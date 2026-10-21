@@ -1,0 +1,145 @@
+﻿nodeIndex,name,parentNodeIndex,meshIndex,semanticComponentRootIndex,semanticCategory
+0,3D 베어링 상부,142,0,0,bearing
+1,3D 베어링 중부,142,1,1,bearing
+2,"3D 베어링 하부 (1.3mm, 118)",142,2,2,bearing
+3,Body24,142,3,3,unknown
+4,Body1.035,5,4,6,motorTransmissionCandidate
+5,Component15,6,,6,motorTransmissionCandidate
+6,Component15:2,142,,6,motorTransmissionCandidate
+7,Body1.036,10,5,11,eyeMatrix
+8,Body2.007,10,6,11,eyeMatrix
+9,Body3.001,10,7,11,eyeMatrix
+10,KeyStudio-HT16K33-8x8-LED-Matrix v4 v2,11,,11,eyeMatrix
+11,KeyStudio-HT16K33-8x8-LED-Matrix v4 v2:2,142,,11,eyeMatrix
+12,Body1.019,15,8,16,eyeMatrix
+13,Body2,15,9,16,eyeMatrix
+14,Body3,15,10,16,eyeMatrix
+15,KeyStudio-HT16K33-8x8-LED-Matrix v4(미러),16,,16,eyeMatrix
+16,KeyStudio-HT16K33-8x8-LED-Matrix v4(미러):1,142,,16,eyeMatrix
+17,LED 쉐이드,142,11,17,ledDiffuser
+18,Body1,19,12,20,projector
+19,Miniray_Beam v1,20,,20,projector
+20,Miniray_Beam v1:1,142,,20,projector
+21,Body1.033,22,13,73,servoAssembly
+22,B3B-EH,23,,73,servoAssembly
+23,B3B-EH:1,72,,73,servoAssembly
+24,Body1.034,25,13,73,servoAssembly
+25,B3B-EH.001,26,,73,servoAssembly
+26,B3B-EH:2,72,,73,servoAssembly
+27,Body1.029,29,14,73,servoAssembly
+28,Body2.005,29,15,73,servoAssembly
+29,BTS2_M2_6X8,30,,73,servoAssembly
+30,BTS2_M2_6X8:1,72,,73,servoAssembly
+31,Body1.030,33,14,73,servoAssembly
+32,Body2.006,33,15,73,servoAssembly
+33,BTS2_M2_6X8.001,34,,73,servoAssembly
+34,BTS2_M2_6X8:2,72,,73,servoAssembly
+35,Body1.022,36,16,73,servoAssembly
+36,DC15_A01_CASE_B_DUMMY,37,,73,servoAssembly
+37,DC15_A01_CASE_B_DUMMY:1,72,,73,servoAssembly
+38,Body1.021,39,17,73,servoAssembly
+39,DC15_A01_CASE_F_DUMMY,40,,73,servoAssembly
+40,DC15_A01_CASE_F_DUMMY:1,72,,73,servoAssembly
+41,Body1.020,42,18,73,servoAssembly
+42,DC15_A01_CASE_M_DUMMY,43,,73,servoAssembly
+43,DC15_A01_CASE_M_DUMMY:1,72,,73,servoAssembly
+44,Body1.023,45,19,73,servoAssembly
+45,DC15_A01_HORN_DUMMY,46,,73,servoAssembly
+46,DC15_A01_HORN_DUMMY:1,72,,73,servoAssembly
+47,Body1.031,48,20,73,servoAssembly
+48,DC15_A01_HORN_IDLE2_DUMMY,49,,73,servoAssembly
+49,DC15_A01_HORN_IDLE2_DUMMY:1,72,,73,servoAssembly
+50,Body1.032,51,21,73,servoAssembly
+51,DC15_A01_IDLE_CAP_DUMMY,52,,73,servoAssembly
+52,DC15_A01_IDLE_CAP_DUMMY:1,72,,73,servoAssembly
+53,Body1.024,54,22,73,servoAssembly
+54,DC15_A01_LED_CAP2_DUMMY,55,,73,servoAssembly
+55,DC15_A01_LED_CAP2_DUMMY:1,72,,73,servoAssembly
+56,Body1.025,58,23,73,servoAssembly
+57,Body2.001,58,24,73,servoAssembly
+58,PHS_1_7X20_5_DC10,59,,73,servoAssembly
+59,PHS_1_7X20_5_DC10:1,72,,73,servoAssembly
+60,Body1.026,62,23,73,servoAssembly
+61,Body2.002,62,24,73,servoAssembly
+62,PHS_1_7X20_5_DC10.001,63,,73,servoAssembly
+63,PHS_1_7X20_5_DC10:2,72,,73,servoAssembly
+64,Body1.027,66,23,73,servoAssembly
+65,Body2.003,66,24,73,servoAssembly
+66,PHS_1_7X20_5_DC10.002,67,,73,servoAssembly
+67,PHS_1_7X20_5_DC10:3,72,,73,servoAssembly
+68,Body1.028,70,23,73,servoAssembly
+69,Body2.004,70,24,73,servoAssembly
+70,PHS_1_7X20_5_DC10.003,71,,73,servoAssembly
+71,PHS_1_7X20_5_DC10:4,72,,73,servoAssembly
+72,"XL,XC-330 (4) v2",73,,73,servoAssembly
+73,"XL,XC-330 (4) v2:4",142,,73,servoAssembly
+74,Body1.018,75,25,131,passiveIdlerAssembly
+75,DC12_A01_CVR_CABLE_5_1,76,,131,passiveIdlerAssembly
+76,DC12_A01_CVR_CABLE_5_1:1,128,,131,passiveIdlerAssembly
+77,Body1.010,78,26,131,passiveIdlerAssembly
+78,DC12_A01_SPACER_RING_1_2,79,,131,passiveIdlerAssembly
+79,DC12_A01_SPACER_RING_1_2:1,128,,131,passiveIdlerAssembly
+80,Body1.011,81,26,131,passiveIdlerAssembly
+81,DC12_A01_SPACER_RING_1_2.001,82,,131,passiveIdlerAssembly
+82,DC12_A01_SPACER_RING_1_2:2,128,,131,passiveIdlerAssembly
+83,Body1.012,84,26,131,passiveIdlerAssembly
+84,DC12_A01_SPACER_RING_1_2.002,85,,131,passiveIdlerAssembly
+85,DC12_A01_SPACER_RING_1_2:3,128,,131,passiveIdlerAssembly
+86,Body1.013,87,26,131,passiveIdlerAssembly
+87,DC12_A01_SPACER_RING_1_2.003,88,,131,passiveIdlerAssembly
+88,DC12_A01_SPACER_RING_1_2:4,128,,131,passiveIdlerAssembly
+89,Body1.014,90,26,131,passiveIdlerAssembly
+90,DC12_A01_SPACER_RING_1_2.004,91,,131,passiveIdlerAssembly
+91,DC12_A01_SPACER_RING_1_2:5,128,,131,passiveIdlerAssembly
+92,Body1.015,93,26,131,passiveIdlerAssembly
+93,DC12_A01_SPACER_RING_1_2.005,94,,131,passiveIdlerAssembly
+94,DC12_A01_SPACER_RING_1_2:6,128,,131,passiveIdlerAssembly
+95,Body1.016,96,26,131,passiveIdlerAssembly
+96,DC12_A01_SPACER_RING_1_2.006,97,,131,passiveIdlerAssembly
+97,DC12_A01_SPACER_RING_1_2:7,128,,131,passiveIdlerAssembly
+98,Body1.017,99,26,131,passiveIdlerAssembly
+99,DC12_A01_SPACER_RING_1_2.007,100,,131,passiveIdlerAssembly
+100,DC12_A01_SPACER_RING_1_2:8,128,,131,passiveIdlerAssembly
+101,Body1.001,102,27,131,passiveIdlerAssembly
+102,DUMMY_DC12_3,103,,131,passiveIdlerAssembly
+103,DUMMY_DC12_3:1,128,,131,passiveIdlerAssembly
+104,Body1.002,105,28,131,passiveIdlerAssembly
+105,WBH_M2_5X12_8,106,,131,passiveIdlerAssembly
+106,WBH_M2_5X12_8:1,128,,131,passiveIdlerAssembly
+107,Body1.003,108,28,131,passiveIdlerAssembly
+108,WBH_M2_5X12_8.001,109,,131,passiveIdlerAssembly
+109,WBH_M2_5X12_8:2,128,,131,passiveIdlerAssembly
+110,Body1.004,111,28,131,passiveIdlerAssembly
+111,WBH_M2_5X12_8.002,112,,131,passiveIdlerAssembly
+112,WBH_M2_5X12_8:3,128,,131,passiveIdlerAssembly
+113,Body1.005,114,28,131,passiveIdlerAssembly
+114,WBH_M2_5X12_8.003,115,,131,passiveIdlerAssembly
+115,WBH_M2_5X12_8:4,128,,131,passiveIdlerAssembly
+116,Body1.006,117,28,131,passiveIdlerAssembly
+117,WBH_M2_5X12_8.004,118,,131,passiveIdlerAssembly
+118,WBH_M2_5X12_8:5,128,,131,passiveIdlerAssembly
+119,Body1.007,120,28,131,passiveIdlerAssembly
+120,WBH_M2_5X12_8.005,121,,131,passiveIdlerAssembly
+121,WBH_M2_5X12_8:6,128,,131,passiveIdlerAssembly
+122,Body1.008,123,28,131,passiveIdlerAssembly
+123,WBH_M2_5X12_8.006,124,,131,passiveIdlerAssembly
+124,WBH_M2_5X12_8:7,128,,131,passiveIdlerAssembly
+125,Body1.009,126,28,131,passiveIdlerAssembly
+126,WBH_M2_5X12_8.007,127,,131,passiveIdlerAssembly
+127,WBH_M2_5X12_8:8,128,,131,passiveIdlerAssembly
+128,DC12_X430_DUMMY_ASSY_ASM_4_ASM,129,,131,passiveIdlerAssembly
+129,DC12_X430_DUMMY_ASSY_ASM_4_ASM:1,130,,131,passiveIdlerAssembly
+130,"XM,H-430_idler (2) v1",131,,131,passiveIdlerAssembly
+131,"XM,H-430_idler (2) v1:2",142,,131,passiveIdlerAssembly
+132,기둥,142,29,132,column
+133,네오픽셀 24개,142,30,133,neopixelAssembly
+134,눈 LED 가이드,142,31,134,eyeGuide
+135,Body1.037,136,32,137,bodyLower
+136,루 도넛 하단 최종_1016,137,,137,bodyLower
+137,루 도넛 하단 최종_1016:1,142,,137,bodyLower
+138,루 상부,142,33,138,bodyUpper
+139,빔 홀더,142,34,139,projectorHolder
+140,틸트 회전축,142,35,140,tiltShaft
+141,틸트 회전축 (1),142,36,141,tiltShaft
+142,Total_Ass'y_LIU v21,,,142,unclassified
+143,Rail,,37,143,rail

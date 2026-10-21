@@ -1,0 +1,2187 @@
+{
+  "schema": "LIEU_LED_Calibration/1.0",
+  "units": "meters; glTF world coordinates at imported rest pose",
+  "sourceFile": "LIEU_Senario.glb",
+  "modelGeometryConfirmed": {
+    "neopixelChipCount": 24,
+    "neopixelCentersRadiusMeters": 0.0294,
+    "neopixelPitchDeg": 15,
+    "eyeMatrixCount": 2,
+    "eyePixelsPerMatrix": 64,
+    "neopixelSourceMeshNodeIndex": 133,
+    "eyeSourcesMeshNodeIndices": [
+      13,
+      8
+    ]
+  },
+  "important": [
+    "RGBW physical chipset and byte ordering NOT established by CAD geometry.",
+    "Virtual pixel0 is at +X world and pixels increase towards +Z (seen from +Y). Actual physical DIN orientation/order is unknown.",
+    "The 8x8 physical row/column mapping is inferred from modeled chip surfaces, NOT confirmed I2C register ordering.",
+    "LED chip centers are inside existing shade/guide meshes; final glow should be computed as visible diffusion or shader emissive, not always draw raw spheres at these centers.",
+    "Screen left/right assumes the observer looks from world +X toward -X with world +Y as up; check UI mirror mapping."
+  ],
+  "ring24": {
+    "sourceMeshNodeIndex": 133,
+    "chipType": "unknown_RGBW_or_RGB",
+    "physicalIndex0AtVirtualIndex": null,
+    "physicalOrderClockwiseViewedFromBelow": null,
+    "physicalColorByteOrder": null,
+    "pixels": [
+      {
+        "angleDegWorldXtoZ": 0.0,
+        "worldPositionMeters": [
+          0.0294,
+          -0.02322953,
+          0.0
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 0
+      },
+      {
+        "angleDegWorldXtoZ": 15.0,
+        "worldPositionMeters": [
+          0.02839822,
+          -0.02322953,
+          0.00760928
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 1
+      },
+      {
+        "angleDegWorldXtoZ": 30.000001,
+        "worldPositionMeters": [
+          0.02546115,
+          -0.02322953,
+          0.0147
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 2
+      },
+      {
+        "angleDegWorldXtoZ": 45.0,
+        "worldPositionMeters": [
+          0.02078894,
+          -0.02322953,
+          0.02078894
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 3
+      },
+      {
+        "angleDegWorldXtoZ": 59.999999,
+        "worldPositionMeters": [
+          0.0147,
+          -0.02322953,
+          0.02546115
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 4
+      },
+      {
+        "angleDegWorldXtoZ": 75.0,
+        "worldPositionMeters": [
+          0.00760928,
+          -0.02322953,
+          0.02839822
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 5
+      },
+      {
+        "angleDegWorldXtoZ": 90.0,
+        "worldPositionMeters": [
+          0.0,
+          -0.02322953,
+          0.0294
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 6
+      },
+      {
+        "angleDegWorldXtoZ": 105.0,
+        "worldPositionMeters": [
+          -0.00760928,
+          -0.02322953,
+          0.02839822
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 7
+      },
+      {
+        "angleDegWorldXtoZ": 120.000001,
+        "worldPositionMeters": [
+          -0.0147,
+          -0.02322953,
+          0.02546115
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 8
+      },
+      {
+        "angleDegWorldXtoZ": 135.0,
+        "worldPositionMeters": [
+          -0.02078894,
+          -0.02322953,
+          0.02078894
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 9
+      },
+      {
+        "angleDegWorldXtoZ": 149.999999,
+        "worldPositionMeters": [
+          -0.02546115,
+          -0.02322953,
+          0.0147
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 10
+      },
+      {
+        "angleDegWorldXtoZ": 165.0,
+        "worldPositionMeters": [
+          -0.02839822,
+          -0.02322953,
+          0.00760928
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 11
+      },
+      {
+        "angleDegWorldXtoZ": 180.0,
+        "worldPositionMeters": [
+          -0.0294,
+          -0.02322953,
+          0.0
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 12
+      },
+      {
+        "angleDegWorldXtoZ": 195.0,
+        "worldPositionMeters": [
+          -0.02839822,
+          -0.02322953,
+          -0.00760928
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 13
+      },
+      {
+        "angleDegWorldXtoZ": 210.000001,
+        "worldPositionMeters": [
+          -0.02546115,
+          -0.02322953,
+          -0.0147
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 14
+      },
+      {
+        "angleDegWorldXtoZ": 225.0,
+        "worldPositionMeters": [
+          -0.02078894,
+          -0.02322953,
+          -0.02078894
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 15
+      },
+      {
+        "angleDegWorldXtoZ": 239.999999,
+        "worldPositionMeters": [
+          -0.0147,
+          -0.02322953,
+          -0.02546115
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 16
+      },
+      {
+        "angleDegWorldXtoZ": 255.0,
+        "worldPositionMeters": [
+          -0.00760928,
+          -0.02322953,
+          -0.02839822
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 17
+      },
+      {
+        "angleDegWorldXtoZ": 270.0,
+        "worldPositionMeters": [
+          0.0,
+          -0.02322953,
+          -0.0294
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 18
+      },
+      {
+        "angleDegWorldXtoZ": 285.0,
+        "worldPositionMeters": [
+          0.00760928,
+          -0.02322953,
+          -0.02839822
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 19
+      },
+      {
+        "angleDegWorldXtoZ": 300.000001,
+        "worldPositionMeters": [
+          0.0147,
+          -0.02322953,
+          -0.02546115
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 20
+      },
+      {
+        "angleDegWorldXtoZ": 315.0,
+        "worldPositionMeters": [
+          0.02078894,
+          -0.02322953,
+          -0.02078894
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 21
+      },
+      {
+        "angleDegWorldXtoZ": 329.999999,
+        "worldPositionMeters": [
+          0.02546115,
+          -0.02322953,
+          -0.0147
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 22
+      },
+      {
+        "angleDegWorldXtoZ": 345.0,
+        "worldPositionMeters": [
+          0.02839822,
+          -0.02322953,
+          -0.00760928
+        ],
+        "outwardNormalWorld": [
+          0,
+          -1,
+          0
+        ],
+        "virtualIndex": 23
+      }
+    ]
+  },
+  "eyes": [
+    {
+      "name": "screenLeft_positiveZ_whenViewedFromPlusX",
+      "meshNodeIndex": 13,
+      "matrixResolution": [
+        8,
+        8
+      ],
+      "physicalI2cAddress": null,
+      "orientationConfirmedOnPhysicalBuild": false,
+      "pixels": [
+        {
+          "row": 0,
+          "col": 0,
+          "matrixIndex": 0,
+          "worldPositionMeters": [
+            0.11994483,
+            0.00810939,
+            0.03583946
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            1.4
+          ]
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "matrixIndex": 1,
+          "worldPositionMeters": [
+            0.12003457,
+            0.00821633,
+            0.03184189
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            1.0
+          ]
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "matrixIndex": 2,
+          "worldPositionMeters": [
+            0.1201243,
+            0.00832326,
+            0.02784433
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            0.6
+          ]
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "matrixIndex": 3,
+          "worldPositionMeters": [
+            0.12021403,
+            0.0084302,
+            0.02384677
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            0.2
+          ]
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "matrixIndex": 4,
+          "worldPositionMeters": [
+            0.12030376,
+            0.00853714,
+            0.0198492
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -0.2
+          ]
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "matrixIndex": 5,
+          "worldPositionMeters": [
+            0.12039349,
+            0.00864408,
+            0.01585164
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -0.6
+          ]
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "matrixIndex": 6,
+          "worldPositionMeters": [
+            0.12048323,
+            0.00875101,
+            0.01185408
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -1.0
+          ]
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "matrixIndex": 7,
+          "worldPositionMeters": [
+            0.12057296,
+            0.00885795,
+            0.00785651
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -1.4
+          ]
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "matrixIndex": 8,
+          "worldPositionMeters": [
+            0.11737525,
+            0.00504708,
+            0.03569986
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            1.4
+          ]
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "matrixIndex": 9,
+          "worldPositionMeters": [
+            0.11746498,
+            0.00515402,
+            0.0317023
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            1.0
+          ]
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "matrixIndex": 10,
+          "worldPositionMeters": [
+            0.11755471,
+            0.00526095,
+            0.02770473
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            0.6
+          ]
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "matrixIndex": 11,
+          "worldPositionMeters": [
+            0.11764445,
+            0.00536789,
+            0.02370717
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            0.2
+          ]
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "matrixIndex": 12,
+          "worldPositionMeters": [
+            0.11773418,
+            0.00547483,
+            0.0197096
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -0.2
+          ]
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "matrixIndex": 13,
+          "worldPositionMeters": [
+            0.11782391,
+            0.00558177,
+            0.01571204
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -0.6
+          ]
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "matrixIndex": 14,
+          "worldPositionMeters": [
+            0.11791364,
+            0.0056887,
+            0.01171448
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -1.0
+          ]
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "matrixIndex": 15,
+          "worldPositionMeters": [
+            0.11800337,
+            0.00579564,
+            0.00771691
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -1.4
+          ]
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "matrixIndex": 16,
+          "worldPositionMeters": [
+            0.11480566,
+            0.00198477,
+            0.03556026
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            1.4
+          ]
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "matrixIndex": 17,
+          "worldPositionMeters": [
+            0.1148954,
+            0.0020917,
+            0.0315627
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            1.0
+          ]
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "matrixIndex": 18,
+          "worldPositionMeters": [
+            0.11498513,
+            0.00219864,
+            0.02756513
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            0.6
+          ]
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "matrixIndex": 19,
+          "worldPositionMeters": [
+            0.11507486,
+            0.00230558,
+            0.02356757
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            0.2
+          ]
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "matrixIndex": 20,
+          "worldPositionMeters": [
+            0.11516459,
+            0.00241252,
+            0.01957001
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -0.2
+          ]
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "matrixIndex": 21,
+          "worldPositionMeters": [
+            0.11525432,
+            0.00251945,
+            0.01557244
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -0.6
+          ]
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "matrixIndex": 22,
+          "worldPositionMeters": [
+            0.11534406,
+            0.00262639,
+            0.01157488
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -1.0
+          ]
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "matrixIndex": 23,
+          "worldPositionMeters": [
+            0.11543379,
+            0.00273333,
+            0.00757732
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -1.4
+          ]
+        },
+        {
+          "row": 3,
+          "col": 0,
+          "matrixIndex": 24,
+          "worldPositionMeters": [
+            0.11223608,
+            -0.00107754,
+            0.03542066
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            1.4
+          ]
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "matrixIndex": 25,
+          "worldPositionMeters": [
+            0.11232581,
+            -0.00097061,
+            0.0314231
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            1.0
+          ]
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "matrixIndex": 26,
+          "worldPositionMeters": [
+            0.11241554,
+            -0.00086367,
+            0.02742554
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            0.6
+          ]
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "matrixIndex": 27,
+          "worldPositionMeters": [
+            0.11250528,
+            -0.00075673,
+            0.02342797
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            0.2
+          ]
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "matrixIndex": 28,
+          "worldPositionMeters": [
+            0.11259501,
+            -0.00064979,
+            0.01943041
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -0.2
+          ]
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "matrixIndex": 29,
+          "worldPositionMeters": [
+            0.11268474,
+            -0.00054286,
+            0.01543285
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -0.6
+          ]
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "matrixIndex": 30,
+          "worldPositionMeters": [
+            0.11277447,
+            -0.00043592,
+            0.01143528
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -1.0
+          ]
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "matrixIndex": 31,
+          "worldPositionMeters": [
+            0.1128642,
+            -0.00032898,
+            0.00743772
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -1.4
+          ]
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "matrixIndex": 32,
+          "worldPositionMeters": [
+            0.1096665,
+            -0.00413986,
+            0.03528107
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            1.4
+          ]
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "matrixIndex": 33,
+          "worldPositionMeters": [
+            0.10975623,
+            -0.00403292,
+            0.0312835
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            1.0
+          ]
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "matrixIndex": 34,
+          "worldPositionMeters": [
+            0.10984596,
+            -0.00392598,
+            0.02728594
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            0.6
+          ]
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "matrixIndex": 35,
+          "worldPositionMeters": [
+            0.10993569,
+            -0.00381904,
+            0.02328838
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            0.2
+          ]
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "matrixIndex": 36,
+          "worldPositionMeters": [
+            0.11002542,
+            -0.00371211,
+            0.01929081
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -0.2
+          ]
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "matrixIndex": 37,
+          "worldPositionMeters": [
+            0.11011516,
+            -0.00360517,
+            0.01529325
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -0.6
+          ]
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "matrixIndex": 38,
+          "worldPositionMeters": [
+            0.11020489,
+            -0.00349823,
+            0.01129568
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -1.0
+          ]
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "matrixIndex": 39,
+          "worldPositionMeters": [
+            0.11029462,
+            -0.00339129,
+            0.00729812
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -1.4
+          ]
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "matrixIndex": 40,
+          "worldPositionMeters": [
+            0.10709691,
+            -0.00720217,
+            0.03514147
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            1.4
+          ]
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "matrixIndex": 41,
+          "worldPositionMeters": [
+            0.10718664,
+            -0.00709523,
+            0.03114391
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            1.0
+          ]
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "matrixIndex": 42,
+          "worldPositionMeters": [
+            0.10727637,
+            -0.00698829,
+            0.02714634
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "matrixIndex": 43,
+          "worldPositionMeters": [
+            0.10736611,
+            -0.00688135,
+            0.02314878
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            0.2
+          ]
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "matrixIndex": 44,
+          "worldPositionMeters": [
+            0.10745584,
+            -0.00677442,
+            0.01915121
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -0.2
+          ]
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "matrixIndex": 45,
+          "worldPositionMeters": [
+            0.10754557,
+            -0.00666748,
+            0.01515365
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -0.6
+          ]
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "matrixIndex": 46,
+          "worldPositionMeters": [
+            0.1076353,
+            -0.00656054,
+            0.01115609
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -1.0
+          ]
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "matrixIndex": 47,
+          "worldPositionMeters": [
+            0.10772503,
+            -0.0064536,
+            0.00715852
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -1.4
+          ]
+        },
+        {
+          "row": 6,
+          "col": 0,
+          "matrixIndex": 48,
+          "worldPositionMeters": [
+            0.10452733,
+            -0.01026448,
+            0.03500187
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            1.4
+          ]
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "matrixIndex": 49,
+          "worldPositionMeters": [
+            0.10461706,
+            -0.01015754,
+            0.03100431
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "matrixIndex": 50,
+          "worldPositionMeters": [
+            0.10470679,
+            -0.0100506,
+            0.02700674
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            0.6
+          ]
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "matrixIndex": 51,
+          "worldPositionMeters": [
+            0.10479652,
+            -0.00994367,
+            0.02300918
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            0.2
+          ]
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "matrixIndex": 52,
+          "worldPositionMeters": [
+            0.10488625,
+            -0.00983673,
+            0.01901162
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -0.2
+          ]
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "matrixIndex": 53,
+          "worldPositionMeters": [
+            0.10497599,
+            -0.00972979,
+            0.01501405
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -0.6
+          ]
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "matrixIndex": 54,
+          "worldPositionMeters": [
+            0.10506572,
+            -0.00962285,
+            0.01101649
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -1.0
+          ]
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "matrixIndex": 55,
+          "worldPositionMeters": [
+            0.10515545,
+            -0.00951592,
+            0.00701893
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -1.4
+          ]
+        },
+        {
+          "row": 7,
+          "col": 0,
+          "matrixIndex": 56,
+          "worldPositionMeters": [
+            0.10195774,
+            -0.01332679,
+            0.03486227
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            1.4
+          ]
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "matrixIndex": 57,
+          "worldPositionMeters": [
+            0.10204747,
+            -0.01321985,
+            0.03086471
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            1.0
+          ]
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "matrixIndex": 58,
+          "worldPositionMeters": [
+            0.1021372,
+            -0.01311291,
+            0.02686715
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            0.6
+          ]
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "matrixIndex": 59,
+          "worldPositionMeters": [
+            0.10222694,
+            -0.01300598,
+            0.02286958
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            0.2
+          ]
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "matrixIndex": 60,
+          "worldPositionMeters": [
+            0.10231667,
+            -0.01289904,
+            0.01887202
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -0.2
+          ]
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "matrixIndex": 61,
+          "worldPositionMeters": [
+            0.1024064,
+            -0.0127921,
+            0.01487446
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -0.6
+          ]
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "matrixIndex": 62,
+          "worldPositionMeters": [
+            0.10249613,
+            -0.01268516,
+            0.01087689
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -1.0
+          ]
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "matrixIndex": 63,
+          "worldPositionMeters": [
+            0.10258586,
+            -0.01257823,
+            0.00687933
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -1.4
+          ]
+        }
+      ]
+    },
+    {
+      "name": "screenRight_negativeZ_whenViewedFromPlusX",
+      "meshNodeIndex": 8,
+      "matrixResolution": [
+        8,
+        8
+      ],
+      "physicalI2cAddress": null,
+      "orientationConfirmedOnPhysicalBuild": false,
+      "pixels": [
+        {
+          "row": 0,
+          "col": 0,
+          "matrixIndex": 0,
+          "worldPositionMeters": [
+            0.12057297,
+            0.00885794,
+            -0.00785651
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            1.4
+          ]
+        },
+        {
+          "row": 0,
+          "col": 1,
+          "matrixIndex": 1,
+          "worldPositionMeters": [
+            0.12048324,
+            0.00875101,
+            -0.01185408
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            1.0
+          ]
+        },
+        {
+          "row": 0,
+          "col": 2,
+          "matrixIndex": 2,
+          "worldPositionMeters": [
+            0.12039351,
+            0.00864407,
+            -0.01585164
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            0.6
+          ]
+        },
+        {
+          "row": 0,
+          "col": 3,
+          "matrixIndex": 3,
+          "worldPositionMeters": [
+            0.12030377,
+            0.00853713,
+            -0.0198492
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            0.2
+          ]
+        },
+        {
+          "row": 0,
+          "col": 4,
+          "matrixIndex": 4,
+          "worldPositionMeters": [
+            0.12021404,
+            0.00843019,
+            -0.02384677
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -0.2
+          ]
+        },
+        {
+          "row": 0,
+          "col": 5,
+          "matrixIndex": 5,
+          "worldPositionMeters": [
+            0.12012431,
+            0.00832326,
+            -0.02784433
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -0.6
+          ]
+        },
+        {
+          "row": 0,
+          "col": 6,
+          "matrixIndex": 6,
+          "worldPositionMeters": [
+            0.12003458,
+            0.00821632,
+            -0.03184189
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -1.0
+          ]
+        },
+        {
+          "row": 0,
+          "col": 7,
+          "matrixIndex": 7,
+          "worldPositionMeters": [
+            0.11994484,
+            0.00810938,
+            -0.03583946
+          ],
+          "cadLocalGridCoordinate": [
+            -1.4,
+            -1.4
+          ]
+        },
+        {
+          "row": 1,
+          "col": 0,
+          "matrixIndex": 8,
+          "worldPositionMeters": [
+            0.11800339,
+            0.00579563,
+            -0.00771692
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            1.4
+          ]
+        },
+        {
+          "row": 1,
+          "col": 1,
+          "matrixIndex": 9,
+          "worldPositionMeters": [
+            0.11791365,
+            0.00568869,
+            -0.01171448
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            1.0
+          ]
+        },
+        {
+          "row": 1,
+          "col": 2,
+          "matrixIndex": 10,
+          "worldPositionMeters": [
+            0.11782392,
+            0.00558176,
+            -0.01571204
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            0.6
+          ]
+        },
+        {
+          "row": 1,
+          "col": 3,
+          "matrixIndex": 11,
+          "worldPositionMeters": [
+            0.11773419,
+            0.00547482,
+            -0.01970961
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            0.2
+          ]
+        },
+        {
+          "row": 1,
+          "col": 4,
+          "matrixIndex": 12,
+          "worldPositionMeters": [
+            0.11764446,
+            0.00536788,
+            -0.02370717
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -0.2
+          ]
+        },
+        {
+          "row": 1,
+          "col": 5,
+          "matrixIndex": 13,
+          "worldPositionMeters": [
+            0.11755472,
+            0.00526094,
+            -0.02770473
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -0.6
+          ]
+        },
+        {
+          "row": 1,
+          "col": 6,
+          "matrixIndex": 14,
+          "worldPositionMeters": [
+            0.11746499,
+            0.00515401,
+            -0.0317023
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -1.0
+          ]
+        },
+        {
+          "row": 1,
+          "col": 7,
+          "matrixIndex": 15,
+          "worldPositionMeters": [
+            0.11737526,
+            0.00504707,
+            -0.03569986
+          ],
+          "cadLocalGridCoordinate": [
+            -1.0,
+            -1.4
+          ]
+        },
+        {
+          "row": 2,
+          "col": 0,
+          "matrixIndex": 16,
+          "worldPositionMeters": [
+            0.1154338,
+            0.00273332,
+            -0.00757732
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            1.4
+          ]
+        },
+        {
+          "row": 2,
+          "col": 1,
+          "matrixIndex": 17,
+          "worldPositionMeters": [
+            0.11534407,
+            0.00262638,
+            -0.01157488
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            1.0
+          ]
+        },
+        {
+          "row": 2,
+          "col": 2,
+          "matrixIndex": 18,
+          "worldPositionMeters": [
+            0.11525434,
+            0.00251945,
+            -0.01557244
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            0.6
+          ]
+        },
+        {
+          "row": 2,
+          "col": 3,
+          "matrixIndex": 19,
+          "worldPositionMeters": [
+            0.1151646,
+            0.00241251,
+            -0.01957001
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            0.2
+          ]
+        },
+        {
+          "row": 2,
+          "col": 4,
+          "matrixIndex": 20,
+          "worldPositionMeters": [
+            0.11507487,
+            0.00230557,
+            -0.02356757
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -0.2
+          ]
+        },
+        {
+          "row": 2,
+          "col": 5,
+          "matrixIndex": 21,
+          "worldPositionMeters": [
+            0.11498514,
+            0.00219863,
+            -0.02756514
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -0.6
+          ]
+        },
+        {
+          "row": 2,
+          "col": 6,
+          "matrixIndex": 22,
+          "worldPositionMeters": [
+            0.11489541,
+            0.0020917,
+            -0.0315627
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -1.0
+          ]
+        },
+        {
+          "row": 2,
+          "col": 7,
+          "matrixIndex": 23,
+          "worldPositionMeters": [
+            0.11480567,
+            0.00198476,
+            -0.03556026
+          ],
+          "cadLocalGridCoordinate": [
+            -0.6,
+            -1.4
+          ]
+        },
+        {
+          "row": 3,
+          "col": 0,
+          "matrixIndex": 24,
+          "worldPositionMeters": [
+            0.11286422,
+            -0.00032899,
+            -0.00743772
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            1.4
+          ]
+        },
+        {
+          "row": 3,
+          "col": 1,
+          "matrixIndex": 25,
+          "worldPositionMeters": [
+            0.11277448,
+            -0.00043593,
+            -0.01143528
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            1.0
+          ]
+        },
+        {
+          "row": 3,
+          "col": 2,
+          "matrixIndex": 26,
+          "worldPositionMeters": [
+            0.11268475,
+            -0.00054287,
+            -0.01543285
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            0.6
+          ]
+        },
+        {
+          "row": 3,
+          "col": 3,
+          "matrixIndex": 27,
+          "worldPositionMeters": [
+            0.11259502,
+            -0.0006498,
+            -0.01943041
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            0.2
+          ]
+        },
+        {
+          "row": 3,
+          "col": 4,
+          "matrixIndex": 28,
+          "worldPositionMeters": [
+            0.11250529,
+            -0.00075674,
+            -0.02342797
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -0.2
+          ]
+        },
+        {
+          "row": 3,
+          "col": 5,
+          "matrixIndex": 29,
+          "worldPositionMeters": [
+            0.11241555,
+            -0.00086368,
+            -0.02742554
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -0.6
+          ]
+        },
+        {
+          "row": 3,
+          "col": 6,
+          "matrixIndex": 30,
+          "worldPositionMeters": [
+            0.11232582,
+            -0.00097062,
+            -0.0314231
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -1.0
+          ]
+        },
+        {
+          "row": 3,
+          "col": 7,
+          "matrixIndex": 31,
+          "worldPositionMeters": [
+            0.11223609,
+            -0.00107755,
+            -0.03542066
+          ],
+          "cadLocalGridCoordinate": [
+            -0.2,
+            -1.4
+          ]
+        },
+        {
+          "row": 4,
+          "col": 0,
+          "matrixIndex": 32,
+          "worldPositionMeters": [
+            0.11029463,
+            -0.0033913,
+            -0.00729812
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            1.4
+          ]
+        },
+        {
+          "row": 4,
+          "col": 1,
+          "matrixIndex": 33,
+          "worldPositionMeters": [
+            0.1102049,
+            -0.00349824,
+            -0.01129569
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            1.0
+          ]
+        },
+        {
+          "row": 4,
+          "col": 2,
+          "matrixIndex": 34,
+          "worldPositionMeters": [
+            0.11011517,
+            -0.00360518,
+            -0.01529325
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            0.6
+          ]
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "matrixIndex": 35,
+          "worldPositionMeters": [
+            0.11002543,
+            -0.00371211,
+            -0.01929081
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            0.2
+          ]
+        },
+        {
+          "row": 4,
+          "col": 4,
+          "matrixIndex": 36,
+          "worldPositionMeters": [
+            0.1099357,
+            -0.00381905,
+            -0.02328838
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -0.2
+          ]
+        },
+        {
+          "row": 4,
+          "col": 5,
+          "matrixIndex": 37,
+          "worldPositionMeters": [
+            0.10984597,
+            -0.00392599,
+            -0.02728594
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -0.6
+          ]
+        },
+        {
+          "row": 4,
+          "col": 6,
+          "matrixIndex": 38,
+          "worldPositionMeters": [
+            0.10975624,
+            -0.00403293,
+            -0.0312835
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -1.0
+          ]
+        },
+        {
+          "row": 4,
+          "col": 7,
+          "matrixIndex": 39,
+          "worldPositionMeters": [
+            0.1096665,
+            -0.00413986,
+            -0.03528107
+          ],
+          "cadLocalGridCoordinate": [
+            0.2,
+            -1.4
+          ]
+        },
+        {
+          "row": 5,
+          "col": 0,
+          "matrixIndex": 40,
+          "worldPositionMeters": [
+            0.10772505,
+            -0.00645361,
+            -0.00715852
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            1.4
+          ]
+        },
+        {
+          "row": 5,
+          "col": 1,
+          "matrixIndex": 41,
+          "worldPositionMeters": [
+            0.10763531,
+            -0.00656055,
+            -0.01115609
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            1.0
+          ]
+        },
+        {
+          "row": 5,
+          "col": 2,
+          "matrixIndex": 42,
+          "worldPositionMeters": [
+            0.10754558,
+            -0.00666749,
+            -0.01515365
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            0.6
+          ]
+        },
+        {
+          "row": 5,
+          "col": 3,
+          "matrixIndex": 43,
+          "worldPositionMeters": [
+            0.10745585,
+            -0.00677443,
+            -0.01915122
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            0.2
+          ]
+        },
+        {
+          "row": 5,
+          "col": 4,
+          "matrixIndex": 44,
+          "worldPositionMeters": [
+            0.10736612,
+            -0.00688136,
+            -0.02314878
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -0.2
+          ]
+        },
+        {
+          "row": 5,
+          "col": 5,
+          "matrixIndex": 45,
+          "worldPositionMeters": [
+            0.10727639,
+            -0.0069883,
+            -0.02714634
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -0.6
+          ]
+        },
+        {
+          "row": 5,
+          "col": 6,
+          "matrixIndex": 46,
+          "worldPositionMeters": [
+            0.10718665,
+            -0.00709524,
+            -0.03114391
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -1.0
+          ]
+        },
+        {
+          "row": 5,
+          "col": 7,
+          "matrixIndex": 47,
+          "worldPositionMeters": [
+            0.10709692,
+            -0.00720218,
+            -0.03514147
+          ],
+          "cadLocalGridCoordinate": [
+            0.6,
+            -1.4
+          ]
+        },
+        {
+          "row": 6,
+          "col": 0,
+          "matrixIndex": 48,
+          "worldPositionMeters": [
+            0.10515546,
+            -0.00951593,
+            -0.00701893
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            1.4
+          ]
+        },
+        {
+          "row": 6,
+          "col": 1,
+          "matrixIndex": 49,
+          "worldPositionMeters": [
+            0.10506573,
+            -0.00962286,
+            -0.01101649
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "row": 6,
+          "col": 2,
+          "matrixIndex": 50,
+          "worldPositionMeters": [
+            0.104976,
+            -0.0097298,
+            -0.01501405
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            0.6
+          ]
+        },
+        {
+          "row": 6,
+          "col": 3,
+          "matrixIndex": 51,
+          "worldPositionMeters": [
+            0.10488627,
+            -0.00983674,
+            -0.01901162
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            0.2
+          ]
+        },
+        {
+          "row": 6,
+          "col": 4,
+          "matrixIndex": 52,
+          "worldPositionMeters": [
+            0.10479653,
+            -0.00994368,
+            -0.02300918
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -0.2
+          ]
+        },
+        {
+          "row": 6,
+          "col": 5,
+          "matrixIndex": 53,
+          "worldPositionMeters": [
+            0.1047068,
+            -0.01005061,
+            -0.02700674
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -0.6
+          ]
+        },
+        {
+          "row": 6,
+          "col": 6,
+          "matrixIndex": 54,
+          "worldPositionMeters": [
+            0.10461707,
+            -0.01015755,
+            -0.03100431
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -1.0
+          ]
+        },
+        {
+          "row": 6,
+          "col": 7,
+          "matrixIndex": 55,
+          "worldPositionMeters": [
+            0.10452734,
+            -0.01026449,
+            -0.03500187
+          ],
+          "cadLocalGridCoordinate": [
+            1.0,
+            -1.4
+          ]
+        },
+        {
+          "row": 7,
+          "col": 0,
+          "matrixIndex": 56,
+          "worldPositionMeters": [
+            0.10258588,
+            -0.01257824,
+            -0.00687933
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            1.4
+          ]
+        },
+        {
+          "row": 7,
+          "col": 1,
+          "matrixIndex": 57,
+          "worldPositionMeters": [
+            0.10249615,
+            -0.01268517,
+            -0.01087689
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            1.0
+          ]
+        },
+        {
+          "row": 7,
+          "col": 2,
+          "matrixIndex": 58,
+          "worldPositionMeters": [
+            0.10240641,
+            -0.01279211,
+            -0.01487446
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            0.6
+          ]
+        },
+        {
+          "row": 7,
+          "col": 3,
+          "matrixIndex": 59,
+          "worldPositionMeters": [
+            0.10231668,
+            -0.01289905,
+            -0.01887202
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            0.2
+          ]
+        },
+        {
+          "row": 7,
+          "col": 4,
+          "matrixIndex": 60,
+          "worldPositionMeters": [
+            0.10222695,
+            -0.01300599,
+            -0.02286958
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -0.2
+          ]
+        },
+        {
+          "row": 7,
+          "col": 5,
+          "matrixIndex": 61,
+          "worldPositionMeters": [
+            0.10213722,
+            -0.01311292,
+            -0.02686715
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -0.6
+          ]
+        },
+        {
+          "row": 7,
+          "col": 6,
+          "matrixIndex": 62,
+          "worldPositionMeters": [
+            0.10204748,
+            -0.01321986,
+            -0.03086471
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -1.0
+          ]
+        },
+        {
+          "row": 7,
+          "col": 7,
+          "matrixIndex": 63,
+          "worldPositionMeters": [
+            0.10195775,
+            -0.0133268,
+            -0.03486227
+          ],
+          "cadLocalGridCoordinate": [
+            1.4,
+            -1.4
+          ]
+        }
+      ]
+    }
+  ]
+}

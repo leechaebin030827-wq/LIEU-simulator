@@ -1,0 +1,9066 @@
+{
+ "schema": "LIEU_GLB_Manifest/1.0.0",
+ "sourceFile": "LIEU_Senario.glb",
+ "generationMethod": "GLB JSON chunk parsing + trimesh world-space geometry bounds",
+ "coordinateSystem": {
+  "up": "Y",
+  "railAxis": "X",
+  "sideAxis": "Z",
+  "eyeFrontApprox": "+X",
+  "projectionAimApprox": "-Y",
+  "sceneUnits": "meters after GLB root transforms; original CAD-like geometry uses scaled hierarchy"
+ },
+ "statistics": {
+  "totalNodeCount": 144,
+  "meshInstanceCount": 61,
+  "uniqueMeshCount": 38,
+  "materialCount": 4,
+  "animationCount": 0,
+  "skinCount": 0,
+  "textureCount": 0,
+  "sceneRootNodeIndices": [
+   142,
+   143
+  ]
+ },
+ "estimatedFeatureDimensionsMeters": {
+  "donutBodyOuterDiameter": 0.26,
+  "pillarDiameter": 0.06,
+  "railLength": 0.6124,
+  "railCrossSectionWidth": 0.0685,
+  "neopixelRingOuterDiameter": 0.0656,
+  "tiltShaftCentersApprox": [
+   [
+    0,
+    0.02,
+    -0.0405
+   ],
+   [
+    0,
+    0.02,
+    0.0405
+   ]
+  ]
+ },
+ "candidateActuationAxesNOTMechanicallyValidated": [
+  {
+   "id": "railX",
+   "type": "prismatic",
+   "axisWorld": [
+    1,
+    0,
+    0
+   ],
+   "pivotWorldMeters": [
+    0,
+    0,
+    0
+   ],
+   "owner": "entire LIEU root assembly except Rail node 143",
+   "min": null,
+   "max": null
+  },
+  {
+   "id": "yaw",
+   "type": "revolute",
+   "axisWorld": [
+    0,
+    1,
+    0
+   ],
+   "pivotWorldMeters": [
+    0,
+    0.015,
+    0
+   ],
+   "owner": "rotating subassembly after bearing, requires CAD confirmation",
+   "min": null,
+   "max": null
+  },
+  {
+   "id": "tilt",
+   "type": "revolute",
+   "axisWorld": [
+    0,
+    0,
+    1
+   ],
+   "pivotWorldMeters": [
+    0,
+    0.02,
+    0
+   ],
+   "owner": "tilting donut and associated payload, requires CAD confirmation",
+   "min": null,
+   "max": null
+  }
+ ],
+ "confirmedLimitations": [
+  "No GLB animation channels, joints, kinematic constraints, skins, or controllers",
+  "The 24 NeoPixel ring is a single mesh and must be re-instanced or shader-split for independent RGBW control",
+  "Two separate HT16K33-like 8x8 eye assemblies are modeled; per-pixel emissive materials absent",
+  "No identifiable rail actuator, dedicated webcam mesh or speaker mesh",
+  "The XM/H430 assembly is called idler in original hierarchy; do not assert it is a drive motor",
+  "The XL/XC330 name is a family name, not exact actuator model or verified motor count from physical design",
+  "Rail node uses negative non-uniform scales as imported; avoid blindly reparenting/scaling",
+  "Only gray/white materials are supplied; no texture images, emissive lights or projector optics defined"
+ ],
+ "materialList": [
+  {
+   "materialIndex": 0,
+   "name": "Steel - Satin",
+   "baseColorFactor": [
+    0.6274510025978088,
+    0.6274510025978088,
+    0.6274510025978088,
+    1
+   ],
+   "emissiveFactor": null,
+   "doubleSided": true
+  },
+  {
+   "materialIndex": 1,
+   "name": "Opaque(89,89,89)",
+   "baseColorFactor": [
+    0.3490196168422699,
+    0.3490196168422699,
+    0.3490196168422699,
+    1
+   ],
+   "emissiveFactor": null,
+   "doubleSided": true
+  },
+  {
+   "materialIndex": 2,
+   "name": "Paint - Enamel Glossy (White)",
+   "baseColorFactor": [
+    0.9647058844566345,
+    0.9647058844566345,
+    0.9529411792755127,
+    1
+   ],
+   "emissiveFactor": null,
+   "doubleSided": true
+  },
+  {
+   "materialIndex": 3,
+   "name": "Opaque(25,25,25)",
+   "baseColorFactor": [
+    0.09803921729326248,
+    0.09803921729326248,
+    0.09803921729326248,
+    1
+   ],
+   "emissiveFactor": null,
+   "doubleSided": true
+  }
+ ],
+ "componentGroups": [
+  {
+   "rootNodeIndex": 0,
+   "rootName": "3D 베어링 상부",
+   "category": "bearing",
+   "description": "bearing upper ring",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    0
+   ]
+  },
+  {
+   "rootNodeIndex": 1,
+   "rootName": "3D 베어링 중부",
+   "category": "bearing",
+   "description": "bearing middle ring",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    1
+   ]
+  },
+  {
+   "rootNodeIndex": 2,
+   "rootName": "3D 베어링 하부 (1.3mm, 118)",
+   "category": "bearing",
+   "description": "bearing lower ring",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    2
+   ]
+  },
+  {
+   "rootNodeIndex": 3,
+   "rootName": "Body24",
+   "category": "unknown",
+   "description": "generic part; CAD confirmation required",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    3
+   ]
+  },
+  {
+   "rootNodeIndex": 6,
+   "rootName": "Component15:2",
+   "category": "motorTransmissionCandidate",
+   "description": "component/gear near XC330",
+   "nodeCount": 3,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    4
+   ]
+  },
+  {
+   "rootNodeIndex": 11,
+   "rootName": "KeyStudio-HT16K33-8x8-LED-Matrix v4 v2:2",
+   "category": "eyeMatrix",
+   "description": "right/left side pending orientation calibration",
+   "nodeCount": 5,
+   "meshInstanceCount": 3,
+   "meshNodeIndices": [
+    7,
+    8,
+    9
+   ]
+  },
+  {
+   "rootNodeIndex": 16,
+   "rootName": "KeyStudio-HT16K33-8x8-LED-Matrix v4(미러):1",
+   "category": "eyeMatrix",
+   "description": "right/left side pending orientation calibration",
+   "nodeCount": 5,
+   "meshInstanceCount": 3,
+   "meshNodeIndices": [
+    12,
+    13,
+    14
+   ]
+  },
+  {
+   "rootNodeIndex": 17,
+   "rootName": "LED 쉐이드",
+   "category": "ledDiffuser",
+   "description": "central ring diffuser",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    17
+   ]
+  },
+  {
+   "rootNodeIndex": 20,
+   "rootName": "Miniray_Beam v1:1",
+   "category": "projector",
+   "description": "mini projector module",
+   "nodeCount": 3,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    18
+   ]
+  },
+  {
+   "rootNodeIndex": 73,
+   "rootName": "XL,XC-330 (4) v2:4",
+   "category": "servoAssembly",
+   "description": "one XL/XC330 family reference assembly; exact type unknown",
+   "nodeCount": 53,
+   "meshInstanceCount": 21,
+   "meshNodeIndices": [
+    21,
+    24,
+    27,
+    28,
+    31,
+    32,
+    35,
+    38,
+    41,
+    44,
+    47,
+    50,
+    53,
+    56,
+    57,
+    60,
+    61,
+    64,
+    65,
+    68,
+    69
+   ]
+  },
+  {
+   "rootNodeIndex": 131,
+   "rootName": "XM,H-430_idler (2) v1:2",
+   "category": "passiveIdlerAssembly",
+   "description": "one XM/H430 labeled idler; not assumed active servo",
+   "nodeCount": 58,
+   "meshInstanceCount": 18,
+   "meshNodeIndices": [
+    74,
+    77,
+    80,
+    83,
+    86,
+    89,
+    92,
+    95,
+    98,
+    101,
+    104,
+    107,
+    110,
+    113,
+    116,
+    119,
+    122,
+    125
+   ]
+  },
+  {
+   "rootNodeIndex": 132,
+   "rootName": "기둥",
+   "category": "column",
+   "description": "central pillar connects body to rail",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    132
+   ]
+  },
+  {
+   "rootNodeIndex": 133,
+   "rootName": "네오픽셀 24개",
+   "category": "neopixelAssembly",
+   "description": "one mesh representing a 24pixel ring, not individually addressable nodes",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    133
+   ]
+  },
+  {
+   "rootNodeIndex": 134,
+   "rootName": "눈 LED 가이드",
+   "category": "eyeGuide",
+   "description": "face front LED apertures",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    134
+   ]
+  },
+  {
+   "rootNodeIndex": 137,
+   "rootName": "루 도넛 하단 최종_1016:1",
+   "category": "bodyLower",
+   "description": "outer housing bottom",
+   "nodeCount": 3,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    135
+   ]
+  },
+  {
+   "rootNodeIndex": 138,
+   "rootName": "루 상부",
+   "category": "bodyUpper",
+   "description": "outer housing top",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    138
+   ]
+  },
+  {
+   "rootNodeIndex": 139,
+   "rootName": "빔 홀더",
+   "category": "projectorHolder",
+   "description": "central underside projector mount",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    139
+   ]
+  },
+  {
+   "rootNodeIndex": 140,
+   "rootName": "틸트 회전축",
+   "category": "tiltShaft",
+   "description": "negative Z shaft",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    140
+   ]
+  },
+  {
+   "rootNodeIndex": 141,
+   "rootName": "틸트 회전축 (1)",
+   "category": "tiltShaft",
+   "description": "positive Z shaft",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    141
+   ]
+  },
+  {
+   "rootNodeIndex": 143,
+   "rootName": "Rail",
+   "category": "rail",
+   "description": "separate stationary rail, no modeled motor drive",
+   "nodeCount": 1,
+   "meshInstanceCount": 1,
+   "meshNodeIndices": [
+    143
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "nodeIndex": 0,
+   "name": "3D 베어링 상부",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 0,
+   "ancestorIndices": [
+    142,
+    0
+   ],
+   "semanticComponentRootIndex": 0,
+   "semanticCategory": "bearing"
+  },
+  {
+   "nodeIndex": 1,
+   "name": "3D 베어링 중부",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 1,
+   "ancestorIndices": [
+    142,
+    1
+   ],
+   "semanticComponentRootIndex": 1,
+   "semanticCategory": "bearing"
+  },
+  {
+   "nodeIndex": 2,
+   "name": "3D 베어링 하부 (1.3mm, 118)",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 2,
+   "ancestorIndices": [
+    142,
+    2
+   ],
+   "semanticComponentRootIndex": 2,
+   "semanticCategory": "bearing"
+  },
+  {
+   "nodeIndex": 3,
+   "name": "Body24",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 3,
+   "ancestorIndices": [
+    142,
+    3
+   ],
+   "semanticComponentRootIndex": 3,
+   "semanticCategory": "unknown"
+  },
+  {
+   "nodeIndex": 4,
+   "name": "Body1.035",
+   "parentNodeIndex": 5,
+   "childNodeIndices": [],
+   "localTranslation": [
+    -7.62939453125e-06,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    9.999999046325684,
+    10,
+    9.999999046325684
+   ],
+   "meshIndex": 4,
+   "ancestorIndices": [
+    142,
+    6,
+    5,
+    4
+   ],
+   "semanticComponentRootIndex": 6,
+   "semanticCategory": "motorTransmissionCandidate"
+  },
+  {
+   "nodeIndex": 5,
+   "name": "Component15",
+   "parentNodeIndex": 6,
+   "childNodeIndices": [
+    4
+   ],
+   "localTranslation": [
+    -7.62939453125e-06,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    6,
+    5
+   ],
+   "semanticComponentRootIndex": 6,
+   "semanticCategory": "motorTransmissionCandidate"
+  },
+  {
+   "nodeIndex": 6,
+   "name": "Component15:2",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    5
+   ],
+   "localTranslation": [
+    -88,
+    -11.043242454528809,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0.8815574049949646,
+    0,
+    0.4720768332481384
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    6
+   ],
+   "semanticComponentRootIndex": 6,
+   "semanticCategory": "motorTransmissionCandidate"
+  },
+  {
+   "nodeIndex": 7,
+   "name": "Body1.036",
+   "parentNodeIndex": 10,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10.000000953674316,
+    10,
+    10.000000953674316
+   ],
+   "meshIndex": 5,
+   "ancestorIndices": [
+    142,
+    11,
+    10,
+    7
+   ],
+   "semanticComponentRootIndex": 11,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 8,
+   "name": "Body2.007",
+   "parentNodeIndex": 10,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10.000000953674316,
+    10,
+    10.000000953674316
+   ],
+   "meshIndex": 6,
+   "ancestorIndices": [
+    142,
+    11,
+    10,
+    8
+   ],
+   "semanticComponentRootIndex": 11,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 9,
+   "name": "Body3.001",
+   "parentNodeIndex": 10,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10.000000953674316,
+    10,
+    10.000000953674316
+   ],
+   "meshIndex": 7,
+   "ancestorIndices": [
+    142,
+    11,
+    10,
+    9
+   ],
+   "semanticComponentRootIndex": 11,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 10,
+   "name": "KeyStudio-HT16K33-8x8-LED-Matrix v4 v2",
+   "parentNodeIndex": 11,
+   "childNodeIndices": [
+    7,
+    8,
+    9
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    11,
+    10
+   ],
+   "semanticComponentRootIndex": 11,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 11,
+   "name": "KeyStudio-HT16K33-8x8-LED-Matrix v4 v2:2",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    10
+   ],
+   "localTranslation": [
+    104.50118255615234,
+    3.441387891769409,
+    -21.359390258789062
+   ],
+   "localRotationQuaternion": [
+    0.28760620951652527,
+    -0.6459740996360779,
+    -0.6355434656143188,
+    0.30997520685195923
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    11
+   ],
+   "semanticComponentRootIndex": 11,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 12,
+   "name": "Body1.019",
+   "parentNodeIndex": 15,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    7.238694706757087e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10.000000953674316,
+    10,
+    10.000000953674316
+   ],
+   "meshIndex": 8,
+   "ancestorIndices": [
+    142,
+    16,
+    15,
+    12
+   ],
+   "semanticComponentRootIndex": 16,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 13,
+   "name": "Body2",
+   "parentNodeIndex": 15,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    7.238694706757087e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10.000000953674316,
+    10,
+    10.000000953674316
+   ],
+   "meshIndex": 9,
+   "ancestorIndices": [
+    142,
+    16,
+    15,
+    13
+   ],
+   "semanticComponentRootIndex": 16,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 14,
+   "name": "Body3",
+   "parentNodeIndex": 15,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    7.238694706757087e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10.000000953674316,
+    10,
+    10.000000953674316
+   ],
+   "meshIndex": 10,
+   "ancestorIndices": [
+    142,
+    16,
+    15,
+    14
+   ],
+   "semanticComponentRootIndex": 16,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 15,
+   "name": "KeyStudio-HT16K33-8x8-LED-Matrix v4(미러)",
+   "parentNodeIndex": 16,
+   "childNodeIndices": [
+    12,
+    13,
+    14
+   ],
+   "localTranslation": [
+    0,
+    0,
+    7.238694706757087e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    16,
+    15
+   ],
+   "semanticComponentRootIndex": 16,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 16,
+   "name": "KeyStudio-HT16K33-8x8-LED-Matrix v4(미러):1",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    15
+   ],
+   "localTranslation": [
+    104.50118255615234,
+    3.44138765335083,
+    21.359390258789062
+   ],
+   "localRotationQuaternion": [
+    0.30997517704963684,
+    -0.6355434656143188,
+    -0.6459741592407227,
+    0.28760623931884766
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    16
+   ],
+   "semanticComponentRootIndex": 16,
+   "semanticCategory": "eyeMatrix"
+  },
+  {
+   "nodeIndex": 17,
+   "name": "LED 쉐이드",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 11,
+   "ancestorIndices": [
+    142,
+    17
+   ],
+   "semanticComponentRootIndex": 17,
+   "semanticCategory": "ledDiffuser"
+  },
+  {
+   "nodeIndex": 18,
+   "name": "Body1",
+   "parentNodeIndex": 19,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    2.2370845726982225e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 12,
+   "ancestorIndices": [
+    142,
+    20,
+    19,
+    18
+   ],
+   "semanticComponentRootIndex": 20,
+   "semanticCategory": "projector"
+  },
+  {
+   "nodeIndex": 19,
+   "name": "Miniray_Beam v1",
+   "parentNodeIndex": 20,
+   "childNodeIndices": [
+    18
+   ],
+   "localTranslation": [
+    0,
+    0,
+    2.2370845726982225e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    20,
+    19
+   ],
+   "semanticComponentRootIndex": 20,
+   "semanticCategory": "projector"
+  },
+  {
+   "nodeIndex": 20,
+   "name": "Miniray_Beam v1:1",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    19
+   ],
+   "localTranslation": [
+    0.4940594434738159,
+    -28.456523895263672,
+    7.543475151062012
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338509012631221e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    20
+   ],
+   "semanticComponentRootIndex": 20,
+   "semanticCategory": "projector"
+  },
+  {
+   "nodeIndex": 21,
+   "name": "Body1.033",
+   "parentNodeIndex": 22,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 13,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    23,
+    22,
+    21
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 22,
+   "name": "B3B-EH",
+   "parentNodeIndex": 23,
+   "childNodeIndices": [
+    21
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    23,
+    22
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 23,
+   "name": "B3B-EH:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    22
+   ],
+   "localTranslation": [
+    7.6999993324279785,
+    -10.399999618530273,
+    8.999999046325684
+   ],
+   "localRotationQuaternion": [
+    -0.5,
+    -0.5,
+    -0.5,
+    0.5
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    23
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 24,
+   "name": "Body1.034",
+   "parentNodeIndex": 25,
+   "childNodeIndices": [],
+   "localTranslation": [
+    2.5572360300429864e-06,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 13,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    26,
+    25,
+    24
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 25,
+   "name": "B3B-EH.001",
+   "parentNodeIndex": 26,
+   "childNodeIndices": [
+    24
+   ],
+   "localTranslation": [
+    2.5572360300429864e-06,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    26,
+    25
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 26,
+   "name": "B3B-EH:2",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    25
+   ],
+   "localTranslation": [
+    -7.6999993324279785,
+    -10.399999618530273,
+    9.000005722045898
+   ],
+   "localRotationQuaternion": [
+    -0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    26
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 27,
+   "name": "Body1.029",
+   "parentNodeIndex": 29,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 14,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    30,
+    29,
+    27
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 28,
+   "name": "Body2.005",
+   "parentNodeIndex": 29,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 15,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    30,
+    29,
+    28
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 29,
+   "name": "BTS2_M2_6X8",
+   "parentNodeIndex": 30,
+   "childNodeIndices": [
+    27,
+    28
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    30,
+    29
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 30,
+   "name": "BTS2_M2_6X8:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    29
+   ],
+   "localTranslation": [
+    0,
+    4.90000057220459,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338508302088485e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    30
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 31,
+   "name": "Body1.030",
+   "parentNodeIndex": 33,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 14,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    34,
+    33,
+    31
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 32,
+   "name": "Body2.006",
+   "parentNodeIndex": 33,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 15,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    34,
+    33,
+    32
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 33,
+   "name": "BTS2_M2_6X8.001",
+   "parentNodeIndex": 34,
+   "childNodeIndices": [
+    31,
+    32
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    34,
+    33
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 34,
+   "name": "BTS2_M2_6X8:2",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    33
+   ],
+   "localTranslation": [
+    0,
+    -20.700000762939453,
+    -3.194581950083375e-06
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    34
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 35,
+   "name": "Body1.022",
+   "parentNodeIndex": 36,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    -3.013386731254286e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 16,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    37,
+    36,
+    35
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 36,
+   "name": "DC15_A01_CASE_B_DUMMY",
+   "parentNodeIndex": 37,
+   "childNodeIndices": [
+    35
+   ],
+   "localTranslation": [
+    0,
+    0,
+    -3.013386731254286e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    37,
+    36
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 37,
+   "name": "DC15_A01_CASE_B_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    36
+   ],
+   "localTranslation": [
+    0,
+    -19.499998092651367,
+    -3.013386731254286e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    37
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 38,
+   "name": "Body1.021",
+   "parentNodeIndex": 39,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 17,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    40,
+    39,
+    38
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 39,
+   "name": "DC15_A01_CASE_F_DUMMY",
+   "parentNodeIndex": 40,
+   "childNodeIndices": [
+    38
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    40,
+    39
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 40,
+   "name": "DC15_A01_CASE_F_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    39
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    40
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 41,
+   "name": "Body1.020",
+   "parentNodeIndex": 42,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 18,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    43,
+    42,
+    41
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 42,
+   "name": "DC15_A01_CASE_M_DUMMY",
+   "parentNodeIndex": 43,
+   "childNodeIndices": [
+    41
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    43,
+    42
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 43,
+   "name": "DC15_A01_CASE_M_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    42
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    43
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 44,
+   "name": "Body1.023",
+   "parentNodeIndex": 45,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 19,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    46,
+    45,
+    44
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 45,
+   "name": "DC15_A01_HORN_DUMMY",
+   "parentNodeIndex": 46,
+   "childNodeIndices": [
+    44
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    46,
+    45
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 46,
+   "name": "DC15_A01_HORN_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    45
+   ],
+   "localTranslation": [
+    0,
+    3.5999999046325684,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338508302088485e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    46
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 47,
+   "name": "Body1.031",
+   "parentNodeIndex": 48,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 20,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    49,
+    48,
+    47
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 48,
+   "name": "DC15_A01_HORN_IDLE2_DUMMY",
+   "parentNodeIndex": 49,
+   "childNodeIndices": [
+    47
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    49,
+    48
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 49,
+   "name": "DC15_A01_HORN_IDLE2_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    48
+   ],
+   "localTranslation": [
+    0,
+    -19.600000381469727,
+    -3.0284863896667957e-06
+   ],
+   "localRotationQuaternion": [
+    -1,
+    0,
+    0,
+    7.549790126404332e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    49
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 50,
+   "name": "Body1.032",
+   "parentNodeIndex": 51,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 21,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    52,
+    51,
+    50
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 51,
+   "name": "DC15_A01_IDLE_CAP_DUMMY",
+   "parentNodeIndex": 52,
+   "childNodeIndices": [
+    50
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    52,
+    51
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 52,
+   "name": "DC15_A01_IDLE_CAP_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    51
+   ],
+   "localTranslation": [
+    0,
+    -22.299997329711914,
+    -3.436174665694125e-06
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    52
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 53,
+   "name": "Body1.024",
+   "parentNodeIndex": 54,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    -2.7264950404060073e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 22,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    55,
+    54,
+    53
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 54,
+   "name": "DC15_A01_LED_CAP2_DUMMY",
+   "parentNodeIndex": 55,
+   "childNodeIndices": [
+    53
+   ],
+   "localTranslation": [
+    0,
+    0,
+    -2.7264950404060073e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    55,
+    54
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 55,
+   "name": "DC15_A01_LED_CAP2_DUMMY:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    54
+   ],
+   "localTranslation": [
+    0,
+    -17.60000228881836,
+    -7.500002861022949
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    -1,
+    7.549789415861596e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    55
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 56,
+   "name": "Body1.025",
+   "parentNodeIndex": 58,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -9.648452760302462e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 23,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    59,
+    58,
+    56
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 57,
+   "name": "Body2.001",
+   "parentNodeIndex": 58,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -9.648452760302462e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 24,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    59,
+    58,
+    57
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 58,
+   "name": "PHS_1_7X20_5_DC10",
+   "parentNodeIndex": 59,
+   "childNodeIndices": [
+    56,
+    57
+   ],
+   "localTranslation": [
+    0,
+    -9.648452760302462e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    59,
+    58
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 59,
+   "name": "PHS_1_7X20_5_DC10:1",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    58
+   ],
+   "localTranslation": [
+    8.40000057220459,
+    1.9999998807907104,
+    -4.499999046325684
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338508302088485e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    59
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 60,
+   "name": "Body1.026",
+   "parentNodeIndex": 62,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -5.843359303980833e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 23,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    63,
+    62,
+    60
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 61,
+   "name": "Body2.002",
+   "parentNodeIndex": 62,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -5.843359303980833e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 24,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    63,
+    62,
+    61
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 62,
+   "name": "PHS_1_7X20_5_DC10.001",
+   "parentNodeIndex": 63,
+   "childNodeIndices": [
+    60,
+    61
+   ],
+   "localTranslation": [
+    0,
+    -5.843359303980833e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    63,
+    62
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 63,
+   "name": "PHS_1_7X20_5_DC10:2",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    62
+   ],
+   "localTranslation": [
+    -8.399998664855957,
+    2,
+    -4.500000476837158
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338508302088485e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    63
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 64,
+   "name": "Body1.027",
+   "parentNodeIndex": 66,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -8.855726264300756e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 23,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    67,
+    66,
+    64
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 65,
+   "name": "Body2.003",
+   "parentNodeIndex": 66,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -8.855726264300756e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 24,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    67,
+    66,
+    65
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 66,
+   "name": "PHS_1_7X20_5_DC10.002",
+   "parentNodeIndex": 67,
+   "childNodeIndices": [
+    64,
+    65
+   ],
+   "localTranslation": [
+    0,
+    -8.855726264300756e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    67,
+    66
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 67,
+   "name": "PHS_1_7X20_5_DC10:3",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    66
+   ],
+   "localTranslation": [
+    4.90000057220459,
+    2,
+    22.900001525878906
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338508302088485e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    67
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 68,
+   "name": "Body1.028",
+   "parentNodeIndex": 70,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -5.843359758728184e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 23,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    71,
+    70,
+    68
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 69,
+   "name": "Body2.004",
+   "parentNodeIndex": 70,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -5.843359758728184e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 24,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    71,
+    70,
+    69
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 70,
+   "name": "PHS_1_7X20_5_DC10.003",
+   "parentNodeIndex": 71,
+   "childNodeIndices": [
+    68,
+    69
+   ],
+   "localTranslation": [
+    0,
+    -5.843359758728184e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    71,
+    70
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 71,
+   "name": "PHS_1_7X20_5_DC10:4",
+   "parentNodeIndex": 72,
+   "childNodeIndices": [
+    70
+   ],
+   "localTranslation": [
+    -8.399998664855957,
+    2,
+    19.400001525878906
+   ],
+   "localRotationQuaternion": [
+    0,
+    -0.7071068286895752,
+    0.7071068286895752,
+    5.338508302088485e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72,
+    71
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 72,
+   "name": "XL,XC-330 (4) v2",
+   "parentNodeIndex": 73,
+   "childNodeIndices": [
+    23,
+    26,
+    30,
+    34,
+    37,
+    40,
+    43,
+    46,
+    49,
+    52,
+    55,
+    59,
+    63,
+    67,
+    71
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73,
+    72
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 73,
+   "name": "XL,XC-330 (4) v2:4",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    72
+   ],
+   "localTranslation": [
+    -88,
+    0.4567579925060272,
+    0
+   ],
+   "localRotationQuaternion": [
+    0.7071068286895752,
+    0,
+    -0.7071067094802856,
+    5.338507591545749e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    73
+   ],
+   "semanticComponentRootIndex": 73,
+   "semanticCategory": "servoAssembly"
+  },
+  {
+   "nodeIndex": 74,
+   "name": "Body1.018",
+   "parentNodeIndex": 75,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 25,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    76,
+    75,
+    74
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 75,
+   "name": "DC12_A01_CVR_CABLE_5_1",
+   "parentNodeIndex": 76,
+   "childNodeIndices": [
+    74
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    76,
+    75
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 76,
+   "name": "DC12_A01_CVR_CABLE_5_1:1",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    75
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0.05000114440917969
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    76
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 77,
+   "name": "Body1.010",
+   "parentNodeIndex": 78,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    79,
+    78,
+    77
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 78,
+   "name": "DC12_A01_SPACER_RING_1_2",
+   "parentNodeIndex": 79,
+   "childNodeIndices": [
+    77
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    79,
+    78
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 79,
+   "name": "DC12_A01_SPACER_RING_1_2:1",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    78
+   ],
+   "localTranslation": [
+    11,
+    -14.199997901916504,
+    -8.000000953674316
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    79
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 80,
+   "name": "Body1.011",
+   "parentNodeIndex": 81,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    82,
+    81,
+    80
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 81,
+   "name": "DC12_A01_SPACER_RING_1_2.001",
+   "parentNodeIndex": 82,
+   "childNodeIndices": [
+    80
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    82,
+    81
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 82,
+   "name": "DC12_A01_SPACER_RING_1_2:2",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    81
+   ],
+   "localTranslation": [
+    -11,
+    -14.199997901916504,
+    -8.000000953674316
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    82
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 83,
+   "name": "Body1.012",
+   "parentNodeIndex": 84,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -4.266065843694378e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    85,
+    84,
+    83
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 84,
+   "name": "DC12_A01_SPACER_RING_1_2.002",
+   "parentNodeIndex": 85,
+   "childNodeIndices": [
+    83
+   ],
+   "localTranslation": [
+    0,
+    -4.266065843694378e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    85,
+    84
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 85,
+   "name": "DC12_A01_SPACER_RING_1_2:3",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    84
+   ],
+   "localTranslation": [
+    11,
+    -14.19999885559082,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    85
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 86,
+   "name": "Body1.013",
+   "parentNodeIndex": 87,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -4.266065843694378e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    88,
+    87,
+    86
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 87,
+   "name": "DC12_A01_SPACER_RING_1_2.003",
+   "parentNodeIndex": 88,
+   "childNodeIndices": [
+    86
+   ],
+   "localTranslation": [
+    0,
+    -4.266065843694378e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    88,
+    87
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 88,
+   "name": "DC12_A01_SPACER_RING_1_2:4",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    87
+   ],
+   "localTranslation": [
+    -11,
+    -14.19999885559082,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    88
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 89,
+   "name": "Body1.014",
+   "parentNodeIndex": 90,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    -5.024282472732011e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    91,
+    90,
+    89
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 90,
+   "name": "DC12_A01_SPACER_RING_1_2.004",
+   "parentNodeIndex": 91,
+   "childNodeIndices": [
+    89
+   ],
+   "localTranslation": [
+    0,
+    -5.024282472732011e-06,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    91,
+    90
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 91,
+   "name": "DC12_A01_SPACER_RING_1_2:5",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    90
+   ],
+   "localTranslation": [
+    -11,
+    14.199999809265137,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    0,
+    0.7071068286895752,
+    -0.7071068286895752,
+    5.338509012631221e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    91
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 92,
+   "name": "Body1.015",
+   "parentNodeIndex": 93,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    94,
+    93,
+    92
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 93,
+   "name": "DC12_A01_SPACER_RING_1_2.005",
+   "parentNodeIndex": 94,
+   "childNodeIndices": [
+    92
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    94,
+    93
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 94,
+   "name": "DC12_A01_SPACER_RING_1_2:6",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    93
+   ],
+   "localTranslation": [
+    11,
+    14.199999809265137,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    0,
+    0.7071068286895752,
+    -0.7071068286895752,
+    5.338509012631221e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    94
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 95,
+   "name": "Body1.016",
+   "parentNodeIndex": 96,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    97,
+    96,
+    95
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 96,
+   "name": "DC12_A01_SPACER_RING_1_2.006",
+   "parentNodeIndex": 97,
+   "childNodeIndices": [
+    95
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    97,
+    96
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 97,
+   "name": "DC12_A01_SPACER_RING_1_2:7",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    96
+   ],
+   "localTranslation": [
+    -11,
+    14.199999809265137,
+    -7.999999523162842
+   ],
+   "localRotationQuaternion": [
+    0,
+    0.7071068286895752,
+    -0.7071068286895752,
+    5.338509012631221e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    97
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 98,
+   "name": "Body1.017",
+   "parentNodeIndex": 99,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 26,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    100,
+    99,
+    98
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 99,
+   "name": "DC12_A01_SPACER_RING_1_2.007",
+   "parentNodeIndex": 100,
+   "childNodeIndices": [
+    98
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    100,
+    99
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 100,
+   "name": "DC12_A01_SPACER_RING_1_2:8",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    99
+   ],
+   "localTranslation": [
+    11,
+    14.199999809265137,
+    -7.999999523162842
+   ],
+   "localRotationQuaternion": [
+    0,
+    0.7071068286895752,
+    -0.7071068286895752,
+    5.338509012631221e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    100
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 101,
+   "name": "Body1.001",
+   "parentNodeIndex": 102,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 27,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    103,
+    102,
+    101
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 102,
+   "name": "DUMMY_DC12_3",
+   "parentNodeIndex": 103,
+   "childNodeIndices": [
+    101
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    103,
+    102
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 103,
+   "name": "DUMMY_DC12_3:1",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    102
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    103
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 104,
+   "name": "Body1.002",
+   "parentNodeIndex": 105,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    106,
+    105,
+    104
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 105,
+   "name": "WBH_M2_5X12_8",
+   "parentNodeIndex": 106,
+   "childNodeIndices": [
+    104
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    106,
+    105
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 106,
+   "name": "WBH_M2_5X12_8:1",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    105
+   ],
+   "localTranslation": [
+    -11,
+    14.199999809265137,
+    -7.999999523162842
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    106
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 107,
+   "name": "Body1.003",
+   "parentNodeIndex": 108,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    109,
+    108,
+    107
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 108,
+   "name": "WBH_M2_5X12_8.001",
+   "parentNodeIndex": 109,
+   "childNodeIndices": [
+    107
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    109,
+    108
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 109,
+   "name": "WBH_M2_5X12_8:2",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    108
+   ],
+   "localTranslation": [
+    11,
+    14.199999809265137,
+    -7.999999523162842
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    109
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 110,
+   "name": "Body1.004",
+   "parentNodeIndex": 111,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    4.4353992052492686e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    112,
+    111,
+    110
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 111,
+   "name": "WBH_M2_5X12_8.002",
+   "parentNodeIndex": 112,
+   "childNodeIndices": [
+    110
+   ],
+   "localTranslation": [
+    0,
+    0,
+    4.4353992052492686e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    112,
+    111
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 112,
+   "name": "WBH_M2_5X12_8:3",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    111
+   ],
+   "localTranslation": [
+    -11,
+    14.199999809265137,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    112
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 113,
+   "name": "Body1.005",
+   "parentNodeIndex": 114,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    4.4353992052492686e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    115,
+    114,
+    113
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 114,
+   "name": "WBH_M2_5X12_8.003",
+   "parentNodeIndex": 115,
+   "childNodeIndices": [
+    113
+   ],
+   "localTranslation": [
+    0,
+    0,
+    4.4353992052492686e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    115,
+    114
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 115,
+   "name": "WBH_M2_5X12_8:4",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    114
+   ],
+   "localTranslation": [
+    11,
+    14.199999809265137,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    115
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 116,
+   "name": "Body1.006",
+   "parentNodeIndex": 117,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    3.1939957807480823e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    118,
+    117,
+    116
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 117,
+   "name": "WBH_M2_5X12_8.004",
+   "parentNodeIndex": 118,
+   "childNodeIndices": [
+    116
+   ],
+   "localTranslation": [
+    0,
+    0,
+    3.1939957807480823e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    118,
+    117
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 118,
+   "name": "WBH_M2_5X12_8:5",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    117
+   ],
+   "localTranslation": [
+    11,
+    -14.19999885559082,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    1,
+    7.549790126404332e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    118
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 119,
+   "name": "Body1.007",
+   "parentNodeIndex": 120,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    3.1939957807480823e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    121,
+    120,
+    119
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 120,
+   "name": "WBH_M2_5X12_8.005",
+   "parentNodeIndex": 121,
+   "childNodeIndices": [
+    119
+   ],
+   "localTranslation": [
+    0,
+    0,
+    3.1939957807480823e-06
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    121,
+    120
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 121,
+   "name": "WBH_M2_5X12_8:6",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    120
+   ],
+   "localTranslation": [
+    -11,
+    -14.19999885559082,
+    31.999996185302734
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    1,
+    7.549790126404332e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    121
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 122,
+   "name": "Body1.008",
+   "parentNodeIndex": 123,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    124,
+    123,
+    122
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 123,
+   "name": "WBH_M2_5X12_8.006",
+   "parentNodeIndex": 124,
+   "childNodeIndices": [
+    122
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    124,
+    123
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 124,
+   "name": "WBH_M2_5X12_8:7",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    123
+   ],
+   "localTranslation": [
+    11,
+    -14.199997901916504,
+    -8.000000953674316
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    1,
+    7.549790126404332e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    124
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 125,
+   "name": "Body1.009",
+   "parentNodeIndex": 126,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 28,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    127,
+    126,
+    125
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 126,
+   "name": "WBH_M2_5X12_8.007",
+   "parentNodeIndex": 127,
+   "childNodeIndices": [
+    125
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    127,
+    126
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 127,
+   "name": "WBH_M2_5X12_8:8",
+   "parentNodeIndex": 128,
+   "childNodeIndices": [
+    126
+   ],
+   "localTranslation": [
+    -11,
+    -14.199997901916504,
+    -8.000000953674316
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    1,
+    7.549790126404332e-08
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128,
+    127
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 128,
+   "name": "DC12_X430_DUMMY_ASSY_ASM_4_ASM",
+   "parentNodeIndex": 129,
+   "childNodeIndices": [
+    76,
+    79,
+    82,
+    85,
+    88,
+    91,
+    94,
+    97,
+    100,
+    103,
+    106,
+    109,
+    112,
+    115,
+    118,
+    121,
+    124,
+    127
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129,
+    128
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 129,
+   "name": "DC12_X430_DUMMY_ASSY_ASM_4_ASM:1",
+   "parentNodeIndex": 130,
+   "childNodeIndices": [
+    128
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130,
+    129
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 130,
+   "name": "XM,H-430_idler (2) v1",
+   "parentNodeIndex": 131,
+   "childNodeIndices": [
+    129
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131,
+    130
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 131,
+   "name": "XM,H-430_idler (2) v1:2",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    130
+   ],
+   "localTranslation": [
+    0,
+    20,
+    0
+   ],
+   "localRotationQuaternion": [
+    -0.7071068286895752,
+    0,
+    0,
+    0.7071068286895752
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    131
+   ],
+   "semanticComponentRootIndex": 131,
+   "semanticCategory": "passiveIdlerAssembly"
+  },
+  {
+   "nodeIndex": 132,
+   "name": "기둥",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 29,
+   "ancestorIndices": [
+    142,
+    132
+   ],
+   "semanticComponentRootIndex": 132,
+   "semanticCategory": "column"
+  },
+  {
+   "nodeIndex": 133,
+   "name": "네오픽셀 24개",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 30,
+   "ancestorIndices": [
+    142,
+    133
+   ],
+   "semanticComponentRootIndex": 133,
+   "semanticCategory": "neopixelAssembly"
+  },
+  {
+   "nodeIndex": 134,
+   "name": "눈 LED 가이드",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 31,
+   "ancestorIndices": [
+    142,
+    134
+   ],
+   "semanticComponentRootIndex": 134,
+   "semanticCategory": "eyeGuide"
+  },
+  {
+   "nodeIndex": 135,
+   "name": "Body1.037",
+   "parentNodeIndex": 136,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 32,
+   "ancestorIndices": [
+    142,
+    137,
+    136,
+    135
+   ],
+   "semanticComponentRootIndex": 137,
+   "semanticCategory": "bodyLower"
+  },
+  {
+   "nodeIndex": 136,
+   "name": "루 도넛 하단 최종_1016",
+   "parentNodeIndex": 137,
+   "childNodeIndices": [
+    135
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    137,
+    136
+   ],
+   "semanticComponentRootIndex": 137,
+   "semanticCategory": "bodyLower"
+  },
+  {
+   "nodeIndex": 137,
+   "name": "루 도넛 하단 최종_1016:1",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [
+    136
+   ],
+   "localTranslation": [
+    0,
+    8,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    1,
+    1,
+    1
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142,
+    137
+   ],
+   "semanticComponentRootIndex": 137,
+   "semanticCategory": "bodyLower"
+  },
+  {
+   "nodeIndex": 138,
+   "name": "루 상부",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 33,
+   "ancestorIndices": [
+    142,
+    138
+   ],
+   "semanticComponentRootIndex": 138,
+   "semanticCategory": "bodyUpper"
+  },
+  {
+   "nodeIndex": 139,
+   "name": "빔 홀더",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 34,
+   "ancestorIndices": [
+    142,
+    139
+   ],
+   "semanticComponentRootIndex": 139,
+   "semanticCategory": "projectorHolder"
+  },
+  {
+   "nodeIndex": 140,
+   "name": "틸트 회전축",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 35,
+   "ancestorIndices": [
+    142,
+    140
+   ],
+   "semanticComponentRootIndex": 140,
+   "semanticCategory": "tiltShaft"
+  },
+  {
+   "nodeIndex": 141,
+   "name": "틸트 회전축 (1)",
+   "parentNodeIndex": 142,
+   "childNodeIndices": [],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    10,
+    10,
+    10
+   ],
+   "meshIndex": 36,
+   "ancestorIndices": [
+    142,
+    141
+   ],
+   "semanticComponentRootIndex": 141,
+   "semanticCategory": "tiltShaft"
+  },
+  {
+   "nodeIndex": 142,
+   "name": "Total_Ass'y_LIU v21",
+   "parentNodeIndex": null,
+   "childNodeIndices": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    11,
+    16,
+    17,
+    20,
+    73,
+    131,
+    132,
+    133,
+    134,
+    137,
+    138,
+    139,
+    140,
+    141
+   ],
+   "localTranslation": [
+    0,
+    0,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    0.0010000000474974513,
+    0.0010000000474974513,
+    0.0010000000474974513
+   ],
+   "meshIndex": null,
+   "ancestorIndices": [
+    142
+   ],
+   "semanticComponentRootIndex": 142,
+   "semanticCategory": "unclassified"
+  },
+  {
+   "nodeIndex": 143,
+   "name": "Rail",
+   "parentNodeIndex": null,
+   "childNodeIndices": [],
+   "localTranslation": [
+    -0.2134530246257782,
+    0.19743740558624268,
+    0
+   ],
+   "localRotationQuaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "localScale": [
+    -0.30618852376937866,
+    -0.03426253795623779,
+    -0.044813789427280426
+   ],
+   "meshIndex": 37,
+   "ancestorIndices": [
+    143
+   ],
+   "semanticComponentRootIndex": 143,
+   "semanticCategory": "rail"
+  }
+ ],
+ "meshInstances": [
+  {
+   "nodeIndex": 0,
+   "name": "3D 베어링 상부",
+   "meshIndex": 0,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 3D 베어링 상부",
+   "semanticCategory": "bearing",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.1135,
+    0.005057,
+    -0.09297
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.093,
+    0.024957,
+    0.092996
+   ],
+   "worldBoundingCenterMeters": [
+    -0.01025,
+    0.015007,
+    1.3e-05
+   ],
+   "worldBoundingSizeMeters": [
+    0.2065,
+    0.0199,
+    0.185966
+   ],
+   "vertexCount": 4484,
+   "triangleCount": 5166,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 1,
+   "name": "3D 베어링 중부",
+   "meshIndex": 1,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 3D 베어링 중부",
+   "semanticCategory": "bearing",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0779,
+    0.004957,
+    -0.0779
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0779,
+    0.024557,
+    0.0779
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.014757,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.1558,
+    0.0196,
+    0.1558
+   ],
+   "vertexCount": 4052,
+   "triangleCount": 4712,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 2,
+   "name": "3D 베어링 하부 (1.3mm, 118)",
+   "meshIndex": 2,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 3D 베어링 하부 (1.3mm, 118)",
+   "semanticCategory": "bearing",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.077987,
+    -0.014043,
+    -0.078
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.077987,
+    0.004957,
+    0.078
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    -0.004543,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.155974,
+    0.019,
+    0.156
+   ],
+   "vertexCount": 115198,
+   "triangleCount": 115284,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 3,
+   "name": "Body24",
+   "meshIndex": 3,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / Body24",
+   "semanticCategory": "unknown",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.011,
+    0.009,
+    -0.027
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.011,
+    0.031,
+    -0.019
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.02,
+    -0.023
+   ],
+   "worldBoundingSizeMeters": [
+    0.022,
+    0.022,
+    0.008
+   ],
+   "vertexCount": 3236,
+   "triangleCount": 3908,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 4,
+   "name": "Body1.035",
+   "meshIndex": 4,
+   "parentNodeIndex": 5,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / Component15:2 / Component15 / Body1.035",
+   "semanticCategory": "motorTransmissionCandidate",
+   "worldTransform4x4": [
+    [
+     -0.00554287,
+     0.0,
+     0.00832326,
+     -0.088
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     -0.01104324
+    ],
+    [
+     -0.00832326,
+     0.0,
+     -0.00554287,
+     1e-08
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.100309,
+    -0.011043,
+    -0.012279
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.075651,
+    -0.006043,
+    0.012349
+   ],
+   "worldBoundingCenterMeters": [
+    -0.08798,
+    -0.008543,
+    3.5e-05
+   ],
+   "worldBoundingSizeMeters": [
+    0.024658,
+    0.005,
+    0.024628
+   ],
+   "vertexCount": 3702,
+   "triangleCount": 4542,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 7,
+   "name": "Body1.036",
+   "meshIndex": 5,
+   "parentNodeIndex": 10,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / KeyStudio-HT16K33-8x8-LED-Matrix v4 v2:2 / KeyStudio-HT16K33-8x8-LED-Matrix v4 v2 / Body1.036",
+   "semanticCategory": "eyeMatrix",
+   "worldTransform4x4": [
+    [
+     -0.00642396,
+     0.00022433,
+     -0.00766045,
+     0.10450119
+    ],
+    [
+     -0.00765578,
+     0.00026734,
+     0.00642788,
+     0.00344139
+    ],
+    [
+     0.00034899,
+     0.00999391,
+     0.0,
+     -0.02135939
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.093676,
+    -0.010539,
+    -0.042203
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.116613,
+    0.016342,
+    -0.000516
+   ],
+   "worldBoundingCenterMeters": [
+    0.105145,
+    0.002901,
+    -0.021359
+   ],
+   "worldBoundingSizeMeters": [
+    0.022937,
+    0.026882,
+    0.041687
+   ],
+   "vertexCount": 838,
+   "triangleCount": 984,
+   "materialIndices": [
+    1
+   ],
+   "materialNames": [
+    "Opaque(89,89,89)"
+   ]
+  },
+  {
+   "nodeIndex": 8,
+   "name": "Body2.007",
+   "meshIndex": 6,
+   "parentNodeIndex": 10,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / KeyStudio-HT16K33-8x8-LED-Matrix v4 v2:2 / KeyStudio-HT16K33-8x8-LED-Matrix v4 v2 / Body2.007",
+   "semanticCategory": "eyeMatrix",
+   "worldTransform4x4": [
+    [
+     -0.00642396,
+     0.00022433,
+     -0.00766045,
+     0.10450119
+    ],
+    [
+     -0.00765578,
+     0.00026734,
+     0.00642788,
+     0.00344139
+    ],
+    [
+     0.00034899,
+     0.00999391,
+     0.0,
+     -0.02135939
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.095174,
+    -0.014916,
+    -0.037872
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.121918,
+    0.015011,
+    -0.004847
+   ],
+   "worldBoundingCenterMeters": [
+    0.108546,
+    4.7e-05,
+    -0.021359
+   ],
+   "worldBoundingSizeMeters": [
+    0.026744,
+    0.029927,
+    0.033025
+   ],
+   "vertexCount": 10426,
+   "triangleCount": 12272,
+   "materialIndices": [
+    2
+   ],
+   "materialNames": [
+    "Paint - Enamel Glossy (White)"
+   ]
+  },
+  {
+   "nodeIndex": 9,
+   "name": "Body3.001",
+   "meshIndex": 7,
+   "parentNodeIndex": 10,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / KeyStudio-HT16K33-8x8-LED-Matrix v4 v2:2 / KeyStudio-HT16K33-8x8-LED-Matrix v4 v2 / Body3.001",
+   "semanticCategory": "eyeMatrix",
+   "worldTransform4x4": [
+    [
+     -0.00642396,
+     0.00022433,
+     -0.00766045,
+     0.10450119
+    ],
+    [
+     -0.00765578,
+     0.00026734,
+     0.00642788,
+     0.00344139
+    ],
+    [
+     0.00034899,
+     0.00999391,
+     0.0,
+     -0.02135939
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.100414,
+    0.000354,
+    -0.030733
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.107092,
+    0.007716,
+    -0.011986
+   ],
+   "worldBoundingCenterMeters": [
+    0.103753,
+    0.004035,
+    -0.021359
+   ],
+   "worldBoundingSizeMeters": [
+    0.006678,
+    0.007362,
+    0.018748
+   ],
+   "vertexCount": 130,
+   "triangleCount": 144,
+   "materialIndices": [
+    3
+   ],
+   "materialNames": [
+    "Opaque(25,25,25)"
+   ]
+  },
+  {
+   "nodeIndex": 12,
+   "name": "Body1.019",
+   "meshIndex": 8,
+   "parentNodeIndex": 15,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / KeyStudio-HT16K33-8x8-LED-Matrix v4(미러):1 / KeyStudio-HT16K33-8x8-LED-Matrix v4(미러) / Body1.019",
+   "semanticCategory": "eyeMatrix",
+   "worldTransform4x4": [
+    [
+     -0.00642396,
+     -0.00022433,
+     -0.00766044,
+     0.10450118
+    ],
+    [
+     -0.00765578,
+     -0.00026734,
+     0.00642788,
+     0.0034414
+    ],
+    [
+     -0.00034899,
+     0.00999391,
+     -0.0,
+     0.02135939
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.093676,
+    -0.010539,
+    0.000516
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.116613,
+    0.016342,
+    0.042203
+   ],
+   "worldBoundingCenterMeters": [
+    0.105145,
+    0.002901,
+    0.021359
+   ],
+   "worldBoundingSizeMeters": [
+    0.022937,
+    0.026882,
+    0.041687
+   ],
+   "vertexCount": 838,
+   "triangleCount": 984,
+   "materialIndices": [
+    1
+   ],
+   "materialNames": [
+    "Opaque(89,89,89)"
+   ]
+  },
+  {
+   "nodeIndex": 13,
+   "name": "Body2",
+   "meshIndex": 9,
+   "parentNodeIndex": 15,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / KeyStudio-HT16K33-8x8-LED-Matrix v4(미러):1 / KeyStudio-HT16K33-8x8-LED-Matrix v4(미러) / Body2",
+   "semanticCategory": "eyeMatrix",
+   "worldTransform4x4": [
+    [
+     -0.00642396,
+     -0.00022433,
+     -0.00766044,
+     0.10450118
+    ],
+    [
+     -0.00765578,
+     -0.00026734,
+     0.00642788,
+     0.0034414
+    ],
+    [
+     -0.00034899,
+     0.00999391,
+     -0.0,
+     0.02135939
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.095174,
+    -0.014916,
+    0.004847
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.121918,
+    0.015011,
+    0.037872
+   ],
+   "worldBoundingCenterMeters": [
+    0.108546,
+    4.7e-05,
+    0.021359
+   ],
+   "worldBoundingSizeMeters": [
+    0.026744,
+    0.029927,
+    0.033025
+   ],
+   "vertexCount": 10426,
+   "triangleCount": 12272,
+   "materialIndices": [
+    2
+   ],
+   "materialNames": [
+    "Paint - Enamel Glossy (White)"
+   ]
+  },
+  {
+   "nodeIndex": 14,
+   "name": "Body3",
+   "meshIndex": 10,
+   "parentNodeIndex": 15,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / KeyStudio-HT16K33-8x8-LED-Matrix v4(미러):1 / KeyStudio-HT16K33-8x8-LED-Matrix v4(미러) / Body3",
+   "semanticCategory": "eyeMatrix",
+   "worldTransform4x4": [
+    [
+     -0.00642396,
+     -0.00022433,
+     -0.00766044,
+     0.10450118
+    ],
+    [
+     -0.00765578,
+     -0.00026734,
+     0.00642788,
+     0.0034414
+    ],
+    [
+     -0.00034899,
+     0.00999391,
+     -0.0,
+     0.02135939
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.100414,
+    0.000354,
+    0.011986
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.107092,
+    0.007716,
+    0.030733
+   ],
+   "worldBoundingCenterMeters": [
+    0.103753,
+    0.004035,
+    0.021359
+   ],
+   "worldBoundingSizeMeters": [
+    0.006678,
+    0.007362,
+    0.018748
+   ],
+   "vertexCount": 130,
+   "triangleCount": 144,
+   "materialIndices": [
+    3
+   ],
+   "materialNames": [
+    "Opaque(25,25,25)"
+   ]
+  },
+  {
+   "nodeIndex": 17,
+   "name": "LED 쉐이드",
+   "meshIndex": 11,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / LED 쉐이드",
+   "semanticCategory": "ledDiffuser",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0345,
+    -0.02648,
+    -0.0345
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0345,
+    -0.02048,
+    0.0345
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    -0.02348,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.069,
+    0.006,
+    0.069
+   ],
+   "vertexCount": 1336,
+   "triangleCount": 1628,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 18,
+   "name": "Body1",
+   "meshIndex": 12,
+   "parentNodeIndex": 19,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / Miniray_Beam v1:1 / Miniray_Beam v1 / Body1",
+   "semanticCategory": "projector",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     -0.0,
+     -0.0,
+     0.00049406
+    ],
+    [
+     0.0,
+     0.0,
+     -0.01,
+     -0.02845653
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.00754348
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.021756,
+    -0.050707,
+    -0.006457
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.022744,
+    -0.006207,
+    0.007543
+   ],
+   "worldBoundingCenterMeters": [
+    0.000494,
+    -0.028457,
+    0.000543
+   ],
+   "worldBoundingSizeMeters": [
+    0.0445,
+    0.0445,
+    0.014
+   ],
+   "vertexCount": 501,
+   "triangleCount": 494,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 21,
+   "name": "Body1.033",
+   "meshIndex": 13,
+   "parentNodeIndex": 22,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / B3B-EH:1 / B3B-EH / Body1.033",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     0.0,
+     0.0,
+     -0.097
+    ],
+    [
+     -0.0,
+     -0.0,
+     -0.01,
+     0.01085676
+    ],
+    [
+     -0.0,
+     -0.01,
+     0.0,
+     -0.0077
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.102,
+    0.007657,
+    -0.0099
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.092,
+    0.016857,
+    -0.0061
+   ],
+   "worldBoundingCenterMeters": [
+    -0.097,
+    0.012257,
+    -0.008
+   ],
+   "worldBoundingSizeMeters": [
+    0.01,
+    0.0092,
+    0.0038
+   ],
+   "vertexCount": 355,
+   "triangleCount": 306,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 24,
+   "name": "Body1.034",
+   "meshIndex": 13,
+   "parentNodeIndex": 25,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / B3B-EH:2 / B3B-EH.001 / Body1.034",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     -0.0,
+     0.0,
+     -0.09700001
+    ],
+    [
+     0.0,
+     0.0,
+     -0.01,
+     0.01085676
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0077
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.102,
+    0.007657,
+    0.0061
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.092,
+    0.016857,
+    0.0099
+   ],
+   "worldBoundingCenterMeters": [
+    -0.097,
+    0.012257,
+    0.008
+   ],
+   "worldBoundingSizeMeters": [
+    0.01,
+    0.0092,
+    0.0038
+   ],
+   "vertexCount": 355,
+   "triangleCount": 306,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 27,
+   "name": "Body1.029",
+   "meshIndex": 14,
+   "parentNodeIndex": 29,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / BTS2_M2_6X8:1 / BTS2_M2_6X8 / Body1.029",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00444324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.09075,
+    -0.006009,
+    -0.00275
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.08525,
+    0.003557,
+    0.00275
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088,
+    -0.001226,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.0055,
+    0.009565,
+    0.0055
+   ],
+   "vertexCount": 1599,
+   "triangleCount": 2520,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 28,
+   "name": "Body2.005",
+   "meshIndex": 15,
+   "parentNodeIndex": 29,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / BTS2_M2_6X8:1 / BTS2_M2_6X8 / Body2.005",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00444324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.089075,
+    -0.004443,
+    -0.001075
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.086925,
+    0.003557,
+    0.001075
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088,
+    -0.000443,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.00215,
+    0.008,
+    0.00215
+   ],
+   "vertexCount": 97,
+   "triangleCount": 124,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 31,
+   "name": "Body1.030",
+   "meshIndex": 14,
+   "parentNodeIndex": 33,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / BTS2_M2_6X8:2 / BTS2_M2_6X8.001 / Body1.030",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.01,
+     0.0,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.0,
+     -0.01,
+     0.02115676
+    ],
+    [
+     -0.01,
+     0.0,
+     0.0,
+     -0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.09075,
+    0.013157,
+    -0.00275
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.08525,
+    0.022722,
+    0.00275
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088,
+    0.017939,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.0055,
+    0.009565,
+    0.0055
+   ],
+   "vertexCount": 1599,
+   "triangleCount": 2520,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 32,
+   "name": "Body2.006",
+   "meshIndex": 15,
+   "parentNodeIndex": 33,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / BTS2_M2_6X8:2 / BTS2_M2_6X8.001 / Body2.006",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.01,
+     0.0,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.0,
+     -0.01,
+     0.02115676
+    ],
+    [
+     -0.01,
+     0.0,
+     0.0,
+     -0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.089075,
+    0.013157,
+    -0.001075
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.086925,
+    0.021157,
+    0.001075
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088,
+    0.017157,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.00215,
+    0.008,
+    0.00215
+   ],
+   "vertexCount": 97,
+   "triangleCount": 124,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 35,
+   "name": "Body1.022",
+   "meshIndex": 16,
+   "parentNodeIndex": 36,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_CASE_B_DUMMY:1 / DC15_A01_CASE_B_DUMMY / Body1.022",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.0,
+     -0.01,
+     -0.088
+    ],
+    [
+     -0.0,
+     -0.01,
+     -0.0,
+     0.01995676
+    ],
+    [
+     -0.01,
+     0.0,
+     -0.0,
+     -0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.1125,
+    0.012357,
+    -0.01
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0785,
+    0.019957,
+    0.01
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0955,
+    0.016157,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.034,
+    0.0076,
+    0.02
+   ],
+   "vertexCount": 3230,
+   "triangleCount": 3634,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 38,
+   "name": "Body1.021",
+   "meshIndex": 17,
+   "parentNodeIndex": 39,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_CASE_F_DUMMY:1 / DC15_A01_CASE_F_DUMMY / Body1.021",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.0,
+     -0.01,
+     -0.088
+    ],
+    [
+     -0.0,
+     -0.01,
+     -0.0,
+     0.00045676
+    ],
+    [
+     -0.01,
+     0.0,
+     -0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.1125,
+    -0.003043,
+    -0.01
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0785,
+    0.000957,
+    0.01
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0955,
+    -0.001043,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.034,
+    0.004,
+    0.02
+   ],
+   "vertexCount": 3250,
+   "triangleCount": 3714,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 41,
+   "name": "Body1.020",
+   "meshIndex": 18,
+   "parentNodeIndex": 42,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_CASE_M_DUMMY:1 / DC15_A01_CASE_M_DUMMY / Body1.020",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.0,
+     -0.01,
+     -0.088
+    ],
+    [
+     -0.0,
+     -0.01,
+     -0.0,
+     0.00045676
+    ],
+    [
+     -0.01,
+     0.0,
+     -0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.1125,
+    -0.003043,
+    -0.01
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0785,
+    0.015457,
+    0.01
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0955,
+    0.006207,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.034,
+    0.0185,
+    0.02
+   ],
+   "vertexCount": 1887,
+   "triangleCount": 2162,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 44,
+   "name": "Body1.023",
+   "meshIndex": 19,
+   "parentNodeIndex": 45,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_HORN_DUMMY:1 / DC15_A01_HORN_DUMMY / Body1.023",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00314324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.096,
+    -0.006043,
+    -0.007993
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.080003,
+    -0.000443,
+    0.007993
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088001,
+    -0.003243,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.015998,
+    0.0056,
+    0.015987
+   ],
+   "vertexCount": 3221,
+   "triangleCount": 4308,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 47,
+   "name": "Body1.031",
+   "meshIndex": 20,
+   "parentNodeIndex": 48,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_HORN_IDLE2_DUMMY:1 / DC15_A01_HORN_IDLE2_DUMMY / Body1.031",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.0,
+     0.01,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     0.02005676
+    ],
+    [
+     -0.01,
+     -0.0,
+     0.0,
+     -0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.096,
+    0.018807,
+    -0.008
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.08,
+    0.022957,
+    0.008
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088,
+    0.020882,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.016,
+    0.00415,
+    0.016
+   ],
+   "vertexCount": 2381,
+   "triangleCount": 3106,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 50,
+   "name": "Body1.032",
+   "meshIndex": 21,
+   "parentNodeIndex": 51,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_IDLE_CAP_DUMMY:1 / DC15_A01_IDLE_CAP_DUMMY / Body1.032",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     0.0,
+     0.01,
+     0.0,
+     -0.088
+    ],
+    [
+     -0.0,
+     0.0,
+     -0.01,
+     0.02275676
+    ],
+    [
+     -0.01,
+     0.0,
+     0.0,
+     -0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0914,
+    0.018157,
+    -0.0034
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0846,
+    0.022757,
+    0.0034
+   ],
+   "worldBoundingCenterMeters": [
+    -0.088,
+    0.020457,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.0068,
+    0.0046,
+    0.0068
+   ],
+   "vertexCount": 1659,
+   "triangleCount": 2202,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 53,
+   "name": "Body1.024",
+   "meshIndex": 22,
+   "parentNodeIndex": 54,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / DC15_A01_LED_CAP2_DUMMY:1 / DC15_A01_LED_CAP2_DUMMY / Body1.024",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     -0.0,
+     -0.01,
+     -0.0805
+    ],
+    [
+     0.0,
+     0.01,
+     -0.0,
+     0.01805676
+    ],
+    [
+     0.01,
+     -0.0,
+     -0.0,
+     -0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0805,
+    0.015457,
+    -0.0025
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0785,
+    0.019957,
+    0.0025
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0795,
+    0.017707,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.002,
+    0.0045,
+    0.005
+   ],
+   "vertexCount": 63,
+   "triangleCount": 50,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 56,
+   "name": "Body1.025",
+   "meshIndex": 23,
+   "parentNodeIndex": 58,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:1 / PHS_1_7X20_5_DC10 / Body1.025",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.08350002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     -0.0084
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.085,
+    -0.002802,
+    -0.0099
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.082,
+    0.018957,
+    -0.0069
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0835,
+    0.008077,
+    -0.0084
+   ],
+   "worldBoundingSizeMeters": [
+    0.002999,
+    0.021759,
+    0.003
+   ],
+   "vertexCount": 1108,
+   "triangleCount": 1472,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 57,
+   "name": "Body2.001",
+   "meshIndex": 24,
+   "parentNodeIndex": 58,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:1 / PHS_1_7X20_5_DC10 / Body2.001",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.08350002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     -0.0084
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.08435,
+    0.014957,
+    -0.00925
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.08265,
+    0.018957,
+    -0.00755
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0835,
+    0.016957,
+    -0.0084
+   ],
+   "worldBoundingSizeMeters": [
+    0.0017,
+    0.004,
+    0.0017
+   ],
+   "vertexCount": 166,
+   "triangleCount": 200,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 60,
+   "name": "Body1.026",
+   "meshIndex": 23,
+   "parentNodeIndex": 62,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:2 / PHS_1_7X20_5_DC10.001 / Body1.026",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.08350002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0084
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.085,
+    -0.002802,
+    0.0069
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.082,
+    0.018957,
+    0.0099
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0835,
+    0.008077,
+    0.0084
+   ],
+   "worldBoundingSizeMeters": [
+    0.002999,
+    0.021759,
+    0.003
+   ],
+   "vertexCount": 1108,
+   "triangleCount": 1472,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 61,
+   "name": "Body2.002",
+   "meshIndex": 24,
+   "parentNodeIndex": 62,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:2 / PHS_1_7X20_5_DC10.001 / Body2.002",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.08350002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0084
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.08435,
+    0.014957,
+    0.00755
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.08265,
+    0.018957,
+    0.00925
+   ],
+   "worldBoundingCenterMeters": [
+    -0.0835,
+    0.016957,
+    0.0084
+   ],
+   "worldBoundingSizeMeters": [
+    0.0017,
+    0.004,
+    0.0017
+   ],
+   "vertexCount": 166,
+   "triangleCount": 200,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 64,
+   "name": "Body1.027",
+   "meshIndex": 23,
+   "parentNodeIndex": 66,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:3 / PHS_1_7X20_5_DC10.002 / Body1.027",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.11090002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     -0.0049
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.1124,
+    -0.002802,
+    -0.0064
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.1094,
+    0.018957,
+    -0.0034
+   ],
+   "worldBoundingCenterMeters": [
+    -0.1109,
+    0.008077,
+    -0.0049
+   ],
+   "worldBoundingSizeMeters": [
+    0.002999,
+    0.021759,
+    0.003
+   ],
+   "vertexCount": 1108,
+   "triangleCount": 1472,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 65,
+   "name": "Body2.003",
+   "meshIndex": 24,
+   "parentNodeIndex": 66,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:3 / PHS_1_7X20_5_DC10.002 / Body2.003",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.11090002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     -0.0049
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.11175,
+    0.014957,
+    -0.00575
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.11005,
+    0.018957,
+    -0.00405
+   ],
+   "worldBoundingCenterMeters": [
+    -0.1109,
+    0.016957,
+    -0.0049
+   ],
+   "worldBoundingSizeMeters": [
+    0.0017,
+    0.004,
+    0.0017
+   ],
+   "vertexCount": 166,
+   "triangleCount": 200,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 68,
+   "name": "Body1.028",
+   "meshIndex": 23,
+   "parentNodeIndex": 70,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:4 / PHS_1_7X20_5_DC10.003 / Body1.028",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.10740002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0084
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.1089,
+    -0.002802,
+    0.0069
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.1059,
+    0.018957,
+    0.0099
+   ],
+   "worldBoundingCenterMeters": [
+    -0.1074,
+    0.008077,
+    0.0084
+   ],
+   "worldBoundingSizeMeters": [
+    0.002999,
+    0.021759,
+    0.003
+   ],
+   "vertexCount": 1108,
+   "triangleCount": 1472,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 69,
+   "name": "Body2.004",
+   "meshIndex": 24,
+   "parentNodeIndex": 70,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XL,XC-330 (4) v2:4 / XL,XC-330 (4) v2 / PHS_1_7X20_5_DC10:4 / PHS_1_7X20_5_DC10.003 / Body2.004",
+   "semanticCategory": "servoAssembly",
+   "worldTransform4x4": [
+    [
+     -0.0,
+     0.01,
+     -0.0,
+     -0.10740002
+    ],
+    [
+     -0.0,
+     0.0,
+     0.01,
+     -0.00154324
+    ],
+    [
+     0.01,
+     0.0,
+     -0.0,
+     0.0084
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.10825,
+    0.014957,
+    0.00755
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.10655,
+    0.018957,
+    0.00925
+   ],
+   "worldBoundingCenterMeters": [
+    -0.1074,
+    0.016957,
+    0.0084
+   ],
+   "worldBoundingSizeMeters": [
+    0.0017,
+    0.004,
+    0.0017
+   ],
+   "vertexCount": 166,
+   "triangleCount": 200,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 74,
+   "name": "Body1.018",
+   "meshIndex": 25,
+   "parentNodeIndex": 75,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_CVR_CABLE_5_1:1 / DC12_A01_CVR_CABLE_5_1 / Body1.018",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.02005
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.01425,
+    0.02785,
+    0.0082
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.01425,
+    0.04125,
+    0.017
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.03455,
+    0.0126
+   ],
+   "worldBoundingSizeMeters": [
+    0.0285,
+    0.0134,
+    0.0088
+   ],
+   "vertexCount": 1745,
+   "triangleCount": 2029,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 77,
+   "name": "Body1.010",
+   "meshIndex": 26,
+   "parentNodeIndex": 78,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:1 / DC12_A01_SPACER_RING_1_2 / Body1.010",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.011
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.012
+    ],
+    [
+     0.0,
+     0.0,
+     -0.01,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.0086,
+    0.0096,
+    0.0142
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0134,
+    0.0144,
+    0.017
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.012,
+    0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 80,
+   "name": "Body1.011",
+   "meshIndex": 26,
+   "parentNodeIndex": 81,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:2 / DC12_A01_SPACER_RING_1_2.001 / Body1.011",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.012
+    ],
+    [
+     0.0,
+     0.0,
+     -0.01,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0134,
+    0.0096,
+    0.0142
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0086,
+    0.0144,
+    0.017
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.012,
+    0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 83,
+   "name": "Body1.012",
+   "meshIndex": 26,
+   "parentNodeIndex": 84,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:3 / DC12_A01_SPACER_RING_1_2.002 / Body1.012",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.011
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.05200001
+    ],
+    [
+     0.0,
+     0.0,
+     -0.01,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.0086,
+    0.0496,
+    0.0142
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0134,
+    0.0544,
+    0.017
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.052,
+    0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 86,
+   "name": "Body1.013",
+   "meshIndex": 26,
+   "parentNodeIndex": 87,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:4 / DC12_A01_SPACER_RING_1_2.003 / Body1.013",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.05200001
+    ],
+    [
+     0.0,
+     0.0,
+     -0.01,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0134,
+    0.0496,
+    0.0142
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0086,
+    0.0544,
+    0.017
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.052,
+    0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 89,
+   "name": "Body1.014",
+   "meshIndex": 26,
+   "parentNodeIndex": 90,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:5 / DC12_A01_SPACER_RING_1_2.004 / Body1.014",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     -0.0,
+     -0.01,
+     0.0,
+     0.05200001
+    ],
+    [
+     0.0,
+     -0.0,
+     0.01,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0134,
+    0.0496,
+    -0.017
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0086,
+    0.0544,
+    -0.0142
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.052,
+    -0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 92,
+   "name": "Body1.015",
+   "meshIndex": 26,
+   "parentNodeIndex": 93,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:6 / DC12_A01_SPACER_RING_1_2.005 / Body1.015",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     0.0,
+     0.0,
+     0.011
+    ],
+    [
+     -0.0,
+     -0.01,
+     0.0,
+     0.052
+    ],
+    [
+     0.0,
+     -0.0,
+     0.01,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.0086,
+    0.0496,
+    -0.017
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0134,
+    0.0544,
+    -0.0142
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.052,
+    -0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 95,
+   "name": "Body1.016",
+   "meshIndex": 26,
+   "parentNodeIndex": 96,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:7 / DC12_A01_SPACER_RING_1_2.006 / Body1.016",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     -0.0,
+     -0.01,
+     0.0,
+     0.012
+    ],
+    [
+     0.0,
+     -0.0,
+     0.01,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0134,
+    0.0096,
+    -0.017
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.0086,
+    0.0144,
+    -0.0142
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.012,
+    -0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 98,
+   "name": "Body1.017",
+   "meshIndex": 26,
+   "parentNodeIndex": 99,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DC12_A01_SPACER_RING_1_2:8 / DC12_A01_SPACER_RING_1_2.007 / Body1.017",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     0.0,
+     0.0,
+     0.011
+    ],
+    [
+     -0.0,
+     -0.01,
+     0.0,
+     0.012
+    ],
+    [
+     0.0,
+     -0.0,
+     0.01,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.0086,
+    0.0096,
+    -0.017
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0134,
+    0.0144,
+    -0.0142
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.012,
+    -0.0156
+   ],
+   "worldBoundingSizeMeters": [
+    0.0048,
+    0.0048,
+    0.0028
+   ],
+   "vertexCount": 1501,
+   "triangleCount": 1838,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 101,
+   "name": "Body1.001",
+   "meshIndex": 27,
+   "parentNodeIndex": 102,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / DUMMY_DC12_3:1 / DUMMY_DC12_3 / Body1.001",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.02
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.01425,
+    0.00875,
+    -0.0237
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.01425,
+    0.05525,
+    0.019
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.032,
+    -0.00235
+   ],
+   "worldBoundingSizeMeters": [
+    0.0285,
+    0.0465,
+    0.0427
+   ],
+   "vertexCount": 14715,
+   "triangleCount": 17324,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 104,
+   "name": "Body1.002",
+   "meshIndex": 28,
+   "parentNodeIndex": 105,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:1 / WBH_M2_5X12_8 / Body1.002",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.012
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.01325,
+    0.00975,
+    -0.0167
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.00875,
+    0.01425,
+    -0.0022
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.012,
+    -0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 107,
+   "name": "Body1.003",
+   "meshIndex": 28,
+   "parentNodeIndex": 108,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:2 / WBH_M2_5X12_8.001 / Body1.003",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.012
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.00875,
+    0.00975,
+    -0.0167
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.01325,
+    0.01425,
+    -0.0022
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.012,
+    -0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 110,
+   "name": "Body1.004",
+   "meshIndex": 28,
+   "parentNodeIndex": 111,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:3 / WBH_M2_5X12_8.002 / Body1.004",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.05200001
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.01325,
+    0.04975,
+    -0.0167
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.00875,
+    0.05425,
+    -0.0022
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.052,
+    -0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 113,
+   "name": "Body1.005",
+   "meshIndex": 28,
+   "parentNodeIndex": 114,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:4 / WBH_M2_5X12_8.003 / Body1.005",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.05200001
+    ],
+    [
+     0.0,
+     -0.01,
+     0.0,
+     -0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.00875,
+    0.04975,
+    -0.0167
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.01325,
+    0.05425,
+    -0.0022
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.052,
+    -0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 116,
+   "name": "Body1.006",
+   "meshIndex": 28,
+   "parentNodeIndex": 117,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:5 / WBH_M2_5X12_8.004 / Body1.006",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     -0.0,
+     0.0,
+     0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.05200001
+    ],
+    [
+     -0.0,
+     0.01,
+     0.0,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.00875,
+    0.04975,
+    0.0022
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.01325,
+    0.05425,
+    0.0167
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.052,
+    0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 119,
+   "name": "Body1.007",
+   "meshIndex": 28,
+   "parentNodeIndex": 120,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:6 / WBH_M2_5X12_8.005 / Body1.007",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     -0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.05200001
+    ],
+    [
+     -0.0,
+     0.01,
+     0.0,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.01325,
+    0.04975,
+    0.0022
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.00875,
+    0.05425,
+    0.0167
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.052,
+    0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 122,
+   "name": "Body1.008",
+   "meshIndex": 28,
+   "parentNodeIndex": 123,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:7 / WBH_M2_5X12_8.006 / Body1.008",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     -0.0,
+     0.0,
+     0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.012
+    ],
+    [
+     -0.0,
+     0.01,
+     0.0,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.00875,
+    0.00975,
+    0.0022
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.01325,
+    0.01425,
+    0.0167
+   ],
+   "worldBoundingCenterMeters": [
+    0.011,
+    0.012,
+    0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 125,
+   "name": "Body1.009",
+   "meshIndex": 28,
+   "parentNodeIndex": 126,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / XM,H-430_idler (2) v1:2 / XM,H-430_idler (2) v1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM:1 / DC12_X430_DUMMY_ASSY_ASM_4_ASM / WBH_M2_5X12_8:8 / WBH_M2_5X12_8.007 / Body1.009",
+   "semanticCategory": "passiveIdlerAssembly",
+   "worldTransform4x4": [
+    [
+     -0.01,
+     -0.0,
+     0.0,
+     -0.011
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.012
+    ],
+    [
+     -0.0,
+     0.01,
+     0.0,
+     0.0142
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.01325,
+    0.00975,
+    0.0022
+   ],
+   "worldBoundingBoxMaxMeters": [
+    -0.00875,
+    0.01425,
+    0.0167
+   ],
+   "worldBoundingCenterMeters": [
+    -0.011,
+    0.012,
+    0.00945
+   ],
+   "worldBoundingSizeMeters": [
+    0.0045,
+    0.0045,
+    0.0145
+   ],
+   "vertexCount": 556,
+   "triangleCount": 660,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 132,
+   "name": "기둥",
+   "meshIndex": 29,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 기둥",
+   "semanticCategory": "column",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.03,
+    -0.01248,
+    -0.03
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.03,
+    0.199773,
+    0.03
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.093647,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.06,
+    0.212252,
+    0.06
+   ],
+   "vertexCount": 1168,
+   "triangleCount": 1612,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 133,
+   "name": "네오픽셀 24개",
+   "meshIndex": 30,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 네오픽셀 24개",
+   "semanticCategory": "neopixelAssembly",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0328,
+    -0.02648,
+    -0.0328
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0328,
+    -0.02323,
+    0.0328
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    -0.024855,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.0656,
+    0.00325,
+    0.0656
+   ],
+   "vertexCount": 1344,
+   "triangleCount": 1388,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 134,
+   "name": "눈 LED 가이드",
+   "meshIndex": 31,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 눈 LED 가이드",
+   "semanticCategory": "eyeGuide",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    0.089741,
+    -0.018825,
+    -0.0425
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.126886,
+    0.021663,
+    0.0425
+   ],
+   "worldBoundingCenterMeters": [
+    0.108313,
+    0.001419,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.037145,
+    0.040488,
+    0.085
+   ],
+   "vertexCount": 23924,
+   "triangleCount": 28562,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 135,
+   "name": "Body1.037",
+   "meshIndex": 32,
+   "parentNodeIndex": 136,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 루 도넛 하단 최종_1016:1 / 루 도넛 하단 최종_1016 / Body1.037",
+   "semanticCategory": "bodyLower",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.008
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.130001,
+    -0.025873,
+    -0.128946
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.13,
+    0.01984,
+    0.131061
+   ],
+   "worldBoundingCenterMeters": [
+    -1e-06,
+    -0.003017,
+    0.001057
+   ],
+   "worldBoundingSizeMeters": [
+    0.26,
+    0.045713,
+    0.260007
+   ],
+   "vertexCount": 33204,
+   "triangleCount": 41650,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 138,
+   "name": "루 상부",
+   "meshIndex": 33,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 루 상부",
+   "semanticCategory": "bodyUpper",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.129,
+    0.019957,
+    -0.129
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.129,
+    0.041974,
+    0.129
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.030965,
+    -0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.258,
+    0.022017,
+    0.258001
+   ],
+   "vertexCount": 6295,
+   "triangleCount": 8498,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 139,
+   "name": "빔 홀더",
+   "meshIndex": 34,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 빔 홀더",
+   "semanticCategory": "projectorHolder",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.0375,
+    -0.05604,
+    -0.0375
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.0375,
+    -0.01248,
+    0.0375
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    -0.03426,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.075,
+    0.043561,
+    0.075
+   ],
+   "vertexCount": 8976,
+   "triangleCount": 12662,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 140,
+   "name": "틸트 회전축",
+   "meshIndex": 35,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 틸트 회전축",
+   "semanticCategory": "tiltShaft",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.02,
+    0.0069,
+    -0.059
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.02,
+    0.0331,
+    -0.022
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.02,
+    -0.0405
+   ],
+   "worldBoundingSizeMeters": [
+    0.04,
+    0.0262,
+    0.037
+   ],
+   "vertexCount": 2454,
+   "triangleCount": 3362,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 141,
+   "name": "틸트 회전축 (1)",
+   "meshIndex": 36,
+   "parentNodeIndex": 142,
+   "hierarchyPath": "Total_Ass'y_LIU v21 / 틸트 회전축 (1)",
+   "semanticCategory": "tiltShaft",
+   "worldTransform4x4": [
+    [
+     0.01,
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.01,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.01,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.02,
+    0.0069,
+    0.022
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.02,
+    0.0331,
+    0.059
+   ],
+   "worldBoundingCenterMeters": [
+    0.0,
+    0.02,
+    0.0405
+   ],
+   "worldBoundingSizeMeters": [
+    0.04,
+    0.0262,
+    0.037
+   ],
+   "vertexCount": 2359,
+   "triangleCount": 3236,
+   "materialIndices": [
+    0
+   ],
+   "materialNames": [
+    "Steel - Satin"
+   ]
+  },
+  {
+   "nodeIndex": 143,
+   "name": "Rail",
+   "meshIndex": 37,
+   "parentNodeIndex": null,
+   "hierarchyPath": "Rail",
+   "semanticCategory": "rail",
+   "worldTransform4x4": [
+    [
+     -0.30618852,
+     0.0,
+     0.0,
+     -0.21345302
+    ],
+    [
+     0.0,
+     -0.03426254,
+     0.0,
+     0.19743741
+    ],
+    [
+     0.0,
+     0.0,
+     -0.03426254,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ]
+   ],
+   "worldBoundingBoxMinMeters": [
+    -0.519642,
+    0.163175,
+    -0.034263
+   ],
+   "worldBoundingBoxMaxMeters": [
+    0.092735,
+    0.2317,
+    0.034263
+   ],
+   "worldBoundingCenterMeters": [
+    -0.213453,
+    0.197437,
+    0.0
+   ],
+   "worldBoundingSizeMeters": [
+    0.612377,
+    0.068525,
+    0.089627
+   ],
+   "vertexCount": 24,
+   "triangleCount": 12,
+   "materialIndices": [
+    null
+   ],
+   "materialNames": [
+    null
+   ]
+  }
+ ],
+ "sourceGlbNote": "GLB replaced by user-supplied LIEU_Senario.glb (2026-10-19): Rail Z scale 0.0343->0.0448; material \"Steel - Satin\" alpha 0.1 BLEND. Runtime must read bounds from the GLB."
+}

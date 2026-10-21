@@ -1,0 +1,1012 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "03_arrival",
+  "title": "03 Arrival",
+  "durationSec": 10,
+  "fps": 30,
+  "loop": false,
+  "demoPreviewOnly": true,
+  "notes": "PREVIEW ONLY. Motion limits/pivots/gear ratios are not physically verified.",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "03_arrival_railX_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_railX_1",
+            "tSec": 10,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "03_arrival_yawY_0",
+            "tSec": 0,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_yawY_1",
+            "tSec": 1,
+            "value": 8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_yawY_2",
+            "tSec": 5,
+            "value": 8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_yawY_3",
+            "tSec": 8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "03_arrival_tiltZ_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_tiltZ_1",
+            "tSec": 1.5,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_tiltZ_2",
+            "tSec": 5,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "03_arrival_tiltZ_3",
+            "tSec": 8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": [
+          {
+            "id": "03_arrival_frame_0",
+            "tSec": 0,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "03_arrival_frame_1",
+            "tSec": 1,
+            "value": [
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ],
+              [
+                35,
+                48,
+                0,
+                18
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "03_arrival_frame_2",
+            "tSec": 5,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ],
+              [
+                0,
+                0,
+                0,
+                46
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "03_arrival_frame_3",
+            "tSec": 8.5,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ]
+            ],
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "03_arrival_ringbrite_0",
+            "tSec": 0,
+            "value": 1,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "effects": [
+        {
+          "id": "farewell_pulse",
+          "type": "pulse",
+          "fromSec": 5,
+          "toSec": 9,
+          "seed": 1,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "whiteLevel": 55,
+            "periodSec": 2.0
+          }
+        }
+      ]
+    },
+    "eyes": {
+      "left": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "03_arrival_left_eye_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "03_arrival_left_eye_1",
+            "tSec": 1,
+            "value": [
+              0,
+              60,
+              126,
+              66,
+              66,
+              126,
+              60,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "03_arrival_left_eye_2",
+            "tSec": 5,
+            "value": [
+              0,
+              102,
+              66,
+              66,
+              90,
+              36,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "03_arrival_left_eye_3",
+            "tSec": 9,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "03_arrival_right_eye_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "03_arrival_right_eye_1",
+            "tSec": 1,
+            "value": [
+              0,
+              60,
+              126,
+              66,
+              66,
+              126,
+              60,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "03_arrival_right_eye_2",
+            "tSec": 5,
+            "value": [
+              0,
+              102,
+              66,
+              66,
+              90,
+              36,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "03_arrival_right_eye_3",
+            "tSec": 9,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "03_arrival_eyeBrightness_0",
+            "tSec": 0,
+            "value": 0.7,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "projector": {
+      "clips": [
+        {
+          "id": "projector_1",
+          "fromSec": 1,
+          "toSec": 5,
+          "assetId": "media/arriving.svg",
+          "visible": true
+        },
+        {
+          "id": "projector_2",
+          "fromSec": 5.2,
+          "toSec": 9.5,
+          "assetId": "media/goodbye.svg",
+          "visible": true
+        }
+      ],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "03_arrival_projector_opacity_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "03_arrival_projector_opacity_1",
+              "tSec": 1,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "03_arrival_projector_opacity_2",
+              "tSec": 1.7,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "03_arrival_projector_opacity_3",
+              "tSec": 8.7,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "03_arrival_projector_opacity_4",
+              "tSec": 9.5,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "03_arrival_projector_opacity_5",
+              "tSec": 10,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "03_arrival_projector_brightness_0",
+              "tSec": 0,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "03_arrival_projector_rot_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "03_arrival_projector_scale_0",
+              "tSec": 0,
+              "value": 1,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "03_arrival_projector_xm_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "03_arrival_projector_zm_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        }
+      }
+    },
+    "audio": [
+      {
+        "id": "03_arrival_audio",
+        "fromSec": 5.2,
+        "toSec": 5.9,
+        "assetId": "media/intro-chime.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.35,
+        "fadeInSec": 0.05,
+        "fadeOutSec": 0.3,
+        "loop": false
+      }
+    ],
+    "events": [
+      {
+        "id": "03_arrival_event_0",
+        "tSec": 1,
+        "type": "arrival_near",
+        "payload": {}
+      },
+      {
+        "id": "03_arrival_event_1",
+        "tSec": 5.2,
+        "type": "passenger_exit",
+        "payload": {}
+      }
+    ]
+  }
+}

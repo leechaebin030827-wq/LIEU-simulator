@@ -1,0 +1,825 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "02_driving_a",
+  "title": "02 Driving A",
+  "durationSec": 40,
+  "fps": 30,
+  "loop": false,
+  "demoPreviewOnly": true,
+  "notes": "PREVIEW ONLY. 주행A: 공사 구간 감지 -> 먼저 앞을 살피고 -> 돌아와 음성+바닥 투사로 우회 안내 -> 조용히 대기.",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "rail_0",
+            "tSec": 0,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_1",
+            "tSec": 5.0,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_2",
+            "tSec": 11.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_3",
+            "tSec": 13.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_4",
+            "tSec": 19.5,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_5",
+            "tSec": 40,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "yaw_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_1",
+            "tSec": 40,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "tilt_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_1",
+            "tSec": 4.6,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_2",
+            "tSec": 6.8,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_3",
+            "tSec": 13.5,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_4",
+            "tSec": 15.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_5",
+            "tSec": 40,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": [
+          {
+            "id": "f0",
+            "tSec": 0,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "f1",
+            "tSec": 40,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "br_0",
+            "tSec": 0,
+            "value": 0.12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_1",
+            "tSec": 40,
+            "value": 0.12,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "effects": [
+        {
+          "id": "idle_a",
+          "type": "breathe",
+          "fromSec": 0,
+          "toSec": 4.0,
+          "seed": 1,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              200
+            ],
+            "speedHz": 0.25
+          }
+        },
+        {
+          "id": "attention",
+          "type": "solid",
+          "fromSec": 4.0,
+          "toSec": 14.2,
+          "seed": 2,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "whiteLevel": 200
+          },
+          "parameterTracks": {
+            "whiteLevel": {
+              "kind": "numeric",
+              "keys": [
+                {
+                  "id": "wl_0",
+                  "tSec": 4.0,
+                  "value": 0,
+                  "interpolationToNext": "smoothstep"
+                },
+                {
+                  "id": "wl_1",
+                  "tSec": 5.2,
+                  "value": 200,
+                  "interpolationToNext": "smoothstep"
+                },
+                {
+                  "id": "wl_2",
+                  "tSec": 13.0,
+                  "value": 200,
+                  "interpolationToNext": "smoothstep"
+                },
+                {
+                  "id": "wl_3",
+                  "tSec": 14.2,
+                  "value": 0,
+                  "interpolationToNext": "smoothstep"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "arrive_glow",
+          "type": "breathe",
+          "fromSec": 19.5,
+          "toSec": 21.5,
+          "seed": 3,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              200
+            ],
+            "speedHz": 0.5
+          }
+        },
+        {
+          "id": "talk",
+          "type": "breathe",
+          "fromSec": 20.0,
+          "toSec": 24.5,
+          "seed": 4,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              90
+            ],
+            "speedHz": 1.1
+          }
+        },
+        {
+          "id": "idle_b",
+          "type": "breathe",
+          "fromSec": 31.0,
+          "toSec": 39.0,
+          "seed": 5,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              200
+            ],
+            "speedHz": 0.25
+          }
+        }
+      ]
+    },
+    "eyes": {
+      "left": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "L_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "R_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "int_0",
+            "tSec": 0,
+            "value": 1,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "projector": {
+      "clips": [
+        {
+          "id": "detour_1",
+          "fromSec": 20.3,
+          "toSec": 22.6,
+          "assetId": "media/detour_1.svg",
+          "visible": true
+        },
+        {
+          "id": "detour_2",
+          "fromSec": 22.6,
+          "toSec": 24.9,
+          "assetId": "media/detour_2.svg",
+          "visible": true
+        },
+        {
+          "id": "detour_3",
+          "fromSec": 24.9,
+          "toSec": 31.4,
+          "assetId": "media/detour_3.svg",
+          "visible": true
+        }
+      ],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "op_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_1",
+              "tSec": 20.3,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_2",
+              "tSec": 21.1,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_3",
+              "tSec": 29.6,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_4",
+              "tSec": 31.4,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_5",
+              "tSec": 40,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "pb",
+              "tSec": 0,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "pr",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "ps",
+              "tSec": 0,
+              "value": 1,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "px",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "pz",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        }
+      }
+    },
+    "audio": [
+      {
+        "id": "voice",
+        "fromSec": 20.0,
+        "toSec": 24.46,
+        "assetId": "media/voice_detour.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.8,
+        "fadeInSec": 0.05,
+        "fadeOutSec": 0.2,
+        "loop": false
+      }
+    ],
+    "events": [
+      {
+        "id": "ev0",
+        "tSec": 0,
+        "type": "scene",
+        "payload": {
+          "title": "대기 · 평상시",
+          "desc": "LED 링이 낮은 밝기로 천천히 호흡하고 본체는 수평을 유지합니다"
+        }
+      },
+      {
+        "id": "ev1",
+        "tSec": 4.0,
+        "type": "scene",
+        "payload": {
+          "title": "공사 구간 감지 · 먼저 살피러 가기",
+          "desc": "호흡을 멈추고 부드럽게 밝아지며, 몸을 앞으로 기울이고 레일을 따라 일정한 속도로 전방으로 이동합니다"
+        }
+      },
+      {
+        "id": "ev2",
+        "tSec": 11.0,
+        "type": "scene",
+        "payload": {
+          "title": "전방 응시",
+          "desc": "끝에서 잠시 멈춰 기울기를 유지한 채 앞쪽 상황을 살핍니다 (차분한 화이트 라이트)"
+        }
+      },
+      {
+        "id": "ev3",
+        "tSec": 13.5,
+        "type": "scene",
+        "payload": {
+          "title": "승객 쪽으로 복귀",
+          "desc": "본체를 천천히 수평으로 되돌리고 레일을 따라 안내 위치(중앙)로 돌아옵니다"
+        }
+      },
+      {
+        "id": "ev4",
+        "tSec": 19.5,
+        "type": "scene",
+        "payload": {
+          "title": "안내 시작",
+          "desc": "중앙에 도착해 멈추고 LED를 한 번 부드럽게 밝힌 뒤 음성 안내와 함께 바닥에 우회 경로를 투사합니다"
+        }
+      },
+      {
+        "id": "ev5",
+        "tSec": 24.9,
+        "type": "scene",
+        "payload": {
+          "title": "우회 경로 안내",
+          "desc": "현재 위치 → 공사 구간 → 갈라지는 우회 경로 순으로 그려지고, 안내가 끝난 뒤에도 잠시 유지됩니다"
+        }
+      },
+      {
+        "id": "ev6",
+        "tSec": 29.6,
+        "type": "scene",
+        "payload": {
+          "title": "조용히 물러나기",
+          "desc": "프로젝션이 서서히 사라지고 LED는 다시 낮은 호흡, 본체는 수평 대기 상태로 돌아갑니다"
+        }
+      },
+      {
+        "id": "ev7",
+        "tSec": 4.0,
+        "type": "detour_info_received",
+        "payload": {
+          "reason": "road_work",
+          "direction": "right"
+        }
+      },
+      {
+        "id": "ev8",
+        "tSec": 19.5,
+        "type": "guidance_start",
+        "payload": {}
+      }
+    ]
+  }
+}

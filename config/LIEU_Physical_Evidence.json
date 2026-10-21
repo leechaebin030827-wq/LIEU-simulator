@@ -1,0 +1,55 @@
+{
+  "schema": "LIEU_Physical_Evidence/1.0",
+  "evidenceVersion": "2026-10-19",
+  "sources": {
+    "photoEyes": "../references/eye_backpack_wiring.png",
+    "photoGear": "../references/internal_ring_gear_and_pinion.png",
+    "cad": "../assets/LIEU_Senario.glb"
+  },
+  "eyes": {
+    "backpackLabelObserved": "HT16K33 LED Backpack / Monochrome 8x8 Matrix / MRA210A",
+    "photographedBoardCount": 2,
+    "bus": "I2C",
+    "busRelationship": "shared SCL/SDA/GND/VCC apparent daisy chain or parallel wiring",
+    "visualWireColorMap": {"SCL":"orange", "SDA":"yellow", "GND":"black", "VCC":"red"},
+    "wireColorElectricalContinuityVerified": false,
+    "photoLeftBoard": {"address": null, "A0SolderJumperClosed": null, "A1SolderJumperClosed": null, "A2SolderJumperClosed": null, "meshNodeIndex": null},
+    "photoRightBoard": {"address": null, "A0SolderJumperClosed": null, "A1SolderJumperClosed": null, "A2SolderJumperClosed": null, "meshNodeIndex": null},
+    "supportedAddressCandidatesTypicalHT16K33": [112, 113, 114, 115, 116, 117, 118, 119],
+    "addressScanCompleted": false,
+    "boardToSceneMappingConfirmed": false,
+    "rowColumnHardwareOrientationConfirmed": false,
+    "independentHardwareControlRequiresDistinctAddresses": true
+  },
+  "yawGear": {
+    "observedLargeAnnularGear": true,
+    "observedSmallMeshingPinion": true,
+    "observedMotorOrCableNearPinion": true,
+    "gearTypeVisual": "external-tooth annular spur gear + small pinion",
+    "candidateDegreesOfFreedom": "yawY",
+    "candidateGLBServoAssemblyRootIndex": 73,
+    "driveJointConfirmed": false,
+    "servoModel": null,
+    "pinionToothCount": null,
+    "ringToothCount": null,
+    "motorToOutputGearRatio": null,
+    "ringLinkFixedOrMoving": null,
+    "movingLink": null,
+    "fixedLink": null,
+    "motorDirectionSign": null,
+    "homeAngleDeg": null,
+    "mechanicalLimitDeg": [null, null],
+    "backlashDeg": null
+  },
+  "neopixelHardware": {
+    "cad24PixelGeometryKnown": true,
+    "actualWiringNotVisibleInThesePhotos": true,
+    "chipset": null,
+    "physicalIndex0AtVirtualIndex": null,
+    "physicalIndexDirection": null,
+    "byteOrder": null,
+    "supplyVoltage": null,
+    "maxTotalCurrent": null
+  },
+  "notVerifiedByPhotos": ["real motor count", "rail actuator and limit switches", "tilt motor mounting and limits", "projector optical geometry", "speaker wiring", "camera wiring", "NeoPixel DIN/DOUT"]
+}

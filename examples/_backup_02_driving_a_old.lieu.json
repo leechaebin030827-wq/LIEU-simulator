@@ -1,0 +1,931 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "02_driving_a",
+  "title": "02 Driving A",
+  "durationSec": 12,
+  "fps": 30,
+  "loop": false,
+  "demoPreviewOnly": true,
+  "notes": "PREVIEW ONLY. Motion limits/pivots/gear ratios are not physically verified.",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "02_driving_a_railX_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_railX_1",
+            "tSec": 2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_railX_2",
+            "tSec": 5,
+            "value": -0.08,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_railX_3",
+            "tSec": 9,
+            "value": -0.08,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_railX_4",
+            "tSec": 11,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "02_driving_a_yawY_0",
+            "tSec": 0,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_yawY_1",
+            "tSec": 2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_yawY_2",
+            "tSec": 4,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_yawY_3",
+            "tSec": 6,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_yawY_4",
+            "tSec": 8,
+            "value": 10,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_yawY_5",
+            "tSec": 10,
+            "value": 10,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_yawY_6",
+            "tSec": 11.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "02_driving_a_tiltZ_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_tiltZ_1",
+            "tSec": 3,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_tiltZ_2",
+            "tSec": 7,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "02_driving_a_tiltZ_3",
+            "tSec": 11,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": [
+          {
+            "id": "02_driving_a_frame_0",
+            "tSec": 0,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "02_driving_a_frame_1",
+            "tSec": 3,
+            "value": [
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ],
+              [
+                25,
+                36,
+                0,
+                20
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "02_driving_a_frame_2",
+            "tSec": 11,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ],
+              [
+                0,
+                0,
+                0,
+                9
+              ]
+            ],
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "02_driving_a_ringbrite_0",
+            "tSec": 0,
+            "value": 1,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "effects": [
+        {
+          "id": "detour_wave",
+          "type": "wave",
+          "fromSec": 3,
+          "toSec": 11,
+          "seed": 12,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "whiteLevel": 45,
+            "speedHz": 0.5,
+            "width": 3,
+            "direction": 1
+          }
+        }
+      ]
+    },
+    "eyes": {
+      "left": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "02_driving_a_left_eye_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_left_eye_1",
+            "tSec": 2.5,
+            "value": [
+              0,
+              60,
+              126,
+              66,
+              66,
+              126,
+              60,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_left_eye_2",
+            "tSec": 6,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_left_eye_3",
+            "tSec": 7.5,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_left_eye_4",
+            "tSec": 7.8,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "02_driving_a_right_eye_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_right_eye_1",
+            "tSec": 2.5,
+            "value": [
+              0,
+              60,
+              126,
+              66,
+              66,
+              126,
+              60,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_right_eye_2",
+            "tSec": 6,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_right_eye_3",
+            "tSec": 7.5,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "02_driving_a_right_eye_4",
+            "tSec": 7.8,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "02_driving_a_eyeBrightness_0",
+            "tSec": 0,
+            "value": 0.7,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "projector": {
+      "clips": [
+        {
+          "id": "projector_1",
+          "fromSec": 3,
+          "toSec": 6.5,
+          "assetId": "media/traffic.svg",
+          "visible": true
+        },
+        {
+          "id": "projector_2",
+          "fromSec": 7,
+          "toSec": 11.5,
+          "assetId": "media/detour.svg",
+          "visible": true
+        }
+      ],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "02_driving_a_projector_opacity_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "02_driving_a_projector_opacity_1",
+              "tSec": 3,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "02_driving_a_projector_opacity_2",
+              "tSec": 3.7,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "02_driving_a_projector_opacity_3",
+              "tSec": 10.7,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "02_driving_a_projector_opacity_4",
+              "tSec": 11.5,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "02_driving_a_projector_opacity_5",
+              "tSec": 12,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "02_driving_a_projector_brightness_0",
+              "tSec": 0,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "02_driving_a_projector_rot_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "02_driving_a_projector_scale_0",
+              "tSec": 0,
+              "value": 1,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "02_driving_a_projector_xm_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "02_driving_a_projector_zm_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        }
+      }
+    },
+    "audio": [
+      {
+        "id": "02_driving_a_audio",
+        "fromSec": 7,
+        "toSec": 7.7,
+        "assetId": "media/intro-chime.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.35,
+        "fadeInSec": 0.05,
+        "fadeOutSec": 0.3,
+        "loop": false
+      }
+    ],
+    "events": [
+      {
+        "id": "02_driving_a_event_0",
+        "tSec": 2.5,
+        "type": "traffic_detected",
+        "payload": {}
+      },
+      {
+        "id": "02_driving_a_event_1",
+        "tSec": 7,
+        "type": "reroute_started",
+        "payload": {
+          "direction": "right"
+        }
+      }
+    ]
+  }
+}

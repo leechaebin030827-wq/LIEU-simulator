@@ -1,0 +1,2414 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "01_boarding",
+  "title": "01 Boarding",
+  "durationSec": 30,
+  "fps": 30,
+  "loop": false,
+  "demoPreviewOnly": true,
+  "notes": "PREVIEW ONLY. Motion limits/pivots/gear ratios are not physically verified.",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "01_boarding_railX_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "01_boarding_railX_1",
+            "tSec": 12,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "01_boarding_yawY_0",
+            "tSec": 0,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "01_boarding_yawY_1",
+            "tSec": 8,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "01_boarding_yawY_2",
+            "tSec": 11,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "01_boarding_yawY_3",
+            "tSec": 12,
+            "value": 0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12033",
+            "tSec": 12.0333,
+            "value": -0.08,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12067",
+            "tSec": 12.0667,
+            "value": -0.31,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12100",
+            "tSec": 12.1,
+            "value": -0.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12133",
+            "tSec": 12.1333,
+            "value": -1.22,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12167",
+            "tSec": 12.1667,
+            "value": -1.87,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12200",
+            "tSec": 12.2,
+            "value": -2.64,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12233",
+            "tSec": 12.2333,
+            "value": -3.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12267",
+            "tSec": 12.2667,
+            "value": -4.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12300",
+            "tSec": 12.3,
+            "value": -5.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12333",
+            "tSec": 12.3333,
+            "value": -6.48,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12367",
+            "tSec": 12.3667,
+            "value": -7.52,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12400",
+            "tSec": 12.4,
+            "value": -8.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12433",
+            "tSec": 12.4333,
+            "value": -9.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12467",
+            "tSec": 12.4667,
+            "value": -10.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12500",
+            "tSec": 12.5,
+            "value": -11.36,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12533",
+            "tSec": 12.5333,
+            "value": -12.13,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12567",
+            "tSec": 12.5667,
+            "value": -12.78,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12600",
+            "tSec": 12.6,
+            "value": -13.31,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12633",
+            "tSec": 12.6333,
+            "value": -13.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12667",
+            "tSec": 12.6667,
+            "value": -13.92,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12700",
+            "tSec": 12.7,
+            "value": -14.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12733",
+            "tSec": 12.7333,
+            "value": -13.85,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12767",
+            "tSec": 12.7667,
+            "value": -13.42,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12800",
+            "tSec": 12.8,
+            "value": -12.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12833",
+            "tSec": 12.8333,
+            "value": -11.67,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12867",
+            "tSec": 12.8667,
+            "value": -10.36,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12900",
+            "tSec": 12.9,
+            "value": -8.77,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12933",
+            "tSec": 12.9333,
+            "value": -6.9,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_12967",
+            "tSec": 12.9667,
+            "value": -4.73,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13000",
+            "tSec": 13.0,
+            "value": -2.3,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13033",
+            "tSec": 13.0333,
+            "value": 0.41,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13067",
+            "tSec": 13.0667,
+            "value": 3.39,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13100",
+            "tSec": 13.1,
+            "value": 6.64,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13133",
+            "tSec": 13.1333,
+            "value": 10.14,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13167",
+            "tSec": 13.1667,
+            "value": 13.91,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13200",
+            "tSec": 13.2,
+            "value": 17.92,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13233",
+            "tSec": 13.2333,
+            "value": 22.17,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13267",
+            "tSec": 13.2667,
+            "value": 26.67,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13300",
+            "tSec": 13.3,
+            "value": 31.39,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13333",
+            "tSec": 13.3333,
+            "value": 36.33,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13367",
+            "tSec": 13.3667,
+            "value": 41.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13400",
+            "tSec": 13.4,
+            "value": 46.87,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13433",
+            "tSec": 13.4333,
+            "value": 52.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13467",
+            "tSec": 13.4667,
+            "value": 58.21,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13500",
+            "tSec": 13.5,
+            "value": 64.15,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13533",
+            "tSec": 13.5333,
+            "value": 70.27,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13567",
+            "tSec": 13.5667,
+            "value": 76.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13600",
+            "tSec": 13.6,
+            "value": 83.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13633",
+            "tSec": 13.6333,
+            "value": 89.58,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13667",
+            "tSec": 13.6667,
+            "value": 96.32,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13700",
+            "tSec": 13.7,
+            "value": 103.16,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13733",
+            "tSec": 13.7333,
+            "value": 110.12,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13767",
+            "tSec": 13.7667,
+            "value": 117.2,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13800",
+            "tSec": 13.8,
+            "value": 124.36,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13833",
+            "tSec": 13.8333,
+            "value": 131.6,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13867",
+            "tSec": 13.8667,
+            "value": 138.94,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13900",
+            "tSec": 13.9,
+            "value": 146.31,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13933",
+            "tSec": 13.9333,
+            "value": 153.74,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_13967",
+            "tSec": 13.9667,
+            "value": 161.23,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14000",
+            "tSec": 14.0,
+            "value": 168.72,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14033",
+            "tSec": 14.0333,
+            "value": 176.23,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14067",
+            "tSec": 14.0667,
+            "value": 183.77,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14100",
+            "tSec": 14.1,
+            "value": 191.28,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14133",
+            "tSec": 14.1333,
+            "value": 198.77,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14167",
+            "tSec": 14.1667,
+            "value": 206.26,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14200",
+            "tSec": 14.2,
+            "value": 213.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14233",
+            "tSec": 14.2333,
+            "value": 221.06,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14267",
+            "tSec": 14.2667,
+            "value": 228.4,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14300",
+            "tSec": 14.3,
+            "value": 235.64,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14333",
+            "tSec": 14.3333,
+            "value": 242.8,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14367",
+            "tSec": 14.3667,
+            "value": 249.88,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14400",
+            "tSec": 14.4,
+            "value": 256.84,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14433",
+            "tSec": 14.4333,
+            "value": 263.68,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14467",
+            "tSec": 14.4667,
+            "value": 270.42,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14500",
+            "tSec": 14.5,
+            "value": 277.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14533",
+            "tSec": 14.5333,
+            "value": 283.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14567",
+            "tSec": 14.5667,
+            "value": 289.73,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14600",
+            "tSec": 14.6,
+            "value": 295.85,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14633",
+            "tSec": 14.6333,
+            "value": 301.79,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14667",
+            "tSec": 14.6667,
+            "value": 307.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14700",
+            "tSec": 14.7,
+            "value": 313.13,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14733",
+            "tSec": 14.7333,
+            "value": 318.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14767",
+            "tSec": 14.7667,
+            "value": 323.67,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14800",
+            "tSec": 14.8,
+            "value": 328.61,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14833",
+            "tSec": 14.8333,
+            "value": 333.33,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14867",
+            "tSec": 14.8667,
+            "value": 337.83,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14900",
+            "tSec": 14.9,
+            "value": 342.08,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14933",
+            "tSec": 14.9333,
+            "value": 346.09,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_14967",
+            "tSec": 14.9667,
+            "value": 349.86,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15000",
+            "tSec": 15.0,
+            "value": 353.36,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15033",
+            "tSec": 15.0333,
+            "value": 356.61,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15067",
+            "tSec": 15.0667,
+            "value": 359.59,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15100",
+            "tSec": 15.1,
+            "value": 362.3,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15133",
+            "tSec": 15.1333,
+            "value": 364.73,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15167",
+            "tSec": 15.1667,
+            "value": 366.9,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15200",
+            "tSec": 15.2,
+            "value": 368.77,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15233",
+            "tSec": 15.2333,
+            "value": 370.36,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15267",
+            "tSec": 15.2667,
+            "value": 371.67,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15300",
+            "tSec": 15.3,
+            "value": 372.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15333",
+            "tSec": 15.3333,
+            "value": 373.42,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15367",
+            "tSec": 15.3667,
+            "value": 373.85,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15400",
+            "tSec": 15.4,
+            "value": 374.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15433",
+            "tSec": 15.4333,
+            "value": 373.97,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15467",
+            "tSec": 15.4667,
+            "value": 373.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15500",
+            "tSec": 15.5,
+            "value": 373.76,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15533",
+            "tSec": 15.5333,
+            "value": 373.58,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15567",
+            "tSec": 15.5667,
+            "value": 373.34,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15600",
+            "tSec": 15.6,
+            "value": 373.06,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15633",
+            "tSec": 15.6333,
+            "value": 372.73,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15667",
+            "tSec": 15.6667,
+            "value": 372.36,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15700",
+            "tSec": 15.7,
+            "value": 371.95,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15733",
+            "tSec": 15.7333,
+            "value": 371.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15767",
+            "tSec": 15.7667,
+            "value": 371.01,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15800",
+            "tSec": 15.8,
+            "value": 370.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15833",
+            "tSec": 15.8333,
+            "value": 369.96,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15867",
+            "tSec": 15.8667,
+            "value": 369.39,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15900",
+            "tSec": 15.9,
+            "value": 368.81,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15933",
+            "tSec": 15.9333,
+            "value": 368.22,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_15967",
+            "tSec": 15.9667,
+            "value": 367.61,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16000",
+            "tSec": 16.0,
+            "value": 367.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16033",
+            "tSec": 16.0333,
+            "value": 366.39,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16067",
+            "tSec": 16.0667,
+            "value": 365.78,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16100",
+            "tSec": 16.1,
+            "value": 365.19,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16133",
+            "tSec": 16.1333,
+            "value": 364.61,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16167",
+            "tSec": 16.1667,
+            "value": 364.04,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16200",
+            "tSec": 16.2,
+            "value": 363.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16233",
+            "tSec": 16.2333,
+            "value": 362.99,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16267",
+            "tSec": 16.2667,
+            "value": 362.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16300",
+            "tSec": 16.3,
+            "value": 362.05,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16333",
+            "tSec": 16.3333,
+            "value": 361.64,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16367",
+            "tSec": 16.3667,
+            "value": 361.27,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16400",
+            "tSec": 16.4,
+            "value": 360.94,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16433",
+            "tSec": 16.4333,
+            "value": 360.66,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16467",
+            "tSec": 16.4667,
+            "value": 360.42,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16500",
+            "tSec": 16.5,
+            "value": 360.24,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16533",
+            "tSec": 16.5333,
+            "value": 360.11,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16567",
+            "tSec": 16.5667,
+            "value": 360.03,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16600",
+            "tSec": 16.6,
+            "value": 360.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16633",
+            "tSec": 16.6333,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16667",
+            "tSec": 16.6667,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16700",
+            "tSec": 16.7,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16733",
+            "tSec": 16.7333,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16767",
+            "tSec": 16.7667,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16800",
+            "tSec": 16.8,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16833",
+            "tSec": 16.8333,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16867",
+            "tSec": 16.8667,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16900",
+            "tSec": 16.9,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16933",
+            "tSec": 16.9333,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_16967",
+            "tSec": 16.9667,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_17000",
+            "tSec": 17.0,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_17033",
+            "tSec": 17.0333,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_17067",
+            "tSec": 17.0667,
+            "value": 360,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_yawY_17100",
+            "tSec": 17.1,
+            "value": 360,
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "01_boarding_tiltZ_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "01_boarding_tiltZ_1",
+            "tSec": 12,
+            "value": 0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12033",
+            "tSec": 12.0333,
+            "value": 0.02,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12067",
+            "tSec": 12.0667,
+            "value": 0.09,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12100",
+            "tSec": 12.1,
+            "value": 0.2,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12133",
+            "tSec": 12.1333,
+            "value": 0.35,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12167",
+            "tSec": 12.1667,
+            "value": 0.53,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12200",
+            "tSec": 12.2,
+            "value": 0.75,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12233",
+            "tSec": 12.2333,
+            "value": 1.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12267",
+            "tSec": 12.2667,
+            "value": 1.27,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12300",
+            "tSec": 12.3,
+            "value": 1.55,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12333",
+            "tSec": 12.3333,
+            "value": 1.85,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12367",
+            "tSec": 12.3667,
+            "value": 2.15,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12400",
+            "tSec": 12.4,
+            "value": 2.45,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12433",
+            "tSec": 12.4333,
+            "value": 2.73,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12467",
+            "tSec": 12.4667,
+            "value": 3.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12500",
+            "tSec": 12.5,
+            "value": 3.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12533",
+            "tSec": 12.5333,
+            "value": 3.47,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12567",
+            "tSec": 12.5667,
+            "value": 3.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12600",
+            "tSec": 12.6,
+            "value": 3.88,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12633",
+            "tSec": 12.6333,
+            "value": 4.05,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12667",
+            "tSec": 12.6667,
+            "value": 4.19,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12700",
+            "tSec": 12.7,
+            "value": 4.3,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12733",
+            "tSec": 12.7333,
+            "value": 4.39,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12767",
+            "tSec": 12.7667,
+            "value": 4.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12800",
+            "tSec": 12.8,
+            "value": 4.47,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12833",
+            "tSec": 12.8333,
+            "value": 4.47,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12867",
+            "tSec": 12.8667,
+            "value": 4.45,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12900",
+            "tSec": 12.9,
+            "value": 4.41,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12933",
+            "tSec": 12.9333,
+            "value": 4.35,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_12967",
+            "tSec": 12.9667,
+            "value": 4.27,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13000",
+            "tSec": 13.0,
+            "value": 4.2,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13033",
+            "tSec": 13.0333,
+            "value": 4.12,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13067",
+            "tSec": 13.0667,
+            "value": 4.04,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13100",
+            "tSec": 13.1,
+            "value": 3.97,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13133",
+            "tSec": 13.1333,
+            "value": 3.92,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13167",
+            "tSec": 13.1667,
+            "value": 3.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13200",
+            "tSec": 13.2,
+            "value": 3.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13233",
+            "tSec": 13.2333,
+            "value": 3.91,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13267",
+            "tSec": 13.2667,
+            "value": 3.97,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13300",
+            "tSec": 13.3,
+            "value": 4.06,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13333",
+            "tSec": 13.3333,
+            "value": 4.2,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13367",
+            "tSec": 13.3667,
+            "value": 4.37,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13400",
+            "tSec": 13.4,
+            "value": 4.58,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13433",
+            "tSec": 13.4333,
+            "value": 4.81,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13467",
+            "tSec": 13.4667,
+            "value": 5.03,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13500",
+            "tSec": 13.5,
+            "value": 5.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13533",
+            "tSec": 13.5333,
+            "value": 5.46,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13567",
+            "tSec": 13.5667,
+            "value": 5.66,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13600",
+            "tSec": 13.6,
+            "value": 5.84,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13633",
+            "tSec": 13.6333,
+            "value": 6.02,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13667",
+            "tSec": 13.6667,
+            "value": 6.18,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13700",
+            "tSec": 13.7,
+            "value": 6.33,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13733",
+            "tSec": 13.7333,
+            "value": 6.47,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13767",
+            "tSec": 13.7667,
+            "value": 6.59,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13800",
+            "tSec": 13.8,
+            "value": 6.7,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13833",
+            "tSec": 13.8333,
+            "value": 6.79,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13867",
+            "tSec": 13.8667,
+            "value": 6.86,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13900",
+            "tSec": 13.9,
+            "value": 6.92,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13933",
+            "tSec": 13.9333,
+            "value": 6.97,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_13967",
+            "tSec": 13.9667,
+            "value": 6.99,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14000",
+            "tSec": 14.0,
+            "value": 7.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14033",
+            "tSec": 14.0333,
+            "value": 6.99,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14067",
+            "tSec": 14.0667,
+            "value": 6.97,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14100",
+            "tSec": 14.1,
+            "value": 6.92,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14133",
+            "tSec": 14.1333,
+            "value": 6.86,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14167",
+            "tSec": 14.1667,
+            "value": 6.79,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14200",
+            "tSec": 14.2,
+            "value": 6.7,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14233",
+            "tSec": 14.2333,
+            "value": 6.59,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14267",
+            "tSec": 14.2667,
+            "value": 6.47,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14300",
+            "tSec": 14.3,
+            "value": 6.33,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14333",
+            "tSec": 14.3333,
+            "value": 6.18,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14367",
+            "tSec": 14.3667,
+            "value": 6.02,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14400",
+            "tSec": 14.4,
+            "value": 5.84,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14433",
+            "tSec": 14.4333,
+            "value": 5.66,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14467",
+            "tSec": 14.4667,
+            "value": 5.46,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14500",
+            "tSec": 14.5,
+            "value": 5.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14533",
+            "tSec": 14.5333,
+            "value": 5.03,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14567",
+            "tSec": 14.5667,
+            "value": 4.81,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14600",
+            "tSec": 14.6,
+            "value": 4.58,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14633",
+            "tSec": 14.6333,
+            "value": 4.35,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14667",
+            "tSec": 14.6667,
+            "value": 4.11,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14700",
+            "tSec": 14.7,
+            "value": 3.87,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14733",
+            "tSec": 14.7333,
+            "value": 3.62,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14767",
+            "tSec": 14.7667,
+            "value": 3.38,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14800",
+            "tSec": 14.8,
+            "value": 3.13,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14833",
+            "tSec": 14.8333,
+            "value": 2.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14867",
+            "tSec": 14.8667,
+            "value": 2.65,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14900",
+            "tSec": 14.9,
+            "value": 2.42,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14933",
+            "tSec": 14.9333,
+            "value": 2.19,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_14967",
+            "tSec": 14.9667,
+            "value": 1.97,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15000",
+            "tSec": 15.0,
+            "value": 1.75,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15033",
+            "tSec": 15.0333,
+            "value": 1.54,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15067",
+            "tSec": 15.0667,
+            "value": 1.34,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15100",
+            "tSec": 15.1,
+            "value": 1.16,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15133",
+            "tSec": 15.1333,
+            "value": 0.98,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15167",
+            "tSec": 15.1667,
+            "value": 0.82,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15200",
+            "tSec": 15.2,
+            "value": 0.67,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15233",
+            "tSec": 15.2333,
+            "value": 0.53,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15267",
+            "tSec": 15.2667,
+            "value": 0.41,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15300",
+            "tSec": 15.3,
+            "value": 0.3,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15333",
+            "tSec": 15.3333,
+            "value": 0.21,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15367",
+            "tSec": 15.3667,
+            "value": 0.14,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15400",
+            "tSec": 15.4,
+            "value": 0.08,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15433",
+            "tSec": 15.4333,
+            "value": 0.03,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15467",
+            "tSec": 15.4667,
+            "value": 0.01,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15500",
+            "tSec": 15.5,
+            "value": 0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15533",
+            "tSec": 15.5333,
+            "value": -0.01,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15567",
+            "tSec": 15.5667,
+            "value": -0.05,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15600",
+            "tSec": 15.6,
+            "value": -0.11,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15633",
+            "tSec": 15.6333,
+            "value": -0.2,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15667",
+            "tSec": 15.6667,
+            "value": -0.31,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15700",
+            "tSec": 15.7,
+            "value": -0.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15733",
+            "tSec": 15.7333,
+            "value": -0.59,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15767",
+            "tSec": 15.7667,
+            "value": -0.75,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15800",
+            "tSec": 15.8,
+            "value": -0.93,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15833",
+            "tSec": 15.8333,
+            "value": -1.11,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15867",
+            "tSec": 15.8667,
+            "value": -1.3,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15900",
+            "tSec": 15.9,
+            "value": -1.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15933",
+            "tSec": 15.9333,
+            "value": -1.7,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_15967",
+            "tSec": 15.9667,
+            "value": -1.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16000",
+            "tSec": 16.0,
+            "value": -2.07,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16033",
+            "tSec": 16.0333,
+            "value": -2.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16067",
+            "tSec": 16.0667,
+            "value": -2.41,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16100",
+            "tSec": 16.1,
+            "value": -2.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16133",
+            "tSec": 16.1333,
+            "value": -2.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16167",
+            "tSec": 16.1667,
+            "value": -2.8,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16200",
+            "tSec": 16.2,
+            "value": -2.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16233",
+            "tSec": 16.2333,
+            "value": -2.95,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16267",
+            "tSec": 16.2667,
+            "value": -2.99,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16300",
+            "tSec": 16.3,
+            "value": -3.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16333",
+            "tSec": 16.3333,
+            "value": -2.99,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16367",
+            "tSec": 16.3667,
+            "value": -2.95,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16400",
+            "tSec": 16.4,
+            "value": -2.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16433",
+            "tSec": 16.4333,
+            "value": -2.8,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16467",
+            "tSec": 16.4667,
+            "value": -2.69,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16500",
+            "tSec": 16.5,
+            "value": -2.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16533",
+            "tSec": 16.5333,
+            "value": -2.41,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16567",
+            "tSec": 16.5667,
+            "value": -2.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16600",
+            "tSec": 16.6,
+            "value": -2.07,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16633",
+            "tSec": 16.6333,
+            "value": -1.89,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16667",
+            "tSec": 16.6667,
+            "value": -1.7,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16700",
+            "tSec": 16.7,
+            "value": -1.5,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16733",
+            "tSec": 16.7333,
+            "value": -1.3,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16767",
+            "tSec": 16.7667,
+            "value": -1.11,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16800",
+            "tSec": 16.8,
+            "value": -0.93,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16833",
+            "tSec": 16.8333,
+            "value": -0.75,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16867",
+            "tSec": 16.8667,
+            "value": -0.59,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16900",
+            "tSec": 16.9,
+            "value": -0.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16933",
+            "tSec": 16.9333,
+            "value": -0.31,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_16967",
+            "tSec": 16.9667,
+            "value": -0.2,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_17000",
+            "tSec": 17.0,
+            "value": -0.11,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_17033",
+            "tSec": 17.0333,
+            "value": -0.05,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_17067",
+            "tSec": 17.0667,
+            "value": -0.01,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "spin_tiltZ_17100",
+            "tSec": 17.1,
+            "value": 0,
+            "interpolationToNext": "linear"
+          }
+        ]
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": [
+          {
+            "id": "01_boarding_frame_0",
+            "tSec": 0,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "01_boarding_frame_1",
+            "tSec": 12,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "01_boarding_ringbrite_0",
+            "tSec": 0,
+            "value": 0.12,
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "effects": [
+        {
+          "id": "sky_breathe",
+          "type": "breathe",
+          "fromSec": 0,
+          "toSec": 8,
+          "seed": 1,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              190,
+              240,
+              255,
+              150
+            ],
+            "speedHz": 0.125
+          }
+        }
+      ]
+    },
+    "eyes": {
+      "left": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "01_boarding_left_eye_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "01_boarding_right_eye_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "01_boarding_eyeBrightness_0",
+            "tSec": 0,
+            "value": 0.7,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "projector": {
+      "clips": [
+        {
+          "id": "projector_1",
+          "fromSec": 0,
+          "toSec": 8.5,
+          "assetId": "media/welcome.svg",
+          "visible": true
+        }
+      ],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "01_boarding_projector_opacity_0",
+              "tSec": 0,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "01_boarding_projector_opacity_1",
+              "tSec": 7.7,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "01_boarding_projector_opacity_2",
+              "tSec": 8.5,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "01_boarding_projector_opacity_3",
+              "tSec": 12,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "01_boarding_projector_brightness_0",
+              "tSec": 0,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "01_boarding_projector_rot_0",
+              "tSec": 0,
+              "value": 180,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "01_boarding_projector_scale_0",
+              "tSec": 0,
+              "value": 1,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "01_boarding_projector_xm_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "01_boarding_projector_zm_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        }
+      }
+    },
+    "audio": [],
+    "events": [
+      {
+        "id": "01_boarding_event_0",
+        "tSec": 0.3,
+        "type": "passenger_arrives",
+        "payload": {
+          "door": "right"
+        }
+      }
+    ]
+  }
+}

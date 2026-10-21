@@ -1,0 +1,315 @@
+{
+  "schema": "LIEU_Simulator_Rig/1.0",
+  "sourceGlb": "../assets/LIEU_Senario.glb",
+  "sourceManifest": "./LIEU_GLB_Node_Manifest.json",
+  "emitterLayout": "./LIEU_LED_Calibration.json",
+  "coordinates": {
+    "up": "+Y",
+    "railAxis": "+X",
+    "yawAxis": "+Y",
+    "tiltAxis": "+Z",
+    "frontAssumption": "+X",
+    "down": "-Y",
+    "baseUnit": "meters",
+    "basisConfirmedWithHardware": false
+  },
+  "staticMeshes": {
+    "railNodeIndices": [
+      143
+    ]
+  },
+  "allCarriageMeshes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7,
+    8,
+    9,
+    12,
+    13,
+    14,
+    17,
+    18,
+    21,
+    24,
+    27,
+    28,
+    31,
+    32,
+    35,
+    38,
+    41,
+    44,
+    47,
+    50,
+    53,
+    56,
+    57,
+    60,
+    61,
+    64,
+    65,
+    68,
+    69,
+    74,
+    77,
+    80,
+    83,
+    86,
+    89,
+    92,
+    95,
+    98,
+    101,
+    104,
+    107,
+    110,
+    113,
+    116,
+    119,
+    122,
+    125,
+    132,
+    133,
+    134,
+    135,
+    138,
+    139,
+    140,
+    141
+  ],
+  "previewKinematics": {
+    "warning": "DESIGN HYPOTHESIS. No real CAD joints, servo limits, or hardware calibration in GLB.",
+    "confirmedAsHardware": false,
+    "restPivotsWorldMeters": {
+      "yawY": [
+        0,
+        0.015,
+        0
+      ],
+      "tiltZ": [
+        0,
+        0.02,
+        0
+      ]
+    },
+    "pivotConfidence": "visual estimate only",
+    "yawCandidateMeshNodeIndices": [
+      0,
+      1,
+      2,
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      17,
+      18,
+      133,
+      134,
+      135,
+      138,
+      139,
+      140,
+      141
+    ],
+    "tiltCandidateMeshNodeIndices": [
+      7,
+      8,
+      9,
+      12,
+      13,
+      14,
+      134,
+      135,
+      138
+    ],
+    "explicitNotes": [
+      "railX follows every mesh except Rail(node143), including column(node132)",
+      "yaw/tilt stage membership are independent, editable per mesh node, and NOT a verified linkage simulation",
+      "tilt preview targets outer shell and both eyes only: center projector, NeoPixel and bearing assemblies deliberately stay until attachment confirmed",
+      "do not rotate a complete motor assembly as one rigid rotor; motor case and horn have different ownership",
+      "if user changes attachment, recompute poses from GLB rest matrices; do not accumulate deltas"
+    ]
+  },
+  "actuators": {
+    "railX": {
+      "kind": "linear",
+      "units": "meters",
+      "axisWorld": [
+        1,
+        0,
+        0
+      ],
+      "previewOnlyRange": [
+        -0.25,
+        0
+      ],
+      "previewOnlyMaxVelocity": 0.06,
+      "previewOnlyMaxAcceleration": 0.12,
+      "physical": {
+        "controller": null,
+        "motorModel": null,
+        "minimum": null,
+        "maximum": null,
+        "maximumVelocity": null,
+        "maximumAcceleration": null,
+        "maximumJerk": null,
+        "homingSensor": null,
+        "homeValue": null,
+        "gearRatio": null,
+        "invertDirection": null
+      }
+    },
+    "yawY": {
+      "kind": "angular",
+      "units": "degrees",
+      "axisWorld": [
+        0,
+        1,
+        0
+      ],
+      "previewOnlyRange": [
+        -90,
+        90
+      ],
+      "previewOnlyMaxVelocity": 110,
+      "previewOnlyMaxAcceleration": 500,
+      "physical": {
+        "controller": null,
+        "motorModel": null,
+        "minimum": null,
+        "maximum": null,
+        "maximumVelocity": null,
+        "maximumAcceleration": null,
+        "maximumJerk": null,
+        "homeValue": null,
+        "gearRatio": null,
+        "invertDirection": null
+      }
+    },
+    "tiltZ": {
+      "kind": "angular",
+      "units": "degrees",
+      "axisWorld": [
+        0,
+        0,
+        1
+      ],
+      "previewOnlyRange": [
+        -15,
+        15
+      ],
+      "previewOnlyMaxVelocity": 20,
+      "previewOnlyMaxAcceleration": 60,
+      "physical": {
+        "controller": null,
+        "motorModel": null,
+        "minimum": null,
+        "maximum": null,
+        "maximumVelocity": null,
+        "maximumAcceleration": null,
+        "maximumJerk": null,
+        "homeValue": null,
+        "gearRatio": null,
+        "invertDirection": null
+      }
+    }
+  },
+  "emitters": {
+    "neopixel24": {
+      "ledCount": 24,
+      "channels": "RGBW (design requirement; physical hardware chip unverified)",
+      "sourceNodeIndex": 133,
+      "diffuserNodeIndex": 17,
+      "physicalIndex0VirtualIndex": null,
+      "physicalOrder": "UNKNOWN",
+      "physicalByteOrder": "UNKNOWN",
+      "perChannelRange": [
+        0,
+        255
+      ],
+      "brightnessRange": [
+        0,
+        1
+      ],
+      "supplyVoltageV": null,
+      "powerBudgetAmps": null
+    },
+    "eyesLeft": {
+      "grid": [
+        8,
+        8
+      ],
+      "sourceMeshNodeIndex": 13,
+      "driver": "HT16K33 (model name)",
+      "physicalI2cAddress": null,
+      "color": "UNKNOWN (likely single color per matrix)",
+      "intensityStepRangeIfHT16K33": [
+        0,
+        15
+      ]
+    },
+    "eyesRight": {
+      "grid": [
+        8,
+        8
+      ],
+      "sourceMeshNodeIndex": 8,
+      "driver": "HT16K33 (model name)",
+      "physicalI2cAddress": null,
+      "color": "UNKNOWN (likely single color per matrix)",
+      "intensityStepRangeIfHT16K33": [
+        0,
+        15
+      ]
+    }
+  },
+  "projector": {
+    "modelLabelFromGLB": "Miniray_Beam",
+    "sourceMeshNodeIndex": 18,
+    "holderNodeIndex": 139,
+    "opticalEmitterWorldMeters": null,
+    "rayWorldApprox": [
+      0,
+      -1,
+      0
+    ],
+    "throwRatio": null,
+    "aspectRatio": null,
+    "nativeResolution": null,
+    "focusDistanceMeters": null,
+    "brightnessLumens": null,
+    "supportsPlaybackSource": null,
+    "projectionSurfaceHeightWorldMeters": null,
+    "followsTiltJoint": null
+  },
+  "audio": {
+    "speakerMeshNodeIndex": null,
+    "speakerLocationWorldMeters": null,
+    "maxOutputGain": null,
+    "supportedOutputDevice": null
+  },
+  "sensor": {
+    "webcamMeshNodeIndex": null,
+    "webcamLocationWorldMeters": null,
+    "cameraFovDeg": null,
+    "webcamUsePermissionRequired": true
+  },
+  "hardwareMode": {
+    "enabled": false,
+    "requiresUserArming": true,
+    "rejectIfUncalibrated": true
+  },
+  "defaultPreview": {
+    "railX": 0,
+    "yawY": 0,
+    "tiltZ": 0,
+    "neopixelBrightness": 0.2,
+    "projectorEnabled": false,
+    "eyePattern": "neutral"
+  }
+}
