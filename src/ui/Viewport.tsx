@@ -89,7 +89,7 @@ export function Viewport() {
       <div className="vpstate" title="Preview only · nothing is sent to the real robot">Preview{live ? <span className="warn"> · LIVE (unsaved)</span> : null}</div>
       {warns.length > 0 && <div className="vpwarn">⚠ Preview limit exceeded: {warns.slice(0, 3).map((w) => `${w.ch} ${w.kind}@${w.tSec.toFixed(2)}s`).join(', ')} — not real hardware limits ({Object.entries(PREVIEW_LIMITS).length}axes, demo values)</div>}
       <Canvas camera={{ fov: 40, near: 0.01, far: 30, position: PRESETS.Persp.pos }} gl={{ antialias: true }} dpr={[1, 2]} onPointerMissed={() => undefined}>
-        <color attach="background" args={['#b9bec6']} />
+        <color attach="background" args={['#9aa0ab']} />
         <hemisphereLight args={['#bcd0ff', '#2a2218', 0.9]} />
         <directionalLight position={[1, 2, 1.5]} intensity={1.6} />
         <directionalLight position={[-1.5, 0.5, -1]} intensity={0.6} />

@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { useStore } from '../store';
 import { computeStageMatrices } from '../engine/rig';
 import { frame, shell } from './runtime';
+import { drawStartButton, type ButtonTimes } from './startButton';
 import type { StageId } from '../engine/types';
 import { Emitters } from './Emitters';
 import { Projection } from './Projection';
@@ -41,16 +42,32 @@ function buildRig(gltf: GltfLike) {
     const mesh = o as THREE.Mesh;
     found.push({ mesh, node, rest: mesh.matrixWorld.clone(), orig: mesh.material });
   });
-  // 'Screen' material: swap the GLB's blank placeholder texture for the seat/window image (same texture object, so opaque clones follow).
+  // 'Screen' material: the seat/window image shown exactly as authored -- unlit, no tone mapping, no lighting/bloom/tint.
+  const screenMat = (m: THREE.MeshStandardMaterial) => {
+    if (m.name !== 'Screen' || !m.map) return m;
+    const tex = m.map;
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const img = new Image();
+    img.onload = () => { tex.image = img; tex.needsUpdate = true; screenCtl.img = img; };
+    img.src = `${import.meta.env.BASE_URL}assets/screen.jpg`; // still image until the video is ready (and if it never is)
+    const mat = new THREE.MeshBasicMaterial({ name: 'Screen', map: tex, color: '#ffffff', toneMapped: false, fog: false, side: m.side });
+    // Looping muted video as the screen content, drawn with the same UV transform as the glTF texture.
+    const video = document.createElement('video');
+    video.src = `${import.meta.env.BASE_URL}assets/screen.mp4`;
+    video.loop = true; video.muted = true; video.defaultPlaybackRate = 0.5; video.playbackRate = 0.5; video.playsInline = true; video.autoplay = true; video.crossOrigin = 'anonymous';
+    video.addEventListener('loadeddata', () => {
+      const vt = new THREE.VideoTexture(video);
+      vt.colorSpace = THREE.SRGBColorSpace; vt.flipY = tex.flipY; vt.wrapS = tex.wrapS; vt.wrapT = tex.wrapT;
+      vt.offset.copy(tex.offset); vt.repeat.copy(tex.repeat); vt.rotation = tex.rotation; vt.center.copy(tex.center);
+      screenCtl.vt = vt; applyScreen();
+    });
+    video.load();
+    Object.assign(screenCtl, { mat, still: tex, video });
+    return mat;
+  };
   for (const r of found) {
-    const ms = Array.isArray(r.orig) ? r.orig : [r.orig];
-    for (const m of ms as THREE.MeshStandardMaterial[]) {
-      if (m.name !== 'Screen' || !m.map || m.userData.screenImage) continue;
-      m.userData.screenImage = true;
-      const tex = m.map, img = new Image();
-      img.onload = () => { tex.image = img; tex.needsUpdate = true; m.emissive.set('#ffffff'); m.emissiveMap = tex; m.emissiveIntensity = 0.55; m.needsUpdate = true; };
-      img.src = `${import.meta.env.BASE_URL}assets/screen.jpg`;
-    }
+    r.orig = Array.isArray(r.orig) ? r.orig.map((m) => screenMat(m as THREE.MeshStandardMaterial)) : screenMat(r.orig as THREE.MeshStandardMaterial);
+    r.mesh.material = r.orig;
   }
   // Body shells take the column's COLOR only (not its glossy/metallic finish).
   const colMat = found.find((r) => r.node === 132)?.orig as THREE.MeshStandardMaterial | undefined;
@@ -61,7 +78,7 @@ function buildRig(gltf: GltfLike) {
   // Pale grey-teal satin body colour (reference render); column, shell and cap share it.
   for (const nodeId of [132, 135, 138]) {
     const m = found.find((r) => r.node === nodeId)?.orig as THREE.MeshStandardMaterial | undefined;
-    if (m?.color) { m.color.set('#a8c3c7'); m.roughness = 0.5; m.metalness = 0; m.needsUpdate = true; }
+    if (m?.color) { m.color.set('#a7bfce'); m.roughness = 0.5; m.metalness = 0; m.needsUpdate = true; }
   }
   // The column then takes the shell's material (same matte finish as the donut body).
   const colRig = found.find((r) => r.node === 132), bodyMat = found.find((r) => r.node === 135)?.orig;
@@ -96,6 +113,109 @@ function buildRig(gltf: GltfLike) {
   return out;
 }
 
+/** Screen content per scenario: 01_* shows the still photo, every other scenario the looping video (half speed). */
+const screenCtl: { mat?: THREE.MeshBasicMaterial; still?: THREE.Texture; video?: HTMLVideoElement; vt?: THREE.Texture; wantVideo: boolean; img?: HTMLImageElement; btn?: { canvas: HTMLCanvasElement; tex: THREE.CanvasTexture }; btnShown: boolean } = { wantVideo: false, btnShown: false };
+export const screenWantsVideo = (seqId: string) => /^03_/.test(seqId);
+function applyScreen() {
+  const { mat, still, video, vt, wantVideo } = screenCtl;
+  if (!mat || !still || !video) return;
+  if (wantVideo && vt) {
+    mat.map = vt; mat.needsUpdate = true;
+    video.playbackRate = 0.5;
+    void video.play().catch(() => { /* autoplay blocked: stays on the still image */ });
+  } else {
+    mat.map = screenCtl.btnShown && screenCtl.btn ? screenCtl.btn.tex : still; mat.needsUpdate = true;
+    video.pause();
+  }
+}
+
+/**
+ * Cue-driven screen video ('screen_video' cue, payload {clips:[{src, from, dur, accel, decel}]}), treated like the wheels of the car: the clip
+ * covers its whole length in `dur` scenario seconds, speeding up from rest over `accel` s (0 = already moving), cruising, and braking to a
+ * smooth stop over `decel` s exactly on its last frame. It holds the last frame until the next clip and shows the first frame before the
+ * first one. A reversed clip is just a pre-reversed file. Everything is a function of scenario time, so pause/scrub/loop show the same frame.
+ */
+type ScreenClip = { src: string; from: number; dur: number; accel?: number; decel?: number };
+/** playback position (s) and speed (video-s per scenario-s) of a clip of length D at local time s */
+function clipState(c: ScreenClip, D: number, s: number): { pos: number; v: number } {
+  const T = Math.max(0.1, c.dur), a = Math.min(c.accel ?? 0, T / 2), d = Math.min(c.decel ?? 0, T / 2);
+  if (s <= 0) return { pos: 0, v: 0 };
+  if (s >= T) return { pos: D, v: 0 };
+  const vc = D / (T - a / 2 - d / 2);
+  if (a > 0 && s < a) return { pos: (vc * s * s) / (2 * a), v: (vc * s) / a };
+  if (s < T - d) return { pos: (vc * a) / 2 + vc * (s - a), v: vc };
+  const r = T - s;
+  return { pos: D - (vc * r * r) / (2 * d), v: (vc * r) / d };
+}
+const clipVids = new Map<string, HTMLVideoElement>();
+let clipActive = false;
+// Frames are copied into a canvas texture only when the video has a real frame ready (not while seeking), so the screen can never go black.
+let clipCanvas: { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D; tex: THREE.CanvasTexture } | null = null;
+function clipVideo(src: string) {
+  let v = clipVids.get(src);
+  if (!v) {
+    v = document.createElement('video');
+    v.src = `${import.meta.env.BASE_URL}${src}`; v.muted = true; v.playsInline = true; v.preload = 'auto'; v.crossOrigin = 'anonymous';
+    v.load(); clipVids.set(src, v);
+  }
+  return v;
+}
+function updateScreenClips(clips: ScreenClip[] | null, t: number, playing: boolean, speed: number) {
+  const { mat, still, img } = screenCtl;
+  if (!mat || !still || !img) return;
+  if (!clips || !clips.length) {
+    if (clipActive) { clipActive = false; clipVids.forEach((v) => v.pause()); applyScreen(); }
+    return;
+  }
+  if (!clipCanvas) {
+    const canvas = document.createElement('canvas'); canvas.width = 464; canvas.height = 832;
+    const ctx = canvas.getContext('2d')!; ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace; tex.flipY = still.flipY; tex.wrapS = still.wrapS; tex.wrapT = still.wrapT;
+    tex.offset.copy(still.offset); tex.repeat.copy(still.repeat); tex.rotation = still.rotation; tex.center.copy(still.center);
+    clipCanvas = { canvas, ctx, tex };
+  }
+  if (!clipActive) { clipActive = true; screenCtl.video?.pause(); mat.map = clipCanvas.tex; mat.needsUpdate = true; }
+  let cur = 0;
+  clips.forEach((c, i) => { if (t >= c.from) cur = i; });
+  clips.forEach((c, i) => {
+    const v = clipVideo(c.src);
+    if (!(v.duration > 0)) return;
+    const D = v.duration, st = i === cur ? clipState(c, D, t - c.from) : { pos: 0, v: 0 };
+    const target = Math.min(st.pos, D - 0.04);
+    if (playing && st.v >= 0.1) {
+      v.playbackRate = Math.min(16, st.v * speed);
+      if (Math.abs(v.currentTime - target) > 0.25) v.currentTime = target;
+      if (v.paused) void v.play().catch(() => { /* autoplay blocked */ });
+    } else { // standing still, scrubbing, or crawling slower than a browser can play: pin the frame
+      if (!v.paused) v.pause();
+      if (Math.abs(v.currentTime - target) > 0.01) v.currentTime = target;
+    }
+  });
+  const v = clipVids.get(clips[cur].src);
+  if (v && v.readyState >= 2 && !v.seeking && v.videoWidth > 0) {
+    clipCanvas.ctx.drawImage(v, 0, 0, clipCanvas.canvas.width, clipCanvas.canvas.height);
+    clipCanvas.tex.needsUpdate = true;
+  }
+}
+
+/** Per frame: while the scenario's 'screen_button' cue window is active, show the still with the glass start button drawn on it. */
+function updateStartButton(b: ButtonTimes | null, t: number) {
+  const { mat, still, img } = screenCtl;
+  if (!mat || !still || !img || screenCtl.wantVideo) return;
+  if (!screenCtl.btn) {
+    const canvas = document.createElement('canvas'); canvas.width = 940; canvas.height = 1672;
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace; tex.flipY = still.flipY; tex.wrapS = still.wrapS; tex.wrapT = still.wrapT;
+    tex.offset.copy(still.offset); tex.repeat.copy(still.repeat); tex.rotation = still.rotation; tex.center.copy(still.center);
+    screenCtl.btn = { canvas, tex };
+  }
+  const { canvas, tex } = screenCtl.btn;
+  const on = !!b && drawStartButton(canvas.getContext('2d')!, canvas.width, canvas.height, img, b, t);
+  if (on) tex.needsUpdate = true;
+  if (on !== screenCtl.btnShown) { screenCtl.btnShown = on; mat.map = on ? tex : still; mat.needsUpdate = true; }
+}
+
 const opaqueCache = new Map<THREE.Material, THREE.Material>();
 function opaqueOf(m: THREE.Material): THREE.Material {
   if (!m.transparent) return m;
@@ -126,6 +246,9 @@ export function Machine() {
     invalidate();
   }, [opaque, selNode, hide, rigBuilt, invalidate]);
 
+  const seqId = useStore((s) => s.seq.id);
+  useEffect(() => { screenCtl.wantVideo = screenWantsVideo(seqId); applyScreen(); invalidate(); }, [seqId, rigBuilt, invalidate]);
+
   // Cutaway: clip the front half (z > 0) with a plane when enabled
   const cutaway = useStore((s) => s.view.cutaway);
   const gl = useThree((s) => s.gl);
@@ -140,6 +263,10 @@ export function Machine() {
   useFrame(() => {
     const s = useStore.getState();
     const st = s.evalNow();
+    const cue = s.seq.tracks.events.find((e) => e.type === 'screen_button');
+    const vcue = s.seq.tracks.events.find((e) => e.type === 'screen_video');
+    updateScreenClips(vcue ? ((vcue.payload as { clips: ScreenClip[] }).clips) : null, st.tSec, s.playing, s.speed);
+    updateStartButton(cue ? (cue.payload as unknown as ButtonTimes) : null, st.tSec);
     const stages = computeStageMatrices(st.motion, s.rig);
     frame.stages = stages; frame.state = st;
     const sig = `${st.motion.railX}|${st.motion.yawY}|${st.motion.tiltZ}|${JSON.stringify(s.rig.pivots)}|${Object.keys(s.rig.owner).length}`;

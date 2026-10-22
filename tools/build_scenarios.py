@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Builds the two hand-directed LIEU scenarios (PREVIEW ONLY):
+"""Builds the hand-directed LIEU scenarios (PREVIEW ONLY):
    01_boarding  - car arrives, Lieu greets, checks seating, spins when the start button is pressed
    02_driving_a - construction detected, Lieu looks ahead, returns, explains the detour
+   03_arrival   - destination nearly reached, Lieu comes out, glances at the door side, says goodbye
+   (run `build_scenarios.py arrival` to rebuild only one; plain run rebuilds all and overwrites saved edits)
 Writes examples/<id>.lieu.json and public/examples/<id>.lieu.json.
 
 Conventions (see memory notes): Lieu faces +X; yaw +  = turn toward the viewport-right in the default view;
@@ -82,7 +84,7 @@ def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, 
                               {'id': 'f0', 'tSec': 0, 'value': ZERO24, 'interpolationToNext': 'linear'},
                               {'id': 'f1', 'tSec': dur, 'value': ZERO24, 'interpolationToNext': 'linear'}]},
                           'brightness': brightness.out(), 'effects': ring_fx},
-               'eyes': {'left': eyes_track('L', eyes), 'right': eyes_track('R', eyes), 'intensity': intensity.out()},
+               'eyes': {'left': eyes_track('L', eyes['left'] if isinstance(eyes, dict) else eyes), 'right': eyes_track('R', eyes['right'] if isinstance(eyes, dict) else eyes), 'intensity': intensity.out()},
                'projector': {'clips': clips, 'properties': {
                    'opacity': opacity.out(),
                    'brightness': {'kind': 'numeric', 'keys': [{'id': 'pb', 'tSec': 0, 'value': 0.85, 'interpolationToNext': 'smoothstep'}]},
@@ -114,14 +116,16 @@ def sfx(id, name, a, dur, gain=0.6, fade_in=0.02, fade_out=0.05):
 def boarding():
     """base position = just inside the front end of the rail. cue -> glide out -> nod -> one left->right seating check -> cue -> glide back to base -> start pressed -> spin."""
     BASE = -0.06           # a little inside the front end (0)
-    DUR = 27
+    DUR = 28.5
     ARR, NOD = 3.7, 4.0      # arrival at the front end, nod start
     CK = 6.4                 # check cue
     rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
     rail.add(0, BASE).add(0.7, BASE).add(ARR, 0).add(13.4, 0).add(16.4, BASE).add(DUR, BASE)
     yaw.add(0, 0).add(7.0, 0).add(8.4, -45).add(9.0, -45).add(11.2, 45).add(12.6, 0)
     tilt.add(0, 0).add(NOD, 0).add(NOD + 0.9, -8).add(NOD + 1.3, -8).add(NOD + 2.2, 0).add(7.0, 0).add(8.4, -10).add(9.8, -12).add(11.2, -10).add(12.6, 0)
-    W0 = 18.3
+    # start button on the screen (drawn by the viewer from the 'screen_button' cue): shown once Lieu is back at base, pressed, then the spin
+    BTN = {'show': 16.6, 'pressDown': 18.0, 'hold': 18.35, 'release': 18.85, 'hide': 19.3, 'gone': 19.7}
+    W0 = 20.0
     tA, tB, tC = whirl(yaw, tilt, W0)
     yaw.add(tC + 1, 0); tilt.add(tC + 1, 0)
     eyes = [(0, F2), (0.15, SM), (12.3, F2), (12.45, N), (W0 - 0.15, F2), (W0, SM), (tC, F2), (tC + 0.15, N)]
@@ -145,9 +149,11 @@ def boarding():
           scene(ARR, '② 도착 · 인사하기', '가볍고 부드럽게 목례합니다'),
           scene(CK, '③ 탑승 확인 (사람이 앉는 중)', '방향 라이트 후 고개를 숙이고 왼쪽에서 오른쪽으로 쓰윽 둘러보며 다 앉았는지 확인합니다'),
           scene(12.6, '④ 확인 후 기본 위치로 복귀', '기본 눈으로 돌아오고, 방향 라이트 후 레일을 타고 기본 위치로 살짝 들어갑니다'),
-          scene(W0 - 0.8, '⑤ 출발 버튼이 눌림', '루가 빙그르르 돕니다 (눈이 오른쪽 끝에서 꺼지고 왼쪽에서 다시 켜짐)'),
+          scene(BTN['show'], '⑤ 출발 버튼', '스크린 중앙에 큰 글래스 "출발" 버튼이 떠오릅니다'),
+          scene(BTN['pressDown'], '⑥ 출발 버튼이 눌림', '버튼이 꾹 눌렸다가 튕기듯 올라오며 사라집니다'),
+          scene(W0 - 0.8, '⑦ 출발 · 빙그르르', '루가 빙그르르 돕니다 (눈이 오른쪽 끝에서 꺼지고 왼쪽에서 다시 켜짐)'),
           scene(tC + 0.5, '대기', '출발 후 기본 위치에서 대기합니다'),
-          (0.3, 'vehicle_arrived', {}), (NOD, 'greeting_nod', {}), (CK, 'seat_check', {}), (W0 - 0.8, 'start_pressed', {})]
+          (0.3, 'vehicle_arrived', {}), (NOD, 'greeting_nod', {}), (CK, 'seat_check', {}), (BTN['show'], 'screen_button', BTN), (BTN['pressDown'], 'start_pressed', {})]
     build('01_boarding', '01 Boarding', DUR,
           'PREVIEW ONLY. 탑승: 기본 위치(앞에서 조금 들어간 곳) -> 맨 앞까지 나와 환영/인사/착석 확인 -> 기본 위치 복귀 -> 출발 버튼 -> 빙그르르. 효과음은 합성음(tools/make_sfx.py).',
           {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 180, audio, ev)
@@ -160,13 +166,18 @@ def driving_a():
     CENTER, BACK = -0.125, -0.25
     # front end -> backs along the rail toward the monitor while glancing around (dynamic) -> returns to the guide position
     rail.add(0, 0).add(5.0, 0).add(13.0, BACK).add(13.5, BACK).add(17.5, CENTER).add(DUR, CENTER)
-    glances = [(4.4, 0), (5.6, -45), (6.9, 40), (8.0, -35), (9.3, 55), (10.7, -40), (11.9, 30), (12.9, -15), (14.0, 0)]
-    yaw.add(0, 0)
-    for t, v in glances: yaw.add(t, v)
-    yaw.add(DUR, 0)
-    tilt.add(0, 0).add(4.4, 0).add(5.6, -8).add(6.9, -5).add(8.0, -12).add(9.3, -6).add(10.7, -12).add(11.9, -6).add(12.9, -9).add(14.4, -4).add(17.0, 0).add(DUR, 0)
+    # the head swings round to +90 (eyes slide round to the side and out of sight), then keeps shaking side to side facing the monitor, then swings back
+    yaw.add(0, 0).add(4.0, 0).add(6.2, 90)
+    for t, v in [(7.4, 64), (8.6, 90), (9.8, 66), (11.0, 90), (12.0, 70), (12.8, 90)]: yaw.add(t, v)
+    yaw.add(14.8, 0).add(DUR, 0)
+    tilt.add(0, 0).add(4.0, 0).add(6.2, -8).add(7.4, -5).add(8.6, -12).add(9.8, -6).add(11.0, -12).add(12.0, -6).add(12.8, -9).add(14.8, -4).add(17.0, 0).add(DUR, 0)
     eyes = [(0, N)]
-    inten = Tr('int').add(0, 1)
+    baked = ROOT / 'tools/baked_eyes/02_driving_a.json'   # expressions from the eye studio (tools/bake_eyes.ts); falls back to the plain eye
+    if baked.exists():
+        ks = json.loads(baked.read_text())
+        eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
+    # eyes stay lit while the head swings round (they slide out of view with the turn); once they are side-on / behind they are switched off, and back on as the head comes round again
+    inten = Tr('int').add(0, 1).add(5.2, 1).add(5.7, 0).add(13.1, 0).add(13.6, 1)
     ramp = Tr('wl').add(4.0, 0).add(5.2, 200).add(16.0, 200).add(17.2, 0)
     fx = [breathe('idle_a', 1, [0, 0, 0, 200], 0, 4.0, 0.25),
           {'id': 'attention', 'type': 'solid', 'fromSec': 4.0, 'toSec': 17.2, 'seed': 2, 'priority': 1, 'blend': 'max',
@@ -180,17 +191,72 @@ def driving_a():
              {'id': 'detour_3', 'fromSec': 22.9, 'toSec': 29.4, 'assetId': 'media/detour_3.svg', 'visible': True}]
     opac = Tr('op').add(0, 0).add(18.3, 0).add(19.1, 0.8).add(27.6, 0.8).add(29.4, 0).add(DUR, 0)
     audio = [{'id': 'voice', 'fromSec': 18.0, 'toSec': 22.46, 'assetId': 'media/voice_detour.wav', 'mediaOffsetSec': 0, 'gain': 0.8, 'fadeInSec': 0.05, 'fadeOutSec': 0.2, 'loop': False}]
+    # screen: the drive video is treated like the car's wheels. It is already rolling at 0 s and brakes smoothly to a stop on its last frame (the
+    # road work) exactly when Lieu reacts at 4.0 s, stays stopped while Lieu backs to the monitor, looks around and comes back, then, when
+    # Lieu starts back along the rail (13.5 s), the car sets off again in reverse with it: slowly gathers speed, cruises, and brakes to rest on the first frame.
+    screen_clips = [{'src': 'assets/screen_drive.mp4', 'from': 0, 'dur': 4.0, 'accel': 0, 'decel': 2.2},
+                    {'src': 'assets/screen_drive_rev.mp4', 'from': 13.5, 'dur': 9.5, 'accel': 2.0, 'decel': 2.6}]
     ev = [scene(0, '대기 · 레일 맨 앞', 'LED 링이 낮은 밝기로 천천히 호흡하고, 루는 레일 맨 앞에서 수평으로 대기합니다'),
-          scene(4.0, '공사 구간 감지 · 모니터 쪽으로 두리번', '호흡을 멈추고 밝아지며, 레일을 따라 모니터 쪽(뒤)으로 이동하면서 좌우로 빠르게 두리번거리고 고개를 까딱입니다'),
-          scene(13.0, '모니터 쪽 끝 도착', '잠시 살핀 뒤 몸을 천천히 수평으로 되돌리며 안내 위치(중앙)로 돌아옵니다'),
+          scene(4.0, '공사 구간 감지 · 모니터 쪽으로 두리번', '호흡을 멈추고 밝아지며, 고개가 90도 돌아가 눈이 옆으로 넘어가 보이지 않게 되고, 레일을 따라 모니터 쪽(뒤)으로 이동하면서 도리도리하며 살펴봅니다'),
+          scene(13.0, '모니터 쪽 끝 도착', '잠시 살핀 뒤 몸을 돌려 눈이 다시 켜지고, 몸을 천천히 수평으로 되돌리며 안내 위치(중앙)로 돌아옵니다'),
           scene(17.5, '안내 시작', 'LED를 한 번 부드럽게 밝힌 뒤 음성 안내와 함께 바닥에 우회 경로를 투사합니다'),
           scene(22.9, '우회 경로 안내', '현재 위치 → 공사 구간 → 갈라지는 우회 경로 순으로 그려지고, 안내가 끝난 뒤에도 잠시 유지됩니다'),
           scene(27.6, '조용히 물러나기', '프로젝션이 서서히 사라지고 LED는 다시 낮은 호흡, 본체는 수평 대기 상태로 돌아갑니다'),
-          (4.0, 'detour_info_received', {'reason': 'road_work', 'direction': 'right'}), (17.5, 'guidance_start', {})]
+          (0, 'screen_video', {'clips': screen_clips}), (4.0, 'detour_info_received', {'reason': 'road_work', 'direction': 'right'}), (17.5, 'guidance_start', {})]
     build('02_driving_a', '02 Driving A', DUR,
           'PREVIEW ONLY. 주행A: 공사 구간 감지 -> 레일 맨 앞에서 모니터 쪽으로 물러나며 두리번 -> 안내 위치에서 음성+바닥 투사로 우회 안내 -> 조용히 대기.',
           {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 0, audio, ev)
 
 
+# ---------------------------------------------------------------- 03 arrival
+def arrival():
+    """base -> glide to the front end ("almost there") -> look over the cabin -> arrival: smile + nod + goodbye -> face the door side (Lieu's right) -> back to base."""
+    BASE = -0.06
+    DUR = 31
+    OUT, LOOK, ARR, DOOR, BACK = 2.2, 6.2, 14.0, 16.8, 25.0
+    rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
+    rail.add(0, BASE).add(OUT + 0.6, BASE).add(OUT + 3.4, 0).add(BACK, 0).add(BACK + 3.0, BASE).add(DUR, BASE)
+    # gentle look over the cabin (left -> right), then eyes front for the arrival nod, then turn to the door side and hold
+    yaw.add(0, 0).add(LOOK, 0).add(LOOK + 1.4, -35).add(LOOK + 2.2, -35).add(LOOK + 4.6, 35).add(LOOK + 6.0, 0)\
+       .add(DOOR, 0).add(DOOR + 1.6, 40).add(BACK - 1.6, 40).add(BACK, 0).add(DUR, 0)
+    tilt.add(0, 0).add(LOOK, 0).add(LOOK + 1.4, -8).add(LOOK + 4.6, -8).add(LOOK + 6.0, 0).add(ARR + 0.4, 0) \
+        .add(ARR + 1.4, -8).add(ARR + 1.9, -8).add(ARR + 3.0, 0).add(DUR, 0)
+    blink = lambda *ts: [e for t in ts for e in ((t, F2), (t + 0.15, N))]
+    eyes = [(0, F2), (0.15, N)] + blink(5.0, 11.0) + [(ARR - 0.2, F2), (ARR, SM), (BACK - 0.2, F2), (BACK, N)] + blink(28.0)
+    eyes.sort()
+    inten = Tr('int').add(0, 1)
+    fx = [breathe('idle_a', 1, [90, 185, 255, 40], 0, OUT, 1 / 3.0),
+          chase('cue_out', 20, OUT - 0.4, 1),
+          breathe('near_glow', 2, [90, 185, 255, 70], OUT + 0.6, ARR, 1 / 3.5),
+          chase('cue_arrive', 21, ARR - 0.8, 1, (255, 200, 120, 60)),
+          breathe('bye_glow', 3, [255, 190, 160, 90], ARR, BACK, 1 / 2.4),
+          chase('cue_back', 22, BACK - 0.8, -1),
+          breathe('idle_b', 4, [90, 185, 255, 40], BACK + 3.0, DUR - 0.5, 1 / 3.0)]
+    fx += [wave('bye_' + n, 30 + i, c, ph, ARR + 0.4, DOOR + 4.0, 0.5) for i, (n, c, ph) in enumerate(WHIRL_COLORS)]
+    bright = Tr('br').add(0, BR).add(DUR, BR)
+    clips = [{'id': 'arriving', 'fromSec': OUT + 0.4, 'toSec': ARR - 0.6, 'assetId': 'media/arriving.svg', 'visible': True},
+             {'id': 'goodbye', 'fromSec': ARR + 0.6, 'toSec': BACK - 0.4, 'assetId': 'media/goodbye.svg', 'visible': True}]
+    opac = Tr('op').add(0, 0).add(OUT + 0.4, 0).add(OUT + 1.6, 0.78).add(ARR - 1.8, 0.78).add(ARR - 0.6, 0) \
+        .add(ARR + 0.6, 0).add(ARR + 1.8, 0.8).add(BACK - 1.8, 0.8).add(BACK - 0.4, 0).add(DUR, 0)
+    audio = [sfx('cue1', 'sfx_cue.wav', OUT - 0.4, 0.45), sfx('glide1', 'sfx_glide.wav', OUT + 0.6, 2.8, 0.5, 0.4, 0.8),
+             sfx('scan', 'sfx_scan.wav', LOOK + 1.4, 2.2, 0.5), sfx('cue2', 'sfx_cue.wav', ARR - 0.8, 0.45),
+             {**sfx('chime', 'intro-chime.wav', ARR, 0.72, 0.5), 'fadeOutSec': 0.2}, sfx('nod', 'sfx_nod.wav', ARR + 1.0, 0.35, 0.6),
+             sfx('turn', 'sfx_turn.wav', DOOR + 0.2, 1.5, 0.5), sfx('cue3', 'sfx_cue.wav', BACK - 0.8, 0.45),
+             sfx('glide2', 'sfx_glide.wav', BACK + 0.2, 2.8, 0.5, 0.4, 0.8)]
+    ev = [scene(0, '① 대기 · 주행 중', '기본 위치(레일 맨 앞에서 조금 들어간 곳)에서 낮은 호흡으로 대기합니다'),
+          scene(OUT, '② 곧 도착 · 앞으로 나옴', '방향 라이트 후 레일 맨 앞까지 나오며 바닥에 "목적지에 거의 다 왔습니다"를 투사합니다'),
+          scene(LOOK, '③ 차 안 둘러보기', '고개를 살짝 숙이고 왼쪽에서 오른쪽으로 천천히 둘러보며 놓고 내리는 물건이 없는지 살핍니다'),
+          scene(ARR, '④ 도착 · 작별 인사', '웃는 눈과 차임, 목례와 함께 "안녕히 가세요, 감사합니다"를 투사하고 LED가 따뜻한 색으로 물결칩니다'),
+          scene(DOOR, '⑤ 문 쪽 안내', '루의 오른쪽(탑승/하차 문 쪽)으로 몸을 돌려 내리는 방향을 알려줍니다'),
+          scene(BACK, '⑥ 기본 위치로 복귀', '방향 라이트 후 정면을 보고 기본 위치로 들어가 다음 손님을 기다립니다'),
+          (OUT, 'approaching_destination', {}), (ARR, 'vehicle_arrived_destination', {}), (DOOR, 'door_side_guidance', {})]
+    build('03_arrival', '03 Arrival', DUR,
+          'PREVIEW ONLY. 도착: 기본 위치 -> 앞으로 나와 곧 도착 안내 -> 차 안 둘러보기 -> 웃으며 작별 인사 -> 문 쪽(루 기준 오른쪽)으로 안내 -> 기본 위치 복귀. 문 방향의 yaw 부호(+)는 가정값입니다.',
+          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 0, audio, ev)
+
+
 if __name__ == '__main__':
-    boarding(); driving_a(); print('built 01_boarding, 02_driving_a')
+    import sys
+    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival']
+    for n in todo: globals()[n]()
+    print('built', ', '.join(todo))

@@ -8,6 +8,7 @@ import { EMOTIONS, DEFAULT_EXPORT, emotionFrameAt, emotionDurationMs, type Emoti
 import type { EffectClip, EffectName, LedBlend, Rgbw } from '../engine/types';
 import { LED_COUNT } from '../engine/types';
 import { unlockAudio } from '../runtime/audio';
+import { EyeStudio } from './EyeStudio';
 
 type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'rig';
 
@@ -259,7 +260,7 @@ function Eyes() {
   );
 }
 
-function EyesTab() { return <><Eyes /><Emotions /></>; }
+function EyesTab() { return <><Eyes /><EyeStudio /><Emotions /></>; }
 
 function Projector() {
   const d = useDesired();

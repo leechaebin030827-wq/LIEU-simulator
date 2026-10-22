@@ -2,26 +2,50 @@
   "schema": "lieu.sequence/v1",
   "id": "03_arrival",
   "title": "03 Arrival",
-  "durationSec": 10,
+  "durationSec": 31,
   "fps": 30,
   "loop": false,
   "demoPreviewOnly": true,
-  "notes": "PREVIEW ONLY. Motion limits/pivots/gear ratios are not physically verified.",
+  "notes": "PREVIEW ONLY. 도착: 기본 위치 -> 앞으로 나와 곧 도착 안내 -> 차 안 둘러보기 -> 웃으며 작별 인사 -> 문 쪽(루 기준 오른쪽)으로 안내 -> 기본 위치 복귀. 문 방향의 yaw 부호(+)는 가정값입니다.",
   "tracks": {
     "motion": {
       "railX": {
         "kind": "numeric",
         "keys": [
           {
-            "id": "03_arrival_railX_0",
+            "id": "rail_0",
             "tSec": 0,
+            "value": -0.06,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_1",
+            "tSec": 2.8,
+            "value": -0.06,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_2",
+            "tSec": 5.6,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_railX_1",
-            "tSec": 10,
+            "id": "rail_3",
+            "tSec": 25.0,
             "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_4",
+            "tSec": 28.0,
+            "value": -0.06,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_5",
+            "tSec": 31,
+            "value": -0.06,
             "interpolationToNext": "smoothstep"
           }
         ]
@@ -30,26 +54,68 @@
         "kind": "numeric",
         "keys": [
           {
-            "id": "03_arrival_yawY_0",
+            "id": "yaw_0",
             "tSec": 0,
-            "value": 90,
+            "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_yawY_1",
-            "tSec": 1,
-            "value": 8,
+            "id": "yaw_1",
+            "tSec": 6.2,
+            "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_yawY_2",
-            "tSec": 5,
-            "value": 8,
+            "id": "yaw_2",
+            "tSec": 7.6,
+            "value": -35,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_yawY_3",
-            "tSec": 8,
+            "id": "yaw_3",
+            "tSec": 8.4,
+            "value": -35,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_4",
+            "tSec": 10.8,
+            "value": 35,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_5",
+            "tSec": 12.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_6",
+            "tSec": 16.8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7",
+            "tSec": 18.4,
+            "value": 40,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_8",
+            "tSec": 23.4,
+            "value": 40,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9",
+            "tSec": 25.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_10",
+            "tSec": 31,
             "value": 0,
             "interpolationToNext": "smoothstep"
           }
@@ -59,26 +125,62 @@
         "kind": "numeric",
         "keys": [
           {
-            "id": "03_arrival_tiltZ_0",
+            "id": "tilt_0",
             "tSec": 0,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_tiltZ_1",
-            "tSec": 1.5,
-            "value": 4,
+            "id": "tilt_1",
+            "tSec": 6.2,
+            "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_tiltZ_2",
-            "tSec": 5,
-            "value": 4,
+            "id": "tilt_2",
+            "tSec": 7.6,
+            "value": -8,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "03_arrival_tiltZ_3",
-            "tSec": 8,
+            "id": "tilt_3",
+            "tSec": 10.8,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_4",
+            "tSec": 12.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_5",
+            "tSec": 14.4,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_6",
+            "tSec": 15.4,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_7",
+            "tSec": 15.9,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_8",
+            "tSec": 17.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_9",
+            "tSec": 31,
             "value": 0,
             "interpolationToNext": "smoothstep"
           }
@@ -90,605 +192,303 @@
         "kind": "rgbw24",
         "keys": [
           {
-            "id": "03_arrival_frame_0",
+            "id": "f0",
             "tSec": 0,
             "value": [
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ],
               [
                 0,
                 0,
                 0,
-                9
+                0
               ]
             ],
             "interpolationToNext": "linear"
           },
           {
-            "id": "03_arrival_frame_1",
-            "tSec": 1,
-            "value": [
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ],
-              [
-                35,
-                48,
-                0,
-                18
-              ]
-            ],
-            "interpolationToNext": "linear"
-          },
-          {
-            "id": "03_arrival_frame_2",
-            "tSec": 5,
+            "id": "f1",
+            "tSec": 31,
             "value": [
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
+                0
               ],
               [
                 0,
                 0,
                 0,
-                46
-              ]
-            ],
-            "interpolationToNext": "linear"
-          },
-          {
-            "id": "03_arrival_frame_3",
-            "tSec": 8.5,
-            "value": [
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
-              ],
-              [
-                0,
-                0,
-                0,
-                9
+                0
               ]
             ],
             "interpolationToNext": "linear"
@@ -699,25 +499,234 @@
         "kind": "numeric",
         "keys": [
           {
-            "id": "03_arrival_ringbrite_0",
+            "id": "br_0",
             "tSec": 0,
-            "value": 1,
+            "value": 0.12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_1",
+            "tSec": 31,
+            "value": 0.12,
             "interpolationToNext": "smoothstep"
           }
         ]
       },
       "effects": [
         {
-          "id": "farewell_pulse",
-          "type": "pulse",
-          "fromSec": 5,
-          "toSec": 9,
+          "id": "idle_a",
+          "type": "breathe",
+          "fromSec": 0,
+          "toSec": 2.2,
           "seed": 1,
           "priority": 1,
           "blend": "max",
           "params": {
-            "whiteLevel": 55,
-            "periodSec": 2.0
+            "color": [
+              90,
+              185,
+              255,
+              40
+            ],
+            "speedHz": 0.3333
+          }
+        },
+        {
+          "id": "cue_out",
+          "type": "chase",
+          "fromSec": 1.8000000000000003,
+          "toSec": 2.45,
+          "seed": 20,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              185,
+              255,
+              60
+            ],
+            "speedHz": 1.7,
+            "width": 6,
+            "direction": 1
+          }
+        },
+        {
+          "id": "near_glow",
+          "type": "breathe",
+          "fromSec": 2.8000000000000003,
+          "toSec": 14.0,
+          "seed": 2,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              185,
+              255,
+              70
+            ],
+            "speedHz": 0.2857
+          }
+        },
+        {
+          "id": "cue_arrive",
+          "type": "chase",
+          "fromSec": 13.2,
+          "toSec": 13.85,
+          "seed": 21,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              200,
+              120,
+              60
+            ],
+            "speedHz": 1.7,
+            "width": 6,
+            "direction": 1
+          }
+        },
+        {
+          "id": "bye_glow",
+          "type": "breathe",
+          "fromSec": 14.0,
+          "toSec": 25.0,
+          "seed": 3,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              190,
+              160,
+              90
+            ],
+            "speedHz": 0.4167
+          }
+        },
+        {
+          "id": "cue_back",
+          "type": "chase",
+          "fromSec": 24.2,
+          "toSec": 24.85,
+          "seed": 22,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              185,
+              255,
+              60
+            ],
+            "speedHz": 1.7,
+            "width": 6,
+            "direction": -1
+          }
+        },
+        {
+          "id": "idle_b",
+          "type": "breathe",
+          "fromSec": 28.0,
+          "toSec": 30.5,
+          "seed": 4,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              185,
+              255,
+              40
+            ],
+            "speedHz": 0.3333
+          }
+        },
+        {
+          "id": "bye_white",
+          "type": "wave",
+          "fromSec": 14.4,
+          "toSec": 20.8,
+          "seed": 30,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              230
+            ],
+            "speedHz": 0.5,
+            "width": 24,
+            "direction": 1,
+            "phase": 0
+          }
+        },
+        {
+          "id": "bye_sky",
+          "type": "wave",
+          "fromSec": 14.4,
+          "toSec": 20.8,
+          "seed": 31,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              110,
+              205,
+              255,
+              0
+            ],
+            "speedHz": 0.5,
+            "width": 24,
+            "direction": 1,
+            "phase": 1.5708
+          }
+        },
+        {
+          "id": "bye_lilac",
+          "type": "wave",
+          "fromSec": 14.4,
+          "toSec": 20.8,
+          "seed": 32,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              185,
+              150,
+              255,
+              0
+            ],
+            "speedHz": 0.5,
+            "width": 24,
+            "direction": 1,
+            "phase": 3.1416
+          }
+        },
+        {
+          "id": "bye_pink",
+          "type": "wave",
+          "fromSec": 14.4,
+          "toSec": 20.8,
+          "seed": 33,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              150,
+              195,
+              0
+            ],
+            "speedHz": 0.5,
+            "width": 24,
+            "direction": 1,
+            "phase": 4.7124
           }
         }
       ]
@@ -727,10 +736,25 @@
         "kind": "eyeBitmap",
         "keys": [
           {
-            "id": "03_arrival_left_eye_0",
+            "id": "L_0",
             "tSec": 0,
             "value": [
               0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_1",
+            "tSec": 0.15,
+            "value": [
+              0,
               28,
               28,
               28,
@@ -742,38 +766,143 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "03_arrival_left_eye_1",
-            "tSec": 1,
+            "id": "L_2",
+            "tSec": 5.0,
             "value": [
               0,
-              60,
-              126,
-              66,
-              66,
-              126,
-              60,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "03_arrival_left_eye_2",
-            "tSec": 5,
+            "id": "L_3",
+            "tSec": 5.15,
             "value": [
               0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_4",
+            "tSec": 11.0,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_5",
+            "tSec": 11.15,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_6",
+            "tSec": 13.8,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_7",
+            "tSec": 14.0,
+            "value": [
+              0,
+              0,
+              60,
               102,
               66,
-              66,
-              90,
-              36,
+              0,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "03_arrival_left_eye_3",
-            "tSec": 9,
+            "id": "L_8",
+            "tSec": 24.8,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_9",
+            "tSec": 25.0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_10",
+            "tSec": 28.0,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_11",
+            "tSec": 28.15,
             "value": [
               0,
               28,
@@ -792,10 +921,25 @@
         "kind": "eyeBitmap",
         "keys": [
           {
-            "id": "03_arrival_right_eye_0",
+            "id": "R_0",
             "tSec": 0,
             "value": [
               0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_1",
+            "tSec": 0.15,
+            "value": [
+              0,
               28,
               28,
               28,
@@ -807,38 +951,143 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "03_arrival_right_eye_1",
-            "tSec": 1,
+            "id": "R_2",
+            "tSec": 5.0,
             "value": [
               0,
-              60,
-              126,
-              66,
-              66,
-              126,
-              60,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "03_arrival_right_eye_2",
-            "tSec": 5,
+            "id": "R_3",
+            "tSec": 5.15,
             "value": [
               0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_4",
+            "tSec": 11.0,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_5",
+            "tSec": 11.15,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_6",
+            "tSec": 13.8,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_7",
+            "tSec": 14.0,
+            "value": [
+              0,
+              0,
+              60,
               102,
               66,
-              66,
-              90,
-              36,
+              0,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "03_arrival_right_eye_3",
-            "tSec": 9,
+            "id": "R_8",
+            "tSec": 24.8,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_9",
+            "tSec": 25.0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_10",
+            "tSec": 28.0,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_11",
+            "tSec": 28.15,
             "value": [
               0,
               28,
@@ -857,9 +1106,9 @@
         "kind": "numeric",
         "keys": [
           {
-            "id": "03_arrival_eyeBrightness_0",
+            "id": "int_0",
             "tSec": 0,
-            "value": 0.7,
+            "value": 1,
             "interpolationToNext": "smoothstep"
           }
         ]
@@ -868,16 +1117,16 @@
     "projector": {
       "clips": [
         {
-          "id": "projector_1",
-          "fromSec": 1,
-          "toSec": 5,
+          "id": "arriving",
+          "fromSec": 2.6,
+          "toSec": 13.4,
           "assetId": "media/arriving.svg",
           "visible": true
         },
         {
-          "id": "projector_2",
-          "fromSec": 5.2,
-          "toSec": 9.5,
+          "id": "goodbye",
+          "fromSec": 14.6,
+          "toSec": 24.6,
           "assetId": "media/goodbye.svg",
           "visible": true
         }
@@ -887,38 +1136,62 @@
           "kind": "numeric",
           "keys": [
             {
-              "id": "03_arrival_projector_opacity_0",
+              "id": "op_0",
               "tSec": 0,
               "value": 0,
               "interpolationToNext": "smoothstep"
             },
             {
-              "id": "03_arrival_projector_opacity_1",
-              "tSec": 1,
+              "id": "op_1",
+              "tSec": 2.6,
               "value": 0,
               "interpolationToNext": "smoothstep"
             },
             {
-              "id": "03_arrival_projector_opacity_2",
-              "tSec": 1.7,
+              "id": "op_2",
+              "tSec": 3.8,
               "value": 0.78,
               "interpolationToNext": "smoothstep"
             },
             {
-              "id": "03_arrival_projector_opacity_3",
-              "tSec": 8.7,
+              "id": "op_3",
+              "tSec": 12.2,
               "value": 0.78,
               "interpolationToNext": "smoothstep"
             },
             {
-              "id": "03_arrival_projector_opacity_4",
-              "tSec": 9.5,
+              "id": "op_4",
+              "tSec": 13.4,
               "value": 0,
               "interpolationToNext": "smoothstep"
             },
             {
-              "id": "03_arrival_projector_opacity_5",
-              "tSec": 10,
+              "id": "op_5",
+              "tSec": 14.6,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_6",
+              "tSec": 15.8,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_7",
+              "tSec": 23.2,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_8",
+              "tSec": 24.6,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_9",
+              "tSec": 31,
               "value": 0,
               "interpolationToNext": "smoothstep"
             }
@@ -928,7 +1201,7 @@
           "kind": "numeric",
           "keys": [
             {
-              "id": "03_arrival_projector_brightness_0",
+              "id": "pb",
               "tSec": 0,
               "value": 0.85,
               "interpolationToNext": "smoothstep"
@@ -939,7 +1212,7 @@
           "kind": "numeric",
           "keys": [
             {
-              "id": "03_arrival_projector_rot_0",
+              "id": "pr",
               "tSec": 0,
               "value": 0,
               "interpolationToNext": "smoothstep"
@@ -950,7 +1223,7 @@
           "kind": "numeric",
           "keys": [
             {
-              "id": "03_arrival_projector_scale_0",
+              "id": "ps",
               "tSec": 0,
               "value": 1,
               "interpolationToNext": "smoothstep"
@@ -961,7 +1234,7 @@
           "kind": "numeric",
           "keys": [
             {
-              "id": "03_arrival_projector_xm_0",
+              "id": "px",
               "tSec": 0,
               "value": 0,
               "interpolationToNext": "smoothstep"
@@ -972,7 +1245,7 @@
           "kind": "numeric",
           "keys": [
             {
-              "id": "03_arrival_projector_zm_0",
+              "id": "pz",
               "tSec": 0,
               "value": 0,
               "interpolationToNext": "smoothstep"
@@ -983,28 +1256,176 @@
     },
     "audio": [
       {
-        "id": "03_arrival_audio",
-        "fromSec": 5.2,
-        "toSec": 5.9,
+        "id": "cue1",
+        "fromSec": 1.8000000000000003,
+        "toSec": 2.25,
+        "assetId": "media/sfx_cue.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.05,
+        "loop": false
+      },
+      {
+        "id": "glide1",
+        "fromSec": 2.8000000000000003,
+        "toSec": 5.6,
+        "assetId": "media/sfx_glide.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.5,
+        "fadeInSec": 0.4,
+        "fadeOutSec": 0.8,
+        "loop": false
+      },
+      {
+        "id": "scan",
+        "fromSec": 7.6,
+        "toSec": 9.8,
+        "assetId": "media/sfx_scan.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.5,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.05,
+        "loop": false
+      },
+      {
+        "id": "cue2",
+        "fromSec": 13.2,
+        "toSec": 13.65,
+        "assetId": "media/sfx_cue.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.05,
+        "loop": false
+      },
+      {
+        "id": "chime",
+        "fromSec": 14.0,
+        "toSec": 14.72,
         "assetId": "media/intro-chime.wav",
         "mediaOffsetSec": 0,
-        "gain": 0.35,
-        "fadeInSec": 0.05,
-        "fadeOutSec": 0.3,
+        "gain": 0.5,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.2,
+        "loop": false
+      },
+      {
+        "id": "nod",
+        "fromSec": 15.0,
+        "toSec": 15.35,
+        "assetId": "media/sfx_nod.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.05,
+        "loop": false
+      },
+      {
+        "id": "turn",
+        "fromSec": 17.0,
+        "toSec": 18.5,
+        "assetId": "media/sfx_turn.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.5,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.05,
+        "loop": false
+      },
+      {
+        "id": "cue3",
+        "fromSec": 24.2,
+        "toSec": 24.65,
+        "assetId": "media/sfx_cue.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.02,
+        "fadeOutSec": 0.05,
+        "loop": false
+      },
+      {
+        "id": "glide2",
+        "fromSec": 25.2,
+        "toSec": 28.0,
+        "assetId": "media/sfx_glide.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.5,
+        "fadeInSec": 0.4,
+        "fadeOutSec": 0.8,
         "loop": false
       }
     ],
     "events": [
       {
-        "id": "03_arrival_event_0",
-        "tSec": 1,
-        "type": "arrival_near",
+        "id": "ev0",
+        "tSec": 0,
+        "type": "scene",
+        "payload": {
+          "title": "① 대기 · 주행 중",
+          "desc": "기본 위치(레일 맨 앞에서 조금 들어간 곳)에서 낮은 호흡으로 대기합니다"
+        }
+      },
+      {
+        "id": "ev1",
+        "tSec": 2.2,
+        "type": "scene",
+        "payload": {
+          "title": "② 곧 도착 · 앞으로 나옴",
+          "desc": "방향 라이트 후 레일 맨 앞까지 나오며 바닥에 \"목적지에 거의 다 왔습니다\"를 투사합니다"
+        }
+      },
+      {
+        "id": "ev2",
+        "tSec": 6.2,
+        "type": "scene",
+        "payload": {
+          "title": "③ 차 안 둘러보기",
+          "desc": "고개를 살짝 숙이고 왼쪽에서 오른쪽으로 천천히 둘러보며 놓고 내리는 물건이 없는지 살핍니다"
+        }
+      },
+      {
+        "id": "ev3",
+        "tSec": 14.0,
+        "type": "scene",
+        "payload": {
+          "title": "④ 도착 · 작별 인사",
+          "desc": "웃는 눈과 차임, 목례와 함께 \"안녕히 가세요, 감사합니다\"를 투사하고 LED가 따뜻한 색으로 물결칩니다"
+        }
+      },
+      {
+        "id": "ev4",
+        "tSec": 16.8,
+        "type": "scene",
+        "payload": {
+          "title": "⑤ 문 쪽 안내",
+          "desc": "루의 오른쪽(탑승/하차 문 쪽)으로 몸을 돌려 내리는 방향을 알려줍니다"
+        }
+      },
+      {
+        "id": "ev5",
+        "tSec": 25.0,
+        "type": "scene",
+        "payload": {
+          "title": "⑥ 기본 위치로 복귀",
+          "desc": "방향 라이트 후 정면을 보고 기본 위치로 들어가 다음 손님을 기다립니다"
+        }
+      },
+      {
+        "id": "ev6",
+        "tSec": 2.2,
+        "type": "approaching_destination",
         "payload": {}
       },
       {
-        "id": "03_arrival_event_1",
-        "tSec": 5.2,
-        "type": "passenger_exit",
+        "id": "ev7",
+        "tSec": 14.0,
+        "type": "vehicle_arrived_destination",
+        "payload": {}
+      },
+      {
+        "id": "ev8",
+        "tSec": 16.8,
+        "type": "door_side_guidance",
         "payload": {}
       }
     ]

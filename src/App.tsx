@@ -15,7 +15,7 @@ import { emptySequence } from './engine/edit';
 const PRESETS: [string, string, string][] = [
   ['01_boarding', 'Boarding', '차량 도착 · 환영 · 인사 · 착석 확인 · 출발(빙그르르)'],
   ['02_driving_a', 'Driving A', '공사 감지 · 앞을 살피고 · 돌아와 우회 안내'],
-  ['03_arrival', 'Arrival', 'Almost there · goodbye'],
+  ['03_arrival', 'Arrival', '곧 도착 · 둘러보기 · 작별 인사 · 문 쪽 안내'],
 ];
 
 const timeLabel = (t: number) => new Date(t).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });

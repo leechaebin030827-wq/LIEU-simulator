@@ -13,6 +13,7 @@
     "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.2",
     "fflate": "^0.8.3",
+    "mp4-muxer": "^5.2.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "three": "^0.186.1",
