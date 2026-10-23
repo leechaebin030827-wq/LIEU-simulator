@@ -188,7 +188,7 @@ function updateScreenClips(clips: ScreenClip[] | null, t: number, playing: boole
     if (!(v.duration > 0)) return;
     const D = v.duration, st = i === cur ? clipState(c, D, t - c.from) : { pos: 0, v: 0 };
     const target = Math.min(st.pos, D - 0.04);
-    if (playing && st.v >= 0.1) {
+    if (playing && st.v >= 0.1 && st.v * speed >= 0.0625) {   // browsers only play between 1/16x and 16x: slower than that pins the frame
       v.playbackRate = Math.min(16, st.v * speed);
       if (Math.abs(v.currentTime - target) > 0.25) v.currentTime = target;
       if (v.paused) void v.play().catch(() => { /* autoplay blocked */ });

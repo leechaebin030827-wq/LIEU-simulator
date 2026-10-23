@@ -3034,6 +3034,28 @@
     },
     "audio": [
       {
+        "id": "blink0",
+        "fromSec": 13.5,
+        "toSec": 13.59,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "blink1",
+        "fromSec": 15.2,
+        "toSec": 15.29,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
         "id": "voice",
         "fromSec": 18.0,
         "toSec": 22.46,
@@ -3042,6 +3064,61 @@
         "gain": 0.8,
         "fadeInSec": 0.05,
         "fadeOutSec": 0.2,
+        "loop": false
+      },
+      {
+        "id": "blink2",
+        "fromSec": 18.867,
+        "toSec": 18.957,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "blink3",
+        "fromSec": 23.333,
+        "toSec": 23.423,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "blink4",
+        "fromSec": 29.967,
+        "toSec": 30.057,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "blink5",
+        "fromSec": 34.333,
+        "toSec": 34.423,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "blink6",
+        "fromSec": 34.9,
+        "toSec": 34.99,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
         "loop": false
       }
     ],

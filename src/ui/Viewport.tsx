@@ -73,6 +73,7 @@ export function Viewport() {
               {([
                 ['opaqueMaterials', 'Opaque', 'On: render all parts opaque. Off: use the original GLB transparency.'],
                 ['showPivots', 'Axes', 'Show rotation axes (Yaw/Tilt) and rail direction'],
+                ['showBeam', 'Light cone', 'Simulator-only: shows the projector beam as a soft cone down to the projected image'],
                 ['showFrustum', 'Projector frustum', 'Outline the area the projector lights on the floor'],
                 ['cutaway', 'Cutaway', 'Cut the body in half to see inside'],
                 ['outerHalo', 'Outer ring (visual)', 'Decorative outer glow ring (not real hardware)'],

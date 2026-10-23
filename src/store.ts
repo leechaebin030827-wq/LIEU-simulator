@@ -36,7 +36,7 @@ type State = {
   past: LieuSequence[];
   future: LieuSequence[];
   dirtyAudio: number; // bumps when audio needs rescheduling
-  view: { showPivots: boolean; showFrustum: boolean; opaqueMaterials: boolean; cutaway: boolean; showLedGlow: boolean; outerHalo: boolean; eyeColor: string; bloom: boolean; showAxes: boolean; hideMachine: boolean };
+  view: { showPivots: boolean; showFrustum: boolean; showBeam: boolean; opaqueMaterials: boolean; cutaway: boolean; showLedGlow: boolean; outerHalo: boolean; eyeColor: string; bloom: boolean; showAxes: boolean; hideMachine: boolean };
 };
 
 type Actions = {
@@ -92,7 +92,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   autoKey: false, snapFps: 30, live: {},
   selectedLeds: [], selKeys: [], selClip: null, selNode: null, clipboard: null, eventLog: [],
   past: [], future: [], dirtyAudio: 0,
-  view: { showPivots: true, showFrustum: false, opaqueMaterials: true, cutaway: false, showLedGlow: true, outerHalo: false, eyeColor: '#f2f6ff', bloom: true, showAxes: false, hideMachine: false },
+  view: { showPivots: true, showFrustum: false, showBeam: true, opaqueMaterials: true, cutaway: false, showLedGlow: true, outerHalo: false, eyeColor: '#f2f6ff', bloom: true, showAxes: false, hideMachine: false },
 
   evalNow: () => applyLive(evaluateSequenceAt(get().seq, get().tSec), get().live),
 

@@ -42,7 +42,28 @@ function loadMedia(url: string, mime: string, onReady: () => void): Media | null
   return null;
 }
 
+/**
+ * Simulator-only indicator: a soft white cone from the lens down to the projected image. Real projectors do not show a visible beam;
+ * this only exists so the preview makes it obvious where the projection comes from. Alpha fades from the lens toward the floor and
+ * brightens slightly at the silhouette, so it reads as light rather than a solid object.
+ */
+const beamMat = new THREE.ShaderMaterial({
+  transparent: true, depthWrite: false, blending: THREE.NormalBlending, side: THREE.DoubleSide,
+  uniforms: { uOpacity: { value: 0 } },
+  vertexShader: `varying float vV; varying vec3 vN; varying vec3 vView;
+    void main() { vV = position.y + 0.5; vec4 mv = modelViewMatrix * vec4(position, 1.0); vN = normalize(normalMatrix * normal); vView = -mv.xyz; gl_Position = projectionMatrix * mv; }`,
+  fragmentShader: `uniform float uOpacity; varying float vV; varying vec3 vN; varying vec3 vView;
+    void main() {
+      float along = pow(vV, 0.9);                       // 1 at the lens (top of the cylinder), 0 at the floor
+      float rim = 1.0 - abs(dot(normalize(vN), normalize(vView)));
+      float a = uOpacity * (0.1 + 0.45 * along) * (0.45 + 0.55 * rim);
+      gl_FragColor = vec4(vec3(1.0, 0.97, 0.9), a);
+    }`,
+});
+
 export function Projection() {
+  const beam = useRef<THREE.Mesh>(null);
+  const beamGeo = useMemo(() => new THREE.CylinderGeometry(0, 1, 1, 64, 1, true), []);
   const mesh = useRef<THREE.Mesh>(null);
   const lines = useRef<THREE.LineSegments>(null);
   const mat = useMemo(() => new THREE.MeshBasicMaterial({ transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, side: THREE.DoubleSide }), []);
@@ -52,7 +73,7 @@ export function Projection() {
   const ready = useRef(0);
   const lastVideoClip = useRef<string>('');
 
-  useEffect(() => () => { geo.dispose(); mat.dispose(); }, [geo, mat]);
+  useEffect(() => () => { geo.dispose(); mat.dispose(); beamGeo.dispose(); }, [geo, mat, beamGeo]);
 
   useFrame(() => {
     const st = frame.state, stages = frame.stages, m = mesh.current;
@@ -73,6 +94,8 @@ export function Projection() {
     const media = clip ? loadMedia(store.assets[clip.assetId]?.url ?? `${import.meta.env.BASE_URL}examples/${clip.assetId}`, store.assets[clip.assetId]?.mime ?? (clip.assetId.endsWith('.svg') ? 'image/svg+xml' : 'image/png'), () => { ready.current++; }) : null;
     const show = !!(clip && media && hasHit && st.projector.opacity > 0.001);
     m.visible = show;
+    const bm = beam.current;
+    if (bm) bm.visible = false;
     if (!hasHit) { if (lines.current) lines.current.visible = false; return; }
     const tHit = (floorY - tmp.o.y) / tmp.d.y;
     tmp.hit.copy(tmp.o).addScaledVector(tmp.d, tHit);
@@ -83,6 +106,19 @@ export function Projection() {
     // image up -> +X (robot front); rotation about vertical
     m.rotation.set(-Math.PI / 2, 0, 0); m.rotateZ(-Math.PI / 2 + ((st.projector.rotationDeg + (lens === 'yaw' || lens === 'tilt' ? st.motion.yawY : 0)) * Math.PI) / 180);
     m.scale.set(W, H, 1);
+    if (bm) {
+      const on = show && store.view.showBeam;
+      bm.visible = on;
+      if (on) {
+        // apex at the lens, base on the projected image (circle around the footprint); cylinder +Y = apex end
+        const centre = m.position, axis = tmp.o.clone().sub(centre), L = axis.length();
+        bm.position.copy(tmp.o).add(centre).multiplyScalar(0.5);
+        bm.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), axis.divideScalar(Math.max(1e-6, L)));
+        const R = (0.5 * Math.hypot(W, H)) * (2 / 3);   // base circle at 2/3 of the footprint circle: a slimmer cone
+        bm.scale.set(R, L, R);
+        beamMat.uniforms.uOpacity.value = Math.min(1, st.projector.opacity * Math.min(1, st.projector.brightness));
+      }
+    }
     if (show && media) {
       if (mat.map !== media.tex) { mat.map = media.tex; mat.needsUpdate = true; }
       const k = st.projector.opacity * Math.min(2, st.projector.brightness);
@@ -113,6 +149,7 @@ export function Projection() {
   return (
     <>
       <mesh ref={mesh} geometry={geo} material={mat} renderOrder={3} visible={false} />
+      <mesh ref={beam} geometry={beamGeo} material={beamMat} renderOrder={4} visible={false} frustumCulled={false} />
       <lineSegments ref={lines} geometry={lineGeo} frustumCulled={false} visible={false}>
         <lineBasicMaterial color="#ffd43b" transparent opacity={0.7} />
       </lineSegments>

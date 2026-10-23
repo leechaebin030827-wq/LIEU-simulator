@@ -13,7 +13,7 @@ tilt - = nose down; railX -0.25 = back, 0 = front end.
 import json
 import sys
 sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
-import tv_copy, math, shutil
+import sfx_mix, tv_copy, math, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -99,6 +99,7 @@ def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, 
                'audio': audio,
                'events': [{'id': f'ev{i}', 'tSec': t, 'type': ty, 'payload': pl} for i, (t, ty, pl) in enumerate(events)]}}
     tv_copy.apply(seq)
+    sfx_mix.apply(seq)
     for out in (ROOT / 'examples', ROOT / 'public/examples'):
         (out / f'{id_}.lieu.json').write_text(json.dumps(seq, ensure_ascii=False, indent=2), encoding='utf8')
 
