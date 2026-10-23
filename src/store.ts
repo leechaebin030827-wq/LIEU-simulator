@@ -89,7 +89,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   rig: defaultRig(),
   assets: {}, blobs: {},
   tSec: 0, playing: false, loop: false, speed: 0.5,
-  autoKey: true, snapFps: 30, live: {},
+  autoKey: false, snapFps: 30, live: {},
   selectedLeds: [], selKeys: [], selClip: null, selNode: null, clipboard: null, eventLog: [],
   past: [], future: [], dirtyAudio: 0,
   view: { showPivots: true, showFrustum: false, opaqueMaterials: true, cutaway: false, showLedGlow: true, outerHalo: false, eyeColor: '#f2f6ff', bloom: true, showAxes: false, hideMachine: false },

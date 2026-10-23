@@ -32,7 +32,7 @@ function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {
   }, [open]);
   return (
     <div className="exmenu" ref={ref}>
-      <button className="ico" title="Load an example sequence" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos({ left: r.left, top: r.bottom + 6 }); setOpen((o) => !o); }}>Examples <span className="caret">▾</span></button>
+      <button className="ico scn" title="Load a scenario" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos({ left: r.left, top: r.bottom + 6 }); setOpen((o) => !o); }}>Scenarios <span className="caret">▾</span></button>
       {open && (
         <div className="exlist" style={pos}>
           {PRESETS.map(([id, l, d], i) => (
@@ -110,8 +110,8 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
       <div className="grp">
         <button className="ico" title="Clear all keyframes and start an empty sequence" onClick={() => void newSequence()}>New</button>
         <ExampleMenu onPick={async (id) => {
-          if (!(await confirmDiscard('Load example'))) return;
-          try { await loadPresetData(id); toast(`Loaded example: ${PRESETS.find((p) => p[0] === id)?.[1]}`, 'ok'); } catch (x) { toast(String(x), 'warn'); }
+          if (!(await confirmDiscard('Load scenario'))) return;
+          try { await loadPresetData(id); toast(`Loaded scenario: ${PRESETS.find((p) => p[0] === id)?.[1]}`, 'ok'); } catch (x) { toast(String(x), 'warn'); }
         }} />
       </div>
       <div className="grp">

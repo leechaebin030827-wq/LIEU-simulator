@@ -289,3 +289,8 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .ringgrid svg { max-height: 158px; }
 .eyegrid { max-width: 148px; }
 .statusline + .sec, .tabs + .sec { margin-top: 8px; }
+
+/* the one primary entry point: filled so it reads first in the top bar */
+.top button.ico.scn { background: var(--text); color: #0a0a0b; border-color: var(--text); font-weight: 600; padding: 5px 14px; margin-right: 4px; }
+.top button.ico.scn:hover:not(:disabled) { background: #fff; color: #0a0a0b; border-color: #fff; }
+.top button.ico.scn .caret { opacity: .55; }
