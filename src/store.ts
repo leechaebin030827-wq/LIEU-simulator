@@ -88,7 +88,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   seq: emptySequence('Untitled'),
   rig: defaultRig(),
   assets: {}, blobs: {},
-  tSec: 0, playing: false, loop: false, speed: 0.5,
+  tSec: 0, playing: false, loop: false, speed: 0.6,
   autoKey: false, snapFps: 30, live: {},
   selectedLeds: [], selKeys: [], selClip: null, selNode: null, clipboard: null, eventLog: [],
   past: [], future: [], dirtyAudio: 0,

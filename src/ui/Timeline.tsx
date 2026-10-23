@@ -232,7 +232,7 @@ function TransportBar({ pps, setPps }: { pps: number; setPps: (n: number) => voi
       <button onClick={s.stop} title="Stop and return to start">■</button>
       <button className={s.seq.loop ? 'on' : ''} onClick={s.toggleLoop} title="Repeat from the start when the end is reached">↻ Loop</button>
       <span style={{ fontVariantNumeric: 'tabular-nums', minWidth: 120 }} title="Current time / total length">{fmt(s.tSec)} / {fmt(s.seq.durationSec)} s</span>
-      <select value={s.speed} onChange={(e) => s.setSpeed(Number(e.target.value))} title="Playback speed"><option value={0.5}>0.5×</option><option value={1}>1×</option><option value={2}>2×</option></select>
+      <select value={s.speed} onChange={(e) => s.setSpeed(Number(e.target.value))} title="Playback speed"><option value={0.5}>0.5×</option><option value={0.6}>0.6×</option><option value={1}>1×</option><option value={2}>2×</option></select>
       <label className="dim" title="Total sequence length (seconds)">Length <input type="number" min={1} step={1} value={s.seq.durationSec} onChange={(e) => s.patchSeq((q) => { q.durationSec = Math.max(1, Number(e.target.value)); }, 'dur')} /></label>
       <label className="dim" title="Snap keys and clips to this interval">Snap <select value={s.snapFps} onChange={(e) => useStore.setState({ snapFps: Number(e.target.value) })}><option value={0}>Off</option><option value={10}>1/10 s</option><option value={30}>1/30 s</option><option value={60}>1/60 s</option></select></label>
       <button className={s.autoKey ? 'on' : ''} onClick={() => s.setAutoKey(!s.autoKey)} title="On: changing a value records a key (◆) at the current time. Off: unsaved temporary preview (LIVE)">◆ Auto-key {s.autoKey ? 'on' : 'off'}</button>
