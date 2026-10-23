@@ -226,7 +226,7 @@ function PresentBar({ onExit }: { onExit: () => void }) {
   const s = useStore.getState();
   return (
     <>
-      <button className={playing ? 'on' : ''} onClick={() => { unlockAudio(); playing ? s.pause() : s.play(); }}>{playing ? '❚❚ Pause' : '▶ Play'}</button>
+      <button className={'playbtn' + (playing ? ' on' : '')} onClick={() => { unlockAudio(); playing ? s.pause() : s.play(); }}>{playing ? '❚❚ Pause' : '▶ Play'}</button>
       <button onClick={() => useStore.getState().stop()}>■ Stop</button>
       <span>{t.toFixed(2)} / {dur}s</span><span style={{ flex: 1 }} />
       <span className="badge preview">PREVIEW ONLY</span><button onClick={onExit}>Back to editing (Esc)</button>

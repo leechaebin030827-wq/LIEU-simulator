@@ -19,19 +19,19 @@ function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: n
 
 /** Frosted-glass rounded rectangle over the picture: blurred copy of the still, faint white tint, hairline rim with a specular falloff. */
 function glassBox(ctx: CanvasRenderingContext2D, img: CanvasImageSource, W: number, H: number, x: number, y: number, w: number, h: number, r: number, u: number, lit: number) {
-  ctx.save(); ctx.shadowColor = `rgba(8,14,28,${0.26 - 0.1 * lit})`; ctx.shadowBlur = 46 * u; ctx.shadowOffsetY = 16 * u; rr(ctx, x, y, w, h, r); ctx.fillStyle = 'rgba(255,255,255,0.01)'; ctx.fill(); ctx.restore();
+  ctx.save(); ctx.shadowColor = `rgba(8,14,28,${0.18 - 0.08 * lit})`; ctx.shadowBlur = 36 * u; ctx.shadowOffsetY = 12 * u; rr(ctx, x, y, w, h, r); ctx.fillStyle = 'rgba(255,255,255,0.01)'; ctx.fill(); ctx.restore();
   ctx.save(); rr(ctx, x, y, w, h, r); ctx.clip();
   ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);   // the blurred picture is in canvas space, whatever scale the sheet is drawn at
   try { ctx.filter = `blur(${9 * u * SHEET_K}px) saturate(1.5) brightness(1.06)`; } catch { /* tint only */ }
   ctx.drawImage(img, -40, -40, W + 80, H + 80); ctx.filter = 'none';
   ctx.restore();
   const tone = ctx.createLinearGradient(0, y, 0, y + h);
-  tone.addColorStop(0, `rgba(255,255,255,${0.2 + 0.16 * lit})`); tone.addColorStop(1, `rgba(255,255,255,${0.1 + 0.14 * lit})`);
+  tone.addColorStop(0, `rgba(255,255,255,${0.14 + 0.16 * lit})`); tone.addColorStop(1, `rgba(255,255,255,${0.06 + 0.14 * lit})`);
   ctx.fillStyle = tone; ctx.fillRect(x, y, w, h);
   ctx.restore();
   const rim = ctx.createLinearGradient(x, y, x + w, y + h);
   rim.addColorStop(0, 'rgba(255,255,255,0.8)'); rim.addColorStop(0.4, 'rgba(255,255,255,0.22)'); rim.addColorStop(0.7, 'rgba(255,255,255,0.18)'); rim.addColorStop(1, 'rgba(255,255,255,0.5)');
-  rr(ctx, x + 1.5 * u, y + 1.5 * u, w - 3 * u, h - 3 * u, r - 1.5 * u); ctx.lineWidth = 2.5 * u; ctx.strokeStyle = rim; ctx.stroke();
+  rr(ctx, x + 1.5 * u, y + 1.5 * u, w - 3 * u, h - 3 * u, r - 1.5 * u); ctx.lineWidth = 2 * u; ctx.strokeStyle = rim; ctx.stroke();
 }
 
 let mapLayer: HTMLCanvasElement | null = null;
@@ -97,7 +97,7 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   ctx.fillStyle = `rgba(8,14,28,${0.3 * alpha})`; ctx.fillRect(0, 0, W, H);   // calm the scene a little so the white type reads
 
   const X = 64 * u, CW = W - 128 * u;
-  const dy = H * 0.29;                                       // top of the sheet (kept fixed while it scales)
+  const dy = H * 0.43;                                       // top of the sheet (kept fixed while it scales)
   ctx.save(); ctx.globalAlpha = alpha; ctx.translate(0, lift);
   ctx.translate(W / 2, dy); ctx.scale(SHEET_K, SHEET_K); ctx.translate(-W / 2, -dy);
   ctx.textBaseline = 'alphabetic';
@@ -121,28 +121,19 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   drawMap(ctx, X - 20 * u, my, CW + 40 * u, mh, u, t, ((t - b.show) / 2.2) % 1);
 
   // the one boxed element: a wide frosted-glass rounded-rectangle Start button
-  const by = my + mh + 24 * u, bh = 142 * u, sc = 1 - 0.035 * pressed;
+  const by = my + mh + 24 * u, bh = 118 * u, sc = 1 - 0.03 * pressed;
   const bw = CW * sc, bx = X + (CW - bw) / 2, bhh = bh * sc, byy = by + (bh - bhh) / 2 + 5 * u * pressed;
-  glassBox(ctx, img, W, H, bx, byy, bw, bhh, 46 * u, u, pressed);
+  glassBox(ctx, img, W, H, bx, byy, bw, bhh, 34 * u, u, pressed);
   ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   ctx.shadowColor = 'rgba(8,14,28,0.3)'; ctx.shadowBlur = 12 * u; ctx.shadowOffsetY = 2 * u;
-  ctx.font = `600 ${56 * u}px ${FONT}`; if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = `${-1 * u}px`;
-  ctx.fillText('출발', W / 2 - 34 * u, byy + bhh / 2 + 3 * u);
+  ctx.font = `600 ${54 * u}px ${FONT}`; if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = `${2 * u}px`;
+  ctx.fillText('출발', W / 2 + 1 * u, byy + bhh / 2 + 3 * u);
   if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = '0px';
-  const cx0 = W / 2 + 60 * u, cy0 = byy + bhh / 2;
-  ctx.strokeStyle = '#fff'; ctx.lineWidth = 6.5 * u; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-  ctx.beginPath(); ctx.moveTo(cx0 - 10 * u, cy0 - 17 * u); ctx.lineTo(cx0 + 10 * u, cy0); ctx.lineTo(cx0 - 10 * u, cy0 + 17 * u); ctx.stroke();
   ctx.shadowColor = 'transparent';
-  // tap hint: a hairline ring breathing out of the button while it waits
-  if (t < b.pressDown) {
-    const ph = ((t - b.show) / 1.8) % 1;
-    ctx.save(); ctx.globalAlpha *= 0.6 * (1 - ph) * easeOut((t - b.show) / 0.9); ctx.strokeStyle = '#fff'; ctx.lineWidth = 3 * u;
-    rr(ctx, bx - 14 * u * ph, byy - 14 * u * ph, bw + 28 * u * ph, bhh + 28 * u * ph, (46 + 14 * ph) * u); ctx.stroke(); ctx.restore();
-  }
   const rp = (t - b.release) / 0.55;
   if (rp > 0 && rp < 1) {
     ctx.save(); ctx.globalAlpha *= 0.75 * (1 - rp); ctx.strokeStyle = '#fff'; ctx.lineWidth = 4 * u * (1 - rp);
-    const e = 26 * u * easeOut(rp); rr(ctx, bx - e, byy - e, bw + 2 * e, bhh + 2 * e, 46 * u + e); ctx.stroke(); ctx.restore();
+    const e = 26 * u * easeOut(rp); rr(ctx, bx - e, byy - e, bw + 2 * e, bhh + 2 * e, 34 * u + e); ctx.stroke(); ctx.restore();
   }
   ctx.restore();
   ctx.globalAlpha = 1;

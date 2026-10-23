@@ -296,6 +296,6 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .top button.ico.scn .caret { opacity: .55; }
 
 /* Play / Pause: the main transport action, in the accent yellow */
-.transport button.playbtn { background: var(--amber); border-color: var(--amber); color: #1a1200; font-weight: 600; }
-.transport button.playbtn:hover:not(:disabled) { background: #ffc24d; border-color: #ffc24d; }
-.transport button.playbtn.on { background: #e89b00; border-color: #e89b00; color: #1a1200; }
+.transport button.playbtn, .presentbar button.playbtn { background: var(--amber); border-color: var(--amber); color: #1a1200; font-weight: 600; }
+.transport button.playbtn:hover:not(:disabled), .presentbar button.playbtn:hover:not(:disabled) { background: #ffc24d; border-color: #ffc24d; }
+.transport button.playbtn.on, .presentbar button.playbtn.on { background: #e89b00; border-color: #e89b00; color: #1a1200; }
