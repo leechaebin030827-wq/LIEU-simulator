@@ -11,6 +11,8 @@ const askFont = () => { if (fontAsked || typeof document === 'undefined' || !doc
 
 export const buttonActive = (b: ButtonTimes, t: number) => t >= b.show && t <= b.gone;
 
+/** The whole sheet is drawn at this fraction of its design size, centred on the screen (a compact, slightly taller layout). */
+const SHEET_K = 2 / 3;
 const DEST = { name: '서울역', eta: '14', etaUnit: '분' };
 
 function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
@@ -19,8 +21,10 @@ function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: n
 function glassBox(ctx: CanvasRenderingContext2D, img: CanvasImageSource, W: number, H: number, x: number, y: number, w: number, h: number, r: number, u: number, lit: number) {
   ctx.save(); ctx.shadowColor = `rgba(8,14,28,${0.26 - 0.1 * lit})`; ctx.shadowBlur = 46 * u; ctx.shadowOffsetY = 16 * u; rr(ctx, x, y, w, h, r); ctx.fillStyle = 'rgba(255,255,255,0.01)'; ctx.fill(); ctx.restore();
   ctx.save(); rr(ctx, x, y, w, h, r); ctx.clip();
-  try { ctx.filter = `blur(${9 * u}px) saturate(1.5) brightness(1.06)`; } catch { /* tint only */ }
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);   // the blurred picture is in canvas space, whatever scale the sheet is drawn at
+  try { ctx.filter = `blur(${9 * u * SHEET_K}px) saturate(1.5) brightness(1.06)`; } catch { /* tint only */ }
   ctx.drawImage(img, -40, -40, W + 80, H + 80); ctx.filter = 'none';
+  ctx.restore();
   const tone = ctx.createLinearGradient(0, y, 0, y + h);
   tone.addColorStop(0, `rgba(255,255,255,${0.2 + 0.16 * lit})`); tone.addColorStop(1, `rgba(255,255,255,${0.1 + 0.14 * lit})`);
   ctx.fillStyle = tone; ctx.fillRect(x, y, w, h);
@@ -93,12 +97,13 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   ctx.fillStyle = `rgba(8,14,28,${0.3 * alpha})`; ctx.fillRect(0, 0, W, H);   // calm the scene a little so the white type reads
 
   const X = 64 * u, CW = W - 128 * u;
+  const dy = H * 0.29;                                       // top of the sheet (kept fixed while it scales)
   ctx.save(); ctx.globalAlpha = alpha; ctx.translate(0, lift);
+  ctx.translate(W / 2, dy); ctx.scale(SHEET_K, SHEET_K); ctx.translate(-W / 2, -dy);
   ctx.textBaseline = 'alphabetic';
   ctx.shadowColor = 'rgba(8,14,28,0.55)'; ctx.shadowBlur = 20 * u; ctx.shadowOffsetY = 3 * u;
 
   // destination: type only
-  const dy = H * 0.292;
   ctx.textAlign = 'left';
   ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.font = `600 ${25 * u}px ${FONT}`; ctx.fillText('목적지', X, dy);
   ctx.fillStyle = '#fff'; ctx.font = `600 ${68 * u}px ${FONT}`; if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = `${-1.5 * u}px`;
@@ -111,7 +116,7 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = '0px';
 
   // route map: white line art
-  const my = dy + 112 * u, mh = H * 0.31;
+  const my = dy + 112 * u, mh = H * 0.31 * 1.25;   // a longer map
   ctx.shadowColor = 'transparent';
   drawMap(ctx, X - 20 * u, my, CW + 40 * u, mh, u, t, ((t - b.show) / 2.2) % 1);
 
