@@ -1,7 +1,9 @@
 import { useStore } from '../store';
 import { useUi } from '../ui/ui-store';
 
-const KEY = 'lieu.autosave.v1';
+// Bump the version to make every browser start clean once (stale autosaves of edited scenarios are ignored; presets load from their files).
+const KEY = 'lieu.autosave.v2';
+try { localStorage.removeItem('lieu.autosave.v1'); } catch { /* ignore */ }
 
 /** Debounced autosave of the current project JSON to localStorage (uploaded media files are not stored). */
 export function startAutosave() {
