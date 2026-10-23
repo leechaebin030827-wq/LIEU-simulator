@@ -37,7 +37,9 @@ function generatedEye(side: Side, f: EyeFrame, geo: MatrixGeometry): boolean[][]
   const slant = f.mood.sl + f.shape.tilt * 0.6;
   const arch = f.mood.ar;
 
-  const baseX = Math.floor((8 - w) / 2);
+  // an odd-width eye cannot sit dead-centre in 8 columns: mirror the right module (ceil) so the pair is symmetric about the gap between the modules
+  // (same rounding on both would shift both eyes the same way and make the robot look sideways)
+  const baseX = side === 'R' ? Math.ceil((8 - w) / 2) : Math.floor((8 - w) / 2);
   const rangeX = Math.max(1, Math.floor((8 - w) / 2));
   const x0 = clamp(baseX + geo.posX + sideOffset(side, geo) + Math.round(f.gazeX * rangeX) + Math.round(f.flickerX), 0, 8 - w);
   const baseY = Math.floor((8 - h) / 2);
