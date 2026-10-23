@@ -227,7 +227,7 @@ function TransportBar({ pps, setPps }: { pps: number; setPps: (n: number) => voi
     <div className="transport">
       <button onClick={() => s.setTime(0)} title="Go to start">|◀</button>
       <button onClick={() => s.setTime(s.tSec - step)} title="Back 1 frame (←)">◀</button>
-      <button className={s.playing ? 'on' : ''} onClick={() => { unlockAudio(); s.playing ? s.pause() : s.play(); }} style={{ width: 70 }} title="Play / Pause (Space)">{s.playing ? '❚❚ Pause' : '▶ Play'}</button>
+      <button className={'playbtn' + (s.playing ? ' on' : '')} onClick={() => { unlockAudio(); s.playing ? s.pause() : s.play(); }} style={{ width: 70 }} title="Play / Pause (Space)">{s.playing ? '❚❚ Pause' : '▶ Play'}</button>
       <button onClick={() => s.setTime(s.tSec + step)} title="Forward 1 frame (→)">▶</button>
       <button onClick={s.stop} title="Stop and return to start">■</button>
       <button className={s.seq.loop ? 'on' : ''} onClick={s.toggleLoop} title="Repeat from the start when the end is reached">↻ Loop</button>
