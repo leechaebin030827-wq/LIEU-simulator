@@ -93,7 +93,7 @@ def verify():
           ev['eyes']['independentHardwareControlRequiresDistinctAddresses'])
     check('Gear teeth count unknown',ev['yawGear']['pinionToothCount'] is None
           and ev['yawGear']['ringToothCount'] is None)
-    for name in ('01_boarding','02_driving_a','03_arrival'):
+    for name in ('01_boarding','02_driving_a','03_arrival','04_driving_b'):
         seq=data(f'examples/{name}.lieu.json')
         check(f'{name} schema / duration / preview',seq['schema']=='lieu.sequence/v1' and
               seq['durationSec']>0 and seq['demoPreviewOnly'] is True)

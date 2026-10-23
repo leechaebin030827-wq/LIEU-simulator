@@ -132,7 +132,7 @@ export function buildProject(seq: Sequence): Project {
   p.freeform.geometry.glow = Math.min(1.5, 0.45 * glow);
   if (seq.shape === 'long') {
     // tall pill eyes
-    const m = p.matrix.geometry; m.leftW = 3; m.rightW = 3; m.eyeH = 5; m.corner = 1;
+    const m = p.matrix.geometry; m.leftW = 3; m.rightW = 3; m.eyeH = 6; m.corner = 1;
     const f = p.freeform.geometry; f.widthL = f.widthR = 160; f.heightL = f.heightR = 320; f.pill = true; f.spacing = 180;  // 1:2, fully round ends
   }
   if (seq.useCustom && seq.custom) { p.matrix.geometry.customL = seq.custom.left; p.matrix.geometry.customR = seq.custom.right; }

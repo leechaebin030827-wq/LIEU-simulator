@@ -2698,11 +2698,11 @@
             "tSec": 0,
             "value": [
               0,
-              0,
-              0,
-              28,
-              28,
-              0,
+              16,
+              56,
+              56,
+              56,
+              56,
               0,
               0
             ],
@@ -2710,13 +2710,13 @@
           },
           {
             "id": "L_1",
-            "tSec": 0.15,
+            "tSec": 3.367,
             "value": [
               0,
-              0,
-              60,
-              102,
-              66,
+              16,
+              56,
+              56,
+              56,
               0,
               0,
               0
@@ -2725,13 +2725,13 @@
           },
           {
             "id": "L_2",
-            "tSec": 12.3,
+            "tSec": 3.4,
             "value": [
               0,
               0,
               0,
-              28,
-              28,
+              56,
+              56,
               0,
               0,
               0
@@ -2740,28 +2740,28 @@
           },
           {
             "id": "L_3",
-            "tSec": 12.45,
+            "tSec": 3.433,
             "value": [
               0,
-              28,
-              28,
-              28,
-              28,
-              28,
-              28,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "L_4",
-            "tSec": 19.85,
+            "tSec": 3.533,
             "value": [
               0,
               0,
-              0,
-              28,
-              28,
+              16,
+              56,
+              16,
               0,
               0,
               0
@@ -2770,13 +2770,13 @@
           },
           {
             "id": "L_5",
-            "tSec": 20.0,
+            "tSec": 3.567,
             "value": [
               0,
               0,
-              60,
-              102,
-              66,
+              16,
+              56,
+              56,
               0,
               0,
               0
@@ -2785,7 +2785,82 @@
           },
           {
             "id": "L_6",
-            "tSec": 25.4,
+            "tSec": 3.6,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_7",
+            "tSec": 3.633,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_8",
+            "tSec": 3.667,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_9",
+            "tSec": 4.033,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_10",
+            "tSec": 5.133,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_11",
+            "tSec": 5.167,
             "value": [
               0,
               0,
@@ -2799,16 +2874,1336 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_7",
-            "tSec": 25.55,
+            "id": "L_12",
+            "tSec": 5.2,
             "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_13",
+            "tSec": 5.4,
+            "value": [
+              0,
+              0,
               0,
               28,
               28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_14",
+            "tSec": 5.433,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_15",
+            "tSec": 5.467,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_16",
+            "tSec": 5.533,
+            "value": [
+              0,
+              8,
               28,
               28,
               28,
-              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_17",
+            "tSec": 6.133,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_18",
+            "tSec": 6.367,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_19",
+            "tSec": 6.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_20",
+            "tSec": 6.467,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_21",
+            "tSec": 6.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_22",
+            "tSec": 6.533,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_23",
+            "tSec": 7.267,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_24",
+            "tSec": 7.3,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_25",
+            "tSec": 7.333,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_26",
+            "tSec": 7.367,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_27",
+            "tSec": 7.4,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_28",
+            "tSec": 7.433,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_29",
+            "tSec": 7.533,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_30",
+            "tSec": 7.567,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_31",
+            "tSec": 7.6,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_32",
+            "tSec": 7.7,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_33",
+            "tSec": 7.733,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_34",
+            "tSec": 7.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_35",
+            "tSec": 7.8,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_36",
+            "tSec": 8.933,
+            "value": [
+              0,
+              32,
+              112,
+              112,
+              112,
+              112,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_37",
+            "tSec": 9.1,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_38",
+            "tSec": 9.133,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_39",
+            "tSec": 9.267,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_40",
+            "tSec": 9.3,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_41",
+            "tSec": 9.333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_42",
+            "tSec": 9.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_43",
+            "tSec": 9.533,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_44",
+            "tSec": 9.567,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_45",
+            "tSec": 9.667,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_46",
+            "tSec": 9.7,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_47",
+            "tSec": 9.733,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_48",
+            "tSec": 9.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_49",
+            "tSec": 10.4,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_50",
+            "tSec": 10.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_51",
+            "tSec": 10.467,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_52",
+            "tSec": 10.5,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_53",
+            "tSec": 10.567,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_54",
+            "tSec": 10.6,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_55",
+            "tSec": 10.7,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_56",
+            "tSec": 10.733,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_57",
+            "tSec": 10.767,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_58",
+            "tSec": 10.867,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_59",
+            "tSec": 10.9,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_60",
+            "tSec": 10.933,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_61",
+            "tSec": 10.967,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_62",
+            "tSec": 11.633,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_63",
+            "tSec": 11.933,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_64",
+            "tSec": 11.967,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_65",
+            "tSec": 12,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_66",
+            "tSec": 12.067,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_67",
+            "tSec": 12.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_68",
+            "tSec": 12.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_69",
+            "tSec": 12.467,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_70",
+            "tSec": 12.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_71",
+            "tSec": 12.833,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_72",
+            "tSec": 13.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_73",
+            "tSec": 13.933,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_74",
+            "tSec": 13.967,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_75",
+            "tSec": 14.067,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_76",
+            "tSec": 14.1,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_77",
+            "tSec": 14.133,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_78",
+            "tSec": 14.167,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_79",
+            "tSec": 16.767,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_80",
+            "tSec": 17.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_81",
+            "tSec": 17.967,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_82",
+            "tSec": 18,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_83",
+            "tSec": 18.067,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_84",
+            "tSec": 18.667,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_85",
+            "tSec": 18.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_86",
+            "tSec": 19.533,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_87",
+            "tSec": 20.9,
+            "value": [
+              32,
+              112,
+              112,
+              112,
+              112,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_88",
+            "tSec": 21.233,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_89",
+            "tSec": 21.6,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_90",
+            "tSec": 21.633,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_91",
+            "tSec": 21.733,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_92",
+            "tSec": 21.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_93",
+            "tSec": 21.8,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_94",
+            "tSec": 25.267,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_95",
+            "tSec": 25.3,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_96",
+            "tSec": 25.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_97",
+            "tSec": 25.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_98",
+            "tSec": 25.467,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_99",
+            "tSec": 25.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_100",
+            "tSec": 26.867,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
@@ -2823,11 +4218,11 @@
             "tSec": 0,
             "value": [
               0,
-              0,
-              0,
-              28,
-              28,
-              0,
+              16,
+              56,
+              56,
+              56,
+              56,
               0,
               0
             ],
@@ -2835,13 +4230,13 @@
           },
           {
             "id": "R_1",
-            "tSec": 0.15,
+            "tSec": 3.367,
             "value": [
               0,
-              0,
-              60,
-              102,
-              66,
+              16,
+              56,
+              56,
+              56,
               0,
               0,
               0
@@ -2850,13 +4245,13 @@
           },
           {
             "id": "R_2",
-            "tSec": 12.3,
+            "tSec": 3.4,
             "value": [
               0,
               0,
               0,
-              28,
-              28,
+              56,
+              56,
               0,
               0,
               0
@@ -2865,28 +4260,28 @@
           },
           {
             "id": "R_3",
-            "tSec": 12.45,
+            "tSec": 3.433,
             "value": [
               0,
-              28,
-              28,
-              28,
-              28,
-              28,
-              28,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "R_4",
-            "tSec": 19.85,
+            "tSec": 3.533,
             "value": [
               0,
               0,
-              0,
-              28,
-              28,
+              16,
+              56,
+              16,
               0,
               0,
               0
@@ -2895,13 +4290,13 @@
           },
           {
             "id": "R_5",
-            "tSec": 20.0,
+            "tSec": 3.567,
             "value": [
               0,
               0,
-              60,
-              102,
-              66,
+              16,
+              56,
+              56,
               0,
               0,
               0
@@ -2910,7 +4305,82 @@
           },
           {
             "id": "R_6",
-            "tSec": 25.4,
+            "tSec": 3.6,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_7",
+            "tSec": 3.633,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_8",
+            "tSec": 3.667,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_9",
+            "tSec": 4.033,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_10",
+            "tSec": 5.133,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_11",
+            "tSec": 5.167,
             "value": [
               0,
               0,
@@ -2924,16 +4394,1336 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_7",
-            "tSec": 25.55,
+            "id": "R_12",
+            "tSec": 5.2,
             "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_13",
+            "tSec": 5.4,
+            "value": [
+              0,
+              0,
               0,
               28,
               28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_14",
+            "tSec": 5.433,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_15",
+            "tSec": 5.467,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_16",
+            "tSec": 5.533,
+            "value": [
+              0,
+              8,
               28,
               28,
               28,
-              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_17",
+            "tSec": 6.133,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_18",
+            "tSec": 6.367,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_19",
+            "tSec": 6.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_20",
+            "tSec": 6.467,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_21",
+            "tSec": 6.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_22",
+            "tSec": 6.533,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_23",
+            "tSec": 7.267,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_24",
+            "tSec": 7.3,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_25",
+            "tSec": 7.333,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_26",
+            "tSec": 7.367,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_27",
+            "tSec": 7.4,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_28",
+            "tSec": 7.433,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_29",
+            "tSec": 7.533,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_30",
+            "tSec": 7.567,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_31",
+            "tSec": 7.6,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_32",
+            "tSec": 7.7,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_33",
+            "tSec": 7.733,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_34",
+            "tSec": 7.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_35",
+            "tSec": 7.8,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_36",
+            "tSec": 8.933,
+            "value": [
+              0,
+              32,
+              112,
+              112,
+              112,
+              112,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_37",
+            "tSec": 9.1,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_38",
+            "tSec": 9.133,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_39",
+            "tSec": 9.267,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_40",
+            "tSec": 9.3,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_41",
+            "tSec": 9.333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_42",
+            "tSec": 9.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_43",
+            "tSec": 9.533,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_44",
+            "tSec": 9.567,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_45",
+            "tSec": 9.667,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_46",
+            "tSec": 9.7,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_47",
+            "tSec": 9.733,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_48",
+            "tSec": 9.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_49",
+            "tSec": 10.4,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_50",
+            "tSec": 10.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_51",
+            "tSec": 10.467,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_52",
+            "tSec": 10.5,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_53",
+            "tSec": 10.567,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_54",
+            "tSec": 10.6,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_55",
+            "tSec": 10.7,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_56",
+            "tSec": 10.733,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_57",
+            "tSec": 10.767,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_58",
+            "tSec": 10.867,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_59",
+            "tSec": 10.9,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_60",
+            "tSec": 10.933,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_61",
+            "tSec": 10.967,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_62",
+            "tSec": 11.633,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_63",
+            "tSec": 11.933,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_64",
+            "tSec": 11.967,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_65",
+            "tSec": 12,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_66",
+            "tSec": 12.067,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_67",
+            "tSec": 12.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_68",
+            "tSec": 12.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_69",
+            "tSec": 12.467,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_70",
+            "tSec": 12.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_71",
+            "tSec": 12.833,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_72",
+            "tSec": 13.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_73",
+            "tSec": 13.933,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_74",
+            "tSec": 13.967,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_75",
+            "tSec": 14.067,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_76",
+            "tSec": 14.1,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_77",
+            "tSec": 14.133,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_78",
+            "tSec": 14.167,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_79",
+            "tSec": 16.767,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_80",
+            "tSec": 17.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_81",
+            "tSec": 17.967,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_82",
+            "tSec": 18,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_83",
+            "tSec": 18.067,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_84",
+            "tSec": 18.667,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_85",
+            "tSec": 18.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_86",
+            "tSec": 19.533,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_87",
+            "tSec": 20.9,
+            "value": [
+              32,
+              112,
+              112,
+              112,
+              112,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_88",
+            "tSec": 21.233,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_89",
+            "tSec": 21.6,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_90",
+            "tSec": 21.633,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_91",
+            "tSec": 21.733,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_92",
+            "tSec": 21.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_93",
+            "tSec": 21.8,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_94",
+            "tSec": 25.267,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_95",
+            "tSec": 25.3,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_96",
+            "tSec": 25.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_97",
+            "tSec": 25.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_98",
+            "tSec": 25.467,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_99",
+            "tSec": 25.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_100",
+            "tSec": 26.867,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
@@ -3226,7 +6016,12 @@
         "type": "scene",
         "payload": {
           "title": "① 차량 도착 · 탑승자 환영",
-          "desc": "기본 위치(레일 맨 앞에서 조금 들어간 곳)에서 웃는 눈으로 WELCOME을 투사하고, 이동 방향을 알리는 라이트가 먼저 돈 뒤 레일 맨 앞까지 나옵니다"
+          "desc": "기본 위치(레일 맨 앞에서 조금 들어간 곳)에서 웃는 눈으로 WELCOME을 투사하고, 이동 방향을 알리는 라이트가 먼저 돈 뒤 레일 맨 앞까지 나옵니다",
+          "tv": {
+            "tag": "탑승 환영",
+            "head": "안녕하세요, 루예요!",
+            "sub": "오늘 함께 가요. 편하게 앉아 주세요"
+          }
         }
       },
       {
@@ -3235,7 +6030,12 @@
         "type": "scene",
         "payload": {
           "title": "② 도착 · 인사하기",
-          "desc": "가볍고 부드럽게 목례합니다"
+          "desc": "가볍고 부드럽게 목례합니다",
+          "tv": {
+            "tag": "인사",
+            "head": "만나서 반가워요",
+            "sub": "목례로 인사드려요"
+          }
         }
       },
       {
@@ -3244,7 +6044,12 @@
         "type": "scene",
         "payload": {
           "title": "③ 탑승 확인 (사람이 앉는 중)",
-          "desc": "방향 라이트 후 고개를 숙이고 왼쪽에서 오른쪽으로 쓰윽 둘러보며 다 앉았는지 확인합니다"
+          "desc": "방향 라이트 후 고개를 숙이고 왼쪽에서 오른쪽으로 쓰윽 둘러보며 다 앉았는지 확인합니다",
+          "tv": {
+            "tag": "탑승 확인",
+            "head": "다 앉으셨나요?",
+            "sub": "천천히 둘러보며 확인할게요"
+          }
         }
       },
       {
@@ -3253,7 +6058,12 @@
         "type": "scene",
         "payload": {
           "title": "④ 확인 후 기본 위치로 복귀",
-          "desc": "기본 눈으로 돌아오고, 방향 라이트 후 레일을 타고 기본 위치로 살짝 들어갑니다"
+          "desc": "기본 눈으로 돌아오고, 방향 라이트 후 레일을 타고 기본 위치로 살짝 들어갑니다",
+          "tv": {
+            "tag": "확인 완료",
+            "head": "모두 준비됐어요",
+            "sub": "편히 앉아 계세요"
+          }
         }
       },
       {
@@ -3262,7 +6072,12 @@
         "type": "scene",
         "payload": {
           "title": "⑤ 출발 버튼",
-          "desc": "스크린 중앙에 큰 글래스 \"출발\" 버튼이 떠오릅니다"
+          "desc": "스크린 중앙에 큰 글래스 \"출발\" 버튼이 떠오릅니다",
+          "tv": {
+            "tag": "출발 준비",
+            "head": "준비되셨으면 출발을 눌러 주세요",
+            "sub": "화면의 버튼을 살짝 눌러 주세요"
+          }
         }
       },
       {
@@ -3271,7 +6086,12 @@
         "type": "scene",
         "payload": {
           "title": "⑥ 출발 버튼이 눌림",
-          "desc": "버튼이 꾹 눌렸다가 튕기듯 올라오며 사라집니다"
+          "desc": "버튼이 꾹 눌렸다가 튕기듯 올라오며 사라집니다",
+          "tv": {
+            "tag": "출발",
+            "head": "출발합니다!",
+            "sub": "안전하게 모실게요"
+          }
         }
       },
       {
@@ -3280,7 +6100,12 @@
         "type": "scene",
         "payload": {
           "title": "⑦ 출발 · 빙그르르",
-          "desc": "루가 빙그르르 돕니다 (눈이 오른쪽 끝에서 꺼지고 왼쪽에서 다시 켜짐)"
+          "desc": "루가 빙그르르 돕니다 (눈이 오른쪽 끝에서 꺼지고 왼쪽에서 다시 켜짐)",
+          "tv": {
+            "tag": "출발",
+            "head": "자, 떠나볼까요?",
+            "sub": "즐거운 여정 되세요"
+          }
         }
       },
       {
@@ -3289,7 +6114,12 @@
         "type": "scene",
         "payload": {
           "title": "대기",
-          "desc": "출발 후 기본 위치에서 대기합니다"
+          "desc": "출발 후 기본 위치에서 대기합니다",
+          "tv": {
+            "tag": "주행 중",
+            "head": "편안하게 가고 있어요",
+            "sub": "필요하면 언제든 불러 주세요"
+          }
         }
       },
       {

@@ -15,8 +15,37 @@ import { emptySequence } from './engine/edit';
 const PRESETS: [string, string, string][] = [
   ['01_boarding', 'Boarding', '차량 도착 · 환영 · 인사 · 착석 확인 · 출발(빙그르르)'],
   ['02_driving_a', 'Driving A', '공사 감지 · 앞을 살피고 · 돌아와 우회 안내'],
+  ['04_driving_b', 'Driving B', 'Hey LIEU 호출 · 애교 총출동'],
   ['03_arrival', 'Arrival', '곧 도착 · 둘러보기 · 작별 인사 · 문 쪽 안내'],
 ];
+
+function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState({ left: 0, top: 0 });
+  useEffect(() => {
+    if (!open) return;
+    const off = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    window.addEventListener('mousedown', off); window.addEventListener('keydown', esc);
+    return () => { window.removeEventListener('mousedown', off); window.removeEventListener('keydown', esc); };
+  }, [open]);
+  return (
+    <div className="exmenu" ref={ref}>
+      <button className="ico" title="Load an example sequence" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos({ left: r.left, top: r.bottom + 6 }); setOpen((o) => !o); }}>Examples <span className="caret">▾</span></button>
+      {open && (
+        <div className="exlist" style={pos}>
+          {PRESETS.map(([id, l, d], i) => (
+            <button key={id} className="exitem" onClick={() => { setOpen(false); onPick(id); }}>
+              <span className="exnum">{String(i + 1).padStart(2, '0')}</span>
+              <span className="extxt"><b>{l}</b><small>{d}</small></span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const timeLabel = (t: number) => new Date(t).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 const slug = (s: string) => (s.trim().replace(/[^\w가-힣.-]+/g, '_') || 'sequence');
@@ -79,31 +108,27 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
     <div className="top">
       <h1 title="LIEU Sequence Editor">LIEU</h1>
       <div className="grp">
-        <button className="ico" title="Clear all keyframes and start an empty sequence" onClick={() => void newSequence()}>＋ New</button>
-        <select title="Load an example sequence" value="" onChange={async (e) => {
-          const id = e.target.value; e.target.value = ''; if (!id) return;
+        <button className="ico" title="Clear all keyframes and start an empty sequence" onClick={() => void newSequence()}>New</button>
+        <ExampleMenu onPick={async (id) => {
           if (!(await confirmDiscard('Load example'))) return;
           try { await loadPresetData(id); toast(`Loaded example: ${PRESETS.find((p) => p[0] === id)?.[1]}`, 'ok'); } catch (x) { toast(String(x), 'warn'); }
-        }}>
-          <option value="">Examples ▾</option>
-          {PRESETS.map(([id, l, d]) => <option key={id} value={id} title={d}>{l} — {d}</option>)}
-        </select>
+        }} />
       </div>
       <div className="grp">
         <input type="text" value={title} title="Sequence name (used as the saved file name)" placeholder="Sequence name" onChange={(e) => patchSeq((q) => { q.title = e.target.value; }, 'title')} style={{ width: 190 }} />
       </div>
       <div className="grp">
-        <button className="ico" title="Open file (.lieu.json / .zip)" onClick={() => fileRef.current?.click()}>📂 Open</button>
+        <button className="ico" title="Open file (.lieu.json / .zip)" onClick={() => fileRef.current?.click()}>Open</button>
         <input ref={fileRef} type="file" hidden accept=".json,.zip" onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ''; if (f) void openFile(f); }} />
-        <button className="ico" title="Save the current sequence to a file (.lieu.json) — Ctrl/⌘+S" onClick={saveJson}>💾 Save</button>
+        <button className="ico" title="Save the current sequence to a file (.lieu.json) — Ctrl/⌘+S" onClick={saveJson}>Save</button>
         <button className="ico" title="Save as .zip, including uploaded images and sounds" onClick={async () => {
           const s = useStore.getState(); const name = `${slug(s.seq.title)}.lieu.zip`;
           download(name, (await s.exportZip()) as BlobPart, 'application/zip'); toast(`Saved as ZIP → ${name}`, 'ok');
         }}>ZIP</button>
       </div>
       <div className="grp">
-        <button className="ico" onClick={() => useStore.getState().undo()} disabled={!canUndo} title="Undo — Ctrl/⌘+Z">↶ Undo</button>
-        <button className="ico" onClick={() => useStore.getState().redo()} disabled={!canRedo} title="Redo — Ctrl/⌘+Shift+Z">↷ Redo</button>
+        <button className="ico" onClick={() => useStore.getState().undo()} disabled={!canUndo} title="Undo — Ctrl/⌘+Z">Undo</button>
+        <button className="ico" onClick={() => useStore.getState().redo()} disabled={!canRedo} title="Redo — Ctrl/⌘+Shift+Z">Redo</button>
       </div>
       <span className="sp" />
       <span className={'savestate' + (saving ? ' busy' : '')} title="Work is autosaved in this browser (uploaded media excluded)">
@@ -118,7 +143,7 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
 }
 
 export function App() {
-  const [tlH, setTlH] = useState(320);
+  const [tlH, setTlH] = useState(226);
   const [vpW, setVpW] = useState<number | null>(null);
   const showParts = useUi((s) => s.parts);
   const [present, setPresent] = useState(false);
@@ -159,17 +184,22 @@ export function App() {
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const startResize = (e: React.MouseEvent) => {
-    const y0 = e.clientY, h0 = tlH;
-    const mv = (ev: MouseEvent) => setTlH(Math.max(160, Math.min(window.innerHeight - 260, h0 - (ev.clientY - y0))));
-    const up = () => { window.removeEventListener('mousemove', mv); window.removeEventListener('mouseup', up); };
+  /** Drag a splitter: `apply` gets the pointer delta from where the drag started. The page is locked to the resize cursor meanwhile. */
+  const drag = (e: React.MouseEvent, cls: 'rs-col' | 'rs-row', apply: (dx: number, dy: number) => void) => {
+    e.preventDefault();
+    const x0 = e.clientX, y0 = e.clientY;
+    document.body.classList.add('resizing', cls);
+    const mv = (ev: MouseEvent) => apply(ev.clientX - x0, ev.clientY - y0);
+    const up = () => { document.body.classList.remove('resizing', cls); window.removeEventListener('mousemove', mv); window.removeEventListener('mouseup', up); };
     window.addEventListener('mousemove', mv); window.addEventListener('mouseup', up);
   };
+  const startResize = (e: React.MouseEvent) => {
+    const h0 = tlH;
+    drag(e, 'rs-row', (_dx, dy) => setTlH(Math.max(120, Math.min(window.innerHeight - 200, h0 - dy))));
+  };
   const startVResize = (e: React.MouseEvent) => {
-    const x0 = e.clientX, w0 = vpW ?? Math.round(window.innerWidth * 0.4);
-    const mv = (ev: MouseEvent) => setVpW(Math.max(360, Math.min(window.innerWidth - 700, w0 + (ev.clientX - x0))));
-    const up = () => { window.removeEventListener('mousemove', mv); window.removeEventListener('mouseup', up); };
-    window.addEventListener('mousemove', mv); window.addEventListener('mouseup', up);
+    const w0 = vpW ?? Math.round(window.innerWidth * 0.4);
+    drag(e, 'rs-col', (dx) => setVpW(Math.max(280, Math.min(window.innerWidth - 520, w0 + dx))));
   };
 
   return (
@@ -180,7 +210,7 @@ export function App() {
         <div className="vsplit" onMouseDown={startVResize} title="Drag to resize the 3D view" />
         <div className="work">
           <Inspector />
-          <div className="resizer" onMouseDown={startResize} title="Drag to resize the timeline" />
+          <div className="resizer" onMouseDown={startResize} onDoubleClick={() => setTlH((h) => (h > 200 ? 130 : 320))} title="Drag to resize the timeline · double-click to collapse / restore" />
           <Timeline />
         </div>
         {showParts && !present && <div className="treepop"><SceneTree /></div>}

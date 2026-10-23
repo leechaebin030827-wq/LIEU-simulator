@@ -1,6 +1,8 @@
+import { ScreenTab } from './ScreenTab';
 import { useRef, useState } from 'react';
 import { useStore, assetKind } from '../store';
 import { KeyBtn, NumRow, Section, rgbCss, useDesired } from './widgets';
+import type { TrackPath } from '../engine/edit';
 import { PREVIEW_LIMITS } from '../engine/rigDefaults';
 import { EYE_PRESETS, getBit, invertRows, mirrorRows, setBit } from '../engine/eyePresets';
 import { uid, setEyeBitmap } from '../engine/edit';
@@ -10,20 +12,20 @@ import { LED_COUNT } from '../engine/types';
 import { unlockAudio } from '../runtime/audio';
 import { EyeStudio } from './EyeStudio';
 
-type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'rig';
+type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'screen' | 'rig';
 
 export function Inspector() {
   const [tab, setTab] = useState<Tab>('motion');
   const selClip = useStore((s) => s.selClip);
-  const tabs: [Tab, string, string][] = [['motion', 'Motion', 'Rail · Yaw · Tilt'], ['ring', 'LED Ring', 'NeoPixel ×24 (RGBW)'], ['eyes', 'Eyes', 'Two 8x8 dot eyes'], ['proj', 'Projector', 'Floor-projected video/image'], ['audio', 'Audio', 'Voice and sound-effect clips'], ['events', 'Events', 'Sensor triggers (virtual)'], ['rig', 'Rig/HW', 'Part assignment · unknown hardware values']];
+  const tabs: [Tab, string, string][] = [['motion', 'Motion', 'Rail · Yaw · Tilt'], ['ring', 'LED Ring', 'NeoPixel ×24 (RGBW)'], ['eyes', 'Eyes', 'Two 8x8 dot eyes'], ['screen', 'Screen', 'TV screen (9:16) preview'], ['proj', 'Projector', 'Floor-projected video/image'], ['audio', 'Audio', 'Voice and sound-effect clips'], ['events', 'Events', 'Sensor triggers (virtual)'], ['rig', 'Rig/HW', 'Part assignment · unknown hardware values']];
   return (
     <div className="insp">
-      <div className="tabs">{tabs.map(([k, l, d]) => <button key={k} className={tab === k ? 'on' : ''} title={d} onClick={() => setTab(k)}>{l}</button>)}</div>
-      <KeyStatus />
+      <div className="tabs">{tabs.map(([k, l, d]) => <button key={k} className={tab === k ? 'on' : ''} title={d} onClick={() => setTab(k)}>{l}</button>)}<KeyStatus /></div>
       {selClip && <ClipEditor />}
       {tab === 'motion' && <Motion />}
       {tab === 'ring' && <Ring />}
       {tab === 'eyes' && <EyesTab />}
+      {tab === 'screen' && <ScreenTab />}
       {tab === 'proj' && <Projector />}
       {tab === 'audio' && <AudioTab />}
       {tab === 'events' && <Events />}
@@ -36,21 +38,56 @@ function KeyStatus() {
   const autoKey = useStore((s) => s.autoKey), t = useStore((s) => s.tSec);
   const live = useStore((s) => Object.keys(s.live).length > 0);
   return autoKey
-    ? <div className="statusline on" title="Changing a value records a key at the current time">◆ Auto-key on · changes are recorded at <span className="pill">{t.toFixed(2)}s</span></div>
-    : <div className="statusline off" title="Temporary values disappear when you move the time">⚠ Auto-key off · changed values are an unsaved preview{live ? ' (LIVE)' : ''}</div>;
+    ? <div className="statusline on" title="Changing a value records a key at the current time">Auto-key · recording at <span className="pill">{t.toFixed(2)}s</span></div>
+    : <div className="statusline off" title="Temporary values disappear when you move the time">Auto-key off · unsaved preview{live ? ' (LIVE)' : ''}</div>;
+}
+
+function Axis(props: { label: string; value: number; min: number; max: number; step: number; unit: string; digits: number; onChange: (v: number) => void; path: TrackPath; warnRange: [number, number]; hint: string }) {
+  const { label, value, min, max, step, unit, digits, onChange, path, warnRange, hint } = props;
+  const bad = value < warnRange[0] - 1e-9 || value > warnRange[1] + 1e-9;
+  const zero = Math.min(100, Math.max(0, ((0 - min) / (max - min)) * 100));
+  const nudge = (dir: number, big: boolean) => onChange(Math.min(max, Math.max(min, Number((value + dir * step * (big ? 10 : 1)).toFixed(6)))));
+  return (
+    <div className={'axis' + (bad ? ' bad' : '')}>
+      <div className="axname"><b>{label}</b><small>{hint}</small></div>
+      <div className="axtr" style={{ '--z': `${zero}%` } as React.CSSProperties}>
+        <span>{min}</span>
+        <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(Number(e.target.value))} onDoubleClick={() => onChange(0)} title="Double-click to reset to 0" />
+        <span>{max}</span>
+      </div>
+      <div className="axctl">
+        <button className="nudge" title="Step down (Shift: ×10)" onClick={(e) => nudge(-1, e.shiftKey)}>−</button>
+        <div className="lcd"><input type="number" step={step} value={Number(value.toFixed(digits))} onChange={(e) => onChange(Number(e.target.value))} /><em>{unit}</em></div>
+        <button className="nudge" title="Step up (Shift: ×10)" onClick={(e) => nudge(1, e.shiftKey)}>+</button>
+        <button className="nudge zero" title="Set to 0" onClick={() => onChange(0)}>0</button>
+        <KeyBtn path={path} />
+      </div>
+    </div>
+  );
 }
 
 function Motion() {
   const d = useDesired();
   const setMotion = useStore((s) => s.setMotion);
   const L = PREVIEW_LIMITS;
+  const pose = (r: number, y: number, t: number) => { setMotion('railX', r / 1000); setMotion('yawY', y); setMotion('tiltZ', t); };
   return (
     <>
-      <Section title="Motion (3 preview axes)">
-        <NumRow label="Rail X" value={d.motion.railX * 1000} min={-300} max={50} step={1} unit="mm" digits={1} onChange={(v) => setMotion('railX', v / 1000)} path={{ type: 'motion', ch: 'railX' }} warnRange={[L.railX.range[0] * 1000, L.railX.range[1] * 1000]} />
-        <NumRow label="Yaw (rotation)" value={d.motion.yawY} min={-90} max={90} step={0.5} unit="°" digits={1} onChange={(v) => setMotion('yawY', v)} path={{ type: 'motion', ch: 'yawY' }} warnRange={L.yawY.range as [number, number]} />
-        <NumRow label="Tilt" value={d.motion.tiltZ} min={-15} max={15} step={0.25} unit="°" digits={2} onChange={(v) => setMotion('tiltZ', v)} path={{ type: 'motion', ch: 'tiltZ' }} warnRange={L.tiltZ.range as [number, number]} />
-        <div className="note">Preview range: Rail {L.railX.range[0] * 1000}~{L.railX.range[1] * 1000} mm · Yaw ±{L.yawY.range[1]}° · Tilt ±{L.tiltZ.range[1]}° — <b>demo values only</b>, not the real mechanical safe range. The rail GLB length (612 mm) is not the usable stroke.</div>
+      <Section title="Motion" right={<span className="dim small">3 preview axes</span>}>
+        <Axis label="Rail X" hint="forward / back" value={d.motion.railX * 1000} min={-300} max={50} step={1} unit="mm" digits={1} onChange={(v) => setMotion('railX', v / 1000)} path={{ type: 'motion', ch: 'railX' }} warnRange={[L.railX.range[0] * 1000, L.railX.range[1] * 1000]} />
+        <Axis label="Yaw" hint="turn left / right" value={d.motion.yawY} min={-90} max={90} step={0.5} unit="°" digits={1} onChange={(v) => setMotion('yawY', v)} path={{ type: 'motion', ch: 'yawY' }} warnRange={L.yawY.range as [number, number]} />
+        <Axis label="Tilt" hint="nod up / down" value={d.motion.tiltZ} min={-15} max={15} step={0.25} unit="°" digits={2} onChange={(v) => setMotion('tiltZ', v)} path={{ type: 'motion', ch: 'tiltZ' }} warnRange={L.tiltZ.range as [number, number]} />
+      </Section>
+      <Section title="Quick poses" right={<span className="dim small">sets all three axes</span>}>
+        <div className="chips">
+          <button onClick={() => pose(0, 0, 0)}>Center</button>
+          <button onClick={() => pose(-250, 0, 0)}>Rail back</button>
+          <button onClick={() => pose(0, -45, 0)}>Yaw −45°</button>
+          <button onClick={() => pose(0, 45, 0)}>Yaw +45°</button>
+          <button onClick={() => pose(0, 0, -10)}>Bow</button>
+          <button onClick={() => pose(0, 0, 10)}>Look up</button>
+        </div>
+        <div className="note">Drag a slider, type a value, or step with − / +. Double-click a slider to reset it. The ◆ button keys the value at the current time. Demo limits only (Rail {L.railX.range[0] * 1000}~{L.railX.range[1] * 1000} mm · Yaw ±{L.yawY.range[1]}° · Tilt ±{L.tiltZ.range[1]}°) — not the real mechanical range.</div>
       </Section>
     </>
   );
@@ -77,38 +114,47 @@ function Ring() {
   const rotate = (n: number) => { const e: Record<number, Rgbw> = {}; for (let i = 0; i < LED_COUNT; i++) e[i] = d.ring24.pixels[(i - n + LED_COUNT) % LED_COUNT]; setPixels(e); };
   const gradient = () => { const idx = sel.length > 1 ? [...sel].sort((a, b) => a - b) : [...Array(LED_COUNT).keys()]; const a = d.ring24.pixels[idx[0]], b = d.ring24.pixels[idx[idx.length - 1]]; const e: Record<number, Rgbw> = {}; idx.forEach((i, k) => { const u = k / Math.max(1, idx.length - 1); e[i] = [0, 1, 2, 3].map((c) => Math.round(a[c] + (b[c] - a[c]) * u)) as unknown as Rgbw; }); setPixels(e); };
   const addFx = () => addEffect((s) => { s.tracks.ring24.effects.push({ id: uid('fx'), type: fx, fromSec: t, toSec: Math.min(s.durationSec, t + 3), seed: 1 + s.tracks.ring24.effects.length, priority: s.tracks.ring24.effects.length, blend: 'max', params: defaultParams(fx) }); });
+  const SW: [string, Rgbw][] = [['Off', [0, 0, 0, 0]], ['Warm white', [0, 0, 0, 255]], ['White', [255, 255, 255, 0]], ['Red', [255, 0, 0, 0]], ['Orange', [255, 110, 0, 0]], ['Yellow', [255, 210, 0, 0]], ['Green', [0, 220, 70, 0]], ['Cyan', [0, 200, 255, 0]], ['Blue', [30, 70, 255, 0]], ['Purple', [150, 60, 255, 0]], ['Pink', [255, 70, 160, 0]]];
+  const same = (a: readonly number[], b: readonly number[]) => a.every((v, k) => Math.abs(v - b[k]) < 1);
+  const all = [...Array(LED_COUNT).keys()];
+  const FX: EffectName[] = ['solid', 'breathe', 'chase', 'wave', 'pulse', 'sparkle', 'gradient', 'progress'];
   return (
     <>
-      <Section title="NeoPixel 24 RGBW" right={<span className="dim">virtual idx · pixel0 = +X</span>}>
-        <RingPicker />
-        <div className="chips" style={{ marginTop: 6 }}>
-          <button onClick={() => selectLeds([...Array(LED_COUNT).keys()])}>All</button><button onClick={() => selectLeds([])}>None</button>
-          <button onClick={() => selectLeds([...Array(LED_COUNT).keys()].filter((i) => !sel.includes(i)))}>Invert</button>
-          <button onClick={() => selectLeds([...Array(LED_COUNT).keys()].filter((i) => i % 2 === 0))}>Even</button>
-          <button onClick={() => selectLeds([...Array(LED_COUNT).keys()].filter((i) => i % 2 === 1))}>Odd</button>
-          <button onClick={() => rotate(1)}>⟳ +1</button><button onClick={() => rotate(-1)}>⟲ −1</button>
-        </div>
-        <div className="note">Selected: {sel.length ? sel.map((i) => '#' + i).join(' ') : 'none'} (Shift = add)</div>
-      </Section>
-      <Section title="Color (selected)" right={<span style={{ background: rgbCss(first), width: 40, height: 12, display: 'inline-block', borderRadius: 3, border: '1px solid #fff3' }} />}>
-        {(['R', 'G', 'B', 'W'] as const).map((n, c) => (
-          <div className="row" key={n}><label>{n}{mixed(c) ? ' (mixed)' : ''}</label>
-            <input type="range" min={0} max={255} value={first[c]} disabled={!sel.length} onChange={(e) => setCh(c, Number(e.target.value))} />
-            <input type="number" min={0} max={255} value={Math.round(first[c])} disabled={!sel.length} onChange={(e) => setCh(c, Number(e.target.value))} />
-          </div>
-        ))}
-        <div className="row"><label>Picker</label><input type="color" disabled={!sel.length} value={`#${hex2(first[0])}${hex2(first[1])}${hex2(first[2])}`} onChange={(e) => { const h = e.target.value; const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16); const ee: Record<number, Rgbw> = {}; for (const i of sel) ee[i] = [r, g, b, d.ring24.pixels[i][3]]; setPixels(ee); }} /><span className="dim small">RGB only · W kept</span></div>
-        <div className="chips">
-          <button onClick={() => fill([0, 0, 0, 0])}>Off</button><button onClick={() => fill([0, 0, 0, 255])}>W 255</button><button onClick={() => fill([255, 255, 255, 0])}>RGB white</button>
-          <button onClick={() => fill([255, 0, 0, 0])}>Red</button><button onClick={() => fill([0, 255, 0, 0])}>Green</button><button onClick={() => fill([0, 0, 255, 0])}>Blue</button><button onClick={gradient}>Gradient</button>
-        </div>
+      <div className="strip">
         <NumRow label="Brightness" value={d.ring24.brightness} min={0} max={1} step={0.01} onChange={setBri} path={{ type: 'ringBrightness' }} />
-        <div className="row"><label>Frame ◆</label><KeyBtn path={{ type: 'ringBase' }} /><span className="dim small">Key for the full 24-pixel frame at the current time</span></div>
-        <div className="note">W is kept as an independent channel and is only composited to white in the preview. Physical LED0 / direction / byte order are <b>UNKNOWN</b>.</div>
+        <div className="stripkey"><span className="dim small">Frame</span><KeyBtn path={{ type: 'ringBase' }} /></div>
+      </div>
+      <Section title="Pixels · color" right={<span className="dim small">{sel.length ? `${sel.length} selected` : 'none selected'} · Shift = add</span>}>
+        <div className="ringgrid">
+          <RingPicker />
+          <div className="ringtools">
+            <div className="chips">
+              <button onClick={() => selectLeds(all)}>All</button><button onClick={() => selectLeds([])}>None</button>
+              <button onClick={() => selectLeds(all.filter((i) => !sel.includes(i)))}>Invert</button>
+              <button onClick={() => selectLeds(all.filter((i) => i % 2 === 0))}>Even</button>
+              <button onClick={() => selectLeds(all.filter((i) => i % 2 === 1))}>Odd</button>
+              <span className="vsep" />
+              <button onClick={() => rotate(1)} title="Rotate colours one pixel clockwise">⟳</button><button onClick={() => rotate(-1)} title="Rotate colours one pixel counter-clockwise">⟲</button>
+              <button onClick={gradient} title="Blend from the first to the last selected pixel (or all)">Blend</button>
+            </div>
+            <div className="swatches">
+              {SW.map(([name, c]) => <button key={name} className={'sw' + (sel.length && same(first, c) ? ' on' : '')} title={name + (sel.length ? '' : ' — whole ring')} onClick={() => fill(c)} style={{ background: name === 'Off' ? 'transparent' : rgbCss(c) }}>{name === 'Off' ? '×' : ''}</button>)}
+              <label className="swpick" title="Custom colour (RGB, W is kept)"><input type="color" disabled={!sel.length} value={`#${hex2(first[0])}${hex2(first[1])}${hex2(first[2])}`} onChange={(e) => { const h = e.target.value; const r = parseInt(h.slice(1, 3), 16), g = parseInt(h.slice(3, 5), 16), b = parseInt(h.slice(5, 7), 16); const ee: Record<number, Rgbw> = {}; for (const i of sel) ee[i] = [r, g, b, d.ring24.pixels[i][3]]; setPixels(ee); }} /></label>
+            </div>
+            <div className="chans">
+              {(['R', 'G', 'B', 'W'] as const).map((n, c) => (
+                <div className="chan" key={n}>
+                  <span className="chl">{n}{mixed(c) ? '*' : ''}</span>
+                  <input type="range" min={0} max={255} value={first[c]} disabled={!sel.length} onChange={(e) => setCh(c, Number(e.target.value))} />
+                  <input type="number" min={0} max={255} value={Math.round(first[c])} disabled={!sel.length} onChange={(e) => setCh(c, Number(e.target.value))} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </Section>
-      <Section title="Effect clips" right={<span />}>
-        <div className="row"><select value={fx} onChange={(e) => setFx(e.target.value as EffectName)}>{['solid', 'breathe', 'chase', 'wave', 'pulse', 'sparkle', 'gradient', 'progress'].map((x) => <option key={x}>{x}</option>)}</select><button onClick={addFx}>+ Add at current time</button></div>
-        <div className="note">Select, move and resize clips in the timeline Effects lane. Effects are deterministic, computed from seed and time.</div>
+      <Section title="Effects — edit clips in the timeline" right={<button className="primary" onClick={addFx}>+ Add {fx} at {t.toFixed(2)}s</button>}>
+        <div className="chips">{FX.map((x) => <button key={x} className={fx === x ? 'on' : ''} onClick={() => setFx(x)}>{x}</button>)}</div>
       </Section>
     </>
   );
@@ -170,7 +216,7 @@ function EyeEditor({ side }: { side: 'left' | 'right' }) {
             onMouseEnter={() => { if (paint.current !== null && on !== paint.current) setEye(side, setBit(rows, r, c, paint.current)); }} />;
         })}
       </div>
-      <div className="chips" style={{ marginTop: 4 }}>
+      <div className="chips scrollrow" style={{ marginTop: 4 }}>
         {Object.keys(EYE_PRESETS).map((p) => <button key={p} onClick={() => setEye(side, EYE_PRESETS[p])}>{p}</button>)}
         <button onClick={() => setEye(side, invertRows(rows))}>invert</button><button onClick={() => setEye(side, mirrorRows(rows))}>mirror</button>
         <button onClick={() => setEye(side === 'left' ? 'right' : 'left', rows)}>→ copy to {side === 'left' ? 'R' : 'L'}</button>
@@ -252,15 +298,23 @@ function Emotions() {
 function Eyes() {
   const setView = useStore((s) => s.setView), color = useStore((s) => s.view.eyeColor);
   return (
-    <Section title="Eyes · 2 × HT16K33 8×8 (mono)">
+    <Section title="Draw — drag over the dots · patterns are hold keys" right={<label className="inl dim small" title="Preview colour (the real emission colour is unknown)">preview colour <input type="color" value={color} onChange={(e) => setView({ eyeColor: e.target.value })} /></label>}>
       <div className="eyecols"><EyeEditor side="left" /><EyeEditor side="right" /></div>
-      <div className="row"><label>Preview color</label><input type="color" value={color} onChange={(e) => setView({ eyeColor: e.target.value })} /><span className="dim small">Real emission color UNKNOWN</span></div>
-      <div className="note">Eye patterns are hold keys. Logical left/right is separate from the real I²C address and row/column mapping, which are currently <b>UNKNOWN (null)</b>. Drag over the dots to draw.</div>
     </Section>
   );
 }
 
-function EyesTab() { return <><Eyes /><EyeStudio /><Emotions /></>; }
+function EyesTab() {
+  const [v, setV] = useState<'draw' | 'studio' | 'emotions'>('draw');
+  return (
+    <>
+      <div className="subnav">{([['draw', 'Draw'], ['studio', 'Motion blocks'], ['emotions', 'Emotions']] as const).map(([k, l]) => <button key={k} className={v === k ? 'on' : ''} onClick={() => setV(k)}>{l}</button>)}</div>
+      {v === 'draw' && <Eyes />}
+      {v === 'studio' && <EyeStudio />}
+      {v === 'emotions' && <Emotions />}
+    </>
+  );
+}
 
 function Projector() {
   const d = useDesired();

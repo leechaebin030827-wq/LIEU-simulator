@@ -85,11 +85,10 @@ export function Viewport() {
         </div>
       </div>
       {cap?.payload?.title && <div className="vpcap"><b>{cap.payload.title}</b>{cap.payload.desc ? <span>{cap.payload.desc}</span> : null}</div>}
-      <div className="vphint" title="Camera controls">Middle-drag or left-drag: rotate · Shift + middle-drag (or right-drag): pan · Wheel: zoom · Double-click: re-center</div>
       <div className="vpstate" title="Preview only · nothing is sent to the real robot">Preview{live ? <span className="warn"> · LIVE (unsaved)</span> : null}</div>
-      {warns.length > 0 && <div className="vpwarn">⚠ Preview limit exceeded: {warns.slice(0, 3).map((w) => `${w.ch} ${w.kind}@${w.tSec.toFixed(2)}s`).join(', ')} — not real hardware limits ({Object.entries(PREVIEW_LIMITS).length}axes, demo values)</div>}
+      {warns.length > 0 && <div className="vpwarn">Preview limit exceeded: {warns.slice(0, 3).map((w) => `${w.ch} ${w.kind}@${w.tSec.toFixed(2)}s`).join(', ')} — not real hardware limits ({Object.entries(PREVIEW_LIMITS).length}axes, demo values)</div>}
       <Canvas camera={{ fov: 40, near: 0.01, far: 30, position: PRESETS.Persp.pos }} gl={{ antialias: true }} dpr={[1, 2]} onPointerMissed={() => undefined}>
-        <color attach="background" args={['#9aa0ab']} />
+        <color attach="background" args={['#d4d5d8']} />
         <hemisphereLight args={['#bcd0ff', '#2a2218', 0.9]} />
         <directionalLight position={[1, 2, 1.5]} intensity={1.6} />
         <directionalLight position={[-1.5, 0.5, -1]} intensity={0.6} />

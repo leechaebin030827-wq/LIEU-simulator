@@ -655,8 +655,8 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -670,8 +670,8 @@
               16,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -698,8 +698,8 @@
               0,
               0,
               0,
-              56,
               0,
+              56,
               0,
               0,
               0
@@ -712,10 +712,10 @@
             "value": [
               0,
               0,
+              0,
               16,
               56,
               16,
-              0,
               0,
               0
             ],
@@ -730,8 +730,8 @@
               16,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -745,8 +745,8 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -755,8 +755,8 @@
             "id": "L_7",
             "tSec": 3.967,
             "value": [
-              0,
               16,
+              56,
               56,
               56,
               56,
@@ -768,6 +768,21 @@
           },
           {
             "id": "L_8",
+            "tSec": 5.333,
+            "value": [
+              0,
+              56,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_9",
             "tSec": 5.367,
             "value": [
               0,
@@ -782,7 +797,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_9",
+            "id": "L_10",
             "tSec": 5.4,
             "value": [
               0,
@@ -797,27 +812,12 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_10",
-            "tSec": 5.433,
-            "value": [
-              0,
-              0,
-              8,
-              28,
-              28,
-              28,
-              8,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
             "id": "L_11",
-            "tSec": 5.467,
+            "tSec": 5.6,
             "value": [
               0,
               0,
-              0,
+              12,
               28,
               28,
               28,
@@ -835,8 +835,8 @@
               0,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -850,8 +850,8 @@
               16,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -865,8 +865,8 @@
               8,
               28,
               28,
+              28,
               8,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -879,6 +879,21 @@
               8,
               28,
               28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_16",
+            "tSec": 14.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
               8,
               0,
               0,
@@ -887,29 +902,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_16",
+            "id": "L_17",
             "tSec": 14.333,
             "value": [
               0,
               0,
+              8,
               28,
-              28,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_17",
-            "tSec": 14.367,
-            "value": [
-              0,
-              0,
-              28,
-              0,
-              0,
+              8,
               0,
               0,
               0
@@ -918,6 +918,21 @@
           },
           {
             "id": "L_18",
+            "tSec": 14.367,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_19",
             "tSec": 14.5,
             "value": [
               0,
@@ -932,23 +947,8 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_19",
-            "tSec": 14.533,
-            "value": [
-              0,
-              8,
-              28,
-              8,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
             "id": "L_20",
-            "tSec": 14.567,
+            "tSec": 14.533,
             "value": [
               0,
               8,
@@ -963,11 +963,11 @@
           },
           {
             "id": "L_21",
-            "tSec": 15.133,
+            "tSec": 14.567,
             "value": [
               0,
-              0,
               8,
+              28,
               28,
               28,
               8,
@@ -978,7 +978,37 @@
           },
           {
             "id": "L_22",
+            "tSec": 15.133,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_23",
             "tSec": 15.2,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_24",
+            "tSec": 16.467,
             "value": [
               0,
               0,
@@ -992,7 +1022,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_23",
+            "id": "L_25",
             "tSec": 16.5,
             "value": [
               0,
@@ -1007,14 +1037,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_24",
+            "id": "L_26",
             "tSec": 16.533,
             "value": [
               0,
               0,
               0,
-              56,
               0,
+              56,
               0,
               0,
               0
@@ -1022,22 +1052,22 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_25",
+            "id": "L_27",
             "tSec": 16.633,
             "value": [
               0,
               0,
               0,
+              16,
               56,
-              56,
-              0,
+              16,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_26",
+            "id": "L_28",
             "tSec": 16.667,
             "value": [
               0,
@@ -1052,60 +1082,30 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_27",
-            "tSec": 17.633,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              16,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_28",
-            "tSec": 17.7,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
             "id": "L_29",
-            "tSec": 18.5,
+            "tSec": 16.7,
             "value": [
               0,
-              8,
-              28,
-              28,
               0,
-              0,
-              0,
+              16,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "L_30",
-            "tSec": 18.867,
+            "tSec": 17.6,
             "value": [
+              0,
               0,
               16,
               56,
               56,
-              0,
-              0,
+              56,
               0,
               0
             ],
@@ -1113,13 +1113,13 @@
           },
           {
             "id": "L_31",
-            "tSec": 19.367,
+            "tSec": 17.633,
             "value": [
-              0,
               0,
               16,
               56,
-              16,
+              56,
+              56,
               0,
               0,
               0
@@ -1128,13 +1128,13 @@
           },
           {
             "id": "L_32",
-            "tSec": 19.4,
+            "tSec": 18.5,
             "value": [
               0,
-              0,
-              56,
-              56,
-              0,
+              8,
+              28,
+              28,
+              28,
               0,
               0,
               0
@@ -1143,6 +1143,51 @@
           },
           {
             "id": "L_33",
+            "tSec": 18.867,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_34",
+            "tSec": 19.367,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_35",
+            "tSec": 19.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_36",
             "tSec": 19.433,
             "value": [
               0,
@@ -1157,59 +1202,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_34",
+            "id": "L_37",
             "tSec": 19.533,
             "value": [
               0,
               0,
+              0,
               56,
               56,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_35",
-            "tSec": 19.567,
-            "value": [
-              0,
-              0,
-              16,
-              56,
-              16,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_36",
-            "tSec": 19.6,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_37",
-            "tSec": 22.033,
-            "value": [
-              0,
-              32,
-              112,
-              112,
-              0,
               0,
               0,
               0
@@ -1218,13 +1218,13 @@
           },
           {
             "id": "L_38",
-            "tSec": 22.2,
+            "tSec": 19.567,
             "value": [
+              0,
               0,
               16,
               56,
               56,
-              0,
               0,
               0,
               0
@@ -1233,11 +1233,11 @@
           },
           {
             "id": "L_39",
-            "tSec": 22.9,
+            "tSec": 19.6,
             "value": [
               0,
-              0,
               16,
+              56,
               56,
               56,
               0,
@@ -1248,13 +1248,13 @@
           },
           {
             "id": "L_40",
-            "tSec": 22.967,
+            "tSec": 22.033,
             "value": [
               0,
-              16,
-              56,
-              56,
-              0,
+              32,
+              112,
+              112,
+              112,
               0,
               0,
               0
@@ -1263,13 +1263,13 @@
           },
           {
             "id": "L_41",
-            "tSec": 23.233,
+            "tSec": 22.2,
             "value": [
               0,
               16,
               56,
               56,
-              16,
+              56,
               0,
               0,
               0
@@ -1278,14 +1278,14 @@
           },
           {
             "id": "L_42",
-            "tSec": 23.3,
+            "tSec": 22.9,
             "value": [
               0,
               0,
               16,
               56,
               56,
-              16,
+              56,
               0,
               0
             ],
@@ -1293,13 +1293,13 @@
           },
           {
             "id": "L_43",
-            "tSec": 27.033,
+            "tSec": 22.967,
             "value": [
-              0,
               0,
               16,
               56,
-              16,
+              56,
+              56,
               0,
               0,
               0
@@ -1308,14 +1308,14 @@
           },
           {
             "id": "L_44",
-            "tSec": 27.067,
+            "tSec": 23.3,
             "value": [
               0,
               0,
-              0,
+              16,
               56,
-              0,
-              0,
+              56,
+              56,
               0,
               0
             ],
@@ -1323,6 +1323,51 @@
           },
           {
             "id": "L_45",
+            "tSec": 23.333,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_46",
+            "tSec": 27.033,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_47",
+            "tSec": 27.067,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_48",
             "tSec": 27.167,
             "value": [
               0,
@@ -1337,60 +1382,15 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_46",
+            "id": "L_49",
             "tSec": 27.2,
             "value": [
               0,
               0,
               16,
               56,
-              16,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_47",
-            "tSec": 27.233,
-            "value": [
-              0,
-              0,
-              16,
-              56,
               56,
               16,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_48",
-            "tSec": 27.4,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              56,
-              16,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_49",
-            "tSec": 27.9,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              56,
-              0,
               0,
               0
             ],
@@ -1398,44 +1398,44 @@
           },
           {
             "id": "L_50",
-            "tSec": 29.833,
+            "tSec": 27.233,
             "value": [
               0,
-              16,
-              56,
-              56,
-              56,
-              16,
               0,
+              16,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "L_51",
-            "tSec": 31.033,
+            "tSec": 27.6,
             "value": [
               0,
-              0,
               16,
               56,
               56,
+              56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "L_52",
-            "tSec": 31.067,
+            "tSec": 27.767,
             "value": [
               0,
-              0,
-              0,
+              16,
               56,
               56,
-              0,
+              56,
+              56,
               0,
               0
             ],
@@ -1443,27 +1443,57 @@
           },
           {
             "id": "L_53",
-            "tSec": 31.1,
+            "tSec": 29.967,
             "value": [
               0,
-              0,
-              0,
+              16,
               56,
-              0,
-              0,
-              0,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "L_54",
-            "tSec": 31.2,
+            "tSec": 31.033,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_55",
+            "tSec": 31.067,
             "value": [
               0,
               0,
               0,
+              16,
               56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_56",
+            "tSec": 31.1,
+            "value": [
+              0,
+              0,
+              0,
+              0,
               56,
               0,
               0,
@@ -1472,7 +1502,22 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_55",
+            "id": "L_57",
+            "tSec": 31.2,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_58",
             "tSec": 31.233,
             "value": [
               0,
@@ -1487,7 +1532,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_56",
+            "id": "L_59",
             "tSec": 31.267,
             "value": [
               0,
@@ -1495,14 +1540,14 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_57",
+            "id": "L_60",
             "tSec": 34,
             "value": [
               0,
@@ -1510,14 +1555,14 @@
               112,
               112,
               112,
+              112,
               32,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_58",
+            "id": "L_61",
             "tSec": 34.333,
             "value": [
               0,
@@ -1525,14 +1570,14 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_59",
+            "id": "L_62",
             "tSec": 34.667,
             "value": [
               0,
@@ -1540,6 +1585,21 @@
               16,
               56,
               56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_63",
+            "tSec": 34.7,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
               16,
               0,
               0
@@ -1547,29 +1607,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_60",
-            "tSec": 34.7,
-            "value": [
-              0,
-              0,
-              0,
-              56,
-              56,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "L_61",
+            "id": "L_64",
             "tSec": 34.733,
             "value": [
               0,
               0,
               0,
-              56,
               0,
+              56,
               0,
               0,
               0
@@ -1577,22 +1622,22 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_62",
+            "id": "L_65",
             "tSec": 34.833,
             "value": [
               0,
               0,
               0,
+              16,
               56,
-              56,
-              0,
+              16,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_63",
+            "id": "L_66",
             "tSec": 34.867,
             "value": [
               0,
@@ -1607,7 +1652,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_64",
+            "id": "L_67",
             "tSec": 34.9,
             "value": [
               0,
@@ -1615,44 +1660,44 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_65",
+            "id": "L_68",
             "tSec": 38.367,
             "value": [
               0,
               0,
               16,
               56,
+              56,
               16,
-              0,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_66",
+            "id": "L_69",
             "tSec": 38.4,
             "value": [
+              0,
               0,
               0,
               0,
               56,
               0,
               0,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_67",
+            "id": "L_70",
             "tSec": 38.5,
             "value": [
               0,
@@ -1667,31 +1712,46 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_68",
+            "id": "L_71",
             "tSec": 38.533,
             "value": [
               0,
               0,
               16,
               56,
+              56,
               16,
-              0,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "L_69",
+            "id": "L_72",
             "tSec": 38.567,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_73",
+            "tSec": 38.6,
             "value": [
               0,
               16,
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1710,8 +1770,8 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1725,8 +1785,8 @@
               16,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1753,8 +1813,8 @@
               0,
               0,
               0,
-              56,
               0,
+              56,
               0,
               0,
               0
@@ -1767,10 +1827,10 @@
             "value": [
               0,
               0,
+              0,
               16,
               56,
               16,
-              0,
               0,
               0
             ],
@@ -1785,8 +1845,8 @@
               16,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1800,8 +1860,8 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1810,8 +1870,8 @@
             "id": "R_7",
             "tSec": 3.967,
             "value": [
-              0,
               16,
+              56,
               56,
               56,
               56,
@@ -1823,6 +1883,21 @@
           },
           {
             "id": "R_8",
+            "tSec": 5.333,
+            "value": [
+              0,
+              56,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_9",
             "tSec": 5.367,
             "value": [
               0,
@@ -1837,7 +1912,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_9",
+            "id": "R_10",
             "tSec": 5.4,
             "value": [
               0,
@@ -1852,27 +1927,12 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_10",
-            "tSec": 5.433,
-            "value": [
-              0,
-              0,
-              8,
-              28,
-              28,
-              28,
-              8,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
             "id": "R_11",
-            "tSec": 5.467,
+            "tSec": 5.6,
             "value": [
               0,
               0,
-              0,
+              24,
               28,
               28,
               28,
@@ -1890,8 +1950,8 @@
               0,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1905,8 +1965,8 @@
               16,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1920,8 +1980,8 @@
               8,
               28,
               28,
+              28,
               8,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -1934,6 +1994,21 @@
               8,
               28,
               28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_16",
+            "tSec": 14.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
               8,
               0,
               0,
@@ -1942,29 +2017,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_16",
+            "id": "R_17",
             "tSec": 14.333,
             "value": [
               0,
               0,
+              8,
               28,
-              28,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_17",
-            "tSec": 14.367,
-            "value": [
-              0,
-              0,
-              28,
-              0,
-              0,
+              8,
               0,
               0,
               0
@@ -1973,6 +2033,21 @@
           },
           {
             "id": "R_18",
+            "tSec": 14.367,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_19",
             "tSec": 14.5,
             "value": [
               0,
@@ -1987,23 +2062,8 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_19",
-            "tSec": 14.533,
-            "value": [
-              0,
-              8,
-              28,
-              8,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
             "id": "R_20",
-            "tSec": 14.567,
+            "tSec": 14.533,
             "value": [
               0,
               8,
@@ -2018,11 +2078,11 @@
           },
           {
             "id": "R_21",
-            "tSec": 15.133,
+            "tSec": 14.567,
             "value": [
               0,
-              0,
               8,
+              28,
               28,
               28,
               8,
@@ -2033,7 +2093,37 @@
           },
           {
             "id": "R_22",
+            "tSec": 15.133,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_23",
             "tSec": 15.2,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_24",
+            "tSec": 16.467,
             "value": [
               0,
               0,
@@ -2047,7 +2137,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_23",
+            "id": "R_25",
             "tSec": 16.5,
             "value": [
               0,
@@ -2062,14 +2152,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_24",
+            "id": "R_26",
             "tSec": 16.533,
             "value": [
               0,
               0,
               0,
-              56,
               0,
+              56,
               0,
               0,
               0
@@ -2077,22 +2167,22 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_25",
+            "id": "R_27",
             "tSec": 16.633,
             "value": [
               0,
               0,
               0,
+              16,
               56,
-              56,
-              0,
+              16,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_26",
+            "id": "R_28",
             "tSec": 16.667,
             "value": [
               0,
@@ -2107,60 +2197,30 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_27",
-            "tSec": 17.633,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              16,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_28",
-            "tSec": 17.7,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
             "id": "R_29",
-            "tSec": 18.5,
+            "tSec": 16.7,
             "value": [
               0,
-              8,
-              28,
-              28,
               0,
-              0,
-              0,
+              16,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "R_30",
-            "tSec": 18.867,
+            "tSec": 17.6,
             "value": [
+              0,
               0,
               16,
               56,
               56,
-              0,
-              0,
+              56,
               0,
               0
             ],
@@ -2168,13 +2228,13 @@
           },
           {
             "id": "R_31",
-            "tSec": 19.367,
+            "tSec": 17.633,
             "value": [
-              0,
               0,
               16,
               56,
-              16,
+              56,
+              56,
               0,
               0,
               0
@@ -2183,13 +2243,13 @@
           },
           {
             "id": "R_32",
-            "tSec": 19.4,
+            "tSec": 18.5,
             "value": [
               0,
-              0,
-              56,
-              56,
-              0,
+              8,
+              28,
+              28,
+              28,
               0,
               0,
               0
@@ -2198,6 +2258,51 @@
           },
           {
             "id": "R_33",
+            "tSec": 18.867,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_34",
+            "tSec": 19.367,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_35",
+            "tSec": 19.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_36",
             "tSec": 19.433,
             "value": [
               0,
@@ -2212,59 +2317,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_34",
+            "id": "R_37",
             "tSec": 19.533,
             "value": [
               0,
               0,
+              0,
               56,
               56,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_35",
-            "tSec": 19.567,
-            "value": [
-              0,
-              0,
-              16,
-              56,
-              16,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_36",
-            "tSec": 19.6,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              0,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_37",
-            "tSec": 22.033,
-            "value": [
-              0,
-              32,
-              112,
-              112,
-              0,
               0,
               0,
               0
@@ -2273,13 +2333,13 @@
           },
           {
             "id": "R_38",
-            "tSec": 22.2,
+            "tSec": 19.567,
             "value": [
+              0,
               0,
               16,
               56,
               56,
-              0,
               0,
               0,
               0
@@ -2288,11 +2348,11 @@
           },
           {
             "id": "R_39",
-            "tSec": 22.9,
+            "tSec": 19.6,
             "value": [
               0,
-              0,
               16,
+              56,
               56,
               56,
               0,
@@ -2303,13 +2363,13 @@
           },
           {
             "id": "R_40",
-            "tSec": 22.967,
+            "tSec": 22.033,
             "value": [
               0,
-              16,
-              56,
-              56,
-              0,
+              32,
+              112,
+              112,
+              112,
               0,
               0,
               0
@@ -2318,13 +2378,13 @@
           },
           {
             "id": "R_41",
-            "tSec": 23.233,
+            "tSec": 22.2,
             "value": [
               0,
               16,
               56,
               56,
-              16,
+              56,
               0,
               0,
               0
@@ -2333,14 +2393,14 @@
           },
           {
             "id": "R_42",
-            "tSec": 23.3,
+            "tSec": 22.9,
             "value": [
               0,
               0,
               16,
               56,
               56,
-              16,
+              56,
               0,
               0
             ],
@@ -2348,13 +2408,13 @@
           },
           {
             "id": "R_43",
-            "tSec": 27.033,
+            "tSec": 22.967,
             "value": [
-              0,
               0,
               16,
               56,
-              16,
+              56,
+              56,
               0,
               0,
               0
@@ -2363,14 +2423,14 @@
           },
           {
             "id": "R_44",
-            "tSec": 27.067,
+            "tSec": 23.3,
             "value": [
               0,
               0,
-              0,
+              16,
               56,
-              0,
-              0,
+              56,
+              56,
               0,
               0
             ],
@@ -2378,6 +2438,51 @@
           },
           {
             "id": "R_45",
+            "tSec": 23.333,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_46",
+            "tSec": 27.033,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_47",
+            "tSec": 27.067,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_48",
             "tSec": 27.167,
             "value": [
               0,
@@ -2392,60 +2497,15 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_46",
+            "id": "R_49",
             "tSec": 27.2,
             "value": [
               0,
               0,
               16,
               56,
-              16,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_47",
-            "tSec": 27.233,
-            "value": [
-              0,
-              0,
-              16,
-              56,
               56,
               16,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_48",
-            "tSec": 27.4,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              56,
-              16,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_49",
-            "tSec": 27.9,
-            "value": [
-              0,
-              16,
-              56,
-              56,
-              56,
-              0,
               0,
               0
             ],
@@ -2453,44 +2513,44 @@
           },
           {
             "id": "R_50",
-            "tSec": 29.833,
+            "tSec": 27.233,
             "value": [
               0,
-              16,
-              56,
-              56,
-              56,
-              16,
               0,
+              16,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "R_51",
-            "tSec": 31.033,
+            "tSec": 27.6,
             "value": [
               0,
-              0,
               16,
               56,
               56,
+              56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "R_52",
-            "tSec": 31.067,
+            "tSec": 27.767,
             "value": [
               0,
-              0,
-              0,
+              16,
               56,
               56,
-              0,
+              56,
+              56,
               0,
               0
             ],
@@ -2498,27 +2558,57 @@
           },
           {
             "id": "R_53",
-            "tSec": 31.1,
+            "tSec": 29.967,
             "value": [
               0,
-              0,
-              0,
+              16,
               56,
-              0,
-              0,
-              0,
+              56,
+              56,
+              56,
+              16,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
             "id": "R_54",
-            "tSec": 31.2,
+            "tSec": 31.033,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_55",
+            "tSec": 31.067,
             "value": [
               0,
               0,
               0,
+              16,
               56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_56",
+            "tSec": 31.1,
+            "value": [
+              0,
+              0,
+              0,
+              0,
               56,
               0,
               0,
@@ -2527,7 +2617,22 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_55",
+            "id": "R_57",
+            "tSec": 31.2,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_58",
             "tSec": 31.233,
             "value": [
               0,
@@ -2542,7 +2647,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_56",
+            "id": "R_59",
             "tSec": 31.267,
             "value": [
               0,
@@ -2550,14 +2655,14 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_57",
+            "id": "R_60",
             "tSec": 34,
             "value": [
               0,
@@ -2565,14 +2670,14 @@
               112,
               112,
               112,
+              112,
               32,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_58",
+            "id": "R_61",
             "tSec": 34.333,
             "value": [
               0,
@@ -2580,14 +2685,14 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_59",
+            "id": "R_62",
             "tSec": 34.667,
             "value": [
               0,
@@ -2595,6 +2700,21 @@
               16,
               56,
               56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_63",
+            "tSec": 34.7,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
               16,
               0,
               0
@@ -2602,29 +2722,14 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_60",
-            "tSec": 34.7,
-            "value": [
-              0,
-              0,
-              0,
-              56,
-              56,
-              0,
-              0,
-              0
-            ],
-            "interpolationToNext": "hold"
-          },
-          {
-            "id": "R_61",
+            "id": "R_64",
             "tSec": 34.733,
             "value": [
               0,
               0,
               0,
-              56,
               0,
+              56,
               0,
               0,
               0
@@ -2632,22 +2737,22 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_62",
+            "id": "R_65",
             "tSec": 34.833,
             "value": [
               0,
               0,
               0,
+              16,
               56,
-              56,
-              0,
+              16,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_63",
+            "id": "R_66",
             "tSec": 34.867,
             "value": [
               0,
@@ -2662,7 +2767,7 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_64",
+            "id": "R_67",
             "tSec": 34.9,
             "value": [
               0,
@@ -2670,44 +2775,44 @@
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_65",
+            "id": "R_68",
             "tSec": 38.367,
             "value": [
               0,
               0,
               16,
               56,
+              56,
               16,
-              0,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_66",
+            "id": "R_69",
             "tSec": 38.4,
             "value": [
+              0,
               0,
               0,
               0,
               56,
               0,
               0,
-              0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_67",
+            "id": "R_70",
             "tSec": 38.5,
             "value": [
               0,
@@ -2722,31 +2827,46 @@
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_68",
+            "id": "R_71",
             "tSec": 38.533,
             "value": [
               0,
               0,
               16,
               56,
+              56,
               16,
-              0,
               0,
               0
             ],
             "interpolationToNext": "hold"
           },
           {
-            "id": "R_69",
+            "id": "R_72",
             "tSec": 38.567,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_73",
+            "tSec": 38.6,
             "value": [
               0,
               16,
               56,
               56,
               56,
+              56,
               16,
-              0,
               0
             ],
             "interpolationToNext": "hold"
@@ -2932,7 +3052,12 @@
         "type": "scene",
         "payload": {
           "title": "대기 · 레일 맨 앞",
-          "desc": "LED 링이 낮은 밝기로 천천히 호흡하고, 루는 레일 맨 앞에서 수평으로 대기합니다"
+          "desc": "LED 링이 낮은 밝기로 천천히 호흡하고, 루는 레일 맨 앞에서 수평으로 대기합니다",
+          "tv": {
+            "tag": "주행 중",
+            "head": "편안하게 가고 있어요",
+            "sub": "루가 앞길을 함께 지켜보고 있어요"
+          }
         }
       },
       {
@@ -2941,7 +3066,12 @@
         "type": "scene",
         "payload": {
           "title": "공사 구간 감지 · 모니터 쪽으로 두리번",
-          "desc": "호흡을 멈추고 밝아지며, 고개가 90도 돌아가 눈이 옆으로 넘어가 보이지 않게 되고, 레일을 따라 모니터 쪽(뒤)으로 이동하면서 도리도리하며 살펴봅니다"
+          "desc": "호흡을 멈추고 밝아지며, 고개가 90도 돌아가 눈이 옆으로 넘어가 보이지 않게 되고, 레일을 따라 모니터 쪽(뒤)으로 이동하면서 도리도리하며 살펴봅니다",
+          "tv": {
+            "tag": "주의",
+            "head": "앞에 공사 구간이 있어요",
+            "sub": "루가 주변을 살피는 중이에요"
+          }
         }
       },
       {
@@ -2950,7 +3080,12 @@
         "type": "scene",
         "payload": {
           "title": "모니터 쪽 끝 도착",
-          "desc": "잠시 살핀 뒤 몸을 돌려 눈이 다시 켜지고, 몸을 천천히 수평으로 되돌리며 안내 위치(중앙)로 돌아옵니다"
+          "desc": "잠시 살핀 뒤 몸을 돌려 눈이 다시 켜지고, 몸을 천천히 수평으로 되돌리며 안내 위치(중앙)로 돌아옵니다",
+          "tv": {
+            "tag": "확인 완료",
+            "head": "확인했어요",
+            "sub": "더 안전한 길을 찾았어요"
+          }
         }
       },
       {
@@ -2959,7 +3094,12 @@
         "type": "scene",
         "payload": {
           "title": "안내 시작",
-          "desc": "LED를 한 번 부드럽게 밝힌 뒤 음성 안내와 함께 바닥에 우회 경로를 투사합니다"
+          "desc": "LED를 한 번 부드럽게 밝힌 뒤 음성 안내와 함께 바닥에 우회 경로를 투사합니다",
+          "tv": {
+            "tag": "길 안내",
+            "head": "돌아서 갈게요",
+            "sub": "바닥에 비친 경로를 봐 주세요"
+          }
         }
       },
       {
@@ -2968,7 +3108,12 @@
         "type": "scene",
         "payload": {
           "title": "우회 경로 안내",
-          "desc": "현재 위치 → 공사 구간 → 갈라지는 우회 경로 순으로 그려지고, 안내가 끝난 뒤에도 잠시 유지됩니다"
+          "desc": "현재 위치 → 공사 구간 → 갈라지는 우회 경로 순으로 그려지고, 안내가 끝난 뒤에도 잠시 유지됩니다",
+          "tv": {
+            "tag": "우회 안내",
+            "head": "이 길로 우회해요",
+            "sub": "조금 더 걸리지만 안전한 길이에요"
+          }
         }
       },
       {
@@ -2977,7 +3122,12 @@
         "type": "scene",
         "payload": {
           "title": "조용히 물러나기",
-          "desc": "프로젝션이 서서히 사라지고 LED는 다시 낮은 호흡, 본체는 수평 대기 상태로 돌아갑니다"
+          "desc": "프로젝션이 서서히 사라지고 LED는 다시 낮은 호흡, 본체는 수평 대기 상태로 돌아갑니다",
+          "tv": {
+            "tag": "주행 중",
+            "head": "안내를 마쳤어요",
+            "sub": "남은 길도 편안하게 모실게요"
+          }
         }
       },
       {

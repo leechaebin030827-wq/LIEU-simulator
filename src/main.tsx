@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import '@fontsource/ibm-plex-mono/400.css';
 import './ui/styles.css';
 import { useStore } from './store';
 

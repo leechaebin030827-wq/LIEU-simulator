@@ -3,13 +3,17 @@
    01_boarding  - car arrives, Lieu greets, checks seating, spins when the start button is pressed
    02_driving_a - construction detected, Lieu looks ahead, returns, explains the detour
    03_arrival   - destination nearly reached, Lieu comes out, glances at the door side, says goodbye
+   04_driving_b - "Hey LIEU" -> startled, then every cute trick (giggle, heart eyes, wink, shy, stars, bow)
    (run `build_scenarios.py arrival` to rebuild only one; plain run rebuilds all and overwrites saved edits)
 Writes examples/<id>.lieu.json and public/examples/<id>.lieu.json.
 
 Conventions (see memory notes): Lieu faces +X; yaw +  = turn toward the viewport-right in the default view;
 tilt - = nose down; railX -0.25 = back, 0 = front end.
 """
-import json, math, shutil
+import json
+import sys
+sys.path.insert(0, str(__import__('pathlib').Path(__file__).resolve().parent))
+import tv_copy, math, shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -94,6 +98,7 @@ def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, 
                    'offsetZm': {'kind': 'numeric', 'keys': [{'id': 'pz', 'tSec': 0, 'value': 0, 'interpolationToNext': 'smoothstep'}]}}},
                'audio': audio,
                'events': [{'id': f'ev{i}', 'tSec': t, 'type': ty, 'payload': pl} for i, (t, ty, pl) in enumerate(events)]}}
+    tv_copy.apply(seq)
     for out in (ROOT / 'examples', ROOT / 'public/examples'):
         (out / f'{id_}.lieu.json').write_text(json.dumps(seq, ensure_ascii=False, indent=2), encoding='utf8')
 
@@ -128,7 +133,14 @@ def boarding():
     W0 = 20.0
     tA, tB, tC = whirl(yaw, tilt, W0)
     yaw.add(tC + 1, 0); tilt.add(tC + 1, 0)
-    eyes = [(0, F2), (0.15, SM), (12.3, F2), (12.45, N), (W0 - 0.15, F2), (W0, SM), (tC, F2), (tC + 0.15, N)]
+    F3 = [0, 0, 0, 0b00111100, 0, 0, 0, 0]   # eyes shut (smiling blink)
+    # smiling eyes that keep blinking while scanning the seats; 9.0 / 9.35 is a quick double blink
+    smile_blinks = [e for t in (6.7, 7.9, 9.0, 9.35, 10.5, 11.5) for e in ((t, F3), (round(t + 0.12, 3), SM))]
+    eyes = [(0, F2), (0.15, SM)] + smile_blinks + [(12.3, F2), (12.45, N), (W0 - 0.15, F2), (W0, SM), (tC, F2), (tC + 0.15, N)]
+    baked = ROOT / 'tools/baked_eyes/01_boarding.json'    # eye-studio expressions (tools/bake_eyes.ts); falls back to the hand-made bitmaps above
+    if baked.exists():
+        ks = json.loads(baked.read_text())
+        eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
     inten = Tr('int').add(0, 1).add(tA - 0.3, 1).add(tA, 0).add(tB, 0).add(tB + 0.6, 1)
     fx = [chase('cue_out', 20, 0.0, 1), chase('cue_check', 21, CK, -1), chase('cue_back', 22, 12.8, -1), chase('cue_spin', 23, W0 - 0.8, 1),
           breathe('greet_breath', 1, [90, 185, 255, 40], 0.7, ARR, 1 / 3.0),
@@ -224,6 +236,10 @@ def arrival():
     blink = lambda *ts: [e for t in ts for e in ((t, F2), (t + 0.15, N))]
     eyes = [(0, F2), (0.15, N)] + blink(5.0, 11.0) + [(ARR - 0.2, F2), (ARR, SM), (BACK - 0.2, F2), (BACK, N)] + blink(28.0)
     eyes.sort()
+    baked = ROOT / 'tools/baked_eyes/03_arrival.json'
+    if baked.exists():
+        ks = json.loads(baked.read_text())
+        eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
     inten = Tr('int').add(0, 1)
     fx = [breathe('idle_a', 1, [90, 185, 255, 40], 0, OUT, 1 / 3.0),
           chase('cue_out', 20, OUT - 0.4, 1),
@@ -255,8 +271,69 @@ def arrival():
           {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 0, audio, ev)
 
 
+# ---------------------------------------------------------------- 04 driving B
+def driving_b():
+    """a passenger says "Hey LIEU" -> Lieu is startled, then does every cute thing it knows: giggle-wiggle, heart eyes, wink, shy, star-struck bounce, sweet bow."""
+    DUR = 32
+    CENTER = -0.125
+    rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
+    # rail (<= 0.06 m/s): leans in when called, comes right up to the front for the hearts, shyly backs off, bounces forward, then settles back
+    rail.add(0, CENTER).add(3.0, CENTER).add(5.6, -0.07).add(7.5, -0.07).add(11.0, 0).add(12.3, 0).add(15.6, -0.10).add(16.5, -0.10).add(19.6, -0.04).add(22.0, -0.04).add(28.0, CENTER).add(DUR, CENTER)
+    # yaw: perk glance, giggle wiggle, slow heart sway, shy turn-away + peek, excited wiggle, face front
+    yaw.add(0, 0).add(3.0, 0).add(3.7, -10).add(4.2, 0)
+    for t, v in [(4.8, 14), (5.5, -14), (6.2, 14), (6.9, 0), (8.6, -22), (10.0, 22), (11.0, 0), (13.6, -38), (14.6, -38), (15.4, -10), (16.2, 0),
+                 (17.1, 18), (17.8, -18), (18.5, 18), (19.2, -18), (19.9, 12), (20.7, 0)]:
+        yaw.add(t, v)
+    yaw.add(DUR, 0)
+    # tilt (<= 20 deg/s, 60 deg/s^2): perk up, bouncy nods, shy hide, excited bounce, polite bow
+    tilt.add(0, 0).add(3.0, 0).add(4.0, 5).add(5.2, 0).add(6.0, 3).add(6.9, 0).add(8.4, 3).add(10.0, 0).add(11.0, 0).add(11.9, -4).add(12.9, 0)
+    for t, v in [(13.8, -8), (14.6, -8), (15.8, 0), (17.0, 4), (17.9, -2), (18.8, 4), (19.7, -2), (20.6, 0), (22.4, 0), (23.4, -8), (24.0, -8), (25.0, 0)]:
+        tilt.add(t, v)
+    tilt.add(DUR, 0)
+    eyes = [(0, N)]
+    baked = ROOT / 'tools/baked_eyes/04_driving_b.json'
+    if baked.exists():
+        ks = json.loads(baked.read_text())
+        eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
+    inten = Tr('int').add(0, 1)
+    PINK, ROSE, SKY, WARM = [255, 130, 180, 0], [255, 90, 150, 40], [110, 205, 255, 0], [255, 190, 150, 90]
+    fx = [breathe('idle', 1, [90, 185, 255, 40], 0, 3.0, 1 / 3.0),
+          # wake word: a bright pulse around the ring
+          {'id': 'wake', 'type': 'solid', 'fromSec': 3.0, 'toSec': 3.5, 'seed': 2, 'priority': 2, 'blend': 'max', 'params': {'whiteLevel': 255}},
+          breathe('giggle', 3, PINK, 3.5, 7.5, 1.4),
+          wave('love_a', 4, ROSE, 0, 7.5, 12.2, 0.6), wave('love_b', 5, PINK, math.pi, 7.5, 12.2, 0.6),
+          breathe('shy', 6, [255, 160, 190, 60], 12.3, 16.5, 0.9),
+          {'id': 'stars', 'type': 'sparkle', 'fromSec': 16.5, 'toSec': 22.0, 'seed': 7, 'priority': 1, 'blend': 'max', 'params': {'color': [255, 240, 160, 60], 'rateHz': 9, 'density': 0.45}}]
+    fx += [wave('party_' + n, 20 + i, c, ph, 17.0, 22.0, 1.1) for i, (n, c, ph) in enumerate(WHIRL_COLORS)]
+    fx += [breathe('sweet', 8, WARM, 22.0, 28.0, 0.5), breathe('idle_b', 9, [90, 185, 255, 40], 28.0, 31.5, 1 / 3.0)]
+    bright = Tr('br').add(0, BR).add(DUR, BR)
+    clips = [{'id': 'hey', 'fromSec': 2.6, 'toSec': 4.4, 'assetId': 'media/hey_lieu.svg', 'visible': True},
+             {'id': 'reply', 'fromSec': 4.4, 'toSec': 12.0, 'assetId': 'media/lieu_reply.svg', 'visible': True},
+             {'id': 'anytime', 'fromSec': 22.2, 'toSec': 29.0, 'assetId': 'media/lieu_anytime.svg', 'visible': True}]
+    opac = Tr('op').add(0, 0).add(2.6, 0).add(3.2, 0.8).add(4.0, 0.8).add(4.6, 0).add(4.9, 0).add(5.6, 0.8).add(11.0, 0.8).add(12.0, 0) \
+        .add(22.2, 0).add(23.2, 0.8).add(27.6, 0.8).add(29.0, 0).add(DUR, 0)
+    audio = [sfx('hey', 'sfx_cue.wav', 2.9, 0.45, 0.7), sfx('boing', 'sfx_boing.wav', 3.3, 0.5, 0.6), sfx('giggle1', 'sfx_giggle.wav', 4.8, 0.6, 0.55),
+             sfx('love', 'sfx_sparkle.wav', 7.6, 1.1, 0.5), {**sfx('chime', 'intro-chime.wav', 10.6, 0.72, 0.4), 'fadeOutSec': 0.2},
+             sfx('glide', 'sfx_glide.wav', 8.2, 2.8, 0.35, 0.4, 0.8), sfx('shy', 'sfx_turn.wav', 13.0, 1.5, 0.4),
+             sfx('giggle2', 'sfx_giggle.wav', 17.0, 0.6, 0.55), sfx('stars', 'sfx_sparkle.wav', 16.6, 1.1, 0.5), sfx('boing2', 'sfx_boing.wav', 19.4, 0.5, 0.6),
+             sfx('nod', 'sfx_nod.wav', 23.6, 0.35, 0.6), {**sfx('bye', 'intro-chime.wav', 22.1, 0.72, 0.45), 'fadeOutSec': 0.2}]
+    ev = [scene(0, '대기 · 주행 중', '안내 위치(레일 중앙)에서 낮은 호흡으로 대기합니다'),
+          scene(3.0, '"Hey LIEU!" 호출', '이름을 부르자 링이 번쩍! 눈이 동그래지며 호출한 사람 쪽으로 고개를 쏙 내밉니다'),
+          scene(4.2, '① 깔깔 · 몸을 흔들흔들', '"네~ 불렀어요?" 웃는 눈으로 좌우로 신나게 몸을 흔듭니다'),
+          scene(7.5, '② 하트 눈 · 다가오기', '하트 눈으로 천천히 몸을 살랑살랑 흔들며 앞으로 다가옵니다 (링은 분홍빛 물결)'),
+          scene(10.5, '③ 윙크', '살짝 고개를 끄덕이며 윙크 한 번'),
+          scene(12.3, '④ 수줍음', '부끄러워서 고개를 돌려 숙였다가, 슬쩍 다시 쳐다봅니다'),
+          scene(16.5, '⑤ 별 눈 · 신나서 통통', '별 눈으로 반짝반짝, 링이 알록달록 물결치며 통통 튑니다'),
+          scene(22.0, '⑥ 마무리 인사', '다정하게 목례하고 "언제든 불러주세요"를 투사합니다'),
+          scene(28.0, '대기', '안내 위치로 돌아와 차분히 대기합니다'),
+          (3.0, 'wake_word', {'phrase': 'Hey LIEU'})]
+    build('04_driving_b', '04 Driving B', DUR,
+          'PREVIEW ONLY. 주행B: 탑승자가 "Hey LIEU"를 부르면 놀란 뒤 애교 총출동(깔깔, 하트 눈, 윙크, 수줍음, 별 눈 통통, 목례). 호출 음성은 실제 음성 인식이 아니라 연출 이벤트입니다. 효과음은 합성음(tools/make_sfx.py, tools/make_sfx_cute.py).',
+          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 0, audio, ev)
+
+
 if __name__ == '__main__':
     import sys
-    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival']
+    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival', 'driving_b']
     for n in todo: globals()[n]()
     print('built', ', '.join(todo))

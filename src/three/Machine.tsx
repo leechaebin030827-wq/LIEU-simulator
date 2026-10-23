@@ -1,3 +1,4 @@
+import { composeScreen, screenOut, type SceneCaption, type TvCopy } from './screenOut';
 import { useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
@@ -50,7 +51,11 @@ function buildRig(gltf: GltfLike) {
     const img = new Image();
     img.onload = () => { tex.image = img; tex.needsUpdate = true; screenCtl.img = img; };
     img.src = `${import.meta.env.BASE_URL}assets/screen.jpg`; // still image until the video is ready (and if it never is)
-    const mat = new THREE.MeshBasicMaterial({ name: 'Screen', map: tex, color: '#ffffff', toneMapped: false, fog: false, side: m.side });
+    const outTex = new THREE.CanvasTexture(screenOut.canvas);
+    outTex.colorSpace = THREE.SRGBColorSpace; outTex.flipY = tex.flipY; outTex.wrapS = tex.wrapS; outTex.wrapT = tex.wrapT;
+    outTex.offset.copy(tex.offset); outTex.repeat.copy(tex.repeat); outTex.rotation = tex.rotation; outTex.center.copy(tex.center);
+    screenCtl.outTex = outTex;
+    const mat = new THREE.MeshBasicMaterial({ name: 'Screen', map: outTex, color: '#ffffff', toneMapped: false, fog: false, side: m.side });
     // Looping muted video as the screen content, drawn with the same UV transform as the glTF texture.
     const video = document.createElement('video');
     video.src = `${import.meta.env.BASE_URL}assets/screen.mp4`;
@@ -114,17 +119,17 @@ function buildRig(gltf: GltfLike) {
 }
 
 /** Screen content per scenario: 01_* shows the still photo, every other scenario the looping video (half speed). */
-const screenCtl: { mat?: THREE.MeshBasicMaterial; still?: THREE.Texture; video?: HTMLVideoElement; vt?: THREE.Texture; wantVideo: boolean; img?: HTMLImageElement; btn?: { canvas: HTMLCanvasElement; tex: THREE.CanvasTexture }; btnShown: boolean } = { wantVideo: false, btnShown: false };
-export const screenWantsVideo = (seqId: string) => /^03_/.test(seqId);
+const screenCtl: { mat?: THREE.MeshBasicMaterial; still?: THREE.Texture; video?: HTMLVideoElement; vt?: THREE.Texture; wantVideo: boolean; img?: HTMLImageElement; btn?: { canvas: HTMLCanvasElement; tex: THREE.CanvasTexture }; btnShown: boolean; outTex?: THREE.CanvasTexture; src: 'still' | 'video' | 'clip' | 'btn' } = { wantVideo: false, btnShown: false, src: 'still' };
+export const screenWantsVideo = (seqId: string) => /^0[34]_/.test(seqId);
 function applyScreen() {
   const { mat, still, video, vt, wantVideo } = screenCtl;
   if (!mat || !still || !video) return;
   if (wantVideo && vt) {
-    mat.map = vt; mat.needsUpdate = true;
+    screenCtl.src = 'video';
     video.playbackRate = 0.5;
     void video.play().catch(() => { /* autoplay blocked: stays on the still image */ });
   } else {
-    mat.map = screenCtl.btnShown && screenCtl.btn ? screenCtl.btn.tex : still; mat.needsUpdate = true;
+    screenCtl.src = screenCtl.btnShown && screenCtl.btn ? 'btn' : 'still';
     video.pause();
   }
 }
@@ -175,7 +180,7 @@ function updateScreenClips(clips: ScreenClip[] | null, t: number, playing: boole
     tex.offset.copy(still.offset); tex.repeat.copy(still.repeat); tex.rotation = still.rotation; tex.center.copy(still.center);
     clipCanvas = { canvas, ctx, tex };
   }
-  if (!clipActive) { clipActive = true; screenCtl.video?.pause(); mat.map = clipCanvas.tex; mat.needsUpdate = true; }
+  if (!clipActive) { clipActive = true; screenCtl.video?.pause(); screenCtl.src = 'clip'; }
   let cur = 0;
   clips.forEach((c, i) => { if (t >= c.from) cur = i; });
   clips.forEach((c, i) => {
@@ -213,7 +218,18 @@ function updateStartButton(b: ButtonTimes | null, t: number) {
   const { canvas, tex } = screenCtl.btn;
   const on = !!b && drawStartButton(canvas.getContext('2d')!, canvas.width, canvas.height, img, b, t);
   if (on) tex.needsUpdate = true;
-  if (on !== screenCtl.btnShown) { screenCtl.btnShown = on; mat.map = on ? tex : still; mat.needsUpdate = true; }
+  if (on !== screenCtl.btnShown) { screenCtl.btnShown = on; screenCtl.src = on ? 'btn' : 'still'; }
+}
+
+function sceneCaption(events: { type: string; tSec: number; payload?: unknown }[], t: number): SceneCaption | null {
+  const scenes = events.filter((e) => e.type === 'scene').sort((a, b) => a.tSec - b.tSec);
+  let idx = -1;
+  scenes.forEach((e, i) => { if (e.tSec <= t + 1e-6) idx = i; });
+  if (idx < 0) return null;
+  const p = scenes[idx].payload as { title?: string; desc?: string; tv?: TvCopy } | undefined;
+  if (!p?.title) return null;
+  return { title: p.title, desc: p.desc, tv: p.tv, idx, total: scenes.length, age: t - scenes[idx].tSec, remain: idx + 1 < scenes.length ? scenes[idx + 1].tSec - t : 1e9,
+    prev: idx > 0 ? (() => { const q = scenes[idx - 1].payload as { title?: string; desc?: string; tv?: TvCopy } | undefined; return { tv: q?.tv, title: q?.title ?? '', desc: q?.desc }; })() : undefined };
 }
 
 const opaqueCache = new Map<THREE.Material, THREE.Material>();
@@ -267,6 +283,9 @@ export function Machine() {
     const vcue = s.seq.tracks.events.find((e) => e.type === 'screen_video');
     updateScreenClips(vcue ? ((vcue.payload as { clips: ScreenClip[] }).clips) : null, st.tSec, s.playing, s.speed);
     updateStartButton(cue ? (cue.payload as unknown as ButtonTimes) : null, st.tSec);
+    const c = screenCtl;
+    composeScreen(c.src === 'clip' ? clipCanvas?.canvas ?? null : c.src === 'btn' ? c.btn?.canvas ?? null : c.src === 'video' && c.video && c.video.readyState >= 2 ? c.video : c.img ?? null, { title: s.seq.title, scene: sceneCaption(s.seq.tracks.events, st.tSec) });
+    if (c.outTex) c.outTex.needsUpdate = true;
     const stages = computeStageMatrices(st.motion, s.rig);
     frame.stages = stages; frame.state = st;
     const sig = `${st.motion.railX}|${st.motion.yawY}|${st.motion.tiltZ}|${JSON.stringify(s.rig.pivots)}|${Object.keys(s.rig.owner).length}`;
