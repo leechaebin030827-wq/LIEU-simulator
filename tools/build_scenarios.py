@@ -4,6 +4,7 @@
    02_driving_a - construction detected, Lieu looks ahead, returns, explains the detour
    03_arrival   - destination nearly reached, Lieu comes out, glances at the door side, says goodbye
    04_driving_b - "Hey LIEU" -> startled, then every cute trick (giggle, heart eyes, wink, shy, stars, bow)
+   05_web_cover - web motion "cover": the 21 s eye-extractor gaze sequence (curious -> L/R/up/down -> diagonals -> eyes shut -> down -> excited) with the head following the gaze
    (run `build_scenarios.py arrival` to rebuild only one; plain run rebuilds all and overwrites saved edits)
 Writes examples/<id>.lieu.json and public/examples/<id>.lieu.json.
 
@@ -333,8 +334,51 @@ def driving_b():
           {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 0, audio, ev)
 
 
+# ---------------------------------------------------------------- 05 web motion - cover
+def web_cover():
+    """21.0 s, same beats as the eye-extractor sequence. The head follows each gaze block (yaw +/-, tilt + = nose up) and returns to centre between blocks."""
+    DUR = 21.0
+    rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
+    # gaze blocks: (start, length, yaw deg, tilt deg, scene title, label)
+    LOOKS = [(4.0, 1.6, -26, 0), (5.6, 1.6, 26, 0), (7.2, 1.6, 0, 5), (8.8, 1.6, 0, -6),
+             (10.4, 1.7, -20, 5), (12.1, 1.7, 20, 5), (13.8, 1.7, -20, -6), (15.5, 1.7, 20, -6)]
+    rail.add(0, -0.06).add(4.0, 0).add(DUR, 0)
+    yv, tv = [(0, 0), (1.2, 8), (2.4, -6), (3.6, 0)], [(0, 0), (1.2, 3), (2.4, 2), (3.6, 0)]   # slightly curious: a little head-cock
+    # one smooth out-and-back per gaze block (peak at mid-block) keeps accel inside the preview limits (yaw 500, tilt 60 deg/s^2)
+    for (t0, d, y, t) in LOOKS:
+        yv += [(t0, 0), (t0 + d / 2, y), (t0 + d, 0)]; tv += [(t0, 0), (t0 + d / 2, t), (t0 + d, 0)]
+    yv += [(17.2, 0), (19.8, 0), (20.4, 10), (21.0, 0)]
+    tv += [(17.2, 0), (18.5, -5), (19.0, -5), (19.8, 0)]                                           # eyes shut + look down: one small bow
+    yv.append((DUR, 0)); tv.append((DUR, 0))
+    for tr, pts in ((yaw, yv), (tilt, tv)):
+        last = -1
+        for t, v in sorted(set(pts), key=lambda e: e[0]):
+            if t > last + 1e-6: tr.add(t, v); last = t
+    eyes = [(0, N)]
+    baked = ROOT / 'tools/baked_eyes/05_web_cover.json'
+    if baked.exists():
+        ks = json.loads(baked.read_text())
+        eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
+    inten = Tr('int').add(0, 1)
+    fx = [breathe('curious', 1, [90, 185, 255, 40], 0, 17.2, 1 / 3.0), breathe('rest', 2, [150, 225, 255, 70], 17.2, 19.8, 1 / 2.4)]
+    fx += [wave('joy_' + n, 10 + i, c, ph, 19.8, DUR, 1.0) for i, (n, c, ph) in enumerate(WHIRL_COLORS)]
+    bright = Tr('br').add(0, BR).add(DUR, BR)
+    opac = Tr('op').add(0, 0).add(DUR, 0)
+    audio = [sfx('cue', 'sfx_cue.wav', 0.0, 0.45, 0.5), sfx('nod', 'sfx_nod.wav', 17.5, 0.35, 0.6),
+             sfx('sparkle', 'sfx_sparkle.wav', 19.8, 1.1, 0.5), sfx('boing', 'sfx_boing.wav', 20.0, 0.5, 0.5)]
+    ev = [scene(0, '① 살짝 호기심', '레일 앞으로 천천히 나오며 고개를 살짝 갸웃거립니다 (4.0s)'),
+          scene(4.0, '② 왼쪽 · 오른쪽 보기', '눈이 가는 쪽으로 고개를 돌립니다 (각 1.6s)'),
+          scene(7.2, '③ 위 · 아래 보기', '눈을 따라 고개를 들었다 숙입니다 (각 1.6s)'),
+          scene(10.4, '④ 대각선 보기', '왼쪽 위 → 오른쪽 위 → 왼쪽 아래 → 오른쪽 아래 (각 1.7s)'),
+          scene(17.2, '⑤ 눈 감기 · 아래 보기', '눈을 감고 살짝 목례한 뒤 아래를 봅니다'),
+          scene(19.8, '⑥ 신남', '눈을 반짝이며 몸을 들썩, 링이 알록달록 물결칩니다')]
+    build('05_web_cover', '05 Web Motion - Cover', DUR,
+          'PREVIEW ONLY. 웹 모션 - 표지: 눈 추출기 시퀀스(21.0s, 긴 눈·간격 100%·연결 부드러움 350ms)와 같은 길이/순서에 맞춰 로봇이 시선을 따라 고개를 움직입니다.',
+          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, [], opac, 0, audio, ev)
+
+
 if __name__ == '__main__':
     import sys
-    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival', 'driving_b']
+    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival', 'driving_b', 'web_cover']
     for n in todo: globals()[n]()
     print('built', ', '.join(todo))

@@ -17,6 +17,7 @@ const PRESETS: [string, string, string][] = [
   ['02_driving_a', 'Driving A', '공사 감지 · 앞을 살피고 · 돌아와 우회 안내'],
   ['04_driving_b', 'Driving B', 'Hey LIEU 호출 · 애교 총출동'],
   ['03_arrival', 'Arrival', '곧 도착 · 둘러보기 · 작별 인사 · 문 쪽 안내'],
+  ['05_web_cover', '웹 모션 - 표지', '호기심 · 상하좌우 시선 · 눈 감기 · 신남 (21s)'],
 ];
 
 function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {

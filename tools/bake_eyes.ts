@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs';
 import { defaultSequence, newBlock, type Sequence } from '../src/eyestudio/assets';
 import { bakeKeys } from '../src/eyestudio/bake';
 
-type Seg = { at: number; blocks: [string, number][] };
-const seq = (blocks: [string, number][]): Sequence => ({ ...defaultSequence(), blocks: blocks.map(([id, s]) => ({ ...newBlock(id), seconds: s })), blend: 450, shape: 'long' });
+type Seg = { at: number; blocks: [string, number][]; o?: Partial<Sequence> };
+const seq = (blocks: [string, number][], o: Partial<Sequence> = {}): Sequence => ({ ...defaultSequence(), blocks: blocks.map(([id, s]) => ({ ...newBlock(id), seconds: s })), blend: 450, shape: 'long', ...o });
 
 /** 02_driving_a: calm wait -> startled by the road work -> worried as it turns away (eyes are off 5.7-13.1 s while the head faces the monitor)
  *  -> thinking when it turns back -> reassuring while it explains the detour -> nod at the route -> relieved smile -> calm. */
@@ -35,13 +35,20 @@ const ARRIVAL: Seg[] = [
     ['mo-reassuringBlink', 1.0], ['mood-default', 2.0], ['mood-default', 3.0]] },
 ];
 
+/** 05_web_cover (web motion - cover): the eye-extractor sequence as-is (21.0 s, long eyes, spacing 100 %, blend 350 ms):
+ *  slight curiosity -> L, R, up, down -> up-left, up-right, down-left, down-right -> eyes shut -> down -> excited. */
+const WEB_COVER: Seg[] = [
+  { at: 0, o: { blend: 350, spacing: 100, glow: 160 }, blocks: [['mood-curious-soft', 4.0], ['mo-lookLeft', 1.6], ['mo-lookRight', 1.6], ['mo-lookUp', 1.6], ['mo-lookDown', 1.6],
+    ['mo-upLeft', 1.7], ['mo-upRight', 1.7], ['mo-downLeft', 1.7], ['mo-downRight', 1.7], ['mo-closeEyes', 1.0], ['mo-lookDown', 1.6], ['mood-excited', 1.2]] },
+];
+
 function bake(segs: Seg[]) {
   const out: { t: number; l: number[]; r: number[] }[] = [];
-  for (const g of segs) for (const k of bakeKeys(seq(g.blocks), 30)) out.push({ t: Math.round((g.at + k.tSec) * 1000) / 1000, l: [...k.pair.l], r: [...k.pair.r] });
+  for (const g of segs) for (const k of bakeKeys(seq(g.blocks, g.o), 30)) out.push({ t: Math.round((g.at + k.tSec) * 1000) / 1000, l: [...k.pair.l], r: [...k.pair.r] });
   return out.sort((a, b) => a.t - b.t).filter((k, i, a) => i === 0 || k.t > a[i - 1].t);
 }
 
-for (const [name, segs] of [['01_boarding', BOARDING], ['02_driving_a', DRIVING_A], ['03_arrival', ARRIVAL], ['04_driving_b', DRIVING_B]] as const) {
+for (const [name, segs] of [['01_boarding', BOARDING], ['02_driving_a', DRIVING_A], ['03_arrival', ARRIVAL], ['04_driving_b', DRIVING_B], ['05_web_cover', WEB_COVER]] as const) {
   const keys = bake(segs as Seg[]);
   writeFileSync(`tools/baked_eyes/${name}.json`, JSON.stringify(keys));
   console.log(`${name}:`, keys.length, 'keys');
