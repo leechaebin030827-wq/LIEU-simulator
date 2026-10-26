@@ -95,7 +95,7 @@ export type LieuSequence = {
   /** Optional eye-studio look: when present the viewer draws the eyes as that studio sequence (halftone etc.) instead of the raw 8x8 dots. PREVIEW ONLY. */
   eyeLook?: { studio: unknown; startSec?: number };
   tracks: {
-    motion: { railX: NumericTrack; yawY: NumericTrack; tiltZ: NumericTrack };
+    motion: { railX: NumericTrack; yawY: NumericTrack; tiltZ: NumericTrack; /** Visual-only exception (not a real axis): whole body up/down in metres. */ liftY?: NumericTrack };
     ring24: {
       baseFrames: RingTrack;
       brightness: NumericTrack;
@@ -118,7 +118,7 @@ export type LieuSequence = {
 };
 export type DesiredState = {
   tSec: number;
-  motion: { railX: number; yawY: number; tiltZ: number };
+  motion: { railX: number; yawY: number; tiltZ: number; liftY?: number };
   ring24: { pixels: RingFrame; brightness: number };
   eyes: {
     left: EyeRows8;

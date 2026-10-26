@@ -14,7 +14,7 @@ export type RigState = {
   emitterNodes: { ring: number; eyeLeft: number; eyeRight: number; projector: number };
 };
 
-export type MotionState = { railX: number; yawY: number; tiltZ: number };
+export type MotionState = { railX: number; yawY: number; tiltZ: number; /** visual-only whole-body lift (m), not a hardware axis */ liftY?: number };
 
 export const BLACK: Rgbw = [0, 0, 0, 0];
 export const LED_COUNT = 24;

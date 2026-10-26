@@ -84,7 +84,7 @@ def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, 
     seq = {'schema': 'lieu.sequence/v1', 'id': id_, 'title': title, 'durationSec': dur, 'fps': 30, 'loop': False,
            'demoPreviewOnly': True, 'notes': notes,
            'tracks': {
-               'motion': {a: motion[a].out() for a in ('railX', 'yawY', 'tiltZ')},
+               'motion': {a: motion[a].out() for a in ('railX', 'yawY', 'tiltZ', 'liftY') if a in motion},
                'ring24': {'baseFrames': {'kind': 'rgbw24', 'keys': [
                               {'id': 'f0', 'tSec': 0, 'value': ZERO24, 'interpolationToNext': 'linear'},
                               {'id': 'f1', 'tSec': dur, 'value': ZERO24, 'interpolationToNext': 'linear'}]},
@@ -347,7 +347,7 @@ def web_cover():
     rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
     # 0-4 s: the column starts turned to the left, then swirls (yaw/tilt a quarter-turn apart, fading out) round to face front.
     # 4-17.2 s: stays facing front; the look-around blocks only nudge it very subtly (yaw <= 5 deg, tilt <= 2 deg).
-    # 17.2-21 s: still facing front: up, slips down, then rises again as the excited eyes appear (tilt only).
+    # 17.2-21 s: still facing front: the whole body (visual-only liftY, not a real axis) rises a little, slips down, then rises back as the excited eyes appear.
     LOOKS = [(4.0, 1.6, -5, 0), (5.6, 1.6, 5, 0), (7.2, 1.6, 0, 2), (8.8, 1.6, 0, -2),
              (10.4, 1.7, -4, 1.5), (12.1, 1.7, 4, 1.5), (13.8, 1.7, -4, -1.5), (15.5, 1.7, 4, -1.5)]
     rail.add(0, -0.06).add(4.0, 0).add(DUR, 0)
@@ -365,8 +365,10 @@ def web_cover():
     for (t0, d, y, t) in LOOKS:
         for key, v in (('yaw', y), ('tilt', t)):
             pts[key] += [(t0, 0, 'smoothstep'), (t0 + d / 2, v, 'smoothstep'), (t0 + d, 0, 'smoothstep')]
-    pts['tilt'] += [(17.2, 0, 'smoothstep'), (18.0, 5, 'smoothstep'), (19.2, -5, 'smoothstep'), (20.2, 0, 'smoothstep'), (DUR, 0, 'smoothstep')]
+    pts['tilt'] += [(17.2, 0, 'smoothstep'), (DUR, 0, 'smoothstep')]
     pts['yaw'] += [(17.2, 0, 'smoothstep'), (DUR, 0, 'smoothstep')]
+    lift = Tr('lift')
+    for t, v in [(0, 0), (17.2, 0), (18.0, 0.02), (19.2, -0.06), (20.2, 0), (DUR, 0)]: lift.add(t, v)
     for tr, key in ((yaw, 'yaw'), (tilt, 'tilt')):
         last = -1
         for t, v, ip in sorted(pts[key], key=lambda e: e[0]):
@@ -387,11 +389,11 @@ def web_cover():
           scene(4.0, '② 왼쪽 · 오른쪽 보기', '정면을 응시한 채 아주 미세하게만 움직입니다 (각 1.6s)'),
           scene(7.2, '③ 위 · 아래 보기', '정면 응시, 아주 미세한 움직임 (각 1.6s)'),
           scene(10.4, '④ 대각선 보기', '왼쪽 위 → 오른쪽 위 → 왼쪽 아래 → 오른쪽 아래 (각 1.7s)'),
-          scene(17.2, '⑤ 눈 감기 · 아래 보기', '정면을 본 채 위로 올라갔다가 아래로 수웅 내려갑니다'),
+          scene(17.2, '⑤ 눈 감기 · 아래 보기', '정면을 본 채 몸통 전체가 살짝 올라갔다가 아래로 수웅 내려갑니다 (연출용 예외 동작)'),
           scene(19.8, '⑥ 신남', '다시 올라오며 신남 눈이 나옵니다, 링이 알록달록 물결칩니다')]
     build('05_web_cover', '05 Web Motion - Cover', DUR,
           'PREVIEW ONLY. 웹 모션 - 표지: 눈 추출기 시퀀스(21.0s, 긴 눈·간격 100%·연결 부드러움 350ms)와 같은 길이/순서에 맞춰 로봇이 시선을 따라 고개를 움직입니다.',
-          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, [], opac, 0, audio, ev, extra={'eyeLook': {'startSec': 0, 'studio': STUDIO}})
+          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt, 'liftY': lift}, fx, bright, eyes, inten, [], opac, 0, audio, ev, extra={'eyeLook': {'startSec': 0, 'studio': STUDIO}})
 
 
 if __name__ == '__main__':

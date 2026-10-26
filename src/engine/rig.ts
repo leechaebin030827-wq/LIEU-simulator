@@ -19,7 +19,7 @@ function aboutPivot(axis: 'y' | 'z', angleRad: number, pivot: Vec3): Matrix4 {
  * Pivots are expressed in the REST world frame (hypothesis, user editable).
  */
 export function computeStageMatrices(m: MotionState, rig: Pick<RigState, 'pivots'>): StageMatrices {
-  const carriage = new Matrix4().makeTranslation(m.railX, 0, 0);
+  const carriage = new Matrix4().makeTranslation(m.railX, m.liftY ?? 0, 0);   // liftY: visual-only whole-body lift (moves every moving stage, not the fixed rail)
   const yaw = carriage.clone().multiply(aboutPivot('y', m.yawY * DEG, rig.pivots.yaw));
   const tilt = carriage.clone().multiply(aboutPivot('z', m.tiltZ * DEG, rig.pivots.tilt)).multiply(aboutPivot('y', m.yawY * DEG, rig.pivots.yaw));
   return { fixedRail: new Matrix4(), carriage, yaw, tilt };

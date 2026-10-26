@@ -70,6 +70,7 @@ export function evaluateSequenceAt(seq: LieuSequence, tSec: number): DesiredStat
       railX: evalNumeric(motion.railX, t, 0),
       yawY: evalNumeric(motion.yawY, t, 0),
       tiltZ: clamp(evalNumeric(motion.tiltZ, t, 0), -TILT_LIMIT_DEG, TILT_LIMIT_DEG),
+      ...(motion.liftY?.keys.length ? { liftY: evalNumeric(motion.liftY, t, 0) } : {}),
     },
     ring24: { pixels, brightness: clamp(evalNumeric(ring24.brightness, t, 1), 0, 1) },
     eyes: { left, right, intensity: shared, leftIntensity, rightIntensity },

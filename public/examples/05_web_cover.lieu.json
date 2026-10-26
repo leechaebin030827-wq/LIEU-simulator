@@ -1668,24 +1668,47 @@
           },
           {
             "id": "tilt_135",
+            "tSec": 21.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "liftY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "lift_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "lift_1",
+            "tSec": 17.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "lift_2",
             "tSec": 18.0,
-            "value": 5,
+            "value": 0.02,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_136",
+            "id": "lift_3",
             "tSec": 19.2,
-            "value": -5,
+            "value": -0.06,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_137",
+            "id": "lift_4",
             "tSec": 20.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_138",
+            "id": "lift_5",
             "tSec": 21.0,
             "value": 0,
             "interpolationToNext": "smoothstep"
@@ -4070,7 +4093,7 @@
         "type": "scene",
         "payload": {
           "title": "⑤ 눈 감기 · 아래 보기",
-          "desc": "정면을 본 채 위로 올라갔다가 아래로 수웅 내려갑니다"
+          "desc": "정면을 본 채 몸통 전체가 살짝 올라갔다가 아래로 수웅 내려갑니다 (연출용 예외 동작)"
         }
       },
       {
