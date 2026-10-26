@@ -1,0 +1,70 @@
+{
+  "schema": "lieu.motor_limits/v1",
+  "note": "learned by hand-moving the axes; read-only, no motor was commanded",
+  "motors": {
+    "1": {
+      "start": 2154,
+      "min": 1053,
+      "max": 5071,
+      "last": 1061,
+      "units": "raw (4096 = 360 deg on X-series)",
+      "range_deg": 353.14,
+      "axis": "yawY",
+      "note": "raw units are motor-side (4096 = 360 deg, multi-turn, relative). Use calibration/limits to convert to robot yaw.",
+      "calibration": {
+        "method": "hand-set -90 and +90 degrees of the yaw axis, motor position read at each (read-only)",
+        "raw_at_plus90": 9147,
+        "raw_at_minus90": -3931,
+        "raw_center_front": 2608,
+        "raw_per_robot_deg": 72.656,
+        "motor_deg_per_robot_deg": 6.386,
+        "positive_raw_is_positive_yaw": true,
+        "accuracy": "only as good as how exactly the +/-90 positions were set by hand; verify with a third point",
+        "front_history": [
+          {
+            "raw": -1052,
+            "note": "first measurement"
+          },
+          {
+            "raw": 2669,
+            "note": "set by the user: \"this is front\" after the motor lost power (the raw origin changes when the motor is power-cycled)"
+          },
+          {
+            "raw": 2669,
+            "note": "set with 'Set front here'"
+          },
+          {
+            "raw": 2608,
+            "note": "set with 'Set front here'"
+          },
+          {
+            "raw": 2608,
+            "note": "set with 'Set front here'"
+          },
+          {
+            "raw": 2608,
+            "note": "set with 'Set front here'"
+          }
+        ]
+      },
+      "limits": {
+        "robot_deg": [
+          -90,
+          90
+        ],
+        "raw": [
+          -3931,
+          9147
+        ],
+        "raw_center_front": 2608,
+        "source": "min and max given by the user, read from the motor while hand-set at each end"
+      },
+      "safe": {
+        "limit_deg": 80,
+        "max_vel_deg_s": 40,
+        "max_acc_deg_s2": 80,
+        "note": "self-imposed limits (physical range +/-90; the motor itself allows ~69 deg/s of robot yaw = its 73 rpm Velocity Limit). 40 deg/s of robot yaw = about 255 deg/s (~43 rpm) at the motor. Raise only step by step."
+      }
+    }
+  }
+}

@@ -4,3 +4,4 @@ dist
 *.bak
 exports/
 .claude/settings.local.json
+__pycache__/

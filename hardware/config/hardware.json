@@ -1,0 +1,24 @@
+{
+  "_comment": "Device config. Same file for the UNO R4 test setup and the Raspberry Pi. Unknown values are the ones to calibrate (docs/04_PHOTOS_WIRING_AND_GEARTRAIN.md).",
+  "backend": "serial",
+
+  "serial": { "port": "auto", "baud": 115200 },
+  "pi": { "i2c_bus": 1, "ring_gpio": 18, "ring_dma": 10, "ring_freq_hz": 800000 },
+
+  "eyes": {
+    "_comment": "address: the two HT16K33 boards must differ (A0/A1/A2 solder pads). swap: exchange which board is the screen-left eye. layout: how a virtual row (bit7 = left column) is wired to the chip: msb_left | lsb_left | adafruit (Adafruit 8x8 backpack rotates one bit). Verify with: python -m lieu_hw test eyes",
+    "left":  { "address": "0x70", "layout": "adafruit", "flip_x": false, "flip_y": false },
+    "right": { "address": "0x71", "layout": "adafruit", "flip_x": false, "flip_y": false },
+    "swap": false
+  },
+
+  "ring": {
+    "_comment": "count/chipset are fixed by the CAD; byte order is compiled into the firmware (LED_TYPE) / chosen here for the Pi. offset+reverse map the virtual LED0 (+X, counting toward +Z) onto the physical DIN order. max_scale and budget_ma protect the 5 V supply: USB test ~ 400 mA, external 5 V 2 A ~ 1800 mA.",
+    "count": 24,
+    "order": "GRBW",
+    "offset": 0,
+    "reverse": false,
+    "max_scale": 0.25,
+    "budget_ma": 400
+  }
+}

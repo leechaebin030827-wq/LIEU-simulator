@@ -1,0 +1,5 @@
+# mock backend needs nothing.
+pyserial>=3.5          # UNO R4 test rig (backend: serial)
+# Raspberry Pi only (backend: pi):
+# smbus2
+# rpi_ws281x           # Pi 3/4/Zero. Pi 5: use a PIO/SPI NeoPixel driver instead (see drivers/pi_direct.py)

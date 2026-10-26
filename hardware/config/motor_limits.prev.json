@@ -1,0 +1,14 @@
+{
+  "schema": "lieu.motor_limits/v1",
+  "note": "learned by hand-moving the axes; read-only, no motor was commanded",
+  "motors": {
+    "1": {
+      "start": 2868,
+      "min": 1037,
+      "max": 4967,
+      "last": 4967,
+      "units": "raw (4096 = 360 deg on X-series)",
+      "range_deg": 345.41
+    }
+  }
+}
