@@ -37,144 +37,816 @@
         "keys": [
           {
             "id": "yaw_0",
-            "tSec": 0,
-            "value": 0,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.0,
+            "value": -30.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_1",
-            "tSec": 1.2,
-            "value": 8,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.0333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_2",
-            "tSec": 2.4,
-            "value": -6,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.0667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_3",
-            "tSec": 3.6,
-            "value": 0,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.1,
+            "value": -30.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_4",
+            "tSec": 0.1333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_5",
+            "tSec": 0.1667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_6",
+            "tSec": 0.2,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_7",
+            "tSec": 0.2333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_8",
+            "tSec": 0.2667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_9",
+            "tSec": 0.3,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_10",
+            "tSec": 0.3333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_11",
+            "tSec": 0.3667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_12",
+            "tSec": 0.4,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_13",
+            "tSec": 0.4333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_14",
+            "tSec": 0.4667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_15",
+            "tSec": 0.5,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_16",
+            "tSec": 0.5333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_17",
+            "tSec": 0.5667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_18",
+            "tSec": 0.6,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_19",
+            "tSec": 0.6333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_20",
+            "tSec": 0.6667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_21",
+            "tSec": 0.7,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_22",
+            "tSec": 0.7333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_23",
+            "tSec": 0.7667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_24",
+            "tSec": 0.8,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_25",
+            "tSec": 0.8333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_26",
+            "tSec": 0.8667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_27",
+            "tSec": 0.9,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_28",
+            "tSec": 0.9333,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_29",
+            "tSec": 0.9667,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_30",
+            "tSec": 1.0,
+            "value": -30.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_31",
+            "tSec": 1.0333,
+            "value": -29.9356,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_32",
+            "tSec": 1.0667,
+            "value": -29.7471,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_33",
+            "tSec": 1.1,
+            "value": -29.445,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_34",
+            "tSec": 1.1333,
+            "value": -29.0433,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_35",
+            "tSec": 1.1667,
+            "value": -28.5595,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_36",
+            "tSec": 1.2,
+            "value": -28.0132,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_37",
+            "tSec": 1.2333,
+            "value": -27.4262,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_38",
+            "tSec": 1.2667,
+            "value": -26.8209,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_39",
+            "tSec": 1.3,
+            "value": -26.2199,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_40",
+            "tSec": 1.3333,
+            "value": -25.6452,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_41",
+            "tSec": 1.3667,
+            "value": -25.1171,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_42",
+            "tSec": 1.4,
+            "value": -24.6537,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_43",
+            "tSec": 1.4333,
+            "value": -24.2705,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_44",
+            "tSec": 1.4667,
+            "value": -23.9793,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_45",
+            "tSec": 1.5,
+            "value": -23.7883,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_46",
+            "tSec": 1.5333,
+            "value": -23.7018,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_47",
+            "tSec": 1.5667,
+            "value": -23.7198,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_48",
+            "tSec": 1.6,
+            "value": -23.8381,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_49",
+            "tSec": 1.6333,
+            "value": -24.0488,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_50",
+            "tSec": 1.6667,
+            "value": -24.34,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_51",
+            "tSec": 1.7,
+            "value": -24.6968,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_52",
+            "tSec": 1.7333,
+            "value": -25.1014,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_53",
+            "tSec": 1.7667,
+            "value": -25.5339,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_54",
+            "tSec": 1.8,
+            "value": -25.973,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_55",
+            "tSec": 1.8333,
+            "value": -26.3965,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_56",
+            "tSec": 1.8667,
+            "value": -26.7822,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_57",
+            "tSec": 1.9,
+            "value": -27.1085,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_58",
+            "tSec": 1.9333,
+            "value": -27.3554,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_59",
+            "tSec": 1.9667,
+            "value": -27.5045,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_60",
+            "tSec": 2.0,
+            "value": -27.5404,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_61",
+            "tSec": 2.0333,
+            "value": -27.4505,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_62",
+            "tSec": 2.0667,
+            "value": -27.2255,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_63",
+            "tSec": 2.1,
+            "value": -26.86,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_64",
+            "tSec": 2.1333,
+            "value": -26.3522,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_65",
+            "tSec": 2.1667,
+            "value": -25.7043,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_66",
+            "tSec": 2.2,
+            "value": -24.9221,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_67",
+            "tSec": 2.2333,
+            "value": -24.0147,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_68",
+            "tSec": 2.2667,
+            "value": -22.9948,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_69",
+            "tSec": 2.3,
+            "value": -21.8774,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_70",
+            "tSec": 2.3333,
+            "value": -20.6801,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_71",
+            "tSec": 2.3667,
+            "value": -19.4218,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_72",
+            "tSec": 2.4,
+            "value": -18.1229,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_73",
+            "tSec": 2.4333,
+            "value": -16.804,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_74",
+            "tSec": 2.4667,
+            "value": -15.4857,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_75",
+            "tSec": 2.5,
+            "value": -14.1879,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_76",
+            "tSec": 2.5333,
+            "value": -12.9292,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_77",
+            "tSec": 2.5667,
+            "value": -11.7263,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_78",
+            "tSec": 2.6,
+            "value": -10.5941,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_79",
+            "tSec": 2.6333,
+            "value": -9.5444,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_80",
+            "tSec": 2.6667,
+            "value": -8.5869,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_81",
+            "tSec": 2.7,
+            "value": -7.7278,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_82",
+            "tSec": 2.7333,
+            "value": -6.9706,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_83",
+            "tSec": 2.7667,
+            "value": -6.316,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_84",
+            "tSec": 2.8,
+            "value": -5.7616,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_85",
+            "tSec": 2.8333,
+            "value": -5.3026,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_86",
+            "tSec": 2.8667,
+            "value": -4.9321,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_87",
+            "tSec": 2.9,
+            "value": -4.641,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_88",
+            "tSec": 2.9333,
+            "value": -4.4189,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_89",
+            "tSec": 2.9667,
+            "value": -4.2543,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_90",
+            "tSec": 3.0,
+            "value": -4.1352,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_91",
+            "tSec": 3.0333,
+            "value": -4.0492,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_92",
+            "tSec": 3.0667,
+            "value": -3.9845,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_93",
+            "tSec": 3.1,
+            "value": -3.9298,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_94",
+            "tSec": 3.1333,
+            "value": -3.8748,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_95",
+            "tSec": 3.1667,
+            "value": -3.8108,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_96",
+            "tSec": 3.2,
+            "value": -3.7304,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_97",
+            "tSec": 3.2333,
+            "value": -3.6281,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_98",
+            "tSec": 3.2667,
+            "value": -3.5003,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_99",
+            "tSec": 3.3,
+            "value": -3.345,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_100",
+            "tSec": 3.3333,
+            "value": -3.1621,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_101",
+            "tSec": 3.3667,
+            "value": -2.9534,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_102",
+            "tSec": 3.4,
+            "value": -2.7219,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_103",
+            "tSec": 3.4333,
+            "value": -2.4718,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_104",
+            "tSec": 3.4667,
+            "value": -2.2086,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_105",
+            "tSec": 3.5,
+            "value": -1.9381,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_106",
+            "tSec": 3.5333,
+            "value": -1.6667,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_107",
+            "tSec": 3.5667,
+            "value": -1.4008,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_108",
+            "tSec": 3.6,
+            "value": -1.1466,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_109",
+            "tSec": 3.6333,
+            "value": -0.9095,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_110",
+            "tSec": 3.6667,
+            "value": -0.6946,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_111",
+            "tSec": 3.7,
+            "value": -0.5058,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_112",
+            "tSec": 3.7333,
+            "value": -0.3459,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_113",
+            "tSec": 3.7667,
+            "value": -0.2166,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_114",
+            "tSec": 3.8,
+            "value": -0.1184,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_115",
+            "tSec": 3.8333,
+            "value": -0.0508,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_116",
+            "tSec": 3.8667,
+            "value": -0.0122,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_117",
+            "tSec": 3.9,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_118",
             "tSec": 4.0,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_5",
+            "id": "yaw_119",
             "tSec": 4.8,
-            "value": -26,
+            "value": -5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_6",
+            "id": "yaw_120",
             "tSec": 5.6,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_7",
+            "id": "yaw_121",
             "tSec": 6.4,
-            "value": 26,
+            "value": 5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_8",
+            "id": "yaw_122",
             "tSec": 7.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_9",
+            "id": "yaw_123",
             "tSec": 8.0,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_10",
+            "id": "yaw_124",
             "tSec": 8.8,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_11",
+            "id": "yaw_125",
             "tSec": 9.6,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_12",
+            "id": "yaw_126",
             "tSec": 10.4,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_13",
+            "id": "yaw_127",
             "tSec": 11.25,
-            "value": -20,
+            "value": -4,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_14",
+            "id": "yaw_128",
             "tSec": 12.1,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_15",
+            "id": "yaw_129",
             "tSec": 12.95,
-            "value": 20,
+            "value": 4,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_16",
+            "id": "yaw_130",
             "tSec": 13.8,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_17",
+            "id": "yaw_131",
             "tSec": 14.65,
-            "value": -20,
+            "value": -4,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_18",
+            "id": "yaw_132",
             "tSec": 15.5,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_19",
+            "id": "yaw_133",
             "tSec": 16.35,
-            "value": 20,
+            "value": 4,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_20",
+            "id": "yaw_134",
             "tSec": 17.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "yaw_21",
-            "tSec": 19.8,
-            "value": 0,
-            "interpolationToNext": "smoothstep"
-          },
-          {
-            "id": "yaw_22",
-            "tSec": 20.4,
-            "value": 10,
-            "interpolationToNext": "smoothstep"
-          },
-          {
-            "id": "yaw_23",
+            "id": "yaw_135",
             "tSec": 21.0,
             "value": 0,
             "interpolationToNext": "smoothstep"
@@ -186,150 +858,834 @@
         "keys": [
           {
             "id": "tilt_0",
-            "tSec": 0,
-            "value": 0,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.0,
+            "value": -0.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "tilt_1",
-            "tSec": 1.2,
-            "value": 3,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.0333,
+            "value": -0.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "tilt_2",
-            "tSec": 2.4,
-            "value": 2,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.0667,
+            "value": -0.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "tilt_3",
-            "tSec": 3.6,
-            "value": 0,
-            "interpolationToNext": "smoothstep"
+            "tSec": 0.1,
+            "value": -0.0,
+            "interpolationToNext": "linear"
           },
           {
             "id": "tilt_4",
+            "tSec": 0.1333,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_5",
+            "tSec": 0.1667,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_6",
+            "tSec": 0.2,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_7",
+            "tSec": 0.2333,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_8",
+            "tSec": 0.2667,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_9",
+            "tSec": 0.3,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_10",
+            "tSec": 0.3333,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_11",
+            "tSec": 0.3667,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_12",
+            "tSec": 0.4,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_13",
+            "tSec": 0.4333,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_14",
+            "tSec": 0.4667,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_15",
+            "tSec": 0.5,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_16",
+            "tSec": 0.5333,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_17",
+            "tSec": 0.5667,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_18",
+            "tSec": 0.6,
+            "value": -0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_19",
+            "tSec": 0.6333,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_20",
+            "tSec": 0.6667,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_21",
+            "tSec": 0.7,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_22",
+            "tSec": 0.7333,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_23",
+            "tSec": 0.7667,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_24",
+            "tSec": 0.8,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_25",
+            "tSec": 0.8333,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_26",
+            "tSec": 0.8667,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_27",
+            "tSec": 0.9,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_28",
+            "tSec": 0.9333,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_29",
+            "tSec": 0.9667,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_30",
+            "tSec": 1.0,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_31",
+            "tSec": 1.0333,
+            "value": 0.0495,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_32",
+            "tSec": 1.0667,
+            "value": 0.0949,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_33",
+            "tSec": 1.1,
+            "value": 0.1335,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_34",
+            "tSec": 1.1333,
+            "value": 0.163,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_35",
+            "tSec": 1.1667,
+            "value": 0.1815,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_36",
+            "tSec": 1.2,
+            "value": 0.1875,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_37",
+            "tSec": 1.2333,
+            "value": 0.18,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_38",
+            "tSec": 1.2667,
+            "value": 0.1588,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_39",
+            "tSec": 1.3,
+            "value": 0.1238,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_40",
+            "tSec": 1.3333,
+            "value": 0.076,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_41",
+            "tSec": 1.3667,
+            "value": 0.0165,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_42",
+            "tSec": 1.4,
+            "value": -0.053,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_43",
+            "tSec": 1.4333,
+            "value": -0.1303,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_44",
+            "tSec": 1.4667,
+            "value": -0.2131,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_45",
+            "tSec": 1.5,
+            "value": -0.2987,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_46",
+            "tSec": 1.5333,
+            "value": -0.3842,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_47",
+            "tSec": 1.5667,
+            "value": -0.4668,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_48",
+            "tSec": 1.6,
+            "value": -0.5436,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_49",
+            "tSec": 1.6333,
+            "value": -0.6121,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_50",
+            "tSec": 1.6667,
+            "value": -0.6697,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_51",
+            "tSec": 1.7,
+            "value": -0.7144,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_52",
+            "tSec": 1.7333,
+            "value": -0.7444,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_53",
+            "tSec": 1.7667,
+            "value": -0.7585,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_54",
+            "tSec": 1.8,
+            "value": -0.7558,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_55",
+            "tSec": 1.8333,
+            "value": -0.736,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_56",
+            "tSec": 1.8667,
+            "value": -0.6993,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_57",
+            "tSec": 1.9,
+            "value": -0.6465,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_58",
+            "tSec": 1.9333,
+            "value": -0.5787,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_59",
+            "tSec": 1.9667,
+            "value": -0.4976,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_60",
+            "tSec": 2.0,
+            "value": -0.4052,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_61",
+            "tSec": 2.0333,
+            "value": -0.3038,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_62",
+            "tSec": 2.0667,
+            "value": -0.1959,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_63",
+            "tSec": 2.1,
+            "value": -0.0844,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_64",
+            "tSec": 2.1333,
+            "value": 0.028,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_65",
+            "tSec": 2.1667,
+            "value": 0.1385,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_66",
+            "tSec": 2.2,
+            "value": 0.2444,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_67",
+            "tSec": 2.2333,
+            "value": 0.343,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_68",
+            "tSec": 2.2667,
+            "value": 0.4323,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_69",
+            "tSec": 2.3,
+            "value": 0.51,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_70",
+            "tSec": 2.3333,
+            "value": 0.5748,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_71",
+            "tSec": 2.3667,
+            "value": 0.6252,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_72",
+            "tSec": 2.4,
+            "value": 0.6606,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_73",
+            "tSec": 2.4333,
+            "value": 0.6805,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_74",
+            "tSec": 2.4667,
+            "value": 0.6851,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_75",
+            "tSec": 2.5,
+            "value": 0.6749,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_76",
+            "tSec": 2.5333,
+            "value": 0.6507,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_77",
+            "tSec": 2.5667,
+            "value": 0.6138,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_78",
+            "tSec": 2.6,
+            "value": 0.5658,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_79",
+            "tSec": 2.6333,
+            "value": 0.5084,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_80",
+            "tSec": 2.6667,
+            "value": 0.4436,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_81",
+            "tSec": 2.7,
+            "value": 0.3735,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_82",
+            "tSec": 2.7333,
+            "value": 0.3002,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_83",
+            "tSec": 2.7667,
+            "value": 0.2259,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_84",
+            "tSec": 2.8,
+            "value": 0.1524,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_85",
+            "tSec": 2.8333,
+            "value": 0.0818,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_86",
+            "tSec": 2.8667,
+            "value": 0.0157,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_87",
+            "tSec": 2.9,
+            "value": -0.0446,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_88",
+            "tSec": 2.9333,
+            "value": -0.0978,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_89",
+            "tSec": 2.9667,
+            "value": -0.143,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_90",
+            "tSec": 3.0,
+            "value": -0.1798,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_91",
+            "tSec": 3.0333,
+            "value": -0.2078,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_92",
+            "tSec": 3.0667,
+            "value": -0.2272,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_93",
+            "tSec": 3.1,
+            "value": -0.2381,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_94",
+            "tSec": 3.1333,
+            "value": -0.2413,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_95",
+            "tSec": 3.1667,
+            "value": -0.2373,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_96",
+            "tSec": 3.2,
+            "value": -0.2273,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_97",
+            "tSec": 3.2333,
+            "value": -0.2122,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_98",
+            "tSec": 3.2667,
+            "value": -0.1932,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_99",
+            "tSec": 3.3,
+            "value": -0.1715,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_100",
+            "tSec": 3.3333,
+            "value": -0.1481,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_101",
+            "tSec": 3.3667,
+            "value": -0.1242,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_102",
+            "tSec": 3.4,
+            "value": -0.1007,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_103",
+            "tSec": 3.4333,
+            "value": -0.0785,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_104",
+            "tSec": 3.4667,
+            "value": -0.0583,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_105",
+            "tSec": 3.5,
+            "value": -0.0405,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_106",
+            "tSec": 3.5333,
+            "value": -0.0257,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_107",
+            "tSec": 3.5667,
+            "value": -0.0138,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_108",
+            "tSec": 3.6,
+            "value": -0.0048,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_109",
+            "tSec": 3.6333,
+            "value": 0.0013,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_110",
+            "tSec": 3.6667,
+            "value": 0.0049,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_111",
+            "tSec": 3.7,
+            "value": 0.0064,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_112",
+            "tSec": 3.7333,
+            "value": 0.0063,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_113",
+            "tSec": 3.7667,
+            "value": 0.0052,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_114",
+            "tSec": 3.8,
+            "value": 0.0035,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_115",
+            "tSec": 3.8333,
+            "value": 0.0018,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_116",
+            "tSec": 3.8667,
+            "value": 0.0005,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_117",
+            "tSec": 3.9,
+            "value": 0.0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_118",
             "tSec": 4.0,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_5",
+            "id": "tilt_119",
             "tSec": 4.8,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_6",
+            "id": "tilt_120",
             "tSec": 5.6,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_7",
+            "id": "tilt_121",
             "tSec": 6.4,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_8",
+            "id": "tilt_122",
             "tSec": 7.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_9",
+            "id": "tilt_123",
             "tSec": 8.0,
-            "value": 5,
+            "value": 2,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_10",
+            "id": "tilt_124",
             "tSec": 8.8,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_11",
+            "id": "tilt_125",
             "tSec": 9.6,
-            "value": -6,
+            "value": -2,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_12",
+            "id": "tilt_126",
             "tSec": 10.4,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_13",
+            "id": "tilt_127",
             "tSec": 11.25,
-            "value": 5,
+            "value": 1.5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_14",
+            "id": "tilt_128",
             "tSec": 12.1,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_15",
+            "id": "tilt_129",
             "tSec": 12.95,
-            "value": 5,
+            "value": 1.5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_16",
+            "id": "tilt_130",
             "tSec": 13.8,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_17",
+            "id": "tilt_131",
             "tSec": 14.65,
-            "value": -6,
+            "value": -1.5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_18",
+            "id": "tilt_132",
             "tSec": 15.5,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_19",
+            "id": "tilt_133",
             "tSec": 16.35,
-            "value": -6,
+            "value": -1.5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_20",
+            "id": "tilt_134",
             "tSec": 17.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_21",
-            "tSec": 18.5,
+            "id": "tilt_135",
+            "tSec": 18.0,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_136",
+            "tSec": 19.2,
             "value": -5,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_22",
-            "tSec": 19.0,
-            "value": -5,
-            "interpolationToNext": "smoothstep"
-          },
-          {
-            "id": "tilt_23",
-            "tSec": 19.8,
+            "id": "tilt_137",
+            "tSec": 20.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
-            "id": "tilt_24",
+            "id": "tilt_138",
             "tSec": 21.0,
             "value": 0,
             "interpolationToNext": "smoothstep"
@@ -2678,7 +4034,7 @@
         "type": "scene",
         "payload": {
           "title": "① 살짝 호기심",
-          "desc": "레일 앞으로 천천히 나오며 고개를 살짝 갸웃거립니다 (4.0s)"
+          "desc": "왼쪽을 보고 있다가 기둥이 빙그르르 흔들리듯 돌며 정면을 봅니다 (4.0s)"
         }
       },
       {
@@ -2687,7 +4043,7 @@
         "type": "scene",
         "payload": {
           "title": "② 왼쪽 · 오른쪽 보기",
-          "desc": "눈이 가는 쪽으로 고개를 돌립니다 (각 1.6s)"
+          "desc": "정면을 응시한 채 아주 미세하게만 움직입니다 (각 1.6s)"
         }
       },
       {
@@ -2696,7 +4052,7 @@
         "type": "scene",
         "payload": {
           "title": "③ 위 · 아래 보기",
-          "desc": "눈을 따라 고개를 들었다 숙입니다 (각 1.6s)"
+          "desc": "정면 응시, 아주 미세한 움직임 (각 1.6s)"
         }
       },
       {
@@ -2714,7 +4070,7 @@
         "type": "scene",
         "payload": {
           "title": "⑤ 눈 감기 · 아래 보기",
-          "desc": "눈을 감고 살짝 목례한 뒤 아래를 봅니다"
+          "desc": "정면을 본 채 위로 올라갔다가 아래로 수웅 내려갑니다"
         }
       },
       {
@@ -2723,9 +4079,85 @@
         "type": "scene",
         "payload": {
           "title": "⑥ 신남",
-          "desc": "눈을 반짝이며 몸을 들썩, 링이 알록달록 물결칩니다"
+          "desc": "다시 올라오며 신남 눈이 나옵니다, 링이 알록달록 물결칩니다"
         }
       }
     ]
+  },
+  "eyeLook": {
+    "startSec": 0,
+    "studio": {
+      "blocks": [
+        {
+          "id": "b0",
+          "assetId": "mood-curious-soft",
+          "seconds": 4.0
+        },
+        {
+          "id": "b1",
+          "assetId": "mo-lookLeft",
+          "seconds": 1.6
+        },
+        {
+          "id": "b2",
+          "assetId": "mo-lookRight",
+          "seconds": 1.6
+        },
+        {
+          "id": "b3",
+          "assetId": "mo-lookUp",
+          "seconds": 1.6
+        },
+        {
+          "id": "b4",
+          "assetId": "mo-lookDown",
+          "seconds": 1.6
+        },
+        {
+          "id": "b5",
+          "assetId": "mo-upLeft",
+          "seconds": 1.7
+        },
+        {
+          "id": "b6",
+          "assetId": "mo-upRight",
+          "seconds": 1.7
+        },
+        {
+          "id": "b7",
+          "assetId": "mo-downLeft",
+          "seconds": 1.7
+        },
+        {
+          "id": "b8",
+          "assetId": "mo-downRight",
+          "seconds": 1.7
+        },
+        {
+          "id": "b9",
+          "assetId": "mo-closeEyes",
+          "seconds": 1.0
+        },
+        {
+          "id": "b10",
+          "assetId": "mo-lookDown",
+          "seconds": 1.6
+        },
+        {
+          "id": "b11",
+          "assetId": "mood-excited",
+          "seconds": 1.2
+        }
+      ],
+      "blend": 350,
+      "eyeColor": "#FFFFFF",
+      "bg": "#000000",
+      "mode": "halftone",
+      "shape": "long",
+      "spacing": 100,
+      "custom": null,
+      "useCustom": false,
+      "glow": 160
+    }
   }
 }

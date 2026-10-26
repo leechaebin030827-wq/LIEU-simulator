@@ -92,6 +92,8 @@ export type LieuSequence = {
   loop: boolean;
   demoPreviewOnly?: boolean;
   notes?: string;
+  /** Optional eye-studio look: when present the viewer draws the eyes as that studio sequence (halftone etc.) instead of the raw 8x8 dots. PREVIEW ONLY. */
+  eyeLook?: { studio: unknown; startSec?: number };
   tracks: {
     motion: { railX: NumericTrack; yawY: NumericTrack; tiltZ: NumericTrack };
     ring24: {

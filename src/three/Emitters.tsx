@@ -6,6 +6,8 @@ import { useStore } from '../store';
 import { frame, shell } from './runtime';
 import type { StageId } from '../engine/types';
 import { getBit } from '../engine/eyePresets';
+import { buildProject, defaultSequence, totalMs, ASSET_BY_ID, type Sequence } from '../eyestudio/assets';
+import { drawAt } from '../eyestudio/draw';
 
 const GLOW_VERT = /* glsl */ `
 attribute vec3 color; attribute float size; varying vec3 vColor;
@@ -120,12 +122,72 @@ function PickTargets() {
   );
 }
 
+/** Eye-studio look (halftone "dot curve" eyes etc.): the studio sequence is drawn to a canvas each frame and laid over both eye modules on the shell surface. */
+const LOOK_W = 1536, LOOK_H = 512, LOOK_ROWS = 14, LOOK_COLS = 56;
+const LOOK_VERT = /* glsl */ `
+varying vec2 vUv; varying float vFace;
+void main(){
+  vec4 wp = modelMatrix*vec4(position,1.0);
+  vec3 n = normalize(mat3(modelMatrix)*vec3(1.0,0.0,0.0));
+  vFace = smoothstep(0.15, 0.4, dot(normalize(cameraPosition-wp.xyz), n));
+  vUv = uv; gl_Position = projectionMatrix*viewMatrix*wp; }`;
+const LOOK_FRAG = /* glsl */ `
+uniform sampler2D uMap; uniform float uK; uniform float uGain; varying vec2 vUv; varying float vFace;
+void main(){ vec3 c = texture2D(uMap, vUv).rgb; gl_FragColor = vec4(c*uK*uGain*vFace, 1.0); }`;
+
+function EyeLook() {
+  const look = useStore((s) => s.seq.eyeLook);
+  const studio = useMemo<Sequence | null>(() => {
+    if (!look?.studio) return null;
+    const s = { ...defaultSequence(), ...(look.studio as Sequence) };
+    return { ...s, blocks: (s.blocks ?? []).filter((b) => ASSET_BY_ID[b.assetId]) };
+  }, [look]);
+  const project = useMemo(() => (studio ? buildProject({ ...studio, mode: 'halftone' }) : null), [studio]);
+  const cv = useMemo(() => { const c = document.createElement('canvas'); c.width = LOOK_W; c.height = LOOK_H; return c; }, []);
+  const tex = useMemo(() => { const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; t.minFilter = THREE.LinearFilter; t.generateMipmaps = false; return t; }, [cv]);
+  const geo = useMemo(() => {
+    const zs = eyePx.flatMap((e) => e.pixels.map((p) => p.worldPositionMeters[2])), ys = eyePx.flatMap((e) => e.pixels.map((p) => p.worldPositionMeters[1]));
+    const y0 = Math.min(...ys) - 0.0016, y1 = Math.max(...ys) + 0.0016, z0 = Math.min(...zs) - 0.0021, z1 = Math.max(...zs) + 0.0021;
+    const pos: number[] = [], uv: number[] = [], idx: number[] = [];
+    for (let r = 0; r <= LOOK_ROWS; r++) for (let c = 0; c <= LOOK_COLS; c++) {
+      const v = r / LOOK_ROWS, u = c / LOOK_COLS;
+      const y = y0 + v * (y1 - y0), z = z1 - u * (z1 - z0);          // image left = +Z (viewer's left when looking at the front from +X)
+      const q = shell.surface?.sample(y, z);
+      if (q) pos.push(q.pos[0] + q.normal.x * 0.0003, q.pos[1] + q.normal.y * 0.0003, q.pos[2] + q.normal.z * 0.0003);
+      else pos.push(eyePx[0].pixels[0].worldPositionMeters[0] + EYE_LIFT, y, z);
+      uv.push(u, v);
+    }
+    for (let r = 0; r < LOOK_ROWS; r++) for (let c = 0; c < LOOK_COLS; c++) { const a = r * (LOOK_COLS + 1) + c, b = a + 1, d = a + LOOK_COLS + 1, e = d + 1; idx.push(a, b, d, b, e, d); }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2)); g.setIndex(idx);
+    return g;
+  }, []);
+  const mat = useMemo(() => new THREE.ShaderMaterial({ vertexShader: LOOK_VERT, fragmentShader: LOOK_FRAG, transparent: true, depthWrite: false, depthTest: false,
+    blending: THREE.AdditiveBlending, side: THREE.DoubleSide, uniforms: { uMap: { value: tex }, uK: { value: 1 }, uGain: { value: 1 } } }), [tex]);
+  const last = useRef(-1);
+  useEffect(() => { last.current = -1; }, [project]);
+  useFrame(() => {
+    const st = frame.state; if (!st || !project || !studio) return;
+    const ms = Math.min(Math.max(0, (st.tSec - (look?.startSec ?? 0)) * 1000), totalMs(studio) - 1);
+    mat.uniforms.uK.value = st.eyes.intensity;
+    mat.uniforms.uGain.value = Math.min(2, (studio.glow ?? 100) / 100);
+    if (Math.abs(ms - last.current) < 1000 / 40) return;
+    last.current = ms;
+    const c = cv.getContext('2d')!; c.setTransform(1, 0, 0, 1, 0, 0);
+    drawAt(c, LOOK_W, LOOK_H, project, ms, '#000000');
+    tex.needsUpdate = true;
+  });
+  if (!project) return null;
+  return <StageGroup node={13}><mesh geometry={geo} material={mat} frustumCulled={false} renderOrder={6} /></StageGroup>;
+}
+
 /** Lift lit dots toward the shell surface (+X) so they show in the holes instead of behind the board. */
 const EYE_LIFT = 0.0008;
 
 type Seat = { pos: [number, number, number]; normal: THREE.Vector3 };
 
 function EyeGlow({ side }: { side: 'left' | 'right' }) {
+  const hidden = useStore((s) => !!s.seq.eyeLook);
   const data = eyePx[side === 'left' ? 0 : 1];
   const node = side === 'left' ? 13 : 8;
   // Lit dots sit on the smooth outer surface (height-field built from the shell) just above the sealing patch.
@@ -152,7 +214,7 @@ function EyeGlow({ side }: { side: 'left' | 'right' }) {
     const col = geo.getAttribute('color') as THREE.BufferAttribute;
     data.pixels.forEach((p, i) => {
       const on = getBit(rows, p.row, p.col);
-      const f = on ? 4.5 * k : 0; // unlit dots show only the shell-colored hole interior
+      const f = on && !hidden ? 4.5 * k : 0; // unlit dots show only the shell-colored hole interior
       col.setXYZ(i, tint.r * f, tint.g * f, tint.b * f);
     });
     col.needsUpdate = true;
@@ -227,6 +289,7 @@ export function Emitters() {
       <RingGlow />
       <EyeGlow side="left" />
       <EyeGlow side="right" />
+      <EyeLook />
       <PivotGizmos />
       <OuterHalo />
     </>

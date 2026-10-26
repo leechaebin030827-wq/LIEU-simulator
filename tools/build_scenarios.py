@@ -80,7 +80,7 @@ def whirl(yaw: Tr, tilt: Tr, t0):
     return tA, tB, tC
 
 
-def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, clips, opacity, rot, audio, events, partial=None):
+def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, clips, opacity, rot, audio, events, partial=None, extra=None):
     seq = {'schema': 'lieu.sequence/v1', 'id': id_, 'title': title, 'durationSec': dur, 'fps': 30, 'loop': False,
            'demoPreviewOnly': True, 'notes': notes,
            'tracks': {
@@ -99,6 +99,7 @@ def build(id_, title, dur, notes, motion, ring_fx, brightness, eyes, intensity, 
                    'offsetZm': {'kind': 'numeric', 'keys': [{'id': 'pz', 'tSec': 0, 'value': 0, 'interpolationToNext': 'smoothstep'}]}}},
                'audio': audio,
                'events': [{'id': f'ev{i}', 'tSec': t, 'type': ty, 'payload': pl} for i, (t, ty, pl) in enumerate(events)]}}
+    if extra: seq.update(extra)
     tv_copy.apply(seq)
     sfx_mix.apply(seq)
     for out in (ROOT / 'examples', ROOT / 'public/examples'):
@@ -338,22 +339,38 @@ def driving_b():
 def web_cover():
     """21.0 s, same beats as the eye-extractor sequence. The head follows each gaze block (yaw +/-, tilt + = nose up) and returns to centre between blocks."""
     DUR = 21.0
+    # eye-extractor sequence (same blocks as tools/bake_eyes.ts WEB_COVER): halftone "dot curve" long eyes, white, transparent bg, spacing 100 %, glow 160 %, blend 350 ms
+    BLOCKS = [('mood-curious-soft', 4.0), ('mo-lookLeft', 1.6), ('mo-lookRight', 1.6), ('mo-lookUp', 1.6), ('mo-lookDown', 1.6), ('mo-upLeft', 1.7), ('mo-upRight', 1.7),
+              ('mo-downLeft', 1.7), ('mo-downRight', 1.7), ('mo-closeEyes', 1.0), ('mo-lookDown', 1.6), ('mood-excited', 1.2)]
+    STUDIO = {'blocks': [{'id': f'b{i}', 'assetId': a, 'seconds': d} for i, (a, d) in enumerate(BLOCKS)], 'blend': 350, 'eyeColor': '#FFFFFF', 'bg': '#000000',
+              'mode': 'halftone', 'shape': 'long', 'spacing': 100, 'custom': None, 'useCustom': False, 'glow': 160}
     rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
-    # gaze blocks: (start, length, yaw deg, tilt deg, scene title, label)
-    LOOKS = [(4.0, 1.6, -26, 0), (5.6, 1.6, 26, 0), (7.2, 1.6, 0, 5), (8.8, 1.6, 0, -6),
-             (10.4, 1.7, -20, 5), (12.1, 1.7, 20, 5), (13.8, 1.7, -20, -6), (15.5, 1.7, 20, -6)]
+    # 0-4 s: the column starts turned to the left, then swirls (yaw/tilt a quarter-turn apart, fading out) round to face front.
+    # 4-17.2 s: stays facing front; the look-around blocks only nudge it very subtly (yaw <= 5 deg, tilt <= 2 deg).
+    # 17.2-21 s: still facing front: up, slips down, then rises again as the excited eyes appear (tilt only).
+    LOOKS = [(4.0, 1.6, -5, 0), (5.6, 1.6, 5, 0), (7.2, 1.6, 0, 2), (8.8, 1.6, 0, -2),
+             (10.4, 1.7, -4, 1.5), (12.1, 1.7, 4, 1.5), (13.8, 1.7, -4, -1.5), (15.5, 1.7, 4, -1.5)]
     rail.add(0, -0.06).add(4.0, 0).add(DUR, 0)
-    yv, tv = [(0, 0), (1.2, 8), (2.4, -6), (3.6, 0)], [(0, 0), (1.2, 3), (2.4, 2), (3.6, 0)]   # slightly curious: a little head-cock
-    # one smooth out-and-back per gaze block (peak at mid-block) keeps accel inside the preview limits (yaw 500, tilt 60 deg/s^2)
+    pts = {'yaw': [], 'tilt': []}      # (t, value, interp)
+    HOLD, END = 1.0, 3.9
+    for i in range(0, int(END * 30) + 1):
+        t = i / 30
+        u = min(1, max(0, (t - HOLD) / (END - HOLD)))
+        env = math.sin(math.pi * u) if u > 0 else 0
+        ph = 2 * math.pi * (t - HOLD) / 1.5
+        y = -30 * (1 - es(u)) + 11 * env * math.sin(ph) * (1 - u)
+        k = 1.4 * env * math.cos(ph) * (1 - u)
+        pts['yaw'].append((t, y, 'linear')); pts['tilt'].append((t, k, 'linear'))
+    pts['yaw'].append((END + 0.1, 0, 'smoothstep')); pts['tilt'].append((END + 0.1, 0, 'smoothstep'))
     for (t0, d, y, t) in LOOKS:
-        yv += [(t0, 0), (t0 + d / 2, y), (t0 + d, 0)]; tv += [(t0, 0), (t0 + d / 2, t), (t0 + d, 0)]
-    yv += [(17.2, 0), (19.8, 0), (20.4, 10), (21.0, 0)]
-    tv += [(17.2, 0), (18.5, -5), (19.0, -5), (19.8, 0)]                                           # eyes shut + look down: one small bow
-    yv.append((DUR, 0)); tv.append((DUR, 0))
-    for tr, pts in ((yaw, yv), (tilt, tv)):
+        for key, v in (('yaw', y), ('tilt', t)):
+            pts[key] += [(t0, 0, 'smoothstep'), (t0 + d / 2, v, 'smoothstep'), (t0 + d, 0, 'smoothstep')]
+    pts['tilt'] += [(17.2, 0, 'smoothstep'), (18.0, 5, 'smoothstep'), (19.2, -5, 'smoothstep'), (20.2, 0, 'smoothstep'), (DUR, 0, 'smoothstep')]
+    pts['yaw'] += [(17.2, 0, 'smoothstep'), (DUR, 0, 'smoothstep')]
+    for tr, key in ((yaw, 'yaw'), (tilt, 'tilt')):
         last = -1
-        for t, v in sorted(set(pts), key=lambda e: e[0]):
-            if t > last + 1e-6: tr.add(t, v); last = t
+        for t, v, ip in sorted(pts[key], key=lambda e: e[0]):
+            if t > last + 1e-6: tr.add(t, v, ip); last = t
     eyes = [(0, N)]
     baked = ROOT / 'tools/baked_eyes/05_web_cover.json'
     if baked.exists():
@@ -366,15 +383,15 @@ def web_cover():
     opac = Tr('op').add(0, 0).add(DUR, 0)
     audio = [sfx('cue', 'sfx_cue.wav', 0.0, 0.45, 0.5), sfx('nod', 'sfx_nod.wav', 17.5, 0.35, 0.6),
              sfx('sparkle', 'sfx_sparkle.wav', 19.8, 1.1, 0.5), sfx('boing', 'sfx_boing.wav', 20.0, 0.5, 0.5)]
-    ev = [scene(0, '① 살짝 호기심', '레일 앞으로 천천히 나오며 고개를 살짝 갸웃거립니다 (4.0s)'),
-          scene(4.0, '② 왼쪽 · 오른쪽 보기', '눈이 가는 쪽으로 고개를 돌립니다 (각 1.6s)'),
-          scene(7.2, '③ 위 · 아래 보기', '눈을 따라 고개를 들었다 숙입니다 (각 1.6s)'),
+    ev = [scene(0, '① 살짝 호기심', '왼쪽을 보고 있다가 기둥이 빙그르르 흔들리듯 돌며 정면을 봅니다 (4.0s)'),
+          scene(4.0, '② 왼쪽 · 오른쪽 보기', '정면을 응시한 채 아주 미세하게만 움직입니다 (각 1.6s)'),
+          scene(7.2, '③ 위 · 아래 보기', '정면 응시, 아주 미세한 움직임 (각 1.6s)'),
           scene(10.4, '④ 대각선 보기', '왼쪽 위 → 오른쪽 위 → 왼쪽 아래 → 오른쪽 아래 (각 1.7s)'),
-          scene(17.2, '⑤ 눈 감기 · 아래 보기', '눈을 감고 살짝 목례한 뒤 아래를 봅니다'),
-          scene(19.8, '⑥ 신남', '눈을 반짝이며 몸을 들썩, 링이 알록달록 물결칩니다')]
+          scene(17.2, '⑤ 눈 감기 · 아래 보기', '정면을 본 채 위로 올라갔다가 아래로 수웅 내려갑니다'),
+          scene(19.8, '⑥ 신남', '다시 올라오며 신남 눈이 나옵니다, 링이 알록달록 물결칩니다')]
     build('05_web_cover', '05 Web Motion - Cover', DUR,
           'PREVIEW ONLY. 웹 모션 - 표지: 눈 추출기 시퀀스(21.0s, 긴 눈·간격 100%·연결 부드러움 350ms)와 같은 길이/순서에 맞춰 로봇이 시선을 따라 고개를 움직입니다.',
-          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, [], opac, 0, audio, ev)
+          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, [], opac, 0, audio, ev, extra={'eyeLook': {'startSec': 0, 'studio': STUDIO}})
 
 
 if __name__ == '__main__':
