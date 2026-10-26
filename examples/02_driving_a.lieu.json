@@ -6,7 +6,7 @@
   "fps": 30,
   "loop": false,
   "demoPreviewOnly": true,
-  "notes": "PREVIEW ONLY. 주행A: 공사 구간 감지 -> 레일 맨 앞에서 모니터 쪽으로 물러나며 두리번 -> 안내 위치에서 음성+바닥 투사로 우회 안내 -> 조용히 대기.",
+  "notes": "PREVIEW ONLY. 주행A: 공사 구간 감지 -> 레일 맨 앞에서 모니터 쪽으로 물러나며 두리번 -> 안내 위치에서 음성+바닥 투사로 우회 안내 -> 조용히 대기. [요 속도 60°/s 이하로 제한됨 (tools/limit_yaw_speed.ts)]",
   "tracks": {
     "motion": {
       "railX": {
@@ -20,13 +20,13 @@
           },
           {
             "id": "rail_1",
-            "tSec": 5.0,
+            "tSec": 5,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "rail_2",
-            "tSec": 13.0,
+            "tSec": 13,
             "value": -0.25,
             "interpolationToNext": "smoothstep"
           },
@@ -57,67 +57,931 @@
             "id": "yaw_0",
             "tSec": 0,
             "value": 0,
-            "interpolationToNext": "smoothstep"
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_1",
-            "tSec": 4.0,
+            "tSec": 4,
             "value": 0,
-            "interpolationToNext": "smoothstep"
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_2",
-            "tSec": 6.2,
-            "value": 90,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.0333,
+            "value": 0.061,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_3",
-            "tSec": 7.4,
-            "value": 64,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.0667,
+            "value": 0.243,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_4",
-            "tSec": 8.6,
-            "value": 90,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.1,
+            "value": 0.541,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_5",
-            "tSec": 9.8,
-            "value": 66,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.1333,
+            "value": 0.952,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_6",
-            "tSec": 11.0,
-            "value": 90,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.1667,
+            "value": 1.471,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_7",
-            "tSec": 12.0,
-            "value": 70,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.2,
+            "value": 2.096,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_8",
-            "tSec": 12.8,
-            "value": 90,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.2667,
+            "value": 3.646,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_9",
-            "tSec": 14.8,
-            "value": 0,
-            "interpolationToNext": "smoothstep"
+            "tSec": 4.3333,
+            "value": 5.572,
+            "interpolationToNext": "linear"
           },
           {
             "id": "yaw_10",
+            "tSec": 4.4,
+            "value": 7.844,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_11",
+            "tSec": 4.4667,
+            "value": 10.431,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_12",
+            "tSec": 4.5333,
+            "value": 13.303,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_13",
+            "tSec": 4.6,
+            "value": 16.431,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_14",
+            "tSec": 4.6667,
+            "value": 19.785,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_15",
+            "tSec": 4.7667,
+            "value": 25.172,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_16",
+            "tSec": 5.3333,
+            "value": 59.103,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_17",
+            "tSec": 5.4333,
+            "value": 64.828,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_18",
+            "tSec": 5.5333,
+            "value": 70.215,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_19",
+            "tSec": 5.6,
+            "value": 73.569,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_20",
+            "tSec": 5.6667,
+            "value": 76.697,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_21",
+            "tSec": 5.7333,
+            "value": 79.569,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_22",
+            "tSec": 5.8,
+            "value": 82.156,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_23",
+            "tSec": 5.8667,
+            "value": 84.428,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_24",
+            "tSec": 5.9333,
+            "value": 86.354,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_25",
+            "tSec": 6,
+            "value": 87.904,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_26",
+            "tSec": 6.0333,
+            "value": 88.529,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_27",
+            "tSec": 6.0667,
+            "value": 89.048,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_28",
+            "tSec": 6.1,
+            "value": 89.459,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_29",
+            "tSec": 6.1333,
+            "value": 89.757,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_30",
+            "tSec": 6.1667,
+            "value": 89.939,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_31",
+            "tSec": 6.2,
+            "value": 90,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_32",
+            "tSec": 6.2333,
+            "value": 89.941,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_33",
+            "tSec": 6.2667,
+            "value": 89.768,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_34",
+            "tSec": 6.3,
+            "value": 89.488,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_35",
+            "tSec": 6.3667,
+            "value": 88.635,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_36",
+            "tSec": 6.4333,
+            "value": 87.433,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_37",
+            "tSec": 6.5,
+            "value": 85.938,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_38",
+            "tSec": 6.5667,
+            "value": 84.201,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_39",
+            "tSec": 6.6667,
+            "value": 81.262,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_40",
+            "tSec": 6.9333,
+            "value": 72.738,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_41",
+            "tSec": 7.0333,
+            "value": 69.799,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_42",
+            "tSec": 7.1,
+            "value": 68.063,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_43",
+            "tSec": 7.1667,
+            "value": 66.567,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_44",
+            "tSec": 7.2333,
+            "value": 65.365,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_45",
+            "tSec": 7.3,
+            "value": 64.512,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_46",
+            "tSec": 7.3333,
+            "value": 64.232,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_47",
+            "tSec": 7.3667,
+            "value": 64.059,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_48",
+            "tSec": 7.4,
+            "value": 64,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_49",
+            "tSec": 7.4333,
+            "value": 64.059,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_50",
+            "tSec": 7.4667,
+            "value": 64.232,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_51",
+            "tSec": 7.5,
+            "value": 64.512,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_52",
+            "tSec": 7.5667,
+            "value": 65.365,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_53",
+            "tSec": 7.6333,
+            "value": 66.567,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_54",
+            "tSec": 7.7,
+            "value": 68.063,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_55",
+            "tSec": 7.7667,
+            "value": 69.799,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_56",
+            "tSec": 7.8667,
+            "value": 72.738,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_57",
+            "tSec": 8.1333,
+            "value": 81.262,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_58",
+            "tSec": 8.2333,
+            "value": 84.201,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_59",
+            "tSec": 8.3,
+            "value": 85.938,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_60",
+            "tSec": 8.3667,
+            "value": 87.433,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_61",
+            "tSec": 8.4333,
+            "value": 88.635,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_62",
+            "tSec": 8.5,
+            "value": 89.488,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_63",
+            "tSec": 8.5333,
+            "value": 89.768,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_64",
+            "tSec": 8.5667,
+            "value": 89.941,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_65",
+            "tSec": 8.6,
+            "value": 90,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_66",
+            "tSec": 8.6333,
+            "value": 89.945,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_67",
+            "tSec": 8.7,
+            "value": 89.528,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_68",
+            "tSec": 8.7667,
+            "value": 88.74,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_69",
+            "tSec": 8.8333,
+            "value": 87.631,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_70",
+            "tSec": 8.9,
+            "value": 86.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_71",
+            "tSec": 9,
+            "value": 83.778,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_72",
+            "tSec": 9.1333,
+            "value": 79.992,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_73",
+            "tSec": 9.3333,
+            "value": 74.066,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_74",
+            "tSec": 9.4333,
+            "value": 71.353,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_75",
+            "tSec": 9.5,
+            "value": 69.75,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_76",
+            "tSec": 9.5667,
+            "value": 68.369,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_77",
+            "tSec": 9.6333,
+            "value": 67.26,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_78",
+            "tSec": 9.7,
+            "value": 66.472,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_79",
+            "tSec": 9.7667,
+            "value": 66.055,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_80",
+            "tSec": 9.8,
+            "value": 66,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_81",
+            "tSec": 9.8333,
+            "value": 66.055,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_82",
+            "tSec": 9.9,
+            "value": 66.472,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_83",
+            "tSec": 9.9667,
+            "value": 67.26,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_84",
+            "tSec": 10.0333,
+            "value": 68.369,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_85",
+            "tSec": 10.1,
+            "value": 69.75,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_86",
+            "tSec": 10.2,
+            "value": 72.222,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_87",
+            "tSec": 10.3333,
+            "value": 76.008,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_88",
+            "tSec": 10.5333,
+            "value": 81.934,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_89",
+            "tSec": 10.6333,
+            "value": 84.647,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_90",
+            "tSec": 10.7,
+            "value": 86.25,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_91",
+            "tSec": 10.7667,
+            "value": 87.631,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_92",
+            "tSec": 10.8333,
+            "value": 88.74,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_93",
+            "tSec": 10.9,
+            "value": 89.528,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_94",
+            "tSec": 10.9667,
+            "value": 89.945,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_95",
+            "tSec": 11,
+            "value": 90,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_96",
+            "tSec": 11.0333,
+            "value": 89.935,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_97",
+            "tSec": 11.0667,
+            "value": 89.745,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_98",
+            "tSec": 11.1,
+            "value": 89.44,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_99",
+            "tSec": 11.1667,
+            "value": 88.519,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_100",
+            "tSec": 11.2333,
+            "value": 87.241,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_101",
+            "tSec": 11.3,
+            "value": 85.68,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_102",
+            "tSec": 11.4,
+            "value": 82.96,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_103",
+            "tSec": 11.6333,
+            "value": 76.095,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_104",
+            "tSec": 11.7,
+            "value": 74.32,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_105",
+            "tSec": 11.7667,
+            "value": 72.759,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_106",
+            "tSec": 11.8333,
+            "value": 71.481,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_107",
+            "tSec": 11.9,
+            "value": 70.56,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_108",
+            "tSec": 11.9333,
+            "value": 70.255,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_109",
+            "tSec": 11.9667,
+            "value": 70.065,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_110",
+            "tSec": 12,
+            "value": 70,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_111",
+            "tSec": 12.0333,
+            "value": 70.101,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_112",
+            "tSec": 12.0667,
+            "value": 70.394,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_113",
+            "tSec": 12.1,
+            "value": 70.859,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_114",
+            "tSec": 12.1333,
+            "value": 71.481,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_115",
+            "tSec": 12.1667,
+            "value": 72.242,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_116",
+            "tSec": 12.2,
+            "value": 73.125,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_117",
+            "tSec": 12.2667,
+            "value": 75.185,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_118",
+            "tSec": 12.3667,
+            "value": 78.753,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_119",
+            "tSec": 12.5,
+            "value": 83.672,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_120",
+            "tSec": 12.5667,
+            "value": 85.888,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_121",
+            "tSec": 12.6,
+            "value": 86.875,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_122",
+            "tSec": 12.6333,
+            "value": 87.758,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_123",
+            "tSec": 12.6667,
+            "value": 88.519,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_124",
+            "tSec": 12.7,
+            "value": 89.141,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_125",
+            "tSec": 12.7333,
+            "value": 89.606,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_126",
+            "tSec": 12.7667,
+            "value": 89.899,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_127",
+            "tSec": 12.8,
+            "value": 90,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_128",
+            "tSec": 12.8333,
+            "value": 89.926,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_129",
+            "tSec": 12.8667,
+            "value": 89.707,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_130",
+            "tSec": 12.9,
+            "value": 89.348,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_131",
+            "tSec": 12.9333,
+            "value": 88.853,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_132",
+            "tSec": 12.9667,
+            "value": 88.229,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_133",
+            "tSec": 13,
+            "value": 87.48,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_134",
+            "tSec": 13.0333,
+            "value": 86.611,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_135",
+            "tSec": 13.0667,
+            "value": 85.627,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_136",
+            "tSec": 13.1,
+            "value": 84.533,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_137",
+            "tSec": 13.1333,
+            "value": 83.333,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_138",
+            "tSec": 14.1667,
+            "value": 21.359,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_139",
+            "tSec": 14.2333,
+            "value": 17.581,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_140",
+            "tSec": 14.3,
+            "value": 14.063,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_141",
+            "tSec": 14.3667,
+            "value": 10.844,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_142",
+            "tSec": 14.4333,
+            "value": 7.966,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_143",
+            "tSec": 14.4667,
+            "value": 6.667,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_144",
+            "tSec": 14.5,
+            "value": 5.468,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_145",
+            "tSec": 14.5333,
+            "value": 4.373,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_146",
+            "tSec": 14.5667,
+            "value": 3.389,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_147",
+            "tSec": 14.6,
+            "value": 2.52,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_148",
+            "tSec": 14.6333,
+            "value": 1.771,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_149",
+            "tSec": 14.6667,
+            "value": 1.147,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_150",
+            "tSec": 14.7,
+            "value": 0.653,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_151",
+            "tSec": 14.7333,
+            "value": 0.293,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_152",
+            "tSec": 14.7667,
+            "value": 0.074,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_153",
+            "tSec": 14.8667,
+            "value": 0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_154",
             "tSec": 39,
             "value": 0,
-            "interpolationToNext": "smoothstep"
+            "interpolationToNext": "linear"
           }
         ]
       },
@@ -132,7 +996,7 @@
           },
           {
             "id": "tilt_1",
-            "tSec": 4.0,
+            "tSec": 4,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
@@ -162,13 +1026,13 @@
           },
           {
             "id": "tilt_6",
-            "tSec": 11.0,
+            "tSec": 11,
             "value": -12,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "tilt_7",
-            "tSec": 12.0,
+            "tSec": 12,
             "value": -6,
             "interpolationToNext": "smoothstep"
           },
@@ -186,7 +1050,7 @@
           },
           {
             "id": "tilt_10",
-            "tSec": 17.0,
+            "tSec": 17,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
@@ -513,13 +1377,13 @@
           {
             "id": "br_0",
             "tSec": 0,
-            "value": 0.12,
+            "value": 0.8,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "br_1",
             "tSec": 39,
-            "value": 0.12,
+            "value": 0.8,
             "interpolationToNext": "smoothstep"
           }
         ]
@@ -529,7 +1393,7 @@
           "id": "idle_a",
           "type": "breathe",
           "fromSec": 0,
-          "toSec": 4.0,
+          "toSec": 4,
           "seed": 1,
           "priority": 1,
           "blend": "max",
@@ -546,7 +1410,7 @@
         {
           "id": "attention",
           "type": "solid",
-          "fromSec": 4.0,
+          "fromSec": 4,
           "toSec": 17.2,
           "seed": 2,
           "priority": 1,
@@ -560,7 +1424,7 @@
               "keys": [
                 {
                   "id": "wl_0",
-                  "tSec": 4.0,
+                  "tSec": 4,
                   "value": 0,
                   "interpolationToNext": "smoothstep"
                 },
@@ -572,7 +1436,7 @@
                 },
                 {
                   "id": "wl_2",
-                  "tSec": 16.0,
+                  "tSec": 16,
                   "value": 200,
                   "interpolationToNext": "smoothstep"
                 },
@@ -607,7 +1471,7 @@
         {
           "id": "talk",
           "type": "breathe",
-          "fromSec": 18.0,
+          "fromSec": 18,
           "toSec": 22.5,
           "seed": 4,
           "priority": 1,
@@ -625,8 +1489,8 @@
         {
           "id": "idle_b",
           "type": "breathe",
-          "fromSec": 29.0,
-          "toSec": 37.0,
+          "fromSec": 29,
+          "toSec": 37,
           "seed": 5,
           "priority": 1,
           "blend": "max",
@@ -3057,7 +3921,7 @@
       },
       {
         "id": "voice",
-        "fromSec": 18.0,
+        "fromSec": 18,
         "toSec": 22.46,
         "assetId": "media/voice_detour.wav",
         "mediaOffsetSec": 0,
@@ -3139,7 +4003,7 @@
       },
       {
         "id": "ev1",
-        "tSec": 4.0,
+        "tSec": 4,
         "type": "scene",
         "payload": {
           "title": "공사 구간 감지 · 모니터 쪽으로 두리번",
@@ -3153,7 +4017,7 @@
       },
       {
         "id": "ev2",
-        "tSec": 13.0,
+        "tSec": 13,
         "type": "scene",
         "payload": {
           "title": "모니터 쪽 끝 도착",
@@ -3216,7 +4080,7 @@
             {
               "src": "assets/screen_drive.mp4",
               "from": 0,
-              "dur": 4.0,
+              "dur": 4,
               "accel": 0,
               "decel": 2.2
             },
@@ -3224,7 +4088,7 @@
               "src": "assets/screen_drive_rev.mp4",
               "from": 13.5,
               "dur": 9.5,
-              "accel": 2.0,
+              "accel": 2,
               "decel": 2.6
             }
           ]
@@ -3232,7 +4096,7 @@
       },
       {
         "id": "ev7",
-        "tSec": 4.0,
+        "tSec": 4,
         "type": "detour_info_received",
         "payload": {
           "reason": "road_work",

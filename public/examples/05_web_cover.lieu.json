@@ -2030,13 +2030,13 @@
           {
             "id": "br_0",
             "tSec": 0,
-            "value": 0.12,
+            "value": 0.8,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "br_1",
             "tSec": 21.0,
-            "value": 0.12,
+            "value": 0.8,
             "interpolationToNext": "smoothstep"
           }
         ]

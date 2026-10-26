@@ -19,7 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ZERO24 = [[0, 0, 0, 0] for _ in range(24)]
-BR = 0.12   # ring brightness used everywhere (same level as the projection scene)
+BR = 0.8    # ring brightness used everywhere (the hardware side still caps the real LEDs: Hardware panel max brightness / current budget)
 
 # 8x8 eye bitmaps (bit7 = column 0)
 N = [0] + [0b00011100] * 6 + [0]                 # default eye: 3x6 bar
@@ -274,6 +274,59 @@ def arrival():
           {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, fx, bright, eyes, inten, clips, opac, 0, audio, ev)
 
 
+
+# ---------------------------------------------------------------- 04 driving B: ring light show
+def _fx(id, type, a, b, seed, params, prio=1, blend='max'):
+    return {'id': id, 'type': type, 'fromSec': a, 'toSec': b, 'seed': seed, 'priority': prio, 'blend': blend, 'params': params}
+
+
+def driving_b_ring():
+    """24-LED ring for 04: one look per beat of the scene (call, giggle wiggles, heartbeat, wink flash, blush + peek, star party on the bounce beats, sweet glow).
+    Colours are RGBW; white channel gives the pastel tones. Beat times match the yaw wiggles (0.7 s apart) and the chime/wink at 10.6 s."""
+    PINK, ROSE, SKY, LILAC = [255, 130, 180, 0], [255, 90, 150, 40], [110, 205, 255, 0], [185, 150, 255, 0]
+    PEACH, GOLD, MINT, WARM = [255, 170, 130, 80], [255, 205, 100, 60], [120, 255, 200, 0], [255, 190, 150, 90]
+    BLUE = [90, 185, 255, 40]
+    f = []
+    # 0-3 waiting: soft blue breath with a slow cyan comet
+    f += [breathe('idle', 1, BLUE, 0, 3.0, 1 / 3.0),
+          _fx('idle_comet', 'chase', 0, 3.0, 11, {'color': [60, 120, 170, 0], 'speedHz': 0.15, 'width': 5, 'direction': 1})]
+    # 3.0-3.5 "Hey LIEU": white flash, a fast white spin and a cyan ripple that fills the ring
+    f += [_fx('wake', 'solid', 3.0, 3.5, 2, {'whiteLevel': 255}, 2),
+          _fx('wake_spin', 'chase', 3.0, 3.6, 12, {'color': [255, 255, 255, 255], 'speedHz': 2.0, 'width': 7, 'direction': 1}, 3),
+          _fx('wake_fill', 'progress', 3.0, 3.6, 13, {'color': [150, 220, 255, 100]}, 2)]
+    # 3.5-7.5 giggle: pink glow, gold and lilac waves running opposite ways, a pulse on every wiggle (4.8 / 5.5 / 6.2), white glitter
+    f += [breathe('giggle', 3, PINK, 3.5, 7.5, 1.4),
+          _fx('giggle_gold', 'wave', 3.7, 5.6, 14, {'color': GOLD, 'speedHz': 1.2, 'width': 12, 'direction': 1}),
+          _fx('giggle_lilac', 'wave', 4.8, 7.5, 15, {'color': LILAC, 'speedHz': 1.2, 'width': 12, 'direction': -1}),
+          _fx('giggle_beat', 'pulse', 4.45, 6.9, 16, {'color': [255, 150, 200, 60], 'periodSec': 0.7}, 2),
+          _fx('giggle_glitter', 'sparkle', 3.8, 7.5, 17, {'color': [255, 255, 255, 200], 'rateHz': 8, 'density': 0.14}, 3, 'add')]
+    # 7.5-12.2 hearts: rose/pink waves, a lub-dub heartbeat, a warm-white flash on the wink (10.6)
+    f += [wave('love_a', 4, ROSE, 0, 7.5, 12.2, 0.6), wave('love_b', 5, PINK, math.pi, 7.5, 12.2, 0.6),
+          _fx('heartbeat', 'pulse', 7.5, 12.2, 18, {'color': [255, 50, 100, 0], 'periodSec': 0.9}, 2),
+          _fx('wink', 'solid', 10.55, 10.85, 19, {'color': [255, 245, 200, 200]}, 4)]
+    # 12.3-16.5 shy: lilac -> peach blush that breathes slowly, a soft pink dot sneaking round when it peeks back (15.4)
+    f += [_fx('shy_a', 'wave', 12.3, 16.5, 20, {'color': LILAC, 'speedHz': 0.12, 'width': 24, 'direction': 1}),
+          _fx('shy_b', 'wave', 12.3, 16.5, 21, {'color': PEACH, 'speedHz': 0.12, 'width': 24, 'direction': 1, 'phase': math.pi}),
+          breathe('shy', 6, [255, 160, 190, 60], 12.3, 16.5, 0.5),
+          _fx('peek', 'chase', 15.4, 16.5, 22, {'color': [255, 170, 200, 40], 'speedHz': 0.5, 'width': 8, 'direction': -1}, 2)]
+    # 16.5-22 star party: gold glitter, four coloured waves, three comets circling in different directions, a flash on each bounce (17.1 ... 19.9)
+    f += [_fx('stars', 'sparkle', 16.5, 22.0, 7, {'color': [255, 240, 160, 60], 'rateHz': 9, 'density': 0.45}),
+          _fx('comet_gold', 'chase', 16.6, 22.0, 23, {'color': GOLD, 'speedHz': 0.9, 'width': 4, 'direction': 1}, 2),
+          _fx('comet_mint', 'chase', 17.0, 22.0, 24, {'color': MINT, 'speedHz': 0.6, 'width': 4, 'direction': -1}, 2),
+          _fx('comet_pink', 'chase', 17.0, 21.6, 25, {'color': PINK, 'speedHz': 1.2, 'width': 4, 'direction': 1}, 2),
+          _fx('bounce_beat', 'pulse', 16.75, 20.25, 26, {'color': [255, 190, 110, 50], 'periodSec': 0.7}, 3)]
+    f += [wave('party_' + n, 30 + i, c, ph, 17.0, 22.0, 1.1) for i, (n, c, ph) in enumerate(WHIRL_COLORS)]
+    # 22-28 sweet goodbye: warm breath, slow peach/rose blend, a few warm sparkles, one slow golden glow circling
+    f += [breathe('sweet', 8, WARM, 22.0, 28.0, 0.5),
+          _fx('sweet_a', 'wave', 22.0, 28.0, 40, {'color': PEACH, 'speedHz': 0.1, 'width': 24, 'direction': 1}),
+          _fx('sweet_b', 'wave', 22.0, 28.0, 41, {'color': ROSE, 'speedHz': 0.1, 'width': 24, 'direction': 1, 'phase': math.pi}),
+          _fx('sweet_glow', 'chase', 22.0, 28.0, 42, {'color': GOLD, 'speedHz': 0.12, 'width': 10, 'direction': 1}),
+          _fx('sweet_sparkle', 'sparkle', 22.5, 27.5, 43, {'color': [255, 230, 190, 120], 'rateHz': 4, 'density': 0.1}, 3, 'add')]
+    # 28-31.5 back to waiting
+    f += [breathe('idle_b', 9, BLUE, 28.0, 31.5, 1 / 3.0), _fx('idle_b_comet', 'chase', 28.0, 31.5, 44, {'color': [60, 120, 170, 0], 'speedHz': 0.15, 'width': 5, 'direction': 1})]
+    return f
+
+
 # ---------------------------------------------------------------- 04 driving B
 def driving_b():
     """a passenger says "Hey LIEU" -> Lieu is startled, then does every cute thing it knows: giggle-wiggle, heart eyes, wink, shy, star-struck bounce, sweet bow."""
@@ -300,15 +353,7 @@ def driving_b():
         eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
     inten = Tr('int').add(0, 1)
     PINK, ROSE, SKY, WARM = [255, 130, 180, 0], [255, 90, 150, 40], [110, 205, 255, 0], [255, 190, 150, 90]
-    fx = [breathe('idle', 1, [90, 185, 255, 40], 0, 3.0, 1 / 3.0),
-          # wake word: a bright pulse around the ring
-          {'id': 'wake', 'type': 'solid', 'fromSec': 3.0, 'toSec': 3.5, 'seed': 2, 'priority': 2, 'blend': 'max', 'params': {'whiteLevel': 255}},
-          breathe('giggle', 3, PINK, 3.5, 7.5, 1.4),
-          wave('love_a', 4, ROSE, 0, 7.5, 12.2, 0.6), wave('love_b', 5, PINK, math.pi, 7.5, 12.2, 0.6),
-          breathe('shy', 6, [255, 160, 190, 60], 12.3, 16.5, 0.9),
-          {'id': 'stars', 'type': 'sparkle', 'fromSec': 16.5, 'toSec': 22.0, 'seed': 7, 'priority': 1, 'blend': 'max', 'params': {'color': [255, 240, 160, 60], 'rateHz': 9, 'density': 0.45}}]
-    fx += [wave('party_' + n, 20 + i, c, ph, 17.0, 22.0, 1.1) for i, (n, c, ph) in enumerate(WHIRL_COLORS)]
-    fx += [breathe('sweet', 8, WARM, 22.0, 28.0, 0.5), breathe('idle_b', 9, [90, 185, 255, 40], 28.0, 31.5, 1 / 3.0)]
+    fx = driving_b_ring()
     bright = Tr('br').add(0, BR).add(DUR, BR)
     clips = [{'id': 'hey', 'fromSec': 2.6, 'toSec': 4.4, 'assetId': 'media/hey_lieu.svg', 'visible': True},
              {'id': 'reply', 'fromSec': 4.4, 'toSec': 12.0, 'assetId': 'media/lieu_reply.svg', 'visible': True},

@@ -1,0 +1,127 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "06_custom",
+  "title": "06 Custom",
+  "durationSec": 300,
+  "fps": 30,
+  "loop": true,
+  "demoPreviewOnly": true,
+  "notes": "자유 실험 칸. 비어 있는 시퀀스(5분, 반복)입니다: Motion 슬라이더, 눈 라이브러리/그리기, 링 LED, 프로젝터 클립을 마음대로 만져 보세요. Save를 누르면 이 칸에 저장됩니다(examples/06_custom.lieu.json). 모터는 Hardware ▾ 에서 Follow Yaw를 켠 경우에만 따라갑니다.",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": []
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": []
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": []
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": []
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "br_0",
+            "tSec": 0,
+            "value": 0.8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_1",
+            "tSec": 300,
+            "value": 0.8,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "effects": []
+    },
+    "eyes": {
+      "left": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "L_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "R_0",
+            "tSec": 0,
+            "value": [
+              0,
+              28,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": []
+      }
+    },
+    "projector": {
+      "clips": [],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": []
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": []
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": []
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": []
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": []
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": []
+        }
+      }
+    },
+    "audio": [],
+    "events": []
+  }
+}

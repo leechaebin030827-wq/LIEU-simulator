@@ -1,0 +1,3868 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "04_driving_b",
+  "title": "04 Driving B",
+  "durationSec": 32,
+  "fps": 30,
+  "loop": false,
+  "demoPreviewOnly": true,
+  "notes": "PREVIEW ONLY. 주행B: 탑승자가 \"Hey LIEU\"를 부르면 놀란 뒤 애교 총출동(깔깔, 하트 눈, 윙크, 수줍음, 별 눈 통통, 목례). 호출 음성은 실제 음성 인식이 아니라 연출 이벤트입니다. 효과음은 합성음(tools/make_sfx.py, tools/make_sfx_cute.py).",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "rail_0",
+            "tSec": 0,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_1",
+            "tSec": 3.0,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_2",
+            "tSec": 5.6,
+            "value": -0.07,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_3",
+            "tSec": 7.5,
+            "value": -0.07,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_4",
+            "tSec": 11.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_5",
+            "tSec": 12.3,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_6",
+            "tSec": 15.6,
+            "value": -0.1,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_7",
+            "tSec": 16.5,
+            "value": -0.1,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_8",
+            "tSec": 19.6,
+            "value": -0.04,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_9",
+            "tSec": 22.0,
+            "value": -0.04,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_10",
+            "tSec": 28.0,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_11",
+            "tSec": 32,
+            "value": -0.125,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "yaw_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_1",
+            "tSec": 3.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_2",
+            "tSec": 3.7,
+            "value": -10,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_3",
+            "tSec": 4.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_4",
+            "tSec": 4.8,
+            "value": 14,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_5",
+            "tSec": 5.5,
+            "value": -14,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_6",
+            "tSec": 6.2,
+            "value": 14,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7",
+            "tSec": 6.9,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_8",
+            "tSec": 8.6,
+            "value": -22,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9",
+            "tSec": 10.0,
+            "value": 22,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_10",
+            "tSec": 11.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_11",
+            "tSec": 13.6,
+            "value": -38,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_12",
+            "tSec": 14.6,
+            "value": -38,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_13",
+            "tSec": 15.4,
+            "value": -10,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_14",
+            "tSec": 16.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_15",
+            "tSec": 17.1,
+            "value": 18,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_16",
+            "tSec": 17.8,
+            "value": -18,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_17",
+            "tSec": 18.5,
+            "value": 18,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_18",
+            "tSec": 19.2,
+            "value": -18,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_19",
+            "tSec": 19.9,
+            "value": 12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_20",
+            "tSec": 20.7,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_21",
+            "tSec": 32,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "tilt_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_1",
+            "tSec": 3.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_2",
+            "tSec": 4.0,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_3",
+            "tSec": 5.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_4",
+            "tSec": 6.0,
+            "value": 3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_5",
+            "tSec": 6.9,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_6",
+            "tSec": 8.4,
+            "value": 3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_7",
+            "tSec": 10.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_8",
+            "tSec": 11.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_9",
+            "tSec": 11.9,
+            "value": -4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10",
+            "tSec": 12.9,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_11",
+            "tSec": 13.8,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_12",
+            "tSec": 14.6,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_13",
+            "tSec": 15.8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_14",
+            "tSec": 17.0,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_15",
+            "tSec": 17.9,
+            "value": -2,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_16",
+            "tSec": 18.8,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_17",
+            "tSec": 19.7,
+            "value": -2,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_18",
+            "tSec": 20.6,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_19",
+            "tSec": 22.4,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_20",
+            "tSec": 23.4,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_21",
+            "tSec": 24.0,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_22",
+            "tSec": 25.0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_23",
+            "tSec": 32,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": [
+          {
+            "id": "f0",
+            "tSec": 0,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "f1",
+            "tSec": 32,
+            "value": [
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0
+              ]
+            ],
+            "interpolationToNext": "linear"
+          }
+        ]
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "br_0",
+            "tSec": 0,
+            "value": 0.12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_1",
+            "tSec": 32,
+            "value": 0.12,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      },
+      "effects": [
+        {
+          "id": "idle",
+          "type": "breathe",
+          "fromSec": 0,
+          "toSec": 3.0,
+          "seed": 1,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              185,
+              255,
+              40
+            ],
+            "speedHz": 0.3333
+          }
+        },
+        {
+          "id": "wake",
+          "type": "solid",
+          "fromSec": 3.0,
+          "toSec": 3.5,
+          "seed": 2,
+          "priority": 2,
+          "blend": "max",
+          "params": {
+            "whiteLevel": 255
+          }
+        },
+        {
+          "id": "giggle",
+          "type": "breathe",
+          "fromSec": 3.5,
+          "toSec": 7.5,
+          "seed": 3,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              130,
+              180,
+              0
+            ],
+            "speedHz": 1.4
+          }
+        },
+        {
+          "id": "love_a",
+          "type": "wave",
+          "fromSec": 7.5,
+          "toSec": 12.2,
+          "seed": 4,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              90,
+              150,
+              40
+            ],
+            "speedHz": 0.6,
+            "width": 24,
+            "direction": 1,
+            "phase": 0
+          }
+        },
+        {
+          "id": "love_b",
+          "type": "wave",
+          "fromSec": 7.5,
+          "toSec": 12.2,
+          "seed": 5,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              130,
+              180,
+              0
+            ],
+            "speedHz": 0.6,
+            "width": 24,
+            "direction": 1,
+            "phase": 3.1416
+          }
+        },
+        {
+          "id": "shy",
+          "type": "breathe",
+          "fromSec": 12.3,
+          "toSec": 16.5,
+          "seed": 6,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              160,
+              190,
+              60
+            ],
+            "speedHz": 0.9
+          }
+        },
+        {
+          "id": "stars",
+          "type": "sparkle",
+          "fromSec": 16.5,
+          "toSec": 22.0,
+          "seed": 7,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              240,
+              160,
+              60
+            ],
+            "rateHz": 9,
+            "density": 0.45
+          }
+        },
+        {
+          "id": "party_white",
+          "type": "wave",
+          "fromSec": 17.0,
+          "toSec": 22.0,
+          "seed": 20,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              230
+            ],
+            "speedHz": 1.1,
+            "width": 24,
+            "direction": 1,
+            "phase": 0
+          }
+        },
+        {
+          "id": "party_sky",
+          "type": "wave",
+          "fromSec": 17.0,
+          "toSec": 22.0,
+          "seed": 21,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              110,
+              205,
+              255,
+              0
+            ],
+            "speedHz": 1.1,
+            "width": 24,
+            "direction": 1,
+            "phase": 1.5708
+          }
+        },
+        {
+          "id": "party_lilac",
+          "type": "wave",
+          "fromSec": 17.0,
+          "toSec": 22.0,
+          "seed": 22,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              185,
+              150,
+              255,
+              0
+            ],
+            "speedHz": 1.1,
+            "width": 24,
+            "direction": 1,
+            "phase": 3.1416
+          }
+        },
+        {
+          "id": "party_pink",
+          "type": "wave",
+          "fromSec": 17.0,
+          "toSec": 22.0,
+          "seed": 23,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              150,
+              195,
+              0
+            ],
+            "speedHz": 1.1,
+            "width": 24,
+            "direction": 1,
+            "phase": 4.7124
+          }
+        },
+        {
+          "id": "sweet",
+          "type": "breathe",
+          "fromSec": 22.0,
+          "toSec": 28.0,
+          "seed": 8,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              190,
+              150,
+              90
+            ],
+            "speedHz": 0.5
+          }
+        },
+        {
+          "id": "idle_b",
+          "type": "breathe",
+          "fromSec": 28.0,
+          "toSec": 31.5,
+          "seed": 9,
+          "priority": 1,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              185,
+              255,
+              40
+            ],
+            "speedHz": 0.3333
+          }
+        }
+      ]
+    },
+    "eyes": {
+      "left": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "L_0",
+            "tSec": 0,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_1",
+            "tSec": 2.967,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_2",
+            "tSec": 3.9,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_3",
+            "tSec": 4.067,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_4",
+            "tSec": 4.1,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_5",
+            "tSec": 5.4,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_6",
+            "tSec": 5.767,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_7",
+            "tSec": 7.733,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_8",
+            "tSec": 8,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_9",
+            "tSec": 8.367,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_10",
+            "tSec": 8.767,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_11",
+            "tSec": 9.133,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_12",
+            "tSec": 9.5,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_13",
+            "tSec": 9.533,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_14",
+            "tSec": 9.567,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              126,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_15",
+            "tSec": 9.633,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_16",
+            "tSec": 9.667,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_17",
+            "tSec": 9.7,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_18",
+            "tSec": 9.733,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_19",
+            "tSec": 9.9,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_20",
+            "tSec": 10.267,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_21",
+            "tSec": 10.3,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_22",
+            "tSec": 11.2,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_23",
+            "tSec": 11.233,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_24",
+            "tSec": 11.267,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_25",
+            "tSec": 11.833,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_26",
+            "tSec": 11.867,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_27",
+            "tSec": 11.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_28",
+            "tSec": 12.3,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_29",
+            "tSec": 12.567,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_30",
+            "tSec": 13.533,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_31",
+            "tSec": 13.633,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_32",
+            "tSec": 13.667,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_33",
+            "tSec": 13.967,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_34",
+            "tSec": 14,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_35",
+            "tSec": 14.1,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_36",
+            "tSec": 14.967,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_37",
+            "tSec": 15.3,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_38",
+            "tSec": 15.6,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_39",
+            "tSec": 16.733,
+            "value": [
+              24,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              66
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_40",
+            "tSec": 17.933,
+            "value": [
+              0,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              66
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_41",
+            "tSec": 17.967,
+            "value": [
+              0,
+              0,
+              255,
+              126,
+              60,
+              60,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_42",
+            "tSec": 18,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_43",
+            "tSec": 18.033,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              255,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_44",
+            "tSec": 18.067,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_45",
+            "tSec": 18.1,
+            "value": [
+              0,
+              0,
+              255,
+              126,
+              60,
+              60,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_46",
+            "tSec": 18.133,
+            "value": [
+              0,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_47",
+            "tSec": 18.167,
+            "value": [
+              24,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              66
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_48",
+            "tSec": 19.3,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_49",
+            "tSec": 19.6,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_50",
+            "tSec": 20.9,
+            "value": [
+              32,
+              112,
+              112,
+              112,
+              112,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_51",
+            "tSec": 21.233,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_52",
+            "tSec": 21.933,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_53",
+            "tSec": 22.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_54",
+            "tSec": 23.567,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_55",
+            "tSec": 23.6,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_56",
+            "tSec": 23.633,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_57",
+            "tSec": 23.667,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_58",
+            "tSec": 23.867,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_59",
+            "tSec": 23.933,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_60",
+            "tSec": 23.967,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_61",
+            "tSec": 24.033,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_62",
+            "tSec": 24.733,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_63",
+            "tSec": 25.067,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_64",
+            "tSec": 25.233,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_65",
+            "tSec": 25.267,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_66",
+            "tSec": 25.3,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_67",
+            "tSec": 25.4,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_68",
+            "tSec": 25.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_69",
+            "tSec": 25.467,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_70",
+            "tSec": 25.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_71",
+            "tSec": 27.867,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_72",
+            "tSec": 29.533,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_73",
+            "tSec": 29.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_74",
+            "tSec": 30.233,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_75",
+            "tSec": 30.267,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_76",
+            "tSec": 30.3,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_77",
+            "tSec": 30.4,
+            "value": [
+              0,
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_78",
+            "tSec": 30.433,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_79",
+            "tSec": 30.467,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "eyeBitmap",
+        "keys": [
+          {
+            "id": "R_0",
+            "tSec": 0,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_1",
+            "tSec": 2.967,
+            "value": [
+              8,
+              28,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_2",
+            "tSec": 3.9,
+            "value": [
+              8,
+              28,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_3",
+            "tSec": 4.067,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_4",
+            "tSec": 4.1,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_5",
+            "tSec": 5.4,
+            "value": [
+              0,
+              4,
+              14,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_6",
+            "tSec": 5.767,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_7",
+            "tSec": 7.733,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_8",
+            "tSec": 8,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_9",
+            "tSec": 8.367,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_10",
+            "tSec": 8.767,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_11",
+            "tSec": 9.133,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_12",
+            "tSec": 9.5,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_13",
+            "tSec": 9.533,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_14",
+            "tSec": 9.567,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              126,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_15",
+            "tSec": 9.633,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_16",
+            "tSec": 9.667,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_17",
+            "tSec": 9.7,
+            "value": [
+              0,
+              0,
+              0,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_18",
+            "tSec": 9.733,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_19",
+            "tSec": 9.9,
+            "value": [
+              0,
+              102,
+              255,
+              255,
+              126,
+              60,
+              24,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_20",
+            "tSec": 10.267,
+            "value": [
+              0,
+              0,
+              102,
+              126,
+              60,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_21",
+            "tSec": 10.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_22",
+            "tSec": 11.2,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_23",
+            "tSec": 11.233,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_24",
+            "tSec": 11.267,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_25",
+            "tSec": 11.833,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_26",
+            "tSec": 11.867,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_27",
+            "tSec": 11.9,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_28",
+            "tSec": 12.3,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_29",
+            "tSec": 12.567,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_30",
+            "tSec": 13.533,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_31",
+            "tSec": 13.633,
+            "value": [
+              0,
+              0,
+              0,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_32",
+            "tSec": 13.667,
+            "value": [
+              0,
+              0,
+              0,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_33",
+            "tSec": 13.967,
+            "value": [
+              0,
+              0,
+              0,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_34",
+            "tSec": 14,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_35",
+            "tSec": 14.1,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_36",
+            "tSec": 14.967,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_37",
+            "tSec": 15.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_38",
+            "tSec": 15.6,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_39",
+            "tSec": 16.733,
+            "value": [
+              24,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              66
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_40",
+            "tSec": 17.933,
+            "value": [
+              0,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              66
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_41",
+            "tSec": 17.967,
+            "value": [
+              0,
+              0,
+              255,
+              126,
+              60,
+              60,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_42",
+            "tSec": 18,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_43",
+            "tSec": 18.033,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              255,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_44",
+            "tSec": 18.067,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              60,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_45",
+            "tSec": 18.1,
+            "value": [
+              0,
+              0,
+              255,
+              126,
+              60,
+              60,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_46",
+            "tSec": 18.133,
+            "value": [
+              0,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_47",
+            "tSec": 18.167,
+            "value": [
+              24,
+              24,
+              255,
+              126,
+              60,
+              60,
+              102,
+              66
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_48",
+            "tSec": 19.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_49",
+            "tSec": 19.6,
+            "value": [
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_50",
+            "tSec": 20.9,
+            "value": [
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_51",
+            "tSec": 21.233,
+            "value": [
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_52",
+            "tSec": 21.933,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_53",
+            "tSec": 22.3,
+            "value": [
+              0,
+              4,
+              14,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_54",
+            "tSec": 23.567,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_55",
+            "tSec": 23.6,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_56",
+            "tSec": 23.633,
+            "value": [
+              0,
+              0,
+              0,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_57",
+            "tSec": 23.667,
+            "value": [
+              0,
+              0,
+              0,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_58",
+            "tSec": 23.867,
+            "value": [
+              0,
+              0,
+              0,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_59",
+            "tSec": 23.933,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_60",
+            "tSec": 23.967,
+            "value": [
+              0,
+              0,
+              4,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_61",
+            "tSec": 24.033,
+            "value": [
+              0,
+              4,
+              14,
+              14,
+              14,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_62",
+            "tSec": 24.733,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_63",
+            "tSec": 25.067,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_64",
+            "tSec": 25.233,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_65",
+            "tSec": 25.267,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              8,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_66",
+            "tSec": 25.3,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_67",
+            "tSec": 25.4,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_68",
+            "tSec": 25.433,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_69",
+            "tSec": 25.467,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_70",
+            "tSec": 25.5,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_71",
+            "tSec": 27.867,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_72",
+            "tSec": 29.533,
+            "value": [
+              0,
+              4,
+              14,
+              14,
+              14,
+              14,
+              4,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_73",
+            "tSec": 29.9,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_74",
+            "tSec": 30.233,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_75",
+            "tSec": 30.267,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_76",
+            "tSec": 30.3,
+            "value": [
+              0,
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_77",
+            "tSec": 30.4,
+            "value": [
+              0,
+              0,
+              0,
+              8,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_78",
+            "tSec": 30.433,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_79",
+            "tSec": 30.467,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "int_0",
+            "tSec": 0,
+            "value": 1,
+            "interpolationToNext": "smoothstep"
+          }
+        ]
+      }
+    },
+    "projector": {
+      "clips": [
+        {
+          "id": "hey",
+          "fromSec": 2.6,
+          "toSec": 4.4,
+          "assetId": "media/hey_lieu.svg",
+          "visible": true
+        },
+        {
+          "id": "reply",
+          "fromSec": 4.4,
+          "toSec": 12.0,
+          "assetId": "media/lieu_reply.svg",
+          "visible": true
+        },
+        {
+          "id": "anytime",
+          "fromSec": 22.2,
+          "toSec": 29.0,
+          "assetId": "media/lieu_anytime.svg",
+          "visible": true
+        }
+      ],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "op_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_1",
+              "tSec": 2.6,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_2",
+              "tSec": 3.2,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_3",
+              "tSec": 4.0,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_4",
+              "tSec": 4.6,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_5",
+              "tSec": 4.9,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_6",
+              "tSec": 5.6,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_7",
+              "tSec": 11.0,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_8",
+              "tSec": 12.0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_9",
+              "tSec": 22.2,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_10",
+              "tSec": 23.2,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_11",
+              "tSec": 27.6,
+              "value": 0.8,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_12",
+              "tSec": 29.0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "op_13",
+              "tSec": 32,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "pb",
+              "tSec": 0,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "pr",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "ps",
+              "tSec": 0,
+              "value": 1,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "px",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "pz",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            }
+          ]
+        }
+      }
+    },
+    "audio": [
+      {
+        "id": "hey",
+        "fromSec": 2.9,
+        "toSec": 3.7,
+        "assetId": "media/sfx_cue.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.18,
+        "loop": false
+      },
+      {
+        "id": "boing",
+        "fromSec": 3.3,
+        "toSec": 3.9,
+        "assetId": "media/sfx_boing.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.2,
+        "loop": false
+      },
+      {
+        "id": "giggle1",
+        "fromSec": 4.8,
+        "toSec": 5.7,
+        "assetId": "media/sfx_giggle.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.55,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.2,
+        "loop": false
+      },
+      {
+        "id": "love",
+        "fromSec": 7.6,
+        "toSec": 9.3,
+        "assetId": "media/sfx_sparkle.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.5,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.4,
+        "loop": false
+      },
+      {
+        "id": "glide",
+        "fromSec": 8.2,
+        "toSec": 11.0,
+        "assetId": "media/sfx_glide.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.35,
+        "fadeInSec": 0.5,
+        "fadeOutSec": 1.1,
+        "loop": false
+      },
+      {
+        "id": "blink0",
+        "fromSec": 9.133,
+        "toSec": 9.223,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "chime",
+        "fromSec": 10.6,
+        "toSec": 12.2,
+        "assetId": "media/intro-chime.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.4,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.4,
+        "loop": false
+      },
+      {
+        "id": "shy",
+        "fromSec": 13.0,
+        "toSec": 14.85,
+        "assetId": "media/sfx_turn.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.4,
+        "fadeInSec": 0.25,
+        "fadeOutSec": 0.5,
+        "loop": false
+      },
+      {
+        "id": "stars",
+        "fromSec": 16.6,
+        "toSec": 18.3,
+        "assetId": "media/sfx_sparkle.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.5,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.4,
+        "loop": false
+      },
+      {
+        "id": "blink1",
+        "fromSec": 16.733,
+        "toSec": 16.823,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "giggle2",
+        "fromSec": 17.0,
+        "toSec": 17.9,
+        "assetId": "media/sfx_giggle.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.55,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.2,
+        "loop": false
+      },
+      {
+        "id": "boing2",
+        "fromSec": 19.4,
+        "toSec": 20.0,
+        "assetId": "media/sfx_boing.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.2,
+        "loop": false
+      },
+      {
+        "id": "bye",
+        "fromSec": 22.1,
+        "toSec": 23.7,
+        "assetId": "media/intro-chime.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.45,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.4,
+        "loop": false
+      },
+      {
+        "id": "nod",
+        "fromSec": 23.6,
+        "toSec": 24.1,
+        "assetId": "media/sfx_nod.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.6,
+        "fadeInSec": 0.005,
+        "fadeOutSec": 0.15,
+        "loop": false
+      },
+      {
+        "id": "blink2",
+        "fromSec": 25.067,
+        "toSec": 25.157,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      },
+      {
+        "id": "blink3",
+        "fromSec": 29.9,
+        "toSec": 29.99,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
+        "loop": false
+      }
+    ],
+    "events": [
+      {
+        "id": "ev0",
+        "tSec": 0,
+        "type": "scene",
+        "payload": {
+          "title": "대기 · 주행 중",
+          "desc": "안내 위치(레일 중앙)에서 낮은 호흡으로 대기합니다",
+          "tv": {
+            "tag": "주행 중",
+            "head": "편안하게 가고 있어요",
+            "sub": "필요하면 언제든 불러 주세요",
+            "cta": {
+              "text": "Hey LIEU",
+              "sub": "라고 불러 보세요"
+            }
+          }
+        }
+      },
+      {
+        "id": "ev1",
+        "tSec": 3.0,
+        "type": "scene",
+        "payload": {
+          "title": "\"Hey LIEU!\" 호출",
+          "desc": "이름을 부르자 링이 번쩍! 눈이 동그래지며 호출한 사람 쪽으로 고개를 쏙 내밉니다",
+          "tv": {
+            "tag": "호출 인식",
+            "head": "네, 불렀어요?",
+            "sub": "이름을 부르면 루가 반응해요"
+          }
+        }
+      },
+      {
+        "id": "ev2",
+        "tSec": 4.2,
+        "type": "scene",
+        "payload": {
+          "title": "① 깔깔 · 몸을 흔들흔들",
+          "desc": "\"네~ 불렀어요?\" 웃는 눈으로 좌우로 신나게 몸을 흔듭니다",
+          "tv": {
+            "tag": "반가워요",
+            "head": "반가워서 들썩들썩!",
+            "sub": "신나는 마음을 몸으로 표현해요"
+          }
+        }
+      },
+      {
+        "id": "ev3",
+        "tSec": 7.5,
+        "type": "scene",
+        "payload": {
+          "title": "② 하트 눈 · 다가오기",
+          "desc": "하트 눈으로 천천히 몸을 살랑살랑 흔들며 앞으로 다가옵니다 (링은 분홍빛 물결)",
+          "tv": {
+            "tag": "좋아요",
+            "head": "좋아요, 좋아요~",
+            "sub": "하트 눈으로 살랑살랑 다가가요"
+          }
+        }
+      },
+      {
+        "id": "ev4",
+        "tSec": 10.5,
+        "type": "scene",
+        "payload": {
+          "title": "③ 윙크",
+          "desc": "살짝 고개를 끄덕이며 윙크 한 번",
+          "tv": {
+            "tag": "찡긋",
+            "head": "찡긋!",
+            "sub": "눈을 한 번 깜빡여 인사해요"
+          }
+        }
+      },
+      {
+        "id": "ev5",
+        "tSec": 12.3,
+        "type": "scene",
+        "payload": {
+          "title": "④ 수줍음",
+          "desc": "부끄러워서 고개를 돌려 숙였다가, 슬쩍 다시 쳐다봅니다",
+          "tv": {
+            "tag": "부끄러워요",
+            "head": "앗, 부끄러워요",
+            "sub": "슬쩍 다시 쳐다봐요"
+          }
+        }
+      },
+      {
+        "id": "ev6",
+        "tSec": 16.5,
+        "type": "scene",
+        "payload": {
+          "title": "⑤ 별 눈 · 신나서 통통",
+          "desc": "별 눈으로 반짝반짝, 링이 알록달록 물결치며 통통 튑니다",
+          "tv": {
+            "tag": "신나요",
+            "head": "너무 신나요!",
+            "sub": "별 눈으로 반짝반짝 통통 튀어요"
+          }
+        }
+      },
+      {
+        "id": "ev7",
+        "tSec": 22.0,
+        "type": "scene",
+        "payload": {
+          "title": "⑥ 마무리 인사",
+          "desc": "다정하게 목례하고 \"언제든 불러주세요\"를 투사합니다",
+          "tv": {
+            "tag": "또 만나요",
+            "head": "언제든 불러 주세요",
+            "sub": "루는 늘 여기 있을게요"
+          }
+        }
+      },
+      {
+        "id": "ev8",
+        "tSec": 28.0,
+        "type": "scene",
+        "payload": {
+          "title": "대기",
+          "desc": "안내 위치로 돌아와 차분히 대기합니다",
+          "tv": {
+            "tag": "주행 중",
+            "head": "편안하게 가고 있어요",
+            "sub": "필요하면 언제든 불러 주세요",
+            "cta": {
+              "text": "Hey LIEU",
+              "sub": "라고 불러 보세요"
+            }
+          }
+        }
+      },
+      {
+        "id": "ev9",
+        "tSec": 3.0,
+        "type": "wake_word",
+        "payload": {
+          "phrase": "Hey LIEU"
+        }
+      }
+    ]
+  }
+}
