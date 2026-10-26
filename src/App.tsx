@@ -6,6 +6,9 @@ import { Timeline } from './ui/Timeline';
 import { Dialogs } from './ui/Dialogs';
 import { confirmDialog, openHelp, toast, toggleParts, useUi } from './ui/ui-store';
 import { useStore } from './store';
+import { HardwareMenu } from './ui/Hardware';
+import { autoConnectHw } from './runtime/hardware';
+import { startProjectorBroadcast, openProjectorWindow } from './runtime/projectorOut';
 import { startTransport } from './runtime/transport';
 import { startAutosave, readAutosave } from './runtime/autosave';
 import { unlockAudio } from './runtime/audio';
@@ -18,6 +21,7 @@ const PRESETS: [string, string, string][] = [
   ['04_driving_b', 'Driving B', 'Hey LIEU 호출 · 애교 총출동'],
   ['03_arrival', 'Arrival', '곧 도착 · 둘러보기 · 작별 인사 · 문 쪽 안내'],
   ['05_web_cover', '웹 모션 - 표지', '호기심 · 상하좌우 시선 · 눈 감기 · 신남 (21s)'],
+  ['06_custom', 'Custom · 자유 실험', '빈 시퀀스: 모터 · 눈 · 링 · 프로젝터를 마음대로 실험 (저장하면 이 칸에 유지)'],
 ];
 
 function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {
@@ -136,6 +140,8 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
         {saving ? 'Saving…' : savedAt ? `Autosaved ${timeLabel(savedAt)}` : 'Autosave on'}
       </span>
       <span className="badge preview" title="No commands are sent to the real robot (motors, LEDs, eyes, projector)">PREVIEW ONLY</span>
+      <button className="ico" onClick={() => void openProjectorWindow()} title="Open the projector picture in its own window on the second display (the editor stays where it is)">Projector out</button>
+      <HardwareMenu />
       <button className="ico" onClick={onPresent} title="Hide the editor and show only the playback view">▶ Present</button>
       <button className={'ico' + (parts ? ' on' : '')} onClick={toggleParts} title="Open the parts list (Scene / Rig): see parts and change which stage each belongs to">Parts ▾</button>
       <button className="ico" onClick={openHelp} title="How to use and keyboard shortcuts">? Help</button>
@@ -151,6 +157,8 @@ export function App() {
 
   useEffect(() => {
     startTransport();
+    startProjectorBroadcast();
+    void autoConnectHw();
     if ((window as unknown as { __lieuInit?: boolean }).__lieuInit) return;
     (window as unknown as { __lieuInit?: boolean }).__lieuInit = true;
     (async () => {

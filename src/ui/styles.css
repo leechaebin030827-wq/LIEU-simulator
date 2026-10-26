@@ -299,3 +299,9 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .transport button.playbtn, .presentbar button.playbtn { background: var(--amber); border-color: var(--amber); color: #1a1200; font-weight: 600; }
 .transport button.playbtn:hover:not(:disabled), .presentbar button.playbtn:hover:not(:disabled) { background: #ffc24d; border-color: #ffc24d; }
 .transport button.playbtn.on, .presentbar button.playbtn.on { background: #e89b00; border-color: #e89b00; color: #1a1200; }
+
+.hwpanel { width: 380px; gap: 8px; padding: 12px; }
+.hwrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.hwrow label { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; }
+.hwsec { opacity: .6; text-transform: uppercase; letter-spacing: .06em; font-size: 10px; margin-top: 4px; }
+.hwwarn { color: #ffb86b; }

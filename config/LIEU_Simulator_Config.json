@@ -179,16 +179,16 @@
       "previewOnlyMaxVelocity": 110,
       "previewOnlyMaxAcceleration": 500,
       "physical": {
-        "controller": null,
-        "motorModel": null,
-        "minimum": null,
-        "maximum": null,
+        "controller": "Dynamixel U2D2 (protocol 2.0, 115200 baud, id 1)",
+        "motorModel": "Dynamixel model number 1220",
+        "minimum": -90,
+        "maximum": 90,
         "maximumVelocity": null,
         "maximumAcceleration": null,
         "maximumJerk": null,
-        "homeValue": null,
-        "gearRatio": null,
-        "invertDirection": null
+        "homeValue": 0,
+        "gearRatio": 6.386,
+        "invertDirection": false
       }
     },
     "tiltZ": {

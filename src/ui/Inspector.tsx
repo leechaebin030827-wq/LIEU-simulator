@@ -11,6 +11,8 @@ import type { EffectClip, EffectName, LedBlend, Rgbw } from '../engine/types';
 import { LED_COUNT } from '../engine/types';
 import { unlockAudio } from '../runtime/audio';
 import { EyeStudio } from './EyeStudio';
+import { EyeLibrary } from './EyeLibrary';
+import { YawLink } from './YawLink';
 
 type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'screen' | 'rig';
 
@@ -76,6 +78,7 @@ function Motion() {
       <Section title="Motion" right={<span className="dim small">3 preview axes</span>}>
         <Axis label="Rail X" hint="forward / back" value={d.motion.railX * 1000} min={-300} max={50} step={1} unit="mm" digits={1} onChange={(v) => setMotion('railX', v / 1000)} path={{ type: 'motion', ch: 'railX' }} warnRange={[L.railX.range[0] * 1000, L.railX.range[1] * 1000]} />
         <Axis label="Yaw" hint="turn left / right" value={d.motion.yawY} min={-90} max={90} step={0.5} unit="°" digits={1} onChange={(v) => setMotion('yawY', v)} path={{ type: 'motion', ch: 'yawY' }} warnRange={L.yawY.range as [number, number]} />
+        <YawLink />
         <Axis label="Tilt" hint="nod up / down" value={d.motion.tiltZ} min={-15} max={15} step={0.25} unit="°" digits={2} onChange={(v) => setMotion('tiltZ', v)} path={{ type: 'motion', ch: 'tiltZ' }} warnRange={L.tiltZ.range as [number, number]} />
       </Section>
       <Section title="Quick poses" right={<span className="dim small">sets all three axes</span>}>
@@ -304,12 +307,21 @@ function Eyes() {
   );
 }
 
+function EyesDraw() {
+  return (
+    <>
+      <Eyes />
+      <EyeLibrary />
+    </>
+  );
+}
+
 function EyesTab() {
   const [v, setV] = useState<'draw' | 'studio' | 'emotions'>('draw');
   return (
     <>
       <div className="subnav">{([['draw', 'Draw'], ['studio', 'Motion blocks'], ['emotions', 'Emotions']] as const).map(([k, l]) => <button key={k} className={v === k ? 'on' : ''} onClick={() => setV(k)}>{l}</button>)}</div>
-      {v === 'draw' && <Eyes />}
+      {v === 'draw' && <EyesDraw />}
       {v === 'studio' && <EyeStudio />}
       {v === 'emotions' && <Emotions />}
     </>

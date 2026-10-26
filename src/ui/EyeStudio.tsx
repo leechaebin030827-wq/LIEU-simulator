@@ -11,7 +11,7 @@ const GROUPS: Asset['group'][] = ['감정', '동작', '시선', '이모지'];
 const GROUP_EN: Record<Asset['group'], string> = { 감정: 'Moods', 동작: 'Actions', 시선: 'Gaze', 이모지: 'Symbols' };
 const KEY = 'lieu.eyestudio.v3';
 
-function load(): Sequence {
+export function load(): Sequence {
   try {
     const s = JSON.parse(localStorage.getItem(KEY) ?? 'null') as Sequence | null;
     if (s && Array.isArray(s.blocks)) return { ...defaultSequence(), ...s, blocks: s.blocks.filter((b) => ASSET_BY_ID[b.assetId]) };

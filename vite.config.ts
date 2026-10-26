@@ -1,9 +1,10 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { writeFileSync } from 'node:fs';
-import { spawn } from 'node:child_process';
+import { spawn, type ChildProcess } from 'node:child_process';
 import { mkdirSync, readFileSync } from 'node:fs';
 import type { Plugin } from 'vite';
+import { createConnection } from 'node:net';
 import { EMOTIONS, DEFAULT_EXPORT, buildEmotionTimeline, renderGrayFrame } from './src/engine/emotions';
 
 /** Dev-only: renders the eye emotions to a 2:1 black & white mp4 (needs ffmpeg on PATH) and saves a copy in exports/. */
@@ -44,6 +45,31 @@ const exportEmotions = (): Plugin => ({
 });
 
 
+/** Dev-only: keeps the motor/hardware bridge (hardware/pi) running together with the dev server, so plugging the U2D2 in is all it takes.
+ *  A watcher checks the port every 3 s and starts the bridge whenever nothing answers (also right after a dev-server restart, when the
+ *  old bridge is still shutting down). The bridge itself finds the port / baud and keeps looking if the cable or motor power comes and goes. */
+const motorBridge = (): Plugin => ({
+  name: 'lieu-motor-bridge',
+  apply: 'serve',
+  configureServer(server) {
+    let child: ChildProcess | null = null, stopped = false;
+    const listening = () => new Promise<boolean>((res) => { const c = createConnection({ port: 8787, host: '127.0.0.1' }); c.on('connect', () => { c.destroy(); res(true); }); c.on('error', () => res(false)); });
+    const log = (d: Buffer) => d.toString().split('\n').filter((l) => l.trim() && !l.startsWith('  ') && !l.startsWith('---')).forEach((l) => console.log('[bridge]', l));
+    const ensure = async () => {
+      if (stopped || child || await listening()) return;
+      child = spawn('python3', ['-m', 'lieu_hw', 'serve'], { cwd: 'hardware/pi', stdio: ['ignore', 'pipe', 'pipe'] });
+      child.stdout?.on('data', log); child.stderr?.on('data', log);
+      child.on('error', (e) => { console.log('[bridge] not started:', e.message); child = null; });
+      child.on('exit', () => { child = null; });
+    };
+    const timer = setInterval(() => void ensure(), 3000);
+    void ensure();
+    const stop = () => { stopped = true; clearInterval(timer); child?.kill('SIGINT'); };
+    server.httpServer?.on('close', stop);
+    process.on('exit', stop);
+  },
+});
+
 /** Dev-only: lets the Save button overwrite a built-in preset (examples/ + public/examples/). */
 const savePreset = (): Plugin => ({
   name: 'save-preset',
@@ -65,7 +91,7 @@ const savePreset = (): Plugin => ({
 });
 export default defineConfig({
   base: process.env.BASE_PATH ?? '/',
-  plugins: [react(), savePreset(), exportEmotions()],
+  plugins: [react(), savePreset(), exportEmotions(), motorBridge()],
   server: { port: 5173, fs: { allow: ['.'] } },
   test: { environment: 'node', include: ['src/**/*.test.ts'] },
 });
