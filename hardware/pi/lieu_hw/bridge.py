@@ -1,10 +1,10 @@
 """Local bridge: the web editor asks, this process decides. Listens on 127.0.0.1 only, accepts browser requests only from the editor's own origin.
 All motor safety (range, slow profile, fault latch, watchdog) lives in motor_control.py / here, not in the web page.
 
-Auto-setup: the bridge looks for the U2D2 itself (any /dev/cu.usbserial-*, /dev/ttyUSB*), tries the usual baud rates, finds motor id 1, and keeps
-looking if the cable or the motor power comes and goes. What it does by itself when it finds the motor:
-  * torque ON + position mode (the motor was never power-cycled): re-applies the slow speed profile, nothing else  -> ready
-  * torque OFF (power was cycled, or released): waits for ONE human confirmation, "the robot faces front now" ('setup'), then arms.
+Axes: yaw (Dynamixel id 1) and tilt (id 2) share one serial line. Each is found, armed, watched and faulted on its own; one missing axis never
+blocks the other. Auto-setup per axis when it is found:
+  * torque ON + position mode (never power-cycled): re-applies the slow speed profile, nothing else  -> ready
+  * torque OFF: yaw waits for ONE human confirmation ("the robot faces front now", 'setup'); tilt only needs 'arm' (its taught points are absolute).
 Run:  python3 -m lieu_hw serve            (the web dev server starts it for you)
 """
 import glob
@@ -13,27 +13,30 @@ import threading
 import time
 from collections import deque
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
-from .motor_control import TRACK_ERR_DEG, MotorError, YawControl
+from .axes import AxisCfg, load_axes
+from .motor_control import TRACK_ERR_DEG, AxisControl, MotorBus, MotorError
 from .motor_readonly import ReadOnlyBus
-from .yaw_plan import load_yaw_motor
 
 ORIGINS = {"http://localhost:5173", "http://127.0.0.1:5173"}
 WATCHDOG_S = 0.6
 BAUDS = (115200, 57600, 1000000)
-MISSES_BEFORE_LOST = 6  # consecutive checks without any reply (~0.6 s) before the motor counts as gone
+PAUSE_FILE = Path("/tmp/lieu_bridge.pause")  # while this exists the bridge lets go of the serial port (motor_setup / motors record)
+MISSES_BEFORE_LOST = 6  # consecutive checks without any reply (~0.6 s) before an axis counts as gone
 
 
 def find_ports() -> list[str]:
     return sorted(glob.glob("/dev/cu.usbserial-*") + glob.glob("/dev/ttyUSB*"))
 
 
-class Bridge:
-    def __init__(self, port: str = "auto", baud: str | int = "auto"):
-        self.port_spec, self.baud_spec = port, baud
-        self.lock = threading.RLock()
-        self.bus: YawControl | None = None
-        self.front_ok = False
+class Axis:
+    """Runtime state of one axis."""
+
+    def __init__(self, cfg: AxisCfg):
+        self.cfg = cfg
+        self.ctl: AxisControl | None = None
+        self.front_ok = not cfg.needs_front
         self.fault: str | None = None
         self.follow = False
         self.last_goal_deg: float | None = None
@@ -41,66 +44,105 @@ class Bridge:
         self.goals = 0
         self.misses = 0
         self.trail: deque = deque()  # (time, present deg) of the last second, to tell 'lagging' from 'blocked'
+
+    def reset(self, ctl: AxisControl | None):
+        self.ctl, self.follow, self.last_goal_deg, self.misses, self.fault = ctl, False, None, 0, None
+        self.trail.clear()
+        if ctl is None:
+            self.front_ok = not self.cfg.needs_front
+
+
+class Bridge:
+    def __init__(self, port: str = "auto", baud: str | int = "auto"):
+        self.port_spec, self.baud_spec = port, baud
+        self.lock = threading.RLock()
+        self.bus: MotorBus | None = None
+        self.axes = {n: Axis(c) for n, c in load_axes().items()}
+        self.snapshot: dict = {"ok": False, "error": "starting", "searching": True}
+        self.snapshot_at = 0.0
+        self.last_snap_build = 0.0
         threading.Thread(target=self._connector, daemon=True).start()
         threading.Thread(target=self._watch, daemon=True).start()
 
-    # -- finding the motor ------------------------------------------------------------------------------------------------------
-    def _try_connect(self) -> YawControl | None:
+    # -- finding the motors -----------------------------------------------------------------------------------------------------
+    def _open_bus(self) -> MotorBus | None:
         ports = [self.port_spec] if self.port_spec != "auto" else find_ports()
         bauds = BAUDS if self.baud_spec == "auto" else (int(self.baud_spec),)
+        want = {a.cfg.id for a in self.axes.values()}
         for port in ports:
             for baud in bauds:
                 try:
                     probe = ReadOnlyBus(port, baud)
                     try:
-                        found = probe.scan(0.3)
+                        found = probe.scan(0.4)
                     finally:
                         probe.close()
-                    if 1 in found:
-                        return YawControl(port, baud, load_yaw_motor())
+                    if want & set(found):
+                        return MotorBus(port, baud)
                 except Exception:
                     continue
         return None
+
+    def _attach(self, ax: Axis):
+        """Caller holds the lock. Bring a freshly found axis to its starting state."""
+        ctl = AxisControl(self.bus, ax.cfg)
+        ready = bool(ctl.torque_enabled()) and ctl.u32(11, 1) == 4
+        if ready:
+            ctl.arm()  # already armed: only re-applies the slow speed limits (no mode / goal / torque change)
+        ax.reset(ctl)
+        ax.front_ok = ready or not ax.cfg.needs_front
+        print(f"{ax.cfg.name} (id {ax.cfg.id}) found on {self.bus.ser.port} @ {self.bus.ser.baudrate}: " + ("ready (still armed)" if ready else ("needs the front confirmation" if ax.cfg.needs_front else "found, not armed")), flush=True)
 
     def _connector(self):
         while True:
             time.sleep(1.5)
             with self.lock:
-                if self.bus is not None:
+                if PAUSE_FILE.exists():
+                    if self.bus is not None:
+                        self._drop_bus("paused for motor setup")
                     continue
-            bus = self._try_connect()
-            if bus is None:
+                missing = [a for a in self.axes.values() if a.ctl is None]
+            if not missing:
                 continue
+            if self.bus is None:
+                bus = self._open_bus()
+                if bus is None:
+                    continue
+                with self.lock:
+                    self.bus = bus
             with self.lock:
-                try:
-                    ready = bus.torque_enabled(bus.id) and bus.u32(11, 1) == 4
-                    if ready:
-                        bus.arm()  # already armed: only re-applies the slow speed limits (no mode / goal / torque change)
-                    self.front_ok = bool(ready)
-                    self.bus, self.fault, self.follow, self.last_goal_deg = bus, None, False, None
-                    print(f"motor found on {bus.ser.port} @ {bus.ser.baudrate}: " + ("ready (still armed)" if ready else "needs the front confirmation"), flush=True)
-                except Exception as e:
-                    print(f"motor found but setup failed: {e}", flush=True)
+                for ax in self.axes.values():
+                    if ax.ctl is not None:
+                        continue
                     try:
-                        bus.close()
-                    except Exception:
-                        pass
+                        if ax.cfg.id in self.bus.scan(0.3):
+                            self._attach(ax)
+                    except Exception as e:
+                        print(f"{ax.cfg.name}: setup failed: {e}", flush=True)
+                if all(a.ctl is None for a in self.axes.values()):
+                    self._drop_bus("no axis answered")
 
-    def _lose(self, why: str):
-        """Caller holds the lock. The motor went away (power / cable): forget it, the connector keeps looking."""
-        print(f"lost the motor: {why}", flush=True)
+    def _drop_bus(self, why: str):
+        print(f"released the motor bus: {why}", flush=True)
         try:
             self.bus.close()
         except Exception:
             pass
-        self.bus, self.front_ok, self.follow, self.last_goal_deg, self.fault, self.misses = None, False, False, None, None, 0
+        self.bus = None
+        for a in self.axes.values():
+            a.reset(None)
+
+    def _lose(self, ax: Axis, why: str):
+        """Caller holds the lock. This axis went away (power / cable): forget it, the connector keeps looking."""
+        print(f"lost {ax.cfg.name}: {why}", flush=True)
+        ax.reset(None)
 
     # -- safety watch -----------------------------------------------------------------------------------------------------------
-    def _trip(self, why: str):
+    def _trip(self, ax: Axis, why: str):
         """Latch a fault and hold position. Caller holds the lock."""
-        self.fault, self.follow = why, False
+        ax.fault, ax.follow = why, False
         try:
-            self.bus.hold()
+            ax.ctl.hold()
         except Exception:
             pass
 
@@ -108,102 +150,141 @@ class Bridge:
         while True:
             time.sleep(0.1)
             with self.lock:
-                if self.bus is None or self.fault:
-                    continue
-                try:
-                    torque = self.bus.torque_enabled(self.bus.id)
-                    if torque is None:
-                        raise MotorError("no reply")
-                    self.misses = 0
-                    if self.bus.hw_error():
-                        self._trip("hardware error status on the motor")
-                    elif torque and self.last_goal_deg is not None and self.follow:
-                        now, pos = time.monotonic(), self.bus.m.to_deg(self.bus.present())
-                        self.trail.append((now, pos))
-                        while self.trail and now - self.trail[0][0] > 1.0:
-                            self.trail.popleft()
-                        err = abs(pos - self.last_goal_deg)
-                        moved = max(p for _, p in self.trail) - min(p for _, p in self.trail)
-                        full = now - self.trail[0][0] > 0.9
-                        if err > 3 * TRACK_ERR_DEG:
-                            self._trip(f"axis is {err:.0f} deg behind its target")
-                        elif err > TRACK_ERR_DEG and full and moved < 1.0:
-                            self._trip("blocked: far from the target and not moving")
-                        elif time.monotonic() - self.last_cmd > WATCHDOG_S:
-                            self.follow = False
-                            self.bus.hold()
-                except Exception as e:  # a slow or missing reply is only 'lost' after several misses in a row
-                    self.misses += 1
-                    if self.misses >= MISSES_BEFORE_LOST:
-                        self._lose(f"{e} ({self.misses} checks in a row)")
+                for ax in self.axes.values():
+                    if ax.ctl is None or ax.fault or self.bus is None:
+                        continue
+                    try:
+                        torque = ax.ctl.torque_enabled()
+                        if torque is None:
+                            raise MotorError("no reply")
+                        ax.misses = 0
+                        if ax.ctl.hw_error():
+                            self._trip(ax, "hardware error status on the motor")
+                        elif torque and ax.last_goal_deg is not None and ax.follow:
+                            now, pos = time.monotonic(), ax.cfg.to_deg(ax.ctl.present())
+                            ax.trail.append((now, pos))
+                            while ax.trail and now - ax.trail[0][0] > 1.0:
+                                ax.trail.popleft()
+                            err = abs(pos - ax.last_goal_deg)
+                            moved = max(p for _, p in ax.trail) - min(p for _, p in ax.trail)
+                            full = now - ax.trail[0][0] > 0.9
+                            lim = max(TRACK_ERR_DEG, ax.cfg.limit_deg * 0.5) if ax.cfg.name == "yaw" else 6.0  # tilt travels only +-13 deg
+                            if err > 3 * lim:
+                                self._trip(ax, f"axis is {err:.0f} deg behind its target")
+                            elif err > lim and full and moved < max(1.0, 0.04 * lim):
+                                self._trip(ax, "blocked: far from the target and not moving")
+                            elif time.monotonic() - ax.last_cmd > WATCHDOG_S:
+                                ax.follow = False
+                                ax.ctl.hold()
+                    except Exception as e:  # a slow or missing reply is only 'lost' after several misses in a row
+                        ax.misses += 1
+                        if ax.misses >= MISSES_BEFORE_LOST:
+                            self._lose(ax, f"{e} ({ax.misses} checks in a row)")
+                if time.monotonic() - self.last_snap_build >= 0.25:  # what /status serves: built here, so a slow or silent motor can never block the HTTP side
+                    self.snapshot, self.snapshot_at, self.last_snap_build = self._build_status(), time.time(), time.monotonic()
 
     # -- API --------------------------------------------------------------------------------------------------------------------
+    def _axis_status(self, ax: Axis) -> dict:
+        if ax.ctl is None:
+            return {"ok": False, "error": f"{ax.cfg.name} motor (id {ax.cfg.id}) not found - looking...", "searching": True, "fault": ax.fault}
+        try:
+            s = ax.ctl.status()
+            raw = s["present_raw"]
+            return {"ok": True, "torque": s["torque"], "mode": s["mode"], "profile_ok": s["profile_vel"] == s["want_profile_vel"] and s["profile_acc"] == s["want_profile_acc"],
+                    "deg": None if raw is None else round(ax.cfg.to_deg(raw), 2), "hw_error": s["hw_error"], "fault": ax.fault, "follow": ax.follow,
+                    "goals": ax.goals, "last_goal": ax.last_goal_deg, "needs_front": not ax.front_ok,
+                    "limit_deg": ax.cfg.limit_deg, "max_vel": ax.cfg.max_vel}
+        except Exception as e:  # keep the connection: the watcher decides when the motor is really gone
+            return {"ok": False, "error": f"no reply yet ({e})", "fault": ax.fault}
+
     def status(self) -> dict:
-        with self.lock:
-            if self.bus is None:
-                return {"ok": False, "error": "motor not found (U2D2 plugged in? motor power on?) - looking...", "searching": True, "fault": self.fault}
-            try:
-                s = self.bus.status()
-                raw = s["present_raw"]
-                return {"ok": True, "torque": s["torque"], "mode": s["mode"], "profile_ok": s["profile_vel"] == s["want_profile_vel"] and s["profile_acc"] == s["want_profile_acc"],
-                        "deg": None if raw is None else round(self.bus.m.to_deg(raw), 2), "hw_error": s["hw_error"], "fault": self.fault, "follow": self.follow,
-                        "goals": self.goals, "last_goal": self.last_goal_deg, "needs_front": not self.front_ok,
-                        "limit_deg": self.bus.m.limit_deg, "max_vel": self.bus.m.max_vel}
-            except Exception as e:  # keep the connection: the watcher decides when the motor is really gone
-                return {"ok": False, "error": f"no reply yet ({e})", "fault": self.fault}
+        snap = dict(self.snapshot)  # no lock, no serial I/O: always answers at once
+        snap["age_s"] = round(time.time() - self.snapshot_at, 2) if self.snapshot_at else None
+        return snap
+
+    def _build_status(self) -> dict:
+        """Caller holds the lock (the watcher builds it)."""
+        yaw = self._axis_status(self.axes["yaw"])
+        out = dict(yaw)  # the yaw fields stay at the top level (older pages read them there)
+        out["axes"] = {n: (yaw if n == "yaw" else self._axis_status(a)) for n, a in self.axes.items()}
+        if "tilt" in self.axes:
+            out["tilt"] = out["axes"]["tilt"]
+        return out
 
     def act(self, name: str, body: dict) -> dict:
-        with self.lock:
-            if self.bus is None:
-                return {"ok": False, "error": "motor not found"}
+        axis = body.get("axis", "yaw")
+        if not self.lock.acquire(timeout=1.5):
+            return {"ok": False, "error": "motor line is busy, try again"}
+        try:
+            ax = self.axes.get(axis)
+            if ax is None or ax.ctl is None:
+                return {"ok": False, "error": f"{axis} motor not found"}
             try:
-                if name in ("arm", "goal") and not self.front_ok:
+                if name in ("arm", "goal") and not ax.front_ok:
                     raise MotorError("front is not set yet: put the robot at front and press 'Set front + Arm'")
                 if name == "arm":
-                    if self.fault:
-                        raise MotorError(f"fault latched: {self.fault} (clear it first)")
-                    self.bus.arm(); self.last_goal_deg = None; self.trail.clear()
-                elif name == "setup":  # the one human step: "the robot faces front right now" -> remember it, then arm
-                    if self.follow:
+                    if ax.fault:
+                        raise MotorError(f"fault latched: {ax.fault} (clear it first)")
+                    ax.ctl.arm(); ax.last_goal_deg = None; ax.trail.clear()
+                elif name == "setup":  # yaw: the one human step "the robot faces front right now" -> remember it, then arm
+                    if ax.follow:
                         raise MotorError("stop following first")
-                    if self.fault:
-                        raise MotorError(f"fault latched: {self.fault} (clear it first)")
-                    self.bus.set_front()
-                    self.front_ok = True
-                    self.bus.arm(); self.last_goal_deg = None; self.trail.clear()
+                    if ax.fault:
+                        raise MotorError(f"fault latched: {ax.fault} (clear it first)")
+                    if ax.cfg.needs_front:
+                        ax.ctl.set_front()
+                    ax.front_ok = True
+                    ax.ctl.arm(); ax.last_goal_deg = None; ax.trail.clear()
+                elif name == "refront":  # "the robot is at front RIGHT NOW": move the zero here, without moving the motor, and make the page reconnect
+                    if not ax.cfg.needs_front:
+                        raise MotorError(f"{axis} has no teachable front")
+                    ax.follow = False
+                    ax.ctl.set_front()
+                    ax.front_ok = True
+                    if ax.ctl.torque_enabled():
+                        ax.ctl.hold()
+                    ax.last_goal_deg = None; ax.trail.clear()
+                    ax.fault = "정면을 다시 잡았어요. 슬라이더를 0으로 맞추고 '오류 해제' → 다시 연결하세요"  # blocks goals until the person has done that
                 elif name == "goal":
-                    if self.fault:
-                        raise MotorError(f"fault latched: {self.fault}")
+                    if ax.fault:
+                        raise MotorError(f"fault latched: {ax.fault}")
                     deg = float(body["deg"])
-                    self.bus.goto_raw(self.bus.m.to_raw(deg))
-                    self.last_goal_deg, self.last_cmd = deg, time.monotonic()
-                    self.goals += 1
-                    self.follow = bool(body.get("follow", False))
+                    ax.ctl.goto_raw(ax.cfg.to_raw(deg))
+                    ax.last_goal_deg, ax.last_cmd = deg, time.monotonic()
+                    ax.goals += 1
+                    ax.follow = bool(body.get("follow", False))
                 elif name == "hold":
-                    self.follow = False; self.bus.hold()
+                    ax.follow = False; ax.ctl.hold()
                 elif name == "release":
-                    self.follow = False; self.bus.release()
+                    ax.follow = False; ax.ctl.release()
                 elif name == "clear":
-                    self.fault = None
+                    ax.fault = None
                 else:
                     return {"ok": False, "error": "unknown action"}
                 return {"ok": True}
             except (MotorError, ValueError, KeyError) as e:
-                self.follow = False
+                ax.follow = False
                 try:
-                    if self.bus.torque_enabled(self.bus.id):
-                        self.bus.hold()
+                    if ax.ctl.torque_enabled():
+                        ax.ctl.hold()
                 except Exception:
                     pass
                 return {"ok": False, "error": str(e)}
+        finally:
+            self.lock.release()
 
     def shutdown(self):
-        with self.lock:
-            try:
-                if self.bus is not None:
-                    self.bus.hold()
-            except Exception:
-                pass
+        got = self.lock.acquire(timeout=2.0)  # never hang on exit: if the line is stuck, still try to hold the axes
+        try:
+            for ax in self.axes.values():
+                try:
+                    if ax.ctl is not None:
+                        ax.ctl.hold()
+                except Exception:
+                    pass
+        finally:
+            if got:
+                self.lock.release()
 
 
 def serve(port: str = "auto", baud: str | int = "auto", http_port: int = 8787):
@@ -270,7 +351,7 @@ def serve(port: str = "auto", baud: str | int = "auto", http_port: int = 8787):
                 super().handle_error(request, client_address)
 
     srv = Server(("127.0.0.1", http_port), H)
-    print(f"motor bridge on http://127.0.0.1:{http_port} (editor origin only), looking for the U2D2... Ctrl-C stops it and holds the motor where it is.", flush=True)
+    print(f"motor bridge on http://127.0.0.1:{http_port} (editor origin only), looking for the U2D2... Ctrl-C stops it and holds the motors where they are.", flush=True)
     try:
         srv.serve_forever()
     except KeyboardInterrupt:

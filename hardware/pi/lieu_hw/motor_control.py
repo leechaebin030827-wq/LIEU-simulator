@@ -1,4 +1,4 @@
-"""Slow, limited yaw motor control (Dynamixel id 1). THE ONLY PLACE THAT WRITES TO A MOTOR. motor_readonly.py stays write-free.
+"""Slow, limited axis control (Dynamixel yaw id 1 / tilt id 2). THE ONLY PLACE THAT WRITES TO A MOTOR. motor_readonly.py stays write-free.
 
 Safety rules enforced here, not left to the caller:
   * only these registers can be written: operating mode, torque enable, profile acceleration, profile velocity, goal position
@@ -10,8 +10,9 @@ Safety rules enforced here, not left to the caller:
 import struct
 import time
 
+from .axes import AxisCfg
 from .motor_readonly import ReadOnlyBus, crc16, parse_status
-from .yaw_plan import YawMotor, plan_yaw
+from .yaw_plan import plan_yaw
 
 INST_WRITE = 0x03
 ADDR_MODE, ADDR_TORQUE, ADDR_HW_ERROR, ADDR_PROFILE_ACC, ADDR_PROFILE_VEL, ADDR_GOAL, ADDR_PRESENT = 11, 64, 70, 108, 112, 116, 132
@@ -48,32 +49,54 @@ class MotorError(RuntimeError):
     pass
 
 
-class YawControl(ReadOnlyBus):
-    def __init__(self, port: str, baud: int, motor: YawMotor, dxl_id: int = 1):
-        super().__init__(port, baud)
-        self.m, self.id = motor, dxl_id
-        self.raw_min, self.raw_max = sorted((motor.to_raw(-motor.limit_deg), motor.to_raw(motor.limit_deg)))
-        # profile limits derived from the safe limits: robot deg/s -> motor rev/min -> register units
-        gear = motor.raw_per_deg * 360 / 4096                              # motor deg per robot deg
-        self.vel_units = max(1, round(motor.max_vel * gear / 360 * 60 / RPM_UNIT))
-        self.acc_units = max(1, round(motor.max_acc * gear / 360 * 3600 / ACC_UNIT))
+class MotorBus(ReadOnlyBus):
+    """The shared serial line. Reads come from ReadOnlyBus; the (allow-listed) write lives here."""
 
-    # -- low level -------------------------------------------------------------------------------------------------------------
-    def write(self, addr: int, value: int) -> None:
-        pkt = build_write(self.id, addr, value)
+    def write(self, dxl_id: int, addr: int, value: int) -> None:
+        pkt = build_write(dxl_id, addr, value)
         self.ser.reset_input_buffer()
         self.ser.write(pkt)
         self.ser.flush()
         for i, err, _ in parse_status(self._collect(0.03)):
-            if i == self.id:
+            if i == dxl_id:
                 if err:
-                    raise MotorError(f"motor reported error 0x{err:02X} writing register {addr}")
+                    raise MotorError(f"motor {dxl_id} reported error 0x{err:02X} writing register {addr}")
                 return
-        raise MotorError(f"no reply writing register {addr}")
+        raise MotorError(f"motor {dxl_id}: no reply writing register {addr}")
+
+    def u32(self, dxl_id: int, addr: int, n: int = 4, signed: bool = False) -> int | None:
+        p = self.read(dxl_id, addr, n)
+        return None if p is None else int.from_bytes(p, "little", signed=signed)
+
+
+class AxisControl:
+    def __init__(self, bus: MotorBus, cfg: AxisCfg):
+        self.bus, self.cfg, self.id = bus, cfg, cfg.id
+        # profile limits derived from the safe limits: robot deg/s -> motor rev/min -> register units
+        self.vel_units = max(1, round(cfg.max_vel * cfg.gear / 360 * 60 / RPM_UNIT))
+        self.acc_units = max(1, round(cfg.max_acc * cfg.gear / 360 * 3600 / ACC_UNIT))
+
+    @property
+    def raw_min(self) -> int:
+        return self.cfg.raw_bounds[0]
+
+    @property
+    def raw_max(self) -> int:
+        return self.cfg.raw_bounds[1]
+
+    @property
+    def m(self):  # the attributes plan_yaw() reads (limit_deg, max_vel, max_acc) plus the maps
+        return self.cfg
+
+    # -- low level -------------------------------------------------------------------------------------------------------------
+    def write(self, addr: int, value: int) -> None:
+        self.bus.write(self.id, addr, value)
 
     def u32(self, addr: int, n: int = 4, signed: bool = False) -> int | None:
-        p = self.read(self.id, addr, n)
-        return None if p is None else int.from_bytes(p, "little", signed=signed)
+        return self.bus.u32(self.id, addr, n, signed)
+
+    def torque_enabled(self, *_):
+        return self.bus.torque_enabled(self.id)
 
     def present(self) -> int:
         v = self.u32(ADDR_PRESENT, 4, True)
@@ -94,13 +117,13 @@ class YawControl(ReadOnlyBus):
 
     # -- staged actions ---------------------------------------------------------------------------------------------------------
     def status(self) -> dict:
-        return {"torque": self.torque_enabled(self.id), "mode": self.u32(11, 1), "profile_vel": self.u32(ADDR_PROFILE_VEL), "profile_acc": self.u32(ADDR_PROFILE_ACC),
+        return {"torque": self.torque_enabled(), "mode": self.u32(11, 1), "profile_vel": self.u32(ADDR_PROFILE_VEL), "profile_acc": self.u32(ADDR_PROFILE_ACC),
                 "present_raw": self.u32(ADDR_PRESENT, 4, True), "present_deg": None, "hw_error": self.u32(ADDR_HW_ERROR, 1),
                 "want_profile_vel": self.vel_units, "want_profile_acc": self.acc_units, "safe_raw": (self.raw_min, self.raw_max)}
 
     def arm(self) -> None:
         """Mode + slow profile + goal=present, THEN torque on. The motor must not move during any of this."""
-        if self.torque_enabled(self.id):
+        if self.torque_enabled():
             # already armed: only refresh the slow profile (RAM registers), never the mode, goal or torque of a live motor
             if self.u32(11, 1) != MODE_EXTENDED_POSITION:
                 raise MotorError("torque is on but the mode is not extended position: release torque first")
@@ -109,7 +132,6 @@ class YawControl(ReadOnlyBus):
             if not self.profile_ok() or self.u32(ADDR_PROFILE_ACC) != self.acc_units:
                 raise MotorError("profile read-back does not match")
             return
-        p = self.present()
         if self.u32(11, 1) != MODE_EXTENDED_POSITION:
             self.write(ADDR_MODE, MODE_EXTENDED_POSITION)
             if self.u32(11, 1) != MODE_EXTENDED_POSITION:
@@ -118,13 +140,17 @@ class YawControl(ReadOnlyBus):
         self.write(ADDR_PROFILE_VEL, self.vel_units)
         if not self.profile_ok() or self.u32(ADDR_PROFILE_ACC) != self.acc_units:
             raise MotorError("profile read-back does not match: NOT enabling torque")
+        # read the position only NOW, after the mode change: its meaning can differ between modes, and the goal must be what the motor reports in the final mode
+        p = self.present()
         self.write(ADDR_GOAL, p)
         if self.u32(ADDR_GOAL, 4, True) != p:
             raise MotorError("goal read-back does not match: NOT enabling torque")
+        if abs(self.present() - p) > 4:
+            raise MotorError("the axis is moving while arming: NOT enabling torque")
         if self.hw_error():
             raise MotorError(f"hardware error status 0x{self.hw_error():02X}: NOT enabling torque")
         self.write(ADDR_TORQUE, 1)
-        if not self.torque_enabled(self.id):
+        if not self.torque_enabled():
             raise MotorError("torque did not turn on")
 
     def goto_raw(self, raw: int) -> None:
@@ -132,28 +158,16 @@ class YawControl(ReadOnlyBus):
             raise MotorError(f"{raw} is outside the safe range {self.raw_min}..{self.raw_max}")
         if not self.profile_ok():
             raise MotorError("profile velocity is not set to a slow value: refusing to move")
-        if not self.torque_enabled(self.id):
+        if not self.torque_enabled():
             raise MotorError("torque is off: arm first")
         self.write(ADDR_GOAL, raw)
 
     def set_front(self) -> int:
-        """Teach 'here is front (0 deg)': remembers the present raw as the centre (in memory and in config/motor_limits.json). Reads only from the motor."""
-        import json
-        from .config import ROOT
+        """Teach 'here is 0 deg' (yaw only; tilt has its own taught points). Reads only from the motor."""
+        if self.cfg.set_front is None:
+            raise MotorError(f"{self.cfg.name} has no teachable front")
         raw = self.present()
-        self.m.center_raw = raw
-        self.raw_min, self.raw_max = sorted((self.m.to_raw(-self.m.limit_deg), self.m.to_raw(self.m.limit_deg)))
-        path = ROOT / "config" / "motor_limits.json"
-        d = json.loads(path.read_text(encoding="utf-8"))
-        c = d["motors"]["1"]["calibration"]
-        shift = raw - c["raw_center_front"]
-        c["raw_center_front"] = raw
-        c["raw_at_plus90"] += shift
-        c["raw_at_minus90"] += shift
-        d["motors"]["1"]["limits"]["raw"] = [c["raw_at_minus90"], c["raw_at_plus90"]]
-        d["motors"]["1"]["limits"]["raw_center_front"] = raw
-        c.setdefault("front_history", []).append({"raw": raw, "note": "set with 'Set front here'"})
-        path.write_text(json.dumps(d, indent=2, ensure_ascii=False), encoding="utf-8")
+        self.cfg.set_front(raw)
         return raw
 
     def hold(self) -> None:
@@ -164,15 +178,16 @@ class YawControl(ReadOnlyBus):
         self.write(ADDR_TORQUE, 0)
 
     def goto_deg(self, deg: float, timeout: float = 30.0, log=print) -> None:
-        self.goto_raw(self.m.to_raw(deg))
-        goal, t0 = self.m.to_raw(deg), time.monotonic()
+        self.goto_raw(self.cfg.to_raw(deg))
+        goal, t0 = self.cfg.to_raw(deg), time.monotonic()
+        tol = max(8.0, abs(self.cfg.to_raw(1.0) - self.cfg.to_raw(0.0)))  # about 1 robot degree: the motor settles a little short (friction)
         try:
             while time.monotonic() - t0 < timeout:
                 p = self.present()
                 if self.hw_error():
                     raise MotorError("hardware error while moving")
-                log(f"\r  {self.m.to_deg(p):7.2f} deg  (goal {deg:.2f})", end="", flush=True)
-                if abs(p - goal) < self.m.raw_per_deg * 1.0:  # the motor settles a fraction of a degree short (friction), so 1 deg counts as arrived
+                log(f"\r  {self.cfg.to_deg(p):7.2f} deg  (goal {deg:.2f})", end="", flush=True)
+                if abs(p - goal) < tol:
                     log()
                     return
                 time.sleep(0.05)
@@ -182,20 +197,20 @@ class YawControl(ReadOnlyBus):
             raise
 
     def play_yaw(self, yaw_deg: list[float], fps: int, speed: float = 1.0, log=print) -> None:
-        """Follow the (already slowed and clamped) yaw trajectory. Starts by moving slowly to its first point."""
-        traj = plan_yaw(yaw_deg, fps, self.m)
+        """Follow the (already slowed and clamped) trajectory. Starts by moving slowly to its first point."""
+        traj = plan_yaw(yaw_deg, fps, self.cfg)
         self.goto_deg(traj[0], log=log)
         t0, i = time.monotonic(), 0
         try:
             while i < len(traj):
                 i = min(len(traj) - 1, int((time.monotonic() - t0) * fps * speed))
-                self.goto_raw(self.m.to_raw(traj[i]))
+                self.goto_raw(self.cfg.to_raw(traj[i]))
                 p = self.present()
                 if self.hw_error():
                     raise MotorError("hardware error: holding")
-                if abs(self.m.to_deg(p) - traj[i]) > TRACK_ERR_DEG:
-                    raise MotorError(f"tracking error {abs(self.m.to_deg(p) - traj[i]):.1f} deg (blocked?): holding")
-                log(f"\r  t={i / fps:5.2f}s  goal {traj[i]:7.2f}  now {self.m.to_deg(p):7.2f}", end="", flush=True)
+                if abs(self.cfg.to_deg(p) - traj[i]) > TRACK_ERR_DEG:
+                    raise MotorError(f"tracking error {abs(self.cfg.to_deg(p) - traj[i]):.1f} deg (blocked?): holding")
+                log(f"\r  t={i / fps:5.2f}s  goal {traj[i]:7.2f}  now {self.cfg.to_deg(p):7.2f}", end="", flush=True)
                 if i >= len(traj) - 1:
                     break
                 time.sleep(1 / (fps * 2))

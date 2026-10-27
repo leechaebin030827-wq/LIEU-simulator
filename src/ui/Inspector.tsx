@@ -12,7 +12,7 @@ import { LED_COUNT } from '../engine/types';
 import { unlockAudio } from '../runtime/audio';
 import { EyeStudio } from './EyeStudio';
 import { EyeLibrary } from './EyeLibrary';
-import { YawLink } from './YawLink';
+import { AxisLink, YawLink } from './YawLink';
 
 type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'screen' | 'rig';
 
@@ -80,6 +80,7 @@ function Motion() {
         <Axis label="Yaw" hint="turn left / right" value={d.motion.yawY} min={-90} max={90} step={0.5} unit="°" digits={1} onChange={(v) => setMotion('yawY', v)} path={{ type: 'motion', ch: 'yawY' }} warnRange={L.yawY.range as [number, number]} />
         <YawLink />
         <Axis label="Tilt" hint="nod up / down" value={d.motion.tiltZ} min={-15} max={15} step={0.25} unit="°" digits={2} onChange={(v) => setMotion('tiltZ', v)} path={{ type: 'motion', ch: 'tiltZ' }} warnRange={L.tiltZ.range as [number, number]} />
+        <AxisLink axis="tilt" />
       </Section>
       <Section title="Quick poses" right={<span className="dim small">sets all three axes</span>}>
         <div className="chips">

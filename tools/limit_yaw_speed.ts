@@ -8,7 +8,7 @@ import { evaluateSequenceAt } from '../src/engine/evaluate';
 import { validateSequence } from '../src/engine/project';
 
 const cap = Number(process.argv[2]) || 60;
-const ids = process.argv.slice(3).length ? process.argv.slice(3) : ['01_boarding', '02_driving_a', '03_arrival', '04_driving_b', '05_web_cover'];
+const ids = process.argv.slice(3).length ? process.argv.slice(3) : ['01_boarding', '02_driving_a', '03_arrival', '04_driving_b', '05_web_cover', '07_bonus_aegyo'];
 
 export function limitSlew(x: number[], vMax: number, fps: number): number[] {
   const step = vMax / fps, z = [...x];

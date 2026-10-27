@@ -13,6 +13,9 @@ export const YAW_MOTOR = {
   maxAcc: m.safe.max_acc_deg_s2,
 };
 export type YawMotor = typeof YAW_MOTOR;
+export type Limits = { limitDeg: number; maxVel: number; maxAcc: number };
+const t = limits.motors['2'].safe;
+export const TILT_MOTOR: Limits = { limitDeg: t.limit_deg, maxVel: t.max_vel_deg_s, maxAcc: t.max_acc_deg_s2 };
 
 export const yawToRaw = (deg: number, c: YawMotor = YAW_MOTOR) => Math.round(c.centerRaw + c.rawPerDeg * deg);
 
@@ -27,7 +30,7 @@ export type YawPlan = {
 };
 
 /** One 1/fps step of the follower: position clamp + velocity cap + acceleration cap, braking in time to stop on target. Pure. */
-export function followStep(x: number, v: number, want: number, dt: number, c: YawMotor = YAW_MOTOR): { x: number; v: number; clamped: boolean } {
+export function followStep(x: number, v: number, want: number, dt: number, c: Limits = YAW_MOTOR): { x: number; v: number; clamped: boolean } {
   const target = Math.max(-c.limitDeg, Math.min(c.limitDeg, want));
   const err = target - x;
   const vd = Math.max(-c.maxVel, Math.min(c.maxVel, Math.sign(err) * Math.sqrt(1.6 * c.maxAcc * Math.abs(err))));

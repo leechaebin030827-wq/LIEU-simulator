@@ -13,9 +13,9 @@
       "note": "raw units are motor-side (4096 = 360 deg, multi-turn, relative). Use calibration/limits to convert to robot yaw.",
       "calibration": {
         "method": "hand-set -90 and +90 degrees of the yaw axis, motor position read at each (read-only)",
-        "raw_at_plus90": 9147,
-        "raw_at_minus90": -3931,
-        "raw_center_front": 2608,
+        "raw_at_plus90": 8898,
+        "raw_at_minus90": -4180,
+        "raw_center_front": 2359,
         "raw_per_robot_deg": 72.656,
         "motor_deg_per_robot_deg": 6.386,
         "positive_raw_is_positive_yaw": true,
@@ -44,6 +44,18 @@
           {
             "raw": 2608,
             "note": "set with 'Set front here'"
+          },
+          {
+            "raw": 5080,
+            "note": "set with 'Set front here'"
+          },
+          {
+            "raw": 2702,
+            "note": "set with 'Set front here'"
+          },
+          {
+            "raw": 2359,
+            "note": "set with 'Set front here'"
           }
         ]
       },
@@ -53,17 +65,72 @@
           90
         ],
         "raw": [
-          -3931,
-          9147
+          -4180,
+          8898
         ],
-        "raw_center_front": 2608,
+        "raw_center_front": 2359,
         "source": "min and max given by the user, read from the motor while hand-set at each end"
       },
       "safe": {
         "limit_deg": 80,
-        "max_vel_deg_s": 40,
-        "max_acc_deg_s2": 80,
-        "note": "self-imposed limits (physical range +/-90; the motor itself allows ~69 deg/s of robot yaw = its 73 rpm Velocity Limit). 40 deg/s of robot yaw = about 255 deg/s (~43 rpm) at the motor. Raise only step by step."
+        "max_vel_deg_s": 60,
+        "max_acc_deg_s2": 100,
+        "note": "self-imposed limits (physical range +/-90; the motor itself allows ~69 deg/s of robot yaw = its 73 rpm Velocity Limit register). 60 deg/s of robot yaw = about 383 deg/s (~64 rpm) at the motor: matches the scenarios (yaw <= 60 deg/s). Raise only step by step."
+      }
+    },
+    "2": {
+      "record": {
+        "start": 2077,
+        "min": 1820,
+        "max": 2266,
+        "last": 1974,
+        "units": "raw (4096 = 360 deg on X-series / XM430)",
+        "range_deg_at_motor": 39.2,
+        "how": "learned by hand-moving the axis; read-only, no motor was commanded"
+      },
+      "axis": "tilt",
+      "calibration": {
+        "raw_center_level": 2047,
+        "how": "user held the tilt level for 10 s; median of the readings (read-only)",
+        "raw_min_seen": 1820,
+        "raw_max_seen": 2266,
+        "min_vs_level_deg_at_motor": -20.0,
+        "max_vs_level_deg_at_motor": 19.2,
+        "gear_ratio": 1.184,
+        "note": "motor-side numbers. Gear / linkage ratio to the real tilt angle is still unknown (needs a known second angle).",
+        "raw_at_up_end": 1856,
+        "up_is_positive_raw": false,
+        "up_end_vs_level_deg_at_motor": -16.8,
+        "raw_at_down_end": 2260,
+        "down_end_vs_level_deg_at_motor": 18.7,
+        "anchors": [
+          {
+            "robot_deg": 15,
+            "raw": 1856,
+            "meaning": "up end (simulator tilt +15 = look up)"
+          },
+          {
+            "robot_deg": 0,
+            "raw": 2047,
+            "meaning": "level, held by hand for 10 s"
+          },
+          {
+            "robot_deg": -15,
+            "raw": 2260,
+            "meaning": "down end (simulator tilt -15 = bow)"
+          }
+        ],
+        "mapping": "piecewise linear through the three anchors; +deg = up = raw decreasing",
+        "raw_per_robot_deg_up": 12.733,
+        "raw_per_robot_deg_down": 14.2,
+        "motor_deg_per_robot_deg": 1.184,
+        "assumption": "the learned end stops are +15 / -15 deg of robot tilt (set by the user, not measured with an angle gauge)"
+      },
+      "safe": {
+        "limit_deg": 13,
+        "max_vel_deg_s": 30,
+        "max_acc_deg_s2": 100,
+        "note": "tilt: +/-13 deg (the taught ends are +/-15). 30 deg/s of robot tilt = about 36 deg/s (~6 rpm) at the motor. Raise only step by step."
       }
     }
   }

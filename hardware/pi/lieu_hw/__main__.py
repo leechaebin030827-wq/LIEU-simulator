@@ -45,9 +45,14 @@ def test_ring(drv, mapper):
 
 
 def motors_control(a) -> int:
-    from .motor_control import MotorError, YawControl
-    from .yaw_plan import load_yaw_motor
-    bus = YawControl(a.port, a.baud, load_yaw_motor())
+    from pathlib import Path
+    from .axes import load_axes
+    from .motor_control import AxisControl, MotorBus, MotorError
+    pause = Path("/tmp/lieu_bridge.pause")  # the bridge lets go of the serial port while this exists
+    pause.write_text("motors"); time.sleep(2.0)
+    axis = load_axes()[a.axis or "yaw"]
+    mbus = MotorBus(a.port, a.baud)
+    bus = AxisControl(mbus, axis)
     try:
         if a.what in ("arm", "goto", "play") and a.confirm != "MOVE":
             print("this WRITES to the motor and can move it. Re-run with --confirm MOVE when the area is clear and your hand is on the motor power switch.")
@@ -55,7 +60,7 @@ def motors_control(a) -> int:
         try:
             if a.what == "status":
                 s = bus.status()
-                s["present_deg"] = None if s["present_raw"] is None else round(bus.m.to_deg(s["present_raw"]), 2)
+                s["present_deg"] = None if s["present_raw"] is None else round(bus.cfg.to_deg(s["present_raw"]), 2)
                 print(s)
             elif a.what == "arm":
                 bus.arm()
@@ -80,7 +85,8 @@ def motors_control(a) -> int:
             print(f"STOPPED: {e}")
             return 1
     finally:
-        bus.close()
+        mbus.close()
+        pause.unlink(missing_ok=True)
     return 0
 
 
@@ -89,6 +95,9 @@ def motors(a) -> int:
     from .motor_readonly import ReadOnlyBus, record
     if a.what in ("status", "arm", "goto", "hold", "release", "play"):
         return motors_control(a)
+    pause = Path("/tmp/lieu_bridge.pause")  # the bridge lets go of the serial port while this exists
+    if a.what in ("record", "scan", "torque"):
+        pause.write_text("motors"); time.sleep(2.0)
     bus = ReadOnlyBus(a.port, a.baud)
     try:
         found = bus.scan()
@@ -102,11 +111,12 @@ def motors(a) -> int:
             if on:
                 print(f"torque is ON for ids {on}: they will resist your hand. Nothing was changed; turn torque off yourself (Dynamixel Wizard) first.")
                 return 1
-            print("Move each axis by hand through its full range. Ctrl-C to save.")
-            record(bus, ids, Path(__file__).resolve().parents[2] / "config" / "motor_limits.json", a.seconds)
+            print("Move the axis by hand through its full range" + (" (starts when it moves, stops after 4 s of stillness)." if a.auto else ". Ctrl-C to save."), flush=True)
+            record(bus, ids, Path(__file__).resolve().parents[2] / "config" / "motor_limits.json", a.seconds, axis={i: a.axis for i in ids} if a.axis else None, auto=a.auto)
             print("saved hardware/config/motor_limits.json")
     finally:
         bus.close()
+        pause.unlink(missing_ok=True)
     return 0
 
 
@@ -127,6 +137,11 @@ def main(argv=None):
     sv.add_argument("--port", default="auto", help="U2D2 serial port (default: find it)")
     sv.add_argument("--baud", default="auto", help="115200 | 57600 | 1000000 (default: try them)")
     sv.add_argument("--http", type=int, default=8787)
+    si = sub.add_parser("setid", help="give the ONE connected motor its own ID (EEPROM write; connect motors one at a time)")
+    si.add_argument("--port", required=True)
+    si.add_argument("--new", type=int, required=True, help="new ID, 2..20")
+    si.add_argument("--keep-baud", action="store_true", help="do not change the baud rate (default: set 115200 like the other motor)")
+    si.add_argument("--confirm", help="needs --confirm WRITE-ID")
     ms.add_argument("what", choices=["scan", "torque", "record", "status", "arm", "goto", "hold", "release", "play"])
     ms.add_argument("--deg", type=float, help="goto: robot yaw in degrees (safe range only)")
     ms.add_argument("--scenario", help="play: baked scenario id")
@@ -135,6 +150,8 @@ def main(argv=None):
     ms.add_argument("--baud", type=int, default=57600)
     ms.add_argument("--ids", type=int, nargs="*", help="motor IDs (default: all found by scan)")
     ms.add_argument("--seconds", type=float, help="stop recording after this long (default: Ctrl-C)")
+    ms.add_argument("--axis", help="record: name of the axis for --ids (e.g. tilt)")
+    ms.add_argument("--auto", action="store_true", help="record: wait for the first movement, stop after 4 s of stillness")
     t = sub.add_parser("test", help="bring-up patterns")
     t.add_argument("what", choices=["eyes", "ring"])
     a = ap.parse_args(argv)
@@ -147,6 +164,17 @@ def main(argv=None):
         return 0
     if a.cmd == "motors":
         return motors(a)
+    if a.cmd == "setid":
+        from .motor_setup import SetupError, set_id
+        if a.confirm != "WRITE-ID":
+            print("this WRITES the motor's ID (EEPROM). Only ONE motor may be connected. Re-run with --confirm WRITE-ID")
+            return 2
+        try:
+            set_id(a.port, a.new, None if a.keep_baud else 115200)
+        except SetupError as e:
+            print(f"STOPPED: {e}")
+            return 1
+        return 0
     if a.cmd == "serve":
         from .bridge import serve
         serve(a.port, a.baud, a.http)

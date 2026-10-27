@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { validateSequence } from '../src/engine/project';
 import { evaluateSequenceAt } from '../src/engine/evaluate';
 
-const IDS = ['01_boarding', '02_driving_a', '03_arrival', '04_driving_b', '05_web_cover'];
+const IDS = ['01_boarding', '02_driving_a', '03_arrival', '04_driving_b', '05_web_cover', '07_bonus_aegyo'];
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : IDS;
 const hex = (a: readonly number[]) => a.map((v) => (v & 255).toString(16).padStart(2, '0')).join('');
 /** HT16K33 brightness 0..15 from a 0..1 intensity; below ~3 % the eye counts as off (rows are blanked). */

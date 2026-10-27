@@ -52,6 +52,7 @@ const motorBridge = (): Plugin => ({
   name: 'lieu-motor-bridge',
   apply: 'serve',
   configureServer(server) {
+    if (!server.httpServer || server.config.server.middlewareMode) return; // vite-node / vitest also load this config: they must not start or hold a bridge
     let child: ChildProcess | null = null, stopped = false;
     const listening = () => new Promise<boolean>((res) => { const c = createConnection({ port: 8787, host: '127.0.0.1' }); c.on('connect', () => { c.destroy(); res(true); }); c.on('error', () => res(false)); });
     const log = (d: Buffer) => d.toString().split('\n').filter((l) => l.trim() && !l.startsWith('  ') && !l.startsWith('---')).forEach((l) => console.log('[bridge]', l));
@@ -63,6 +64,7 @@ const motorBridge = (): Plugin => ({
       child.on('exit', () => { child = null; });
     };
     const timer = setInterval(() => void ensure(), 3000);
+    timer.unref(); // never keep a process alive just for this watcher
     void ensure();
     const stop = () => { stopped = true; clearInterval(timer); child?.kill('SIGINT'); };
     server.httpServer?.on('close', stop);

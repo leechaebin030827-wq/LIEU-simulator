@@ -92,28 +92,53 @@ class ReadOnlyBus:
         return None if p is None else bool(p[0])
 
 
-def record(bus: ReadOnlyBus, ids: list[int], out: Path, seconds: float | None = None, hz: float = 20.0):
-    """Sample present positions while a person moves the axes by hand; keep min / max / start per motor. Ctrl-C (or `seconds`) saves."""
+def record(bus: ReadOnlyBus, ids: list[int], out: Path, seconds: float | None = None, hz: float = 20.0, axis: dict[int, str] | None = None,
+           auto: bool = False, still_s: float = 4.0, max_s: float = 180.0, motion_raw: int = 45):
+    """Sample present positions while a person moves the axes by hand; keep min / max / start per motor.
+    auto=True: wait for the first movement, then record until every motor has been still for `still_s` seconds (or `max_s`).
+    Saved by MERGING into the existing file under motors[id]['record'] -- calibration and safe limits already stored there are never touched."""
     stats = {i: {"start": None, "min": None, "max": None, "last": None} for i in ids}
     t0 = time.monotonic()
+    moved_at = last_motion = None
     try:
-        while seconds is None or time.monotonic() - t0 < seconds:
+        while True:
+            now = time.monotonic()
+            if auto:
+                if moved_at is None and now - t0 > max_s:
+                    break
+                if moved_at is not None and (now - (last_motion or moved_at) > still_s or now - moved_at > max_s):
+                    break
+            elif seconds is not None and now - t0 >= seconds:
+                break
             for i in ids:
                 v = bus.position(i)
                 if v is None:
                     continue
                 s = stats[i]
-                s["last"] = v
+                prev, s["last"] = s["last"], v
                 s["start"] = v if s["start"] is None else s["start"]
                 s["min"] = v if s["min"] is None else min(s["min"], v)
                 s["max"] = v if s["max"] is None else max(s["max"], v)
-            print("\r" + "  ".join(f"id{i}: {s['last']} [{s['min']}..{s['max']}]" for i, s in stats.items()), end="", flush=True)
+                if prev is not None and abs(v - prev) > 3:   # still moving (noise is +-1)
+                    last_motion = now
+                if auto and moved_at is None and abs(v - s["start"]) > motion_raw:
+                    moved_at, last_motion = now, now
+            print("\r" + "  ".join(f"id{i}: {s['last']} [{s['min']}..{s['max']}]" for i, s in stats.items()) + ("  (waiting for movement)" if auto and moved_at is None else ""), end="", flush=True)
             time.sleep(1 / hz)
     except KeyboardInterrupt:
         pass
     print()
-    data = {str(i): {**s, "units": "raw (4096 = 360 deg on X-series)", "range_deg": None if s["min"] is None else round((s["max"] - s["min"]) * 360 / 4096, 2)} for i, s in stats.items()}
-    if out.exists():  # keep the previous recording
-        out.replace(out.with_name(out.stem + ".prev.json"))
-    out.write_text(json.dumps({"schema": "lieu.motor_limits/v1", "note": "learned by hand-moving the axes; read-only, no motor was commanded", "motors": data}, indent=2), encoding="utf-8")
-    return data
+    data = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {"schema": "lieu.motor_limits/v1", "motors": {}}
+    if out.exists():
+        out.with_name(out.stem + ".prev.json").write_text(out.read_text(encoding="utf-8"), encoding="utf-8")
+    result = {}
+    for i, s in stats.items():
+        rec = {**s, "units": "raw (4096 = 360 deg on X-series / XM430)", "range_deg_at_motor": None if s["min"] is None else round((s["max"] - s["min"]) * 360 / 4096, 2),
+               "how": "learned by hand-moving the axis; read-only, no motor was commanded"}
+        m = data.setdefault("motors", {}).setdefault(str(i), {})
+        m["record"] = rec
+        if axis and i in axis:
+            m["axis"] = axis[i]
+        result[i] = rec
+    out.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    return result
