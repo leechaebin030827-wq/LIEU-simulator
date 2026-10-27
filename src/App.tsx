@@ -14,41 +14,37 @@ import { startAutosave, readAutosave } from './runtime/autosave';
 import { unlockAudio } from './runtime/audio';
 import { validateSequence } from './engine/project';
 import { emptySequence } from './engine/edit';
+import { Menu, MenuItem, MenuSep, MenuKeep } from './ui/Menu';
 import { ExportDialog } from './ui/ExportDialog';
 import { openExport } from './ui/exportUi';
 import { GROUPS, SCENARIOS, PRESET_IDS, scenarioOf } from './scenarios';
 
-function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState({ left: 0, top: 0 });
-  const cur = useStore((s) => s.seq.id);
-  useEffect(() => {
-    if (!open) return;
-    const off = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
-    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
-    window.addEventListener('mousedown', off); window.addEventListener('keydown', esc);
-    return () => { window.removeEventListener('mousedown', off); window.removeEventListener('keydown', esc); };
-  }, [open]);
+/** Scenario switcher: the button shows what is open now; the list is grouped by purpose, the sequence name can be edited at the bottom. */
+function ScenarioMenu({ onPick }: { onPick: (id: string) => void }) {
+  const cur = useStore((s) => s.seq.id), title = useStore((s) => s.seq.title);
+  const patchSeq = useStore((s) => s.patchSeq);
+  const info = scenarioOf(cur);
   return (
-    <div className="exmenu" ref={ref}>
-      <button className="ico scn" title="Load a scenario" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos({ left: r.left, top: r.bottom + 6 }); setOpen((o) => !o); }}>Scenarios <span className="caret">▾</span></button>
-      {open && (
-        <div className="exlist" style={pos}>
-          {GROUPS.map((g) => (
-            <div key={g.key} className="exgroup">
-              <div className="exhead" title={g.note}><b>{g.title}</b><span>{g.en}</span></div>
-              {SCENARIOS.filter((x) => x.group === g.key).map((x) => (
-                <button key={x.id} className={'exitem' + (x.id === cur ? ' cur' : '')} onClick={() => { setOpen(false); onPick(x.id); }}>
-                  <span className="exnum">{x.id.slice(0, 2)}</span>
-                  <span className="extxt"><b>{x.label}</b><small>{x.desc}</small></span>
-                </button>
-              ))}
-            </div>
+    <Menu className="ico scn" width={360} title="시나리오 전환 · Load a scenario"
+      label={<><span className="scnnum">{info ? cur.slice(0, 2) : '··'}</span><span className="scntxt">{title || '이름 없음'}</span></>}>
+      {GROUPS.map((g) => (
+        <div key={g.key} className="exgroup">
+          <div className="exhead" title={g.note}><b>{g.title}</b><span>{g.en}</span></div>
+          {SCENARIOS.filter((x) => x.group === g.key).map((x) => (
+            <button key={x.id} role="menuitem" className={'exitem' + (x.id === cur ? ' cur' : '')} onClick={() => onPick(x.id)}>
+              <span className="exnum">{x.id.slice(0, 2)}</span>
+              <span className="extxt"><b>{x.label}</b><small>{x.desc}</small></span>
+            </button>
           ))}
         </div>
-      )}
-    </div>
+      ))}
+      <MenuSep />
+      <MenuKeep>
+        <label className="exname"><span>이름 (저장 파일명)</span>
+          <input type="text" value={title} placeholder="Sequence name" onChange={(e) => patchSeq((q) => { q.title = e.target.value; }, 'title')} />
+        </label>
+      </MenuKeep>
+    </Menu>
   );
 }
 
@@ -95,11 +91,9 @@ async function newSequence() {
 }
 
 function TopBar({ onPresent }: { onPresent: () => void }) {
-  const title = useStore((s) => s.seq.title);
   const canUndo = useStore((s) => s.past.length > 0), canRedo = useStore((s) => s.future.length > 0);
   const { savedAt, saving, parts } = useUi();
   const fileRef = useRef<HTMLInputElement>(null);
-  const patchSeq = useStore((s) => s.patchSeq);
 
   const openFile = async (f: File) => {
     if (!(await confirmDiscard('Open file'))) return;
@@ -111,39 +105,41 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
     <div className="top">
       <h1 title="LIEU Sequence Editor">LIEU</h1>
       <div className="grp">
-        <button className="ico" title="Clear all keyframes and start an empty sequence" onClick={() => void newSequence()}>New</button>
-        <ExampleMenu onPick={async (id) => {
+        <ScenarioMenu onPick={async (id) => {
           if (!(await confirmDiscard('Load scenario'))) return;
           try { await loadPresetData(id); toast(`Loaded scenario: ${scenarioOf(id)?.label}`, 'ok'); } catch (x) { toast(String(x), 'warn'); }
         }} />
       </div>
       <div className="grp">
-        <input type="text" value={title} title="Sequence name (used as the saved file name)" placeholder="Sequence name" onChange={(e) => patchSeq((q) => { q.title = e.target.value; }, 'title')} style={{ width: 190 }} />
-      </div>
-      <div className="grp">
-        <button className="ico" title="Open file (.lieu.json / .zip)" onClick={() => fileRef.current?.click()}>Open</button>
+        <Menu label="파일" title="파일 · File">
+          <MenuItem onClick={() => void newSequence()}>새로 만들기</MenuItem>
+          <MenuItem onClick={() => fileRef.current?.click()}>열기…</MenuItem>
+          <MenuSep />
+          <MenuItem onClick={saveJson} hint="⌘S">저장 (.lieu.json)</MenuItem>
+          <MenuItem onClick={async () => {
+            const s = useStore.getState(); const name = `${slug(s.seq.title)}.lieu.zip`;
+            download(name, (await s.exportZip()) as BlobPart, 'application/zip'); toast(`Saved as ZIP → ${name}`, 'ok');
+          }}>ZIP으로 저장 (업로드한 이미지·소리 포함)</MenuItem>
+        </Menu>
         <input ref={fileRef} type="file" hidden accept=".json,.zip" onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ''; if (f) void openFile(f); }} />
-        <button className="ico" title="Save the current sequence to a file (.lieu.json) — Ctrl/⌘+S" onClick={saveJson}>Save</button>
-        <button className="ico" title="Save as .zip, including uploaded images and sounds" onClick={async () => {
-          const s = useStore.getState(); const name = `${slug(s.seq.title)}.lieu.zip`;
-          download(name, (await s.exportZip()) as BlobPart, 'application/zip'); toast(`Saved as ZIP → ${name}`, 'ok');
-        }}>ZIP</button>
-      </div>
-      <div className="grp">
-        <button className="ico" onClick={() => useStore.getState().undo()} disabled={!canUndo} title="Undo — Ctrl/⌘+Z">Undo</button>
-        <button className="ico" onClick={() => useStore.getState().redo()} disabled={!canRedo} title="Redo — Ctrl/⌘+Shift+Z">Redo</button>
+        <button className="ico" onClick={() => useStore.getState().undo()} disabled={!canUndo} title="되돌리기 — Ctrl/⌘+Z">↶ 되돌리기</button>
+        <button className="ico" onClick={() => useStore.getState().redo()} disabled={!canRedo} title="다시 실행 — Ctrl/⌘+Shift+Z">↷ 다시</button>
       </div>
       <span className="sp" />
-      <span className={'savestate' + (saving ? ' busy' : '')} title="Work is autosaved in this browser (uploaded media excluded)">
-        {saving ? 'Saving…' : savedAt ? `Autosaved ${timeLabel(savedAt)}` : 'Autosave on'}
+      <span className={'savestate' + (saving ? ' busy' : '')} title="작업 내용은 이 브라우저에 자동 저장됩니다 (업로드한 미디어 제외)">
+        {saving ? '저장 중…' : savedAt ? `자동 저장 ${timeLabel(savedAt)}` : '자동 저장 켜짐'}
       </span>
-      <span className="badge preview" title="No commands are sent to the real robot (motors, LEDs, eyes, projector)">PREVIEW ONLY</span>
-      <button className="ico" onClick={openExport} title="Export this scenario as a 16:9 MP4: a vertical close-up plus four other camera views">Export MP4</button>
-      <button className="ico" onClick={() => void openProjectorWindow()} title="Open the projector picture in its own window on the second display (the editor stays where it is)">Projector out</button>
-      <HardwareMenu />
-      <button className="ico" onClick={onPresent} title="Hide the editor and show only the playback view">▶ Present</button>
-      <button className={'ico' + (parts ? ' on' : '')} onClick={toggleParts} title="Open the parts list (Scene / Rig): see parts and change which stage each belongs to">Parts ▾</button>
-      <button className="ico" onClick={openHelp} title="How to use and keyboard shortcuts">? Help</button>
+      <span className="badge preview" title="실물 로봇(모터·LED·눈·프로젝터)에는 아무 명령도 보내지 않는 미리보기입니다">PREVIEW ONLY</span>
+      <div className="grp out">
+        <HardwareMenu />
+        <button className="ico" onClick={() => void openProjectorWindow()} title="프로젝터 화면을 두 번째 모니터용 별도 창으로 엽니다 (편집기는 그대로)">프로젝터 창</button>
+        <button className="ico cta" onClick={openExport} title="현재 시나리오를 16:9 MP4로 내보내기 — 세로 클로즈업 + 4개 시점">영상 내보내기</button>
+      </div>
+      <div className="grp">
+        <button className="ico" onClick={onPresent} title="편집기를 숨기고 재생 화면만 보기">▶ 발표 모드</button>
+        <button className={'ico' + (parts ? ' on' : '')} onClick={toggleParts} title="파트 목록: 부품을 보고, 각 부품이 어느 스테이지에 속하는지 바꿉니다">파트</button>
+        <button className="ico" onClick={openHelp} title="사용법과 단축키 (?)">? 도움말</button>
+      </div>
     </div>
   );
 }
@@ -184,6 +180,7 @@ export function App() {
       if (mod && e.key.toLowerCase() === 's') { e.preventDefault(); saveJson(); }
       else if (mod && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? s.redo() : s.undo(); }
       else if (mod && e.key.toLowerCase() === 'y') { e.preventDefault(); s.redo(); }
+      else if (!typing && (e.key === '?' || (e.key === '/' && e.shiftKey))) { e.preventDefault(); openHelp(); }
       else if (!typing && e.code === 'Space') { e.preventDefault(); unlockAudio(); s.playing ? s.pause() : s.play(); }
       else if (!typing && e.key === 'ArrowLeft') s.setTime(s.tSec - 1 / 30);
       else if (!typing && e.key === 'ArrowRight') s.setTime(s.tSec + 1 / 30);

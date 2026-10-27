@@ -86,7 +86,7 @@ export function HardwareMenu() {
     <div className="exmenu" ref={ref}>
       <button className={'ico' + (st.connected ? ' on' : '')} title="Drive the real eyes and ring from this page (Arduino UNO R4 over USB)"
         onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos({ right: Math.max(8, window.innerWidth - r.right), top: r.bottom + 6 }); setOpen((o) => !o); }}>
-        {st.connected ? '● ' : ''}Hardware <span className="caret">▾</span>
+        {st.connected ? '● ' : ''}하드웨어 <span className="caret">▾</span>
       </button>
       {open && (
         <div className="exlist hwpanel" style={{ right: pos.right, top: pos.top, left: 'auto' }}>

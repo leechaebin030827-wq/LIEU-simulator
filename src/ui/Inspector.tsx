@@ -19,10 +19,24 @@ type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'screen' |
 export function Inspector() {
   const [tab, setTab] = useState<Tab>('motion');
   const selClip = useStore((s) => s.selClip);
-  const tabs: [Tab, string, string][] = [['motion', 'Motion', 'Rail · Yaw · Tilt'], ['ring', 'LED Ring', 'NeoPixel ×24 (RGBW)'], ['eyes', 'Eyes', 'Two 8x8 dot eyes'], ['screen', 'Screen', 'TV screen (9:16) preview'], ['proj', 'Projector', 'Floor-projected video/image'], ['audio', 'Audio', 'Voice and sound-effect clips'], ['events', 'Events', 'Sensor triggers (virtual)'], ['rig', 'Rig/HW', 'Part assignment · unknown hardware values']];
+  const nAudio = useStore((s) => s.seq.tracks.audio.length), nEvents = useStore((s) => s.seq.tracks.events.length);
+  // work tabs first (what the robot does / shows / says), then the two setup tabs after a divider
+  const tabs: [Tab, string, string, number?][] = [
+    ['motion', '모션', 'Motion · Rail · Yaw · Tilt'], ['ring', 'LED 링', 'LED Ring · NeoPixel ×24 (RGBW)'], ['eyes', '눈', 'Eyes · two 8×8 dot eyes'],
+    ['screen', '스크린', 'Screen · TV screen (9:16) preview'], ['proj', '프로젝터', 'Projector · floor-projected video/image'], ['audio', '사운드', 'Audio · voice and sound-effect clips', nAudio],
+    ['events', '이벤트', 'Events · virtual sensor triggers', nEvents], ['rig', '리그 · HW', 'Rig/HW · part assignment, unknown hardware values'],
+  ];
   return (
     <div className="insp">
-      <div className="tabs">{tabs.map(([k, l, d]) => <button key={k} className={tab === k ? 'on' : ''} title={d} onClick={() => setTab(k)}>{l}</button>)}<KeyStatus /></div>
+      <div className="tabs">
+        {tabs.map(([k, l, d, n]) => (
+          <span key={k} className="tabwrap">
+            {k === 'events' && <span className="tabsep" aria-hidden />}
+            <button className={tab === k ? 'on' : ''} title={d} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>{l}{n ? <span className="cnt">{n}</span> : null}</button>
+          </span>
+        ))}
+        <KeyStatus />
+      </div>
       {selClip && <ClipEditor />}
       {tab === 'motion' && <Motion />}
       {tab === 'ring' && <Ring />}
@@ -36,12 +50,17 @@ export function Inspector() {
   );
 }
 
+/** Auto-key status AND switch: the one place that says whether edits are recorded or only a temporary preview. */
 function KeyStatus() {
-  const autoKey = useStore((s) => s.autoKey), t = useStore((s) => s.tSec);
+  const autoKey = useStore((s) => s.autoKey), t = useStore((s) => s.tSec), setAutoKey = useStore((s) => s.setAutoKey);
   const live = useStore((s) => Object.keys(s.live).length > 0);
-  return autoKey
-    ? <div className="statusline on" title="Changing a value records a key at the current time">Auto-key · recording at <span className="pill">{t.toFixed(2)}s</span></div>
-    : <div className="statusline off" title="Temporary values disappear when you move the time">Auto-key off · unsaved preview{live ? ' (LIVE)' : ''}</div>;
+  return (
+    <button className={'statusline ' + (autoKey ? 'on' : 'off')} onClick={() => setAutoKey(!autoKey)}
+      title={autoKey ? '값을 바꾸면 현재 시간에 키가 기록됩니다. 클릭하면 끕니다.' : '지금 바꾸는 값은 시간을 옮기면 사라지는 임시 미리보기입니다. 클릭하면 Auto-key를 켜서 기록합니다.'}>
+      {autoKey ? <>Auto-key 켜짐 · <span className="pill">{t.toFixed(2)}s</span>에 기록 중</> : <>Auto-key 꺼짐 · 변경은 임시 미리보기{live ? ' (LIVE)' : ''}</>}
+      <span className="sw" aria-hidden />
+    </button>
+  );
 }
 
 function Axis(props: { label: string; value: number; min: number; max: number; step: number; unit: string; digits: number; onChange: (v: number) => void; path: TrackPath; warnRange: [number, number]; hint: string }) {
@@ -418,7 +437,7 @@ function Rig() {
       </Section>
       <Section title="Hardware calibration (UNKNOWN)">
         <table className="small" style={{ width: '100%', color: 'var(--dim)' }}><tbody>
-          {[['Motor model / count', 'null'], ['Axis hard limits · speed · acceleration · jerk', 'null'], ['Gear ratio / homing', 'null'], ['Actual rail stroke', 'null'], ['NeoPixel chipset · LED0 · byte order', 'null / UNKNOWN'], ['Eye I²C address · row/column mapping', 'null'], ['Projector throw / resolution / lens center', 'null']].map(([a, b]) => <tr key={a}><td>{a}</td><td style={{ textAlign: 'right', color: 'var(--key)' }}>{b}</td></tr>)}
+          {[['Motor model / count', '미확인'], ['Axis hard limits · speed · acceleration · jerk', '미확인'], ['Gear ratio / homing', '미확인'], ['Actual rail stroke', '미확인'], ['NeoPixel chipset · LED0 · byte order', '미확인'], ['Eye I²C address · row/column mapping', '미확인'], ['Projector throw / resolution / lens center', '미확인']].map(([a, b]) => <tr key={a}><td>{a}</td><td style={{ textAlign: 'right', color: 'var(--key)' }}>{b}</td></tr>)}
         </tbody></table>
         <button disabled style={{ marginTop: 8, width: '100%' }} title="Hardware output is not implemented">Connect hardware — disabled (PREVIEW ONLY)</button>
         <div className="note">This app sends no commands to motors, LEDs or I²C devices. Until calibration is done (docs/03_INPUTS_AND_LIMITS.md questionnaire), HardwareAdapter is a no-op.</div>
