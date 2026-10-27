@@ -5288,7 +5288,7 @@
       {
         "id": "glide",
         "fromSec": 8.2,
-        "toSec": 11,
+        "toSec": 11.0,
         "assetId": "media/sfx_glide.wav",
         "mediaOffsetSec": 0,
         "gain": 0.35,
@@ -5365,7 +5365,7 @@
       {
         "id": "boing2",
         "fromSec": 19.4,
-        "toSec": 20,
+        "toSec": 20.0,
         "assetId": "media/sfx_boing.wav",
         "mediaOffsetSec": 0,
         "gain": 0.6,

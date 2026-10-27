@@ -20,11 +20,11 @@ const DRIVING_B: Seg[] = [
 ];
 
 /** 01_boarding: warm welcome -> greeting nod -> smiling, blinking look over the seats -> back to base, calm -> listens for the start button -> joyful bounce on press ->
- *  excited through the spin (the intensity track hides the eyes while the head swings) -> soft smile -> calm. Block lengths match the scenario's own beats (28.5 s). */
+ *  excited through the spin (the intensity track hides the eyes while the head swings) -> soft smile -> calm. Block lengths match the scenario's own beats (32.3 s). */
 const BOARDING: Seg[] = [
   { at: 0, blocks: [['mood-happy-soft', 3.7], ['mo-gentleGreeting', 2.7],
     ['mood-happy-soft', 0.8], ['mo-doubleBlink', 0.64], ['mood-happy-soft', 1.2], ['mo-blink', 0.32], ['mood-happy-soft', 1.0], ['mo-doubleBlink', 0.64], ['mood-happy-soft', 0.8], ['mo-reassuringBlink', 0.8],
-    ['mood-happy-soft', 1.6], ['mood-default', 2.4], ['mood-attentive', 1.4], ['mo-joyBounce', 1.4], ['mood-excited', 6.0], ['mood-happy-soft', 1.6], ['mood-default', 1.5]] },
+    ['mood-happy-soft', 1.6], ['mood-default', 2.4], ['mood-attentive', 1.4], ['mo-joyBounce', 1.4], ['mood-excited', 9.8], ['mood-happy-soft', 1.6], ['mood-default', 1.5]] },
 ];
 
 /** 03_arrival: calm -> attentive ("almost there") -> curious, blinking look over the cabin -> smile + nod goodbye -> turns to the door side, glad to point -> reassuring blink -> calm (31 s). */
@@ -42,13 +42,29 @@ const WEB_COVER: Seg[] = [
     ['mo-upLeft', 1.7], ['mo-upRight', 1.7], ['mo-downLeft', 1.7], ['mo-downRight', 1.7], ['mo-closeEyes', 1.0], ['mo-lookDown', 1.6], ['mood-excited', 1.2]] },
 ];
 
+/** 07_bonus_aegyo (59 s): sleepy -> startled -> greeting -> giggles -> heart eyes -> winks -> shy -> star party -> twirl -> wink bomb -> twirl 2 -> heart/cheer bow -> calm. Block lengths = the scenario's beats. */
+const BONUS_AEGYO: Seg[] = [
+  { at: 0, blocks: [['mood-sleepy', 1.6], ['mo-surprise', 0.8],
+    ['mo-gentleGreeting', 2.0], ['mood-happy-soft', 1.4], ['mo-doubleBlink', 0.6],
+    ['mo-laugh', 2.6], ['sym-joy', 2.0],
+    ['sym-heart', 4.5],
+    ['mo-happyWink', 1.4], ['mo-winkLeft', 1.0], ['mo-winkRight', 1.1],
+    ['mo-shy', 3.0], ['mood-happy-soft', 0.8], ['mo-doubleBlink', 0.7],
+    ['sym-star', 2.0], ['sym-sparkle', 1.5], ['mo-excited', 2.0],
+    ['sym-spiral', 3.6], ['mo-excited', 2.6], ['mood-happy', 1.8],
+    ['mo-happyWink', 1.0], ['mo-winkLeft', 0.8], ['mo-winkRight', 0.8], ['mo-winkLeft', 0.8], ['mo-winkRight', 0.8], ['mo-happyWink', 0.8],
+    ['sym-heart', 2.2], ['sym-spiral', 3.4], ['sym-cheer', 1.4], ['mo-laugh', 1.0],
+    ['sym-heart', 1.5], ['mo-joyBounce', 1.5], ['sym-cheer', 1.0], ['mood-happy', 1.0],
+    ['mood-happy-soft', 2.0], ['mood-default', 2.0]] },
+];
+
 function bake(segs: Seg[]) {
   const out: { t: number; l: number[]; r: number[] }[] = [];
   for (const g of segs) for (const k of bakeKeys(seq(g.blocks, g.o), 30)) out.push({ t: Math.round((g.at + k.tSec) * 1000) / 1000, l: [...k.pair.l], r: [...k.pair.r] });
   return out.sort((a, b) => a.t - b.t).filter((k, i, a) => i === 0 || k.t > a[i - 1].t);
 }
 
-for (const [name, segs] of [['01_boarding', BOARDING], ['02_driving_a', DRIVING_A], ['03_arrival', ARRIVAL], ['04_driving_b', DRIVING_B], ['05_web_cover', WEB_COVER]] as const) {
+for (const [name, segs] of [['01_boarding', BOARDING], ['02_driving_a', DRIVING_A], ['03_arrival', ARRIVAL], ['04_driving_b', DRIVING_B], ['05_web_cover', WEB_COVER], ['07_bonus_aegyo', BONUS_AEGYO]] as const) {
   const keys = bake(segs as Seg[]);
   writeFileSync(`tools/baked_eyes/${name}.json`, JSON.stringify(keys));
   console.log(`${name}:`, keys.length, 'keys');

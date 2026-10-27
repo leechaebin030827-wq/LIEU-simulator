@@ -7,6 +7,7 @@ import { useStore } from '../store';
 import { motionWarnings } from '../engine/limits';
 import { PREVIEW_LIMITS } from '../engine/rigDefaults';
 import { PROJ_DEFAULTS } from '../three/Projection';
+import { bridge } from '../three/exportBridge';
 
 const PRESETS: Record<string, { pos: [number, number, number]; target?: [number, number, number]; up?: [number, number, number] }> = {
   // Default view: robot + screen + stand seen from the front-right, projection text on the floor.
@@ -105,9 +106,17 @@ export function Viewport() {
         <Floor />
         <CameraRig />
         <Invalidator />
+        <ExportBridge />
       </Canvas>
     </div>
   );
+}
+
+/** Hands the live renderer / scene to the video exporter. */
+function ExportBridge() {
+  const gl = useThree((s) => s.gl), scene = useThree((s) => s.scene), camera = useThree((s) => s.camera), advance = useThree((s) => s.advance);
+  useEffect(() => { Object.assign(bridge, { gl, scene, camera, advance }); }, [gl, scene, camera, advance]);
+  return null;
 }
 
 function Invalidator() { useFrame(() => undefined); return null; }

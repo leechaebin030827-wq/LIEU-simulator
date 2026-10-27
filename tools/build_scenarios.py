@@ -4,6 +4,7 @@
    02_driving_a - construction detected, Lieu looks ahead, returns, explains the detour
    03_arrival   - destination nearly reached, Lieu comes out, glances at the door side, says goodbye
    04_driving_b - "Hey LIEU" -> startled, then every cute trick (giggle, heart eyes, wink, shy, stars, bow)
+   07_bonus_aegyo - bonus: every form factor at once, maximum cuteness (38 s)
    05_web_cover - web motion "cover": the 21 s eye-extractor gaze sequence (curious -> L/R/up/down -> diagonals -> eyes shut -> down -> excited) with the head following the gaze
    (run `build_scenarios.py arrival` to rebuild only one; plain run rebuilds all and overwrites saved edits)
 Writes examples/<id>.lieu.json and public/examples/<id>.lieu.json.
@@ -60,8 +61,8 @@ WHIRL_COLORS = [('white', [0, 0, 0, 230], 0), ('sky', [110, 205, 255, 0], math.p
 
 
 def whirl(yaw: Tr, tilt: Tr, t0):
-    """illusion spin: right end (eyes off) -> fast hidden swing -> left end (eyes on) -> front. 5.4 s, same values everywhere."""
-    A, B, C = 1.4, 2.6, 1.4
+    """illusion spin: right end (eyes off) -> fast hidden swing -> left end (eyes on) -> front. 9.2 s: every leg stays under the 60 deg/s yaw cap (cosine ease peaks at 1.5x the mean speed)."""
+    A, B, C = 2.3, 4.6, 2.3
     tA, tB, tC = t0 + A, t0 + A + B, t0 + A + B + C
     def y(t):
         if t <= t0: return 0
@@ -124,7 +125,7 @@ def sfx(id, name, a, dur, gain=0.6, fade_in=0.02, fade_out=0.05):
 def boarding():
     """base position = just inside the front end of the rail. cue -> glide out -> nod -> one left->right seating check -> cue -> glide back to base -> start pressed -> spin."""
     BASE = -0.06           # a little inside the front end (0)
-    DUR = 28.5
+    DUR = 32.3
     ARR, NOD = 3.7, 4.0      # arrival at the front end, nod start
     CK = 6.4                 # check cue
     rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
@@ -158,7 +159,7 @@ def boarding():
              sfx('nod', 'sfx_nod.wav', NOD + 0.3, 0.35, 0.6),
              sfx('cue2', 'sfx_cue.wav', CK, 0.45), sfx('turn', 'sfx_turn.wav', 7.0, 1.5, 0.5), sfx('scan', 'sfx_scan.wav', 9.0, 2.2, 0.5),
              sfx('cue3', 'sfx_cue.wav', 12.8, 0.45), sfx('glide2', 'sfx_glide.wav', 13.4, 3.0, 0.5, 0.4, 0.8),
-             sfx('cue4', 'sfx_cue.wav', W0 - 0.8, 0.45), sfx('spin', 'sfx_spin.wav', W0, 5.4, 0.55, 0.2, 0.4),
+             sfx('cue4', 'sfx_cue.wav', W0 - 0.8, 0.45), sfx('spin', 'sfx_spin_long.wav', W0, tC - W0, 0.55, 0.2, 0.4),
              {**sfx('chime2', 'intro-chime.wav', tC, 0.72, 0.5), 'fadeOutSec': 0.2}]
     ev = [scene(0, '① 차량 도착 · 탑승자 환영', '기본 위치(레일 맨 앞에서 조금 들어간 곳)에서 웃는 눈으로 WELCOME을 투사하고, 이동 방향을 알리는 라이트가 먼저 돈 뒤 레일 맨 앞까지 나옵니다'),
           scene(ARR, '② 도착 · 인사하기', '가볍고 부드럽게 목례합니다'),
@@ -441,8 +442,183 @@ def web_cover():
           {'railX': rail, 'yawY': yaw, 'tiltZ': tilt, 'liftY': lift}, fx, bright, eyes, inten, [], opac, 0, audio, ev, extra={'eyeLook': {'startSec': 0, 'studio': STUDIO}})
 
 
+# ---------------------------------------------------------------- 07 bonus: aegyo overload
+def bonus_aegyo_ring():
+    PINK, ROSE, SKY, LILAC = [255, 130, 180, 0], [255, 90, 150, 40], [110, 205, 255, 0], [185, 150, 255, 0]
+    PEACH, GOLD, MINT, WARM, RED = [255, 170, 130, 80], [255, 205, 100, 60], [120, 255, 200, 0], [255, 190, 150, 90], [255, 60, 90, 0]
+    BLUE = [90, 185, 255, 40]
+    f = [breathe('idle', 1, BLUE, 0, 2.4, 1 / 3.0), _fx('idle_comet', 'chase', 0, 2.4, 11, {'color': [60, 120, 170, 0], 'speedHz': 0.15, 'width': 5, 'direction': 1})]
+    # 2.4-6.4 entrance: white flash, four-colour rainbow spin, soft pink glow, glitter
+    f += [_fx('in_flash', 'solid', 2.4, 2.8, 2, {'whiteLevel': 255}, 3),
+          *[_fx(f'in_spin{i}', 'chase', 2.5, 4.6, 20 + i, {'color': c, 'speedHz': 1.5, 'width': 5, 'direction': 1, 'phase': 6 * i}, 2) for i, c in enumerate([ROSE, GOLD, MINT, SKY])],
+          breathe('in_glow', 3, PINK, 4.4, 6.4, 1.0), _fx('in_glit', 'sparkle', 3.0, 6.4, 17, {'color': [255, 255, 255, 200], 'rateHz': 9, 'density': 0.15}, 3, 'add')]
+    # 6.4-11 giggle wiggle: a pulse on every body wiggle (1.0 s), gold / lilac waves running opposite ways
+    f += [_fx('gig_gold', 'wave', 6.4, 11.0, 30, {'color': GOLD, 'speedHz': 1.2, 'width': 12, 'direction': 1}),
+          _fx('gig_lilac', 'wave', 6.4, 11.0, 31, {'color': LILAC, 'speedHz': 1.2, 'width': 12, 'direction': -1}),
+          _fx('gig_beat', 'pulse', 6.72, 11.0, 32, {'color': [255, 150, 200, 60], 'periodSec': 1.3}, 2),
+          _fx('gig_glit', 'sparkle', 6.4, 11.0, 33, {'color': [255, 255, 255, 220], 'rateHz': 10, 'density': 0.2}, 3, 'add')]
+    # 11-15.5 heart eyes: rose / pink waves, lub-dub heartbeat, a slow pink comet
+    f += [wave('love_a', 4, ROSE, 0, 11.0, 15.5, 0.6), wave('love_b', 5, PINK, math.pi, 11.0, 15.5, 0.6),
+          _fx('heartbeat', 'pulse', 11.0, 15.5, 18, {'color': RED, 'periodSec': 0.9}, 2),
+          _fx('love_comet', 'chase', 11.4, 15.5, 34, {'color': [255, 200, 220, 80], 'speedHz': 0.3, 'width': 6, 'direction': 1}, 2)]
+    # 15.5-19 winks: a gold flash on each wink, glitter in between
+    f += [breathe('wink_base', 6, PEACH, 15.5, 19.0, 0.7),
+          _fx('wink_a', 'solid', 15.7, 16.0, 35, {'color': [255, 240, 190, 200]}, 4), _fx('wink_b', 'solid', 16.95, 17.2, 36, {'color': [255, 240, 190, 200]}, 4),
+          _fx('wink_c', 'solid', 18.05, 18.3, 37, {'color': [255, 240, 190, 200]}, 4),
+          _fx('wink_glit', 'sparkle', 15.5, 19.0, 38, {'color': GOLD, 'rateHz': 7, 'density': 0.25}, 3, 'add')]
+    # 19-23.5 shy: lilac / peach blush, slow breath, a pink dot sneaks round when it peeks back
+    f += [_fx('shy_a', 'wave', 19.0, 23.5, 40, {'color': LILAC, 'speedHz': 0.12, 'width': 24, 'direction': 1}),
+          _fx('shy_b', 'wave', 19.0, 23.5, 41, {'color': PEACH, 'speedHz': 0.12, 'width': 24, 'direction': 1, 'phase': math.pi}),
+          breathe('shy', 7, [255, 160, 190, 60], 19.0, 23.5, 0.5), _fx('peek', 'chase', 22.2, 23.5, 42, {'color': [255, 170, 200, 40], 'speedHz': 0.5, 'width': 8, 'direction': -1}, 2)]
+    # 23.5-29 star party: glitter, four waves, three comets, beat on every bounce
+    f += [_fx('stars', 'sparkle', 23.5, 29.0, 7, {'color': [255, 240, 160, 60], 'rateHz': 10, 'density': 0.5}),
+          _fx('c_gold', 'chase', 23.6, 29.0, 43, {'color': GOLD, 'speedHz': 0.9, 'width': 4, 'direction': 1}, 2),
+          _fx('c_mint', 'chase', 23.8, 29.0, 44, {'color': MINT, 'speedHz': 0.6, 'width': 4, 'direction': -1}, 2),
+          _fx('c_pink', 'chase', 23.8, 28.6, 45, {'color': PINK, 'speedHz': 1.3, 'width': 4, 'direction': 1}, 2),
+          _fx('party_beat', 'pulse', 23.68, 29.0, 46, {'color': [255, 190, 110, 50], 'periodSec': 1.047}, 3)]
+    f += [wave('party_' + n, 50 + i, c, ph, 23.5, 29.0, 1.1) for i, (n, c, ph) in enumerate(WHIRL_COLORS)]
+    # 29 - 37 TWIRL: four rainbow comets racing round the ring, the four whirl waves, white glitter, a flash when the head crosses the front
+    TW = 8.0
+    f += [*[_fx(f'tw_spin{i}', 'chase', 29.0, 29.0 + TW, 70 + i, {'color': c, 'speedHz': 1.8, 'width': 5, 'direction': 1, 'phase': 6 * i}, 2) for i, c in enumerate([ROSE, GOLD, MINT, SKY])],
+          *[wave('tw_' + n, 80 + i, c, ph, 29.0, 29.0 + TW, 1.5) for i, (n, c, ph) in enumerate(WHIRL_COLORS)],
+          _fx('tw_glit', 'sparkle', 29.0, 29.0 + TW, 75, {'color': [255, 255, 255, 220], 'rateHz': 12, 'density': 0.3}, 3, 'add'),
+          _fx('tw_cross1', 'solid', 29.0 + TW / 2 - 0.12, 29.0 + TW / 2 + 0.12, 76, {'color': [255, 245, 220, 200]}, 4)]
+    # 37-42 WINK BOMB: hot-pink strobe, comets racing both ways, a pink flash on every wink, pink glitter everywhere
+    HOT = [255, 60, 140, 0]
+    WB0 = 29.0 + TW
+    f += [breathe('wb_glow', 90, HOT, WB0, WB0 + 5.0, 2.0), _fx('wb_beat', 'pulse', WB0, WB0 + 5.0, 91, {'color': [255, 110, 170, 40], 'periodSec': 0.6}, 2),
+          _fx('wb_ca', 'chase', WB0, WB0 + 5.0, 92, {'color': PINK, 'speedHz': 2.5, 'width': 5, 'direction': 1}, 2),
+          _fx('wb_cb', 'chase', WB0, WB0 + 5.0, 93, {'color': [255, 255, 255, 200], 'speedHz': 1.7, 'width': 4, 'direction': -1, 'phase': 12}, 2),
+          _fx('wb_glit', 'sparkle', WB0, WB0 + 5.0, 94, {'color': [255, 150, 200, 120], 'rateHz': 14, 'density': 0.35}, 3, 'add'),
+          *[_fx(f'wb_flash{i}', 'solid', round(t0, 2), round(t0 + 0.22, 2), 95 + i, {'color': [255, 70, 150, 120]}, 4) for i, t0 in enumerate([37.3, 38.25, 39.05, 39.85, 40.65, 41.45])]]
+    # 42-50 TWIRL #2 (the other way round): comets reversed, white / pink / lilac / gold, a pink strobe, a flash when the head crosses the front
+    T2 = WB0 + 5.0
+    f += [*[_fx(f'tw2_spin{i}', 'chase', T2, T2 + TW, 110 + i, {'color': c, 'speedHz': 2.0, 'width': 5, 'direction': -1, 'phase': 6 * i}, 2) for i, c in enumerate([PINK, [0, 0, 0, 230], LILAC, GOLD])],
+          *[_fx('tw2_' + n, 'wave', T2, T2 + TW, 120 + i, {'color': c, 'speedHz': 1.5, 'width': 24, 'direction': -1, 'phase': round(ph, 4)}) for i, (n, c, ph) in enumerate(WHIRL_COLORS)],
+          _fx('tw2_strobe', 'pulse', T2, T2 + TW, 130, {'color': [255, 80, 160, 0], 'periodSec': 0.5}, 3),
+          _fx('tw2_glit', 'sparkle', T2, T2 + TW, 131, {'color': [255, 255, 255, 220], 'rateHz': 13, 'density': 0.3}, 3, 'add'),
+          _fx('tw2_cross', 'solid', T2 + TW / 2 - 0.12, T2 + TW / 2 + 0.12, 132, {'color': [255, 245, 220, 200]}, 4)]
+    # 50-55 heart bow: warm glow, heartbeat, slow rainbow, flash on the bow
+    B0 = T2 + TW
+    f += [breathe('bow', 8, WARM, B0, B0 + 5.0, 0.5), _fx('bow_beat', 'pulse', B0, B0 + 5.0, 60, {'color': [255, 90, 130, 0], 'periodSec': 0.9}, 2),
+          _fx('bow_rainbow', 'chase', B0, B0 + 5.0, 61, {'color': GOLD, 'speedHz': 0.25, 'width': 12, 'direction': 1}),
+          _fx('bow_flash', 'solid', B0 + 2.45, B0 + 2.75, 62, {'color': [255, 235, 200, 180]}, 4),
+          _fx('bow_glit', 'sparkle', B0 + 0.5, B0 + 4.5, 63, {'color': [255, 230, 190, 120], 'rateHz': 5, 'density': 0.12}, 3, 'add')]
+    f += [breathe('idle_b', 9, BLUE, B0 + 5.0, B0 + 9.0, 1 / 3.0), _fx('idle_b_comet', 'chase', B0 + 5.0, B0 + 9.0, 64, {'color': [60, 120, 170, 0], 'speedHz': 0.15, 'width': 5, 'direction': 1})]
+    return f
+
+
+def bonus_aegyo():
+    """Bonus: every form factor at once, as cute as it gets. 38 s: sleepy -> startled -> hello -> giggle-wiggle -> heart eyes -> winks -> shy -> star party -> heart bow -> calm.
+    The head does not stop at extremes: yaw and tilt are continuous sine waves a quarter cycle apart (the head draws circles / rolling waves), cross-faded between scenes.
+    Amplitudes are chosen so speed AND acceleration stay inside the real axes (yaw 60 deg/s & 80 deg/s^2 via tools/limit_yaw_speed.ts, tilt +-12 deg & 30 deg/s, rail 0.06 m/s)."""
+    CENTER = -0.125
+    rail, yaw, tilt = Tr('rail'), Tr('yaw'), Tr('tilt')
+    # tilt trails yaw by a quarter cycle (-pi/2) = circular wave
+    Q = -math.pi / 2
+    TW = 8.0   # each twirl is TW seconds long
+    WB = 5.0   # wink bomb
+    T1, TWB, T2 = 29.0, 29.0 + TW, 29.0 + TW + WB       # twirl 1 / wink bomb / twirl 2 start
+    TB = T2 + TW                                        # heart bow starts
+    DUR = TB + 9.0
+    WT = 2 * math.pi / TW
+    # scene = (t_start, yaw offset, yaw amp, tilt offset, tilt amp, omega rad/s, yaw phase (None = continue the previous wave in phase), tilt phase, tilt frequency multiplier)
+    SC = [(0.0, -2, 8, 0, 2, 1.6, None, Q, 1),          # sleepy look-around
+          (2.4, 0, 13, 3, 6, 2.0, None, Q, 1),          # hello wave
+          (6.4, 0, 11.5, 0, 10.5, 2.4, None, Q, 1),     # giggle wiggle (yaw peaks every 1.3 s)
+          (11.0, 0, 22, 4, 7, 1.2, None, Q, 1),         # slow heart sway
+          (15.5, 16, 5, 6, 4, 2.2, None, Q, 1),         # head tilted to the side + bob (winks)
+          (19.0, -28, 3, -9, 2, 1.5, None, Q, 1),       # shy: turned away and bowed
+          (23.0, 0, 8, 0, 9.5, 3.0, None, Q, 1),        # star party: fast small circles
+          (T1, 0, 0, 0, 5, WT, -WT * T1, Q, 2),         # TWIRL 1: the yaw swing is added below (tw); tilt is a wave at double speed
+          (TWB, 0, 8, 0, 9, 3.0, None, Q, 1),           # WINK BOMB: quick head-tilting bobs
+          (T2, 0, 0, 0, 5, WT, -WT * T2, Q, 2),         # TWIRL 2 (the other way round)
+          (TB, 0, 27, -6.5, 5.5, 1.1, None, Q, 1),      # big slow sweep + bow
+          (TB + 5.0, 0, 0, 0, 0, 1.0, None, Q, 1)]      # settle
+    FADE = [1.2, 1.2, 1.6, 1.6, 2.0, 2.0, 1.6, 1.6, 1.6, 1.6, 2.4]   # cross-fade length at each scene boundary (long where the offsets differ a lot)
+    def smooth(u): u = min(1, max(0, u)); return u * u * (3 - 2 * u)
+    PH = [0.0]   # phase-continuous frequency changes: both waves are in phase at every scene boundary, so the cross-fade never fights itself
+    for i in range(1, len(SC)):
+        PH.append(SC[i][6] if SC[i][6] is not None else PH[-1] + (SC[i - 1][5] - SC[i][5]) * SC[i][0])
+    def weights(t):
+        w = [0.0] * len(SC); w[0] = 1.0
+        for i in range(1, len(SC)):
+            m = smooth((t - (SC[i][0] - FADE[i - 1] / 2)) / FADE[i - 1])  # 0 before the boundary, 1 after
+            w = [x * (1 - m) for x in w]; w[i] = m
+        return w
+    def tw(t):  # the twirls: one slow full swing (twirl 1: right, front, left, front; twirl 2 the other way) that starts and ends at rest; amplitude 72.5 gives about +-47 deg at the highest speed/accel the yaw axis allows
+        out = 0.0
+        for t0, sign in ((T1, 1), (T2, -1)):
+            u = (t - t0) / TW
+            if 0 <= u <= 1: out += sign * 72.5 * math.sin(2 * math.pi * u) * math.sin(math.pi * u) ** 2
+        return out
+    def wave(t, ch):
+        w = weights(t)
+        if ch == 'yaw': return tw(t) +  sum(wi * (sc[1] + sc[2] * math.sin(sc[5] * t + ph)) for wi, sc, ph in zip(w, SC, PH))
+        return sum(wi * (sc[3] + sc[4] * math.sin(sc[8] * (sc[5] * t + ph) + sc[7])) for wi, sc, ph in zip(w, SC, PH))
+    N30 = int(DUR * 30)
+    def gauss(xs, sigma=0.14):  # zero-phase smoothing: takes the corners off the cross-fades without delaying the motion
+        r = int(3 * sigma * 30); k = [math.exp(-0.5 * (j / (sigma * 30)) ** 2) for j in range(-r, r + 1)]; z = sum(k)
+        pad = [xs[0]] * r + xs + [xs[-1]] * r
+        return [sum(pad[i + j] * k[j] for j in range(len(k))) / z for i in range(len(xs))]
+    ys = gauss([wave(i / 30, 'yaw') for i in range(N30 + 1)]); ts = gauss([wave(i / 30, 'tilt') for i in range(N30 + 1)])
+    for i in range(N30 + 1):
+        yaw.add(i / 30, ys[i], 'linear'); tilt.add(i / 30, ts[i], 'linear')
+    # rail: the lean-in path plus a small bob during the two wiggle scenes
+    base = [(0, CENTER), (2.4, CENTER), (6.0, -0.03), (11.0, -0.03), (13.5, 0.0), (15.5, 0.0), (17.0, -0.02), (19.0, -0.02), (21.5, -0.11), (23.5, -0.11),
+            (25.0, -0.08), (27.0, -0.10), (29.0, -0.05), (33.0, -0.02), (TWB, -0.02), (40.0, -0.06), (T2, -0.04), (46.0, -0.10), (TB, 0.0), (TB + 2.0, 0.0), (DUR, CENTER)]
+    def rail_base(t):
+        for (t0, v0), (t1, v1) in zip(base, base[1:]):
+            if t0 <= t <= t1: return v0 + (v1 - v0) * smooth((t - t0) / (t1 - t0))
+        return base[-1][1]
+    for i in range(N30 + 1):
+        t = i / 30
+        bob = 0.012 * math.sin(2.4 * t) * smooth((t - 6.4) / 0.8) * (1 - smooth((t - 10.6) / 0.8)) + 0.012 * math.sin(3.0 * t) * smooth((t - 23.5) / 0.8) * (1 - smooth((t - 28.2) / 0.8)) + 0.01 * math.sin(3.0 * t) * smooth((t - TWB - 0.4) / 0.6) * (1 - smooth((t - T2 + 0.6) / 0.6))
+        rail.add(t, min(0.0, rail_base(t) + bob), 'linear')
+    eyes = [(0, N)]
+    baked = ROOT / 'tools/baked_eyes/07_bonus_aegyo.json'
+    if baked.exists():
+        ks = json.loads(baked.read_text())
+        eyes = {'left': [(k['t'], k['l']) for k in ks], 'right': [(k['t'], k['r']) for k in ks]}
+    inten = Tr('int').add(0, 1)
+    bright = Tr('br').add(0, BR).add(DUR, BR)
+    clips = [{'id': 'hello', 'fromSec': 2.6, 'toSec': 6.4, 'assetId': 'media/aegyo_hello.svg', 'visible': True},
+             {'id': 'hearts', 'fromSec': 11.0, 'toSec': 15.5, 'assetId': 'media/aegyo_hearts.svg', 'visible': True},
+             {'id': 'party', 'fromSec': 23.5, 'toSec': TWB, 'assetId': 'media/aegyo_party.svg', 'visible': True},
+             {'id': 'hearts3', 'fromSec': TWB, 'toSec': T2, 'assetId': 'media/aegyo_hearts.svg', 'visible': True},
+             {'id': 'party2', 'fromSec': T2, 'toSec': TB, 'assetId': 'media/aegyo_party.svg', 'visible': True},
+             {'id': 'hearts2', 'fromSec': TB, 'toSec': TB + 5.0, 'assetId': 'media/aegyo_hearts.svg', 'visible': True}]
+    opac = Tr('op').add(0, 0).add(2.6, 0).add(3.2, 0.8).add(6.0, 0.8).add(6.4, 0).add(11.0, 0).add(11.6, 0.8).add(15.0, 0.8).add(15.5, 0) \
+        .add(23.5, 0).add(24.0, 0.8).add(TWB - 0.4, 0.8).add(TWB, 0).add(TWB + 0.4, 0.8).add(T2 - 0.4, 0.8).add(T2, 0).add(T2 + 0.4, 0.8).add(TB - 0.4, 0.8).add(TB, 0).add(TB + 0.4, 0.8).add(TB + 4.6, 0.8).add(TB + 5.0, 0).add(DUR, 0)
+    audio = [sfx('hey', 'sfx_cue.wav', 2.1, 0.8, 0.7), sfx('glide', 'sfx_glide.wav', 2.6, 3.4, 0.35, 0.4, 0.8), sfx('hello', 'sfx_sparkle.wav', 3.0, 1.0, 0.5),
+             sfx('giggle1', 'sfx_giggle.wav', 6.6, 0.9, 0.55), *[sfx(f'boing{i}', 'sfx_boing.wav', round(7.37 + 1.3 * i, 3), 0.6, 0.5) for i in range(3)], sfx('giggle2', 'sfx_giggle.wav', 9.0, 0.9, 0.5),
+             sfx('love', 'sfx_sparkle.wav', 11.2, 1.7, 0.5), {**sfx('chime', 'intro-chime.wav', 14.4, 1.0, 0.4), 'fadeOutSec': 0.2},
+             sfx('wink', 'sfx_cue.wav', 15.7, 0.5, 0.55), sfx('wink2', 'sfx_cue.wav', 16.95, 0.5, 0.5), sfx('wink3', 'sfx_cue.wav', 18.05, 0.5, 0.5),
+             sfx('shy', 'sfx_turn.wav', 19.3, 1.8, 0.4), sfx('peek', 'sfx_nod.wav', 22.4, 0.5, 0.5),
+             sfx('stars', 'sfx_sparkle.wav', 23.6, 1.7, 0.5), sfx('giggle3', 'sfx_giggle.wav', 25.0, 0.9, 0.55), *[sfx(f'boing_p{i}', 'sfx_boing.wav', round(24.2 + 2.065 * i, 3), 0.6, 0.5) for i in range(3)],
+             {**sfx('bye', 'intro-chime.wav', 29.0, 1.6, 0.45), 'fadeOutSec': 0.3}, sfx('twirl', 'sfx_spin.wav', 29.2, 5.8, 0.5, 0.5, 1.2), sfx('twirl_giggle', 'sfx_giggle.wav', 33.5, 0.9, 0.5),
+             *[sfx(f'wbcue{i}', 'sfx_cue.wav', round(t0, 2), 0.5, 0.55) for i, t0 in enumerate([37.3, 38.25, 39.05, 39.85, 40.65, 41.45])], sfx('wbspark', 'sfx_sparkle.wav', 37.2, 1.7, 0.45), sfx('wbgig', 'sfx_giggle.wav', 39.6, 0.9, 0.5),
+             {**sfx('chime2', 'intro-chime.wav', T2, 1.6, 0.45), 'fadeOutSec': 0.3}, sfx('twirl2', 'sfx_spin.wav', T2 + 0.2, 5.8, 0.5, 0.5, 1.2), sfx('twirl2_giggle', 'sfx_giggle.wav', T2 + 4.5, 0.9, 0.5), sfx('twirl2_boing', 'sfx_boing.wav', T2 + 6.6, 0.6, 0.5),
+             sfx('bow', 'sfx_nod.wav', TB + 2.5, 0.5, 0.6), sfx('end', 'sfx_sparkle.wav', TB + 4.0, 1.7, 0.4)]
+    ev = [scene(0, '으응? 누가 불렀나?', '졸린 눈으로 두리번거리다 깜짝 놀랍니다'),
+          scene(2.4, '① 짠! 등장', '무지개 링이 번쩍! 레일로 쏙 나와서 고개를 갸웃, 손 흔들듯 인사합니다'),
+          scene(6.4, '② 깔깔 몸 흔들기', '요와 틸트가 4분의 1박자 어긋나게 물결치며 머리가 동그라미를 그립니다 (링은 요가 끝까지 갈 때마다 번쩍)'),
+          scene(11.0, '③ 하트 눈 발사', '맨 앞까지 다가와서 두근두근 하트 눈, 링은 심장박동'),
+          scene(15.5, '④ 윙크 윙크 윙크', '고개를 갸웃하고 윙크를 세 번, 윙크마다 링이 번쩍'),
+          scene(19.0, '⑤ 부끄러워서 숨기', '고개를 돌려 숙이고 뒤로 물러났다가 슬쩍 다시 쳐다봅니다'),
+          scene(23.5, '⑥ 별 눈 파티', '모든 축이 동시에 통통! 링은 알록달록 혜성과 반짝이'),
+          scene(29.0, '⑦ 빙그르르!', '소용돌이 눈으로 몸을 크게 한 바퀴 휘이익 (요는 오른쪽 끝 → 정면 → 왼쪽 끝 → 정면), 링은 무지개가 빙글빙글'),
+          scene(TWB, '⑧ 윙크 폭탄 + 핑크 폭발', '윙크를 연달아 날릴 때마다 링이 핫핑크로 번쩍, 머리는 통통 갸웃갸웃'),
+          scene(T2, '⑨ 이번엔 반대로 빙그르르!', '왼쪽으로 먼저 한 바퀴 더 휘이익, 링 혜성은 거꾸로 질주하고 핑크 스트로보'),
+          scene(TB, '⑩ 하트 날리며 인사', '크게 좌우로 손 흔들고 깊이 목례, 하트를 투사합니다'),
+          scene(TB + 5.0, '다시 대기', '안내 위치로 얌전히 돌아와 숨을 고릅니다')]
+    build('07_bonus_aegyo', '07 Bonus · 애교 대폭발', DUR,
+          'PREVIEW ONLY. 번외: 레일·요·틸트·눈·링·프로젝터·소리를 전부 쓰는 애교 총동원 시나리오(깔깔, 하트 눈, 윙크, 수줍음, 별 눈 파티, 빙그르르, 윙크 폭탄+핑크 폭발, 반대로 빙그르르, 하트 인사). 실물 한계 안에서 작성(요 60°/s 이하, 틸트 ±12°·30°/s 이하, 레일 0.06m/s 이하).',
+          {'railX': rail, 'yawY': yaw, 'tiltZ': tilt}, bonus_aegyo_ring(), bright, eyes, inten, clips, opac, 0, audio, ev)
+
+
 if __name__ == '__main__':
     import sys
-    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival', 'driving_b', 'web_cover']
+    todo = sys.argv[1:] or ['boarding', 'driving_a', 'arrival', 'driving_b', 'web_cover', 'bonus_aegyo']
     for n in todo: globals()[n]()
     print('built', ', '.join(todo))

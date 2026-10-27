@@ -4,10 +4,10 @@ export type ButtonTimes = { show: number; pressDown: number; hold: number; relea
 const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const easeOut = (x: number) => 1 - Math.pow(1 - clamp01(x), 3);
 const easeInOut = (x: number) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
-const FONT = '"IBM Plex Sans KR", "IBM Plex Sans", -apple-system, "Apple SD Gothic Neo", sans-serif';
+const FONT = '"Google Sans Flex", -apple-system, "Apple SD Gothic Neo", sans-serif';   // Google Sans Flex has no Hangul: those glyphs come from the system Korean sans
 // canvas never downloads a webfont by itself: ask once for the glyphs used below
 let fontAsked = false;
-const askFont = () => { if (fontAsked || typeof document === 'undefined' || !document.fonts) return; fontAsked = true; void document.fonts.load('600 40px "IBM Plex Sans KR"', '출발').catch(() => undefined); void document.fonts.load('500 40px "IBM Plex Sans KR"', '목적지서울역도착예정분').catch(() => undefined); void document.fonts.load('600 40px "IBM Plex Sans"', '14').catch(() => undefined); };
+const askFont = () => { if (fontAsked || typeof document === 'undefined' || !document.fonts) return; fontAsked = true; void document.fonts.load('600 40px "Google Sans Flex"', '0123456789').catch(() => undefined); };
 
 export const buttonActive = (b: ButtonTimes, t: number) => t >= b.show && t <= b.gone;
 
@@ -15,11 +15,11 @@ export const buttonActive = (b: ButtonTimes, t: number) => t >= b.show && t <= b
 const SHEET_K = 2 / 3;
 const DEST = { name: '서울역', eta: '14', etaUnit: '분' };
 
-function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+/** square corners everywhere: the radius argument is kept so call sites stay unchanged */
+function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, _r: number) { ctx.beginPath(); ctx.rect(x, y, w, h); }
 
 /** Frosted-glass rounded rectangle over the picture: blurred copy of the still, faint white tint, hairline rim with a specular falloff. */
 function glassBox(ctx: CanvasRenderingContext2D, img: CanvasImageSource, W: number, H: number, x: number, y: number, w: number, h: number, r: number, u: number, lit: number) {
-  ctx.save(); ctx.shadowColor = `rgba(8,14,28,${0.18 - 0.08 * lit})`; ctx.shadowBlur = 36 * u; ctx.shadowOffsetY = 12 * u; rr(ctx, x, y, w, h, r); ctx.fillStyle = 'rgba(255,255,255,0.01)'; ctx.fill(); ctx.restore();
   ctx.save(); rr(ctx, x, y, w, h, r); ctx.clip();
   ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);   // the blurred picture is in canvas space, whatever scale the sheet is drawn at
   try { ctx.filter = `blur(${9 * u * SHEET_K}px) saturate(1.5) brightness(1.06)`; } catch { /* tint only */ }
@@ -54,7 +54,6 @@ function drawMap(ctx: CanvasRenderingContext2D, x: number, y: number, w: number,
   // route
   const pts: [number, number][] = [[w * 0.2, h * 0.9], [w * 0.2, h * 0.5], [w * 0.5, h * 0.5], [w * 0.5, h * 0.22], [w * 0.8, h * 0.22], [w * 0.8, h * 0.12]];
   const path = () => { m.beginPath(); pts.forEach(([px, py], k) => (k ? m.lineTo(px, py) : m.moveTo(px, py))); };
-  m.save(); m.shadowColor = 'rgba(255,255,255,0.55)'; m.shadowBlur = 18 * u; path(); m.strokeStyle = '#fff'; m.lineWidth = 11 * u; m.stroke(); m.restore();
   path(); m.strokeStyle = 'rgba(255,255,255,0.95)'; m.lineWidth = 11 * u; m.stroke();
   path(); m.strokeStyle = 'rgba(40,60,90,0.55)'; m.lineWidth = 3.5 * u; m.setLineDash([2 * u, 26 * u]); m.lineDashOffset = -t * 60 * u; m.stroke(); m.setLineDash([]);
   // here: ring
@@ -62,7 +61,7 @@ function drawMap(ctx: CanvasRenderingContext2D, x: number, y: number, w: number,
   // destination: white pin with a soft pulse
   const [dx, dy] = pts[pts.length - 1];
   m.beginPath(); m.arc(dx, dy, (24 + 44 * pulse) * u, 0, Math.PI * 2); m.strokeStyle = `rgba(255,255,255,${0.7 * (1 - pulse)})`; m.lineWidth = 3 * u; m.stroke();
-  m.save(); m.shadowColor = 'rgba(0,0,0,0.3)'; m.shadowBlur = 14 * u; m.beginPath(); m.arc(dx, dy, 25 * u, 0, Math.PI * 2); m.fillStyle = '#fff'; m.fill(); m.restore();
+  m.save(); m.beginPath(); m.arc(dx, dy, 25 * u, 0, Math.PI * 2); m.fillStyle = '#fff'; m.fill(); m.restore();
   m.beginPath(); m.arc(dx, dy, 9 * u, 0, Math.PI * 2); m.fillStyle = 'rgba(40,60,90,0.7)'; m.fill();
   // fade the edges so it floats on the picture
   m.globalCompositeOperation = 'destination-in';
@@ -101,7 +100,6 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   ctx.save(); ctx.globalAlpha = alpha; ctx.translate(0, lift);
   ctx.translate(W / 2, dy); ctx.scale(SHEET_K, SHEET_K); ctx.translate(-W / 2, -dy);
   ctx.textBaseline = 'alphabetic';
-  ctx.shadowColor = 'rgba(8,14,28,0.55)'; ctx.shadowBlur = 20 * u; ctx.shadowOffsetY = 3 * u;
 
   // destination: type only
   ctx.textAlign = 'left';
@@ -117,7 +115,6 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
 
   // route map: white line art
   const my = dy + 112 * u, mh = H * 0.31 * 1.25;   // a longer map
-  ctx.shadowColor = 'transparent';
   drawMap(ctx, X - 20 * u, my, CW + 40 * u, mh, u, t, ((t - b.show) / 2.2) % 1);
 
   // the one boxed element: a wide frosted-glass rounded-rectangle Start button
@@ -125,11 +122,9 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   const bw = CW * sc, bx = X + (CW - bw) / 2, bhh = bh * sc, byy = by + (bh - bhh) / 2 + 5 * u * pressed;
   glassBox(ctx, img, W, H, bx, byy, bw, bhh, 34 * u, u, pressed);
   ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.shadowColor = 'rgba(8,14,28,0.3)'; ctx.shadowBlur = 12 * u; ctx.shadowOffsetY = 2 * u;
   ctx.font = `600 ${54 * u}px ${FONT}`; if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = `${2 * u}px`;
   ctx.fillText('출발', W / 2 + 1 * u, byy + bhh / 2 + 3 * u);
   if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = '0px';
-  ctx.shadowColor = 'transparent';
   const rp = (t - b.release) / 0.55;
   if (rp > 0 && rp < 1) {
     ctx.save(); ctx.globalAlpha *= 0.75 * (1 - rp); ctx.strokeStyle = '#fff'; ctx.lineWidth = 4 * u * (1 - rp);

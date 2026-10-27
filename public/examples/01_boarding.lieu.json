@@ -2,7 +2,7 @@
   "schema": "lieu.sequence/v1",
   "id": "01_boarding",
   "title": "01 Boarding",
-  "durationSec": 28.5,
+  "durationSec": 32.3,
   "fps": 30,
   "loop": false,
   "demoPreviewOnly": true,
@@ -44,7 +44,7 @@
           },
           {
             "id": "rail_5",
-            "tSec": 28.5,
+            "tSec": 32.3,
             "value": -0.06,
             "interpolationToNext": "smoothstep"
           }
@@ -553,145 +553,547 @@
           },
           {
             "id": "yaw_83",
-            "tSec": 19.7667,
-            "value": 0,
+            "tSec": 20.0333,
+            "value": 0.047,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_84",
-            "tSec": 19.8,
-            "value": 1.057,
+            "tSec": 20.1,
+            "value": 0.419,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_85",
-            "tSec": 21,
-            "value": 73.057,
+            "tSec": 20.1667,
+            "value": 1.161,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_86",
-            "tSec": 21.0333,
-            "value": 73.931,
+            "tSec": 20.2333,
+            "value": 2.267,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_87",
-            "tSec": 23.5333,
-            "value": -76.069,
+            "tSec": 20.3,
+            "value": 3.726,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_88",
-            "tSec": 23.5667,
-            "value": -77.94,
+            "tSec": 20.3667,
+            "value": 5.526,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_89",
-            "tSec": 23.6,
-            "value": -79.691,
+            "tSec": 20.4333,
+            "value": 7.656,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_90",
-            "tSec": 23.6333,
-            "value": -81.312,
+            "tSec": 20.5,
+            "value": 10.093,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_91",
-            "tSec": 23.6667,
-            "value": -82.797,
+            "tSec": 20.5667,
+            "value": 12.819,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_92",
-            "tSec": 23.7,
-            "value": -84.151,
+            "tSec": 20.6333,
+            "value": 15.815,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_93",
-            "tSec": 23.7333,
-            "value": -85.369,
+            "tSec": 20.7,
+            "value": 19.049,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_94",
-            "tSec": 23.7667,
-            "value": -86.446,
+            "tSec": 20.8,
+            "value": 24.297,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_95",
-            "tSec": 23.8,
-            "value": -87.385,
+            "tSec": 20.8333,
+            "value": 26.156,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_96",
-            "tSec": 23.8333,
-            "value": -85.818,
+            "tSec": 21.3667,
+            "value": 58.122,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_97",
-            "tSec": 25.1333,
-            "value": -7.818,
+            "tSec": 21.4667,
+            "value": 63.861,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_98",
-            "tSec": 25.1667,
-            "value": -6.031,
+            "tSec": 21.5667,
+            "value": 69.249,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_99",
-            "tSec": 25.2,
-            "value": -4.456,
+            "tSec": 21.6333,
+            "value": 72.599,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_100",
-            "tSec": 25.2333,
-            "value": -3.11,
+            "tSec": 21.7,
+            "value": 75.715,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_101",
-            "tSec": 25.2667,
-            "value": -2,
+            "tSec": 21.7667,
+            "value": 78.577,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_102",
-            "tSec": 25.3,
-            "value": -1.128,
+            "tSec": 21.8333,
+            "value": 81.165,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_103",
-            "tSec": 25.3333,
-            "value": -0.502,
+            "tSec": 21.9,
+            "value": 83.449,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_104",
-            "tSec": 25.3667,
-            "value": -0.126,
+            "tSec": 21.9667,
+            "value": 85.415,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_105",
-            "tSec": 27.0667,
-            "value": 0,
+            "tSec": 22.0333,
+            "value": 87.048,
             "interpolationToNext": "linear"
           },
           {
             "id": "yaw_106",
-            "tSec": 28.5,
+            "tSec": 22.1,
+            "value": 88.331,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_107",
+            "tSec": 22.1667,
+            "value": 89.255,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_108",
+            "tSec": 22.2333,
+            "value": 89.814,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_109",
+            "tSec": 22.3,
+            "value": 90,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_110",
+            "tSec": 22.4,
+            "value": 89.79,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_111",
+            "tSec": 22.5,
+            "value": 89.162,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_112",
+            "tSec": 22.6,
+            "value": 88.118,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_113",
+            "tSec": 22.7,
+            "value": 86.663,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_114",
+            "tSec": 22.8,
+            "value": 84.804,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_115",
+            "tSec": 22.9,
+            "value": 82.549,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_116",
+            "tSec": 23,
+            "value": 79.91,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_117",
+            "tSec": 23.1,
+            "value": 76.898,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_118",
+            "tSec": 23.2,
+            "value": 73.527,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_119",
+            "tSec": 23.3,
+            "value": 69.814,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_120",
+            "tSec": 23.4,
+            "value": 65.775,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_121",
+            "tSec": 23.5,
+            "value": 61.43,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_122",
+            "tSec": 23.6,
+            "value": 56.798,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_123",
+            "tSec": 23.7,
+            "value": 51.901,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_124",
+            "tSec": 23.8,
+            "value": 46.763,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_125",
+            "tSec": 23.9333,
+            "value": 39.574,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_126",
+            "tSec": 23.9667,
+            "value": 37.686,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_127",
+            "tSec": 25,
+            "value": -24.282,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_128",
+            "tSec": 25.1667,
+            "value": -33.966,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_129",
+            "tSec": 25.3,
+            "value": -41.406,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_130",
+            "tSec": 25.4333,
+            "value": -48.503,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_131",
+            "tSec": 25.5333,
+            "value": -53.563,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_132",
+            "tSec": 25.6333,
+            "value": -58.374,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_133",
+            "tSec": 25.7333,
+            "value": -62.913,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_134",
+            "tSec": 25.8333,
+            "value": -67.158,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_135",
+            "tSec": 25.9333,
+            "value": -71.09,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_136",
+            "tSec": 26.0333,
+            "value": -74.691,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_137",
+            "tSec": 26.1333,
+            "value": -77.943,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_138",
+            "tSec": 26.2333,
+            "value": -80.832,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_139",
+            "tSec": 26.3333,
+            "value": -83.345,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_140",
+            "tSec": 26.4333,
+            "value": -85.468,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_141",
+            "tSec": 26.5333,
+            "value": -87.193,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_142",
+            "tSec": 26.6333,
+            "value": -88.512,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_143",
+            "tSec": 26.7333,
+            "value": -89.418,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_144",
+            "tSec": 26.8333,
+            "value": -89.907,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_145",
+            "tSec": 26.9,
+            "value": -90,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_146",
+            "tSec": 26.9667,
+            "value": -89.814,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_147",
+            "tSec": 27.0333,
+            "value": -89.255,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_148",
+            "tSec": 27.1,
+            "value": -88.331,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_149",
+            "tSec": 27.1667,
+            "value": -87.048,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_150",
+            "tSec": 27.2333,
+            "value": -85.415,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_151",
+            "tSec": 27.3,
+            "value": -83.449,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_152",
+            "tSec": 27.3667,
+            "value": -81.165,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_153",
+            "tSec": 27.4333,
+            "value": -78.577,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_154",
+            "tSec": 27.5,
+            "value": -75.715,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_155",
+            "tSec": 27.5667,
+            "value": -72.599,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_156",
+            "tSec": 27.6333,
+            "value": -69.249,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_157",
+            "tSec": 27.7,
+            "value": -65.703,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_158",
+            "tSec": 27.7333,
+            "value": -63.844,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_159",
+            "tSec": 28.2667,
+            "value": -31.878,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_160",
+            "tSec": 28.3667,
+            "value": -26.139,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_161",
+            "tSec": 28.4667,
+            "value": -20.751,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_162",
+            "tSec": 28.5333,
+            "value": -17.401,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_163",
+            "tSec": 28.6,
+            "value": -14.285,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_164",
+            "tSec": 28.6667,
+            "value": -11.423,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_165",
+            "tSec": 28.7333,
+            "value": -8.835,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_166",
+            "tSec": 28.8,
+            "value": -6.551,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_167",
+            "tSec": 28.8667,
+            "value": -4.585,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_168",
+            "tSec": 28.9333,
+            "value": -2.952,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_169",
+            "tSec": 29,
+            "value": -1.669,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_170",
+            "tSec": 29.0667,
+            "value": -0.745,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_171",
+            "tSec": 29.1333,
+            "value": -0.186,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_172",
+            "tSec": 29.2,
+            "value": 0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "yaw_173",
+            "tSec": 32.3,
             "value": 0,
             "interpolationToNext": "linear"
           }
@@ -769,972 +1171,1662 @@
           {
             "id": "tilt_11",
             "tSec": 20.0333,
-            "value": 0.0006,
+            "value": 0.0004,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_12",
             "tSec": 20.0667,
-            "value": 0.005,
+            "value": 0.0029,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_13",
             "tSec": 20.1,
-            "value": 0.0167,
+            "value": 0.0098,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_14",
             "tSec": 20.1333,
-            "value": 0.0395,
+            "value": 0.0232,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_15",
             "tSec": 20.1667,
-            "value": 0.0767,
+            "value": 0.0452,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_16",
             "tSec": 20.2,
-            "value": 0.1317,
+            "value": 0.0777,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_17",
             "tSec": 20.2333,
-            "value": 0.2074,
+            "value": 0.1227,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_18",
             "tSec": 20.2667,
-            "value": 0.3068,
+            "value": 0.182,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_19",
             "tSec": 20.3,
-            "value": 0.4323,
+            "value": 0.2572,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_20",
             "tSec": 20.3333,
-            "value": 0.5862,
+            "value": 0.3498,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_21",
             "tSec": 20.3667,
-            "value": 0.7702,
+            "value": 0.4612,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_22",
             "tSec": 20.4,
-            "value": 0.9859,
+            "value": 0.5927,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_23",
             "tSec": 20.4333,
-            "value": 1.2343,
+            "value": 0.7451,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_24",
             "tSec": 20.4667,
-            "value": 1.5161,
+            "value": 0.9194,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_25",
             "tSec": 20.5,
-            "value": 1.8316,
+            "value": 1.1162,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_26",
             "tSec": 20.5333,
-            "value": 2.1806,
+            "value": 1.3359,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_27",
             "tSec": 20.5667,
-            "value": 2.5624,
+            "value": 1.5787,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_28",
             "tSec": 20.6,
-            "value": 2.976,
+            "value": 1.8445,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_29",
             "tSec": 20.6333,
-            "value": 3.42,
+            "value": 2.1333,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_30",
             "tSec": 20.6667,
-            "value": 3.8924,
+            "value": 2.4444,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_31",
             "tSec": 20.7,
-            "value": 4.391,
+            "value": 2.7773,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_32",
             "tSec": 20.7333,
-            "value": 4.9132,
+            "value": 3.1311,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_33",
             "tSec": 20.7667,
-            "value": 5.4559,
+            "value": 3.5047,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_34",
             "tSec": 20.8,
-            "value": 6.0159,
+            "value": 3.8969,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_35",
             "tSec": 20.8333,
-            "value": 6.5896,
+            "value": 4.3061,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_36",
             "tSec": 20.8667,
-            "value": 7.1731,
+            "value": 4.7307,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_37",
             "tSec": 20.9,
-            "value": 7.7623,
+            "value": 5.1689,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_38",
             "tSec": 20.9333,
-            "value": 8.3532,
+            "value": 5.6187,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_39",
             "tSec": 20.9667,
-            "value": 8.9412,
+            "value": 6.078,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_40",
             "tSec": 21,
-            "value": 9.522,
+            "value": 6.5445,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_41",
             "tSec": 21.0333,
-            "value": 10.0912,
+            "value": 7.0158,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_42",
             "tSec": 21.0667,
-            "value": 10.6442,
+            "value": 7.4896,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_43",
             "tSec": 21.1,
-            "value": 11.1766,
+            "value": 7.9632,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_44",
             "tSec": 21.1333,
-            "value": 11.6843,
+            "value": 8.4341,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_45",
             "tSec": 21.1667,
-            "value": 12.163,
+            "value": 8.8996,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_46",
             "tSec": 21.2,
-            "value": 12.6088,
+            "value": 9.3571,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_47",
             "tSec": 21.2333,
-            "value": 13.0179,
+            "value": 9.804,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_48",
             "tSec": 21.2667,
-            "value": 13.387,
+            "value": 10.2375,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_49",
             "tSec": 21.3,
-            "value": 13.7128,
+            "value": 10.6552,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_50",
             "tSec": 21.3333,
-            "value": 13.9926,
+            "value": 11.0545,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_51",
             "tSec": 21.3667,
-            "value": 14.2239,
+            "value": 11.4329,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_52",
             "tSec": 21.4,
-            "value": 14.4047,
+            "value": 11.7881,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_53",
             "tSec": 21.4333,
-            "value": 14.5334,
+            "value": 12.118,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_54",
             "tSec": 21.4667,
-            "value": 14.6088,
+            "value": 12.4203,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_55",
             "tSec": 21.5,
-            "value": 14.6302,
+            "value": 12.6932,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_56",
             "tSec": 21.5333,
-            "value": 14.5973,
+            "value": 12.9348,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_57",
             "tSec": 21.5667,
-            "value": 14.5103,
+            "value": 13.1437,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_58",
             "tSec": 21.6,
-            "value": 14.3698,
+            "value": 13.3183,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_59",
             "tSec": 21.6333,
-            "value": 14.1922,
+            "value": 13.4719,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_60",
             "tSec": 21.6667,
-            "value": 13.9933,
+            "value": 13.6186,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_61",
             "tSec": 21.7,
-            "value": 13.7732,
+            "value": 13.7582,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_62",
             "tSec": 21.7333,
-            "value": 13.5325,
+            "value": 13.8906,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_63",
             "tSec": 21.7667,
-            "value": 13.2714,
+            "value": 14.0159,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_64",
             "tSec": 21.8,
-            "value": 12.9904,
+            "value": 14.1339,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_65",
             "tSec": 21.8333,
-            "value": 12.6898,
+            "value": 14.2446,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_66",
             "tSec": 21.8667,
-            "value": 12.3701,
+            "value": 14.3479,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_67",
             "tSec": 21.9,
-            "value": 12.0318,
+            "value": 14.4438,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_68",
             "tSec": 21.9333,
-            "value": 11.6755,
+            "value": 14.5321,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_69",
             "tSec": 21.9667,
-            "value": 11.3015,
+            "value": 14.613,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_70",
             "tSec": 22,
-            "value": 10.9106,
+            "value": 14.6863,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_71",
             "tSec": 22.0333,
-            "value": 10.5033,
+            "value": 14.7519,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_72",
             "tSec": 22.0667,
-            "value": 10.0801,
+            "value": 14.8099,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_73",
             "tSec": 22.1,
-            "value": 9.6418,
+            "value": 14.8603,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_74",
             "tSec": 22.1333,
-            "value": 9.189,
+            "value": 14.9029,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_75",
             "tSec": 22.1667,
-            "value": 8.7224,
+            "value": 14.9379,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_76",
             "tSec": 22.2,
-            "value": 8.2426,
+            "value": 14.965,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_77",
             "tSec": 22.2333,
-            "value": 7.7505,
+            "value": 14.9845,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_78",
             "tSec": 22.2667,
-            "value": 7.2467,
+            "value": 14.9961,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_79",
             "tSec": 22.3,
-            "value": 6.732,
+            "value": 15,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_80",
             "tSec": 22.3333,
-            "value": 6.2072,
+            "value": 14.9961,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_81",
             "tSec": 22.3667,
-            "value": 5.673,
+            "value": 14.9845,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_82",
             "tSec": 22.4,
-            "value": 5.1303,
+            "value": 14.965,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_83",
             "tSec": 22.4333,
-            "value": 4.5799,
+            "value": 14.9379,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_84",
             "tSec": 22.4667,
-            "value": 4.0226,
+            "value": 14.9029,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_85",
             "tSec": 22.5,
-            "value": 3.4592,
+            "value": 14.8603,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_86",
             "tSec": 22.5333,
-            "value": 2.8907,
+            "value": 14.8099,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_87",
             "tSec": 22.5667,
-            "value": 2.3178,
+            "value": 14.7519,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_88",
             "tSec": 22.6,
-            "value": 1.7414,
+            "value": 14.6863,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_89",
             "tSec": 22.6333,
-            "value": 1.1624,
+            "value": 14.613,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_90",
             "tSec": 22.6667,
-            "value": 0.5816,
+            "value": 14.5321,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_91",
             "tSec": 22.7,
-            "value": 0,
+            "value": 14.4438,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_92",
             "tSec": 22.7333,
-            "value": -0.5816,
+            "value": 14.3479,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_93",
             "tSec": 22.7667,
-            "value": -1.1624,
+            "value": 14.2446,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_94",
             "tSec": 22.8,
-            "value": -1.7414,
+            "value": 14.1339,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_95",
             "tSec": 22.8333,
-            "value": -2.3178,
+            "value": 14.0159,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_96",
             "tSec": 22.8667,
-            "value": -2.8907,
+            "value": 13.8906,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_97",
             "tSec": 22.9,
-            "value": -3.4592,
+            "value": 13.7582,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_98",
             "tSec": 22.9333,
-            "value": -4.0226,
+            "value": 13.6186,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_99",
             "tSec": 22.9667,
-            "value": -4.5799,
+            "value": 13.4719,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_100",
             "tSec": 23,
-            "value": -5.1303,
+            "value": 13.3183,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_101",
             "tSec": 23.0333,
-            "value": -5.673,
+            "value": 13.1577,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_102",
             "tSec": 23.0667,
-            "value": -6.2072,
+            "value": 12.9904,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_103",
             "tSec": 23.1,
-            "value": -6.732,
+            "value": 12.8163,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_104",
             "tSec": 23.1333,
-            "value": -7.2467,
+            "value": 12.6356,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_105",
             "tSec": 23.1667,
-            "value": -7.7505,
+            "value": 12.4483,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_106",
             "tSec": 23.2,
-            "value": -8.2426,
+            "value": 12.2545,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_107",
             "tSec": 23.2333,
-            "value": -8.7224,
+            "value": 12.0545,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_108",
             "tSec": 23.2667,
-            "value": -9.189,
+            "value": 11.8481,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_109",
             "tSec": 23.3,
-            "value": -9.6418,
+            "value": 11.6357,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_110",
             "tSec": 23.3333,
-            "value": -10.0801,
+            "value": 11.4172,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_111",
             "tSec": 23.3667,
-            "value": -10.5033,
+            "value": 11.1928,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_112",
             "tSec": 23.4,
-            "value": -10.9106,
+            "value": 10.9625,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_113",
             "tSec": 23.4333,
-            "value": -11.3015,
+            "value": 10.7266,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_114",
             "tSec": 23.4667,
-            "value": -11.6755,
+            "value": 10.4852,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_115",
             "tSec": 23.5,
-            "value": -12.0318,
+            "value": 10.2383,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_116",
             "tSec": 23.5333,
-            "value": -12.3701,
+            "value": 9.9861,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_117",
             "tSec": 23.5667,
-            "value": -12.6898,
+            "value": 9.7287,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_118",
             "tSec": 23.6,
-            "value": -12.9904,
+            "value": 9.4663,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_119",
             "tSec": 23.6333,
-            "value": -13.2714,
+            "value": 9.199,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_120",
             "tSec": 23.6667,
-            "value": -13.5325,
+            "value": 8.9269,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_121",
             "tSec": 23.7,
-            "value": -13.7732,
+            "value": 8.6502,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_122",
             "tSec": 23.7333,
-            "value": -13.9933,
+            "value": 8.369,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_123",
             "tSec": 23.7667,
-            "value": -14.1922,
+            "value": 8.0835,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_124",
             "tSec": 23.8,
-            "value": -14.3698,
+            "value": 7.7938,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_125",
             "tSec": 23.8333,
-            "value": -14.5103,
+            "value": 7.5,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_126",
             "tSec": 23.8667,
-            "value": -14.5973,
+            "value": 7.2024,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_127",
             "tSec": 23.9,
-            "value": -14.6302,
+            "value": 6.901,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_128",
             "tSec": 23.9333,
-            "value": -14.6088,
+            "value": 6.596,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_129",
             "tSec": 23.9667,
-            "value": -14.5334,
+            "value": 6.2876,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_130",
             "tSec": 24,
-            "value": -14.4047,
+            "value": 5.976,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_131",
             "tSec": 24.0333,
-            "value": -14.2239,
+            "value": 5.6613,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_132",
             "tSec": 24.0667,
-            "value": -13.9926,
+            "value": 5.3436,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_133",
             "tSec": 24.1,
-            "value": -13.7128,
+            "value": 5.0232,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_134",
             "tSec": 24.1333,
-            "value": -13.387,
+            "value": 4.7002,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_135",
             "tSec": 24.1667,
-            "value": -13.0179,
+            "value": 4.3747,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_136",
             "tSec": 24.2,
-            "value": -12.6088,
+            "value": 4.047,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_137",
             "tSec": 24.2333,
-            "value": -12.163,
+            "value": 3.7171,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_138",
             "tSec": 24.2667,
-            "value": -11.6843,
+            "value": 3.3854,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_139",
             "tSec": 24.3,
-            "value": -11.1766,
+            "value": 3.0518,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_140",
             "tSec": 24.3333,
-            "value": -10.6442,
+            "value": 2.7167,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_141",
             "tSec": 24.3667,
-            "value": -10.0912,
+            "value": 2.3802,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_142",
             "tSec": 24.4,
-            "value": -9.522,
+            "value": 2.0425,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_143",
             "tSec": 24.4333,
-            "value": -8.9412,
+            "value": 1.7037,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_144",
             "tSec": 24.4667,
-            "value": -8.3532,
+            "value": 1.364,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_145",
             "tSec": 24.5,
-            "value": -7.7623,
+            "value": 1.0236,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_146",
             "tSec": 24.5333,
-            "value": -7.1731,
+            "value": 0.6827,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_147",
             "tSec": 24.5667,
-            "value": -6.5896,
+            "value": 0.3414,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_148",
             "tSec": 24.6,
-            "value": -6.0159,
+            "value": 0,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_149",
             "tSec": 24.6333,
-            "value": -5.4559,
+            "value": -0.3414,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_150",
             "tSec": 24.6667,
-            "value": -4.9132,
+            "value": -0.6827,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_151",
             "tSec": 24.7,
-            "value": -4.391,
+            "value": -1.0236,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_152",
             "tSec": 24.7333,
-            "value": -3.8924,
+            "value": -1.364,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_153",
             "tSec": 24.7667,
-            "value": -3.42,
+            "value": -1.7037,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_154",
             "tSec": 24.8,
-            "value": -2.976,
+            "value": -2.0425,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_155",
             "tSec": 24.8333,
-            "value": -2.5624,
+            "value": -2.3802,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_156",
             "tSec": 24.8667,
-            "value": -2.1806,
+            "value": -2.7167,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_157",
             "tSec": 24.9,
-            "value": -1.8316,
+            "value": -3.0518,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_158",
             "tSec": 24.9333,
-            "value": -1.5161,
+            "value": -3.3854,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_159",
             "tSec": 24.9667,
-            "value": -1.2343,
+            "value": -3.7171,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_160",
             "tSec": 25,
-            "value": -0.9859,
+            "value": -4.047,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_161",
             "tSec": 25.0333,
-            "value": -0.7702,
+            "value": -4.3747,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_162",
             "tSec": 25.0667,
-            "value": -0.5862,
+            "value": -4.7002,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_163",
             "tSec": 25.1,
-            "value": -0.4323,
+            "value": -5.0232,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_164",
             "tSec": 25.1333,
-            "value": -0.3068,
+            "value": -5.3436,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_165",
             "tSec": 25.1667,
-            "value": -0.2074,
+            "value": -5.6613,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_166",
             "tSec": 25.2,
-            "value": -0.1317,
+            "value": -5.976,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_167",
             "tSec": 25.2333,
-            "value": -0.0767,
+            "value": -6.2876,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_168",
             "tSec": 25.2667,
-            "value": -0.0395,
+            "value": -6.596,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_169",
             "tSec": 25.3,
-            "value": -0.0167,
+            "value": -6.901,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_170",
             "tSec": 25.3333,
-            "value": -0.005,
+            "value": -7.2024,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_171",
             "tSec": 25.3667,
-            "value": -0.0006,
+            "value": -7.5,
             "interpolationToNext": "linear"
           },
           {
             "id": "tilt_172",
+            "tSec": 25.4,
+            "value": -7.7938,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_173",
+            "tSec": 25.4333,
+            "value": -8.0835,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_174",
+            "tSec": 25.4667,
+            "value": -8.369,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_175",
+            "tSec": 25.5,
+            "value": -8.6502,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_176",
+            "tSec": 25.5333,
+            "value": -8.9269,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_177",
+            "tSec": 25.5667,
+            "value": -9.199,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_178",
+            "tSec": 25.6,
+            "value": -9.4663,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_179",
+            "tSec": 25.6333,
+            "value": -9.7287,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_180",
+            "tSec": 25.6667,
+            "value": -9.9861,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_181",
+            "tSec": 25.7,
+            "value": -10.2383,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_182",
+            "tSec": 25.7333,
+            "value": -10.4852,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_183",
+            "tSec": 25.7667,
+            "value": -10.7266,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_184",
+            "tSec": 25.8,
+            "value": -10.9625,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_185",
+            "tSec": 25.8333,
+            "value": -11.1928,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_186",
+            "tSec": 25.8667,
+            "value": -11.4172,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_187",
+            "tSec": 25.9,
+            "value": -11.6357,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_188",
+            "tSec": 25.9333,
+            "value": -11.8481,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_189",
+            "tSec": 25.9667,
+            "value": -12.0545,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_190",
+            "tSec": 26,
+            "value": -12.2545,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_191",
+            "tSec": 26.0333,
+            "value": -12.4483,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_192",
+            "tSec": 26.0667,
+            "value": -12.6356,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_193",
+            "tSec": 26.1,
+            "value": -12.8163,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_194",
+            "tSec": 26.1333,
+            "value": -12.9904,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_195",
+            "tSec": 26.1667,
+            "value": -13.1577,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_196",
+            "tSec": 26.2,
+            "value": -13.3183,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_197",
+            "tSec": 26.2333,
+            "value": -13.4719,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_198",
+            "tSec": 26.2667,
+            "value": -13.6186,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_199",
+            "tSec": 26.3,
+            "value": -13.7582,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_200",
+            "tSec": 26.3333,
+            "value": -13.8906,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_201",
+            "tSec": 26.3667,
+            "value": -14.0159,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_202",
             "tSec": 26.4,
+            "value": -14.1339,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_203",
+            "tSec": 26.4333,
+            "value": -14.2446,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_204",
+            "tSec": 26.4667,
+            "value": -14.3479,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_205",
+            "tSec": 26.5,
+            "value": -14.4438,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_206",
+            "tSec": 26.5333,
+            "value": -14.5321,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_207",
+            "tSec": 26.5667,
+            "value": -14.613,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_208",
+            "tSec": 26.6,
+            "value": -14.6863,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_209",
+            "tSec": 26.6333,
+            "value": -14.7519,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_210",
+            "tSec": 26.6667,
+            "value": -14.8099,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_211",
+            "tSec": 26.7,
+            "value": -14.8603,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_212",
+            "tSec": 26.7333,
+            "value": -14.9029,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_213",
+            "tSec": 26.7667,
+            "value": -14.9379,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_214",
+            "tSec": 26.8,
+            "value": -14.965,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_215",
+            "tSec": 26.8333,
+            "value": -14.9845,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_216",
+            "tSec": 26.8667,
+            "value": -14.9961,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_217",
+            "tSec": 26.9,
+            "value": -15,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_218",
+            "tSec": 26.9333,
+            "value": -14.9961,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_219",
+            "tSec": 26.9667,
+            "value": -14.9845,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_220",
+            "tSec": 27,
+            "value": -14.965,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_221",
+            "tSec": 27.0333,
+            "value": -14.9379,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_222",
+            "tSec": 27.0667,
+            "value": -14.9029,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_223",
+            "tSec": 27.1,
+            "value": -14.8603,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_224",
+            "tSec": 27.1333,
+            "value": -14.8099,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_225",
+            "tSec": 27.1667,
+            "value": -14.7519,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_226",
+            "tSec": 27.2,
+            "value": -14.6863,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_227",
+            "tSec": 27.2333,
+            "value": -14.613,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_228",
+            "tSec": 27.2667,
+            "value": -14.5321,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_229",
+            "tSec": 27.3,
+            "value": -14.4438,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_230",
+            "tSec": 27.3333,
+            "value": -14.3479,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_231",
+            "tSec": 27.3667,
+            "value": -14.2446,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_232",
+            "tSec": 27.4,
+            "value": -14.1339,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_233",
+            "tSec": 27.4333,
+            "value": -14.0159,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_234",
+            "tSec": 27.4667,
+            "value": -13.8906,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_235",
+            "tSec": 27.5,
+            "value": -13.7582,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_236",
+            "tSec": 27.5333,
+            "value": -13.6186,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_237",
+            "tSec": 27.5667,
+            "value": -13.4719,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_238",
+            "tSec": 27.6,
+            "value": -13.3183,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_239",
+            "tSec": 27.6333,
+            "value": -13.1437,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_240",
+            "tSec": 27.6667,
+            "value": -12.9348,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_241",
+            "tSec": 27.7,
+            "value": -12.6932,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_242",
+            "tSec": 27.7333,
+            "value": -12.4203,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_243",
+            "tSec": 27.7667,
+            "value": -12.118,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_244",
+            "tSec": 27.8,
+            "value": -11.7881,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_245",
+            "tSec": 27.8333,
+            "value": -11.4329,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_246",
+            "tSec": 27.8667,
+            "value": -11.0545,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_247",
+            "tSec": 27.9,
+            "value": -10.6552,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_248",
+            "tSec": 27.9333,
+            "value": -10.2375,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_249",
+            "tSec": 27.9667,
+            "value": -9.804,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_250",
+            "tSec": 28,
+            "value": -9.3571,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_251",
+            "tSec": 28.0333,
+            "value": -8.8996,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_252",
+            "tSec": 28.0667,
+            "value": -8.4341,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_253",
+            "tSec": 28.1,
+            "value": -7.9632,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_254",
+            "tSec": 28.1333,
+            "value": -7.4896,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_255",
+            "tSec": 28.1667,
+            "value": -7.0158,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_256",
+            "tSec": 28.2,
+            "value": -6.5445,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_257",
+            "tSec": 28.2333,
+            "value": -6.078,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_258",
+            "tSec": 28.2667,
+            "value": -5.6187,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_259",
+            "tSec": 28.3,
+            "value": -5.1689,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_260",
+            "tSec": 28.3333,
+            "value": -4.7307,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_261",
+            "tSec": 28.3667,
+            "value": -4.3061,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_262",
+            "tSec": 28.4,
+            "value": -3.8969,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_263",
+            "tSec": 28.4333,
+            "value": -3.5047,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_264",
+            "tSec": 28.4667,
+            "value": -3.1311,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_265",
+            "tSec": 28.5,
+            "value": -2.7773,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_266",
+            "tSec": 28.5333,
+            "value": -2.4444,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_267",
+            "tSec": 28.5667,
+            "value": -2.1333,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_268",
+            "tSec": 28.6,
+            "value": -1.8445,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_269",
+            "tSec": 28.6333,
+            "value": -1.5787,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_270",
+            "tSec": 28.6667,
+            "value": -1.3359,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_271",
+            "tSec": 28.7,
+            "value": -1.1162,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_272",
+            "tSec": 28.7333,
+            "value": -0.9194,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_273",
+            "tSec": 28.7667,
+            "value": -0.7451,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_274",
+            "tSec": 28.8,
+            "value": -0.5927,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_275",
+            "tSec": 28.8333,
+            "value": -0.4612,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_276",
+            "tSec": 28.8667,
+            "value": -0.3498,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_277",
+            "tSec": 28.9,
+            "value": -0.2572,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_278",
+            "tSec": 28.9333,
+            "value": -0.182,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_279",
+            "tSec": 28.9667,
+            "value": -0.1227,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_280",
+            "tSec": 29,
+            "value": -0.0777,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_281",
+            "tSec": 29.0333,
+            "value": -0.0452,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_282",
+            "tSec": 29.0667,
+            "value": -0.0232,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_283",
+            "tSec": 29.1,
+            "value": -0.0098,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_284",
+            "tSec": 29.1333,
+            "value": -0.0029,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_285",
+            "tSec": 29.1667,
+            "value": -0.0004,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_286",
+            "tSec": 29.2,
+            "value": 0,
+            "interpolationToNext": "linear"
+          },
+          {
+            "id": "tilt_287",
+            "tSec": 30.2,
             "value": 0,
             "interpolationToNext": "smoothstep"
           }
@@ -1898,7 +2990,7 @@
           },
           {
             "id": "f1",
-            "tSec": 28.5,
+            "tSec": 32.3,
             "value": [
               [
                 0,
@@ -2078,19 +3170,19 @@
           },
           {
             "id": "br_4",
-            "tSec": 24.6,
+            "tSec": 28.4,
             "value": 0.8,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "br_5",
-            "tSec": 25.6,
+            "tSec": 29.4,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "br_6",
-            "tSec": 28.5,
+            "tSec": 32.3,
             "value": 0,
             "interpolationToNext": "smoothstep"
           }
@@ -2235,7 +3327,7 @@
           "id": "spin_white",
           "type": "wave",
           "fromSec": 20,
-          "toSec": 25.599999999999998,
+          "toSec": 29.4,
           "seed": 10,
           "priority": 1,
           "blend": "max",
@@ -2256,7 +3348,7 @@
           "id": "spin_sky",
           "type": "wave",
           "fromSec": 20,
-          "toSec": 25.599999999999998,
+          "toSec": 29.4,
           "seed": 11,
           "priority": 1,
           "blend": "max",
@@ -2277,7 +3369,7 @@
           "id": "spin_lilac",
           "type": "wave",
           "fromSec": 20,
-          "toSec": 25.599999999999998,
+          "toSec": 29.4,
           "seed": 12,
           "priority": 1,
           "blend": "max",
@@ -2298,7 +3390,7 @@
           "id": "spin_pink",
           "type": "wave",
           "fromSec": 20,
-          "toSec": 25.599999999999998,
+          "toSec": 29.4,
           "seed": 13,
           "priority": 1,
           "blend": "max",
@@ -3767,9 +4859,9 @@
             "value": [
               0,
               0,
+              56,
+              56,
               0,
-              56,
-              56,
               0,
               0,
               0
@@ -3781,10 +4873,10 @@
             "tSec": 25.433,
             "value": [
               0,
-              0,
               16,
               56,
               56,
+              0,
               0,
               0,
               0
@@ -3795,8 +4887,8 @@
             "id": "L_98",
             "tSec": 25.467,
             "value": [
-              0,
               16,
+              56,
               56,
               56,
               56,
@@ -3808,7 +4900,7 @@
           },
           {
             "id": "L_99",
-            "tSec": 25.5,
+            "tSec": 29.1,
             "value": [
               0,
               16,
@@ -3823,7 +4915,127 @@
           },
           {
             "id": "L_100",
-            "tSec": 26.867,
+            "tSec": 29.533,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_101",
+            "tSec": 29.9,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_102",
+            "tSec": 30.233,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_103",
+            "tSec": 30.267,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_104",
+            "tSec": 30.3,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_105",
+            "tSec": 30.4,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              16,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_106",
+            "tSec": 30.433,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_107",
+            "tSec": 30.467,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "L_108",
+            "tSec": 30.667,
             "value": [
               0,
               16,
@@ -5287,9 +6499,9 @@
             "value": [
               0,
               0,
+              28,
+              28,
               0,
-              28,
-              28,
               0,
               0,
               0
@@ -5301,10 +6513,10 @@
             "tSec": 25.433,
             "value": [
               0,
-              0,
               8,
               28,
               28,
+              0,
               0,
               0,
               0
@@ -5315,8 +6527,8 @@
             "id": "R_98",
             "tSec": 25.467,
             "value": [
-              0,
               8,
+              28,
               28,
               28,
               28,
@@ -5328,7 +6540,7 @@
           },
           {
             "id": "R_99",
-            "tSec": 25.5,
+            "tSec": 29.1,
             "value": [
               0,
               8,
@@ -5343,7 +6555,127 @@
           },
           {
             "id": "R_100",
-            "tSec": 26.867,
+            "tSec": 29.533,
+            "value": [
+              0,
+              4,
+              14,
+              14,
+              14,
+              14,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_101",
+            "tSec": 29.9,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_102",
+            "tSec": 30.233,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_103",
+            "tSec": 30.267,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_104",
+            "tSec": 30.3,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_105",
+            "tSec": 30.4,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              8,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_106",
+            "tSec": 30.433,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_107",
+            "tSec": 30.467,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "R_108",
+            "tSec": 30.667,
             "value": [
               0,
               8,
@@ -5369,25 +6701,25 @@
           },
           {
             "id": "int_1",
-            "tSec": 21.1,
+            "tSec": 22,
             "value": 1,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "int_2",
-            "tSec": 21.4,
+            "tSec": 22.3,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "int_3",
-            "tSec": 24,
+            "tSec": 26.9,
             "value": 0,
             "interpolationToNext": "smoothstep"
           },
           {
             "id": "int_4",
-            "tSec": 24.6,
+            "tSec": 27.5,
             "value": 1,
             "interpolationToNext": "smoothstep"
           }
@@ -5440,7 +6772,7 @@
             },
             {
               "id": "op_5",
-              "tSec": 28.5,
+              "tSec": 32.3,
               "value": 0,
               "interpolationToNext": "smoothstep"
             }
@@ -5705,7 +7037,7 @@
       {
         "id": "cue4",
         "fromSec": 19.2,
-        "toSec": 20,
+        "toSec": 20.0,
         "assetId": "media/sfx_cue.wav",
         "mediaOffsetSec": 0,
         "gain": 0.6,
@@ -5716,8 +7048,8 @@
       {
         "id": "spin",
         "fromSec": 20,
-        "toSec": 25.4,
-        "assetId": "media/sfx_spin.wav",
+        "toSec": 29.16,
+        "assetId": "media/sfx_spin_long.wav",
         "mediaOffsetSec": 0,
         "gain": 0.55,
         "fadeInSec": 0.7,
@@ -5748,13 +7080,24 @@
       },
       {
         "id": "chime2",
-        "fromSec": 25.4,
-        "toSec": 27,
+        "fromSec": 29.2,
+        "toSec": 30.8,
         "assetId": "media/intro-chime.wav",
         "mediaOffsetSec": 0,
         "gain": 0.5,
         "fadeInSec": 0.005,
         "fadeOutSec": 0.4,
+        "loop": false
+      },
+      {
+        "id": "blink11",
+        "fromSec": 29.9,
+        "toSec": 29.99,
+        "assetId": "media/sfx_blink.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.7,
+        "fadeInSec": 0.002,
+        "fadeOutSec": 0.02,
         "loop": false
       }
     ],
@@ -5859,7 +7202,7 @@
       },
       {
         "id": "ev7",
-        "tSec": 25.9,
+        "tSec": 29.7,
         "type": "scene",
         "payload": {
           "title": "대기",

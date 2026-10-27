@@ -3,13 +3,8 @@
  * passenger-facing UI are composed here. The 3D screen mesh uses this canvas as its texture and the editor's "Screen" tab
  * mirrors it, so both always show exactly the same picture.
  */
-import '@fontsource/ibm-plex-sans/400.css';
-import '@fontsource/ibm-plex-sans/500.css';
-import '@fontsource/ibm-plex-sans/600.css';
-import '@fontsource/ibm-plex-sans-kr/400.css';
-import '@fontsource/ibm-plex-sans-kr/500.css';
-import '@fontsource/ibm-plex-sans-kr/600.css';
-import '@fontsource/ibm-plex-mono/500.css';
+
+import './screenFonts.css';
 
 /** All screen UI is laid out in real 4K portrait pixels (2160 x 3840); the canvas just renders it at RENDER_SCALE of that. */
 export const DESIGN_W = 2160;
@@ -31,9 +26,9 @@ export type TvCopy = { tag?: string; head: string; sub?: string; cta?: { text: s
 export type SceneCaption = { title: string; desc?: string; tv?: TvCopy; idx: number; total: number; age: number; remain: number; prev?: { tv?: TvCopy; title: string; desc?: string } };
 export type ScreenInfo = { title: string; scene?: SceneCaption | null };
 
-const SANS = '"IBM Plex Sans", "IBM Plex Sans KR", -apple-system, "Apple SD Gothic Neo", sans-serif';
-const KR = '"IBM Plex Sans KR", "IBM Plex Sans", -apple-system, "Apple SD Gothic Neo", sans-serif';
-const MONO = '"IBM Plex Mono", ui-monospace, Menlo, monospace';
+const SANS = '"Google Sans Flex", -apple-system, "Apple SD Gothic Neo", sans-serif';   // Google Sans Flex has no Hangul: those glyphs come from the system Korean sans
+const KR = SANS;
+const MONO = SANS;
 
 // Canvas never triggers a webfont download by itself: ask for the exact glyphs we are about to draw; once they arrive the next frame is right.
 const asked = new Set<string>();
@@ -68,16 +63,10 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number, maxLine
 
 /**
  * Frosted-glass panel (units: 4K pixels): the picture behind it blurred + saturated, a faint neutral tint that deepens toward the
- * bottom for legibility, a hairline edge with a specular top-left falloff, and a layered soft shadow. No gloss blobs, no colour.
+ * bottom for legibility, a hairline edge with a specular top-left falloff, no drop shadow. No gloss blobs, no colour.
  */
 function glass(ctx: CanvasRenderingContext2D, bg: CanvasImageSource | null, x: number, y: number, w: number, h: number, r: number) {
   const rr = () => { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); };
-  // layered shadow: wide ambient + tight contact
-  ctx.save();
-  rr(); ctx.fillStyle = 'rgba(0,0,0,0.001)';
-  ctx.shadowColor = 'rgba(8,14,28,0.22)'; ctx.shadowBlur = 240 * RENDER_SCALE; ctx.shadowOffsetY = 90 * RENDER_SCALE; ctx.fill();
-  ctx.shadowColor = 'rgba(8,14,28,0.20)'; ctx.shadowBlur = 40 * RENDER_SCALE; ctx.shadowOffsetY = 12 * RENDER_SCALE; ctx.fill();
-  ctx.restore();
   // body
   ctx.save(); rr(); ctx.clip();
   if (bg) {
@@ -92,12 +81,12 @@ function glass(ctx: CanvasRenderingContext2D, bg: CanvasImageSource | null, x: n
   ctx.save(); rr(); ctx.clip();
   const hi = ctx.createLinearGradient(0, y, 0, y + h * 0.5);
   hi.addColorStop(0, 'rgba(255,255,255,0.5)'); hi.addColorStop(1, 'rgba(255,255,255,0)');
-  ctx.beginPath(); ctx.roundRect(x + 3, y + 3, w - 6, h - 6, r - 3); ctx.lineWidth = 6; ctx.strokeStyle = hi; ctx.stroke();
+  ctx.beginPath(); ctx.roundRect(x + 3, y + 3, w - 6, h - 6, Math.max(0, r - 3)); ctx.lineWidth = 6; ctx.strokeStyle = hi; ctx.stroke();
   ctx.restore();
   // hairline edge with a diagonal specular falloff
   const edge = ctx.createLinearGradient(x, y, x + w, y + h);
   edge.addColorStop(0, 'rgba(255,255,255,0.55)'); edge.addColorStop(0.3, 'rgba(255,255,255,0.18)'); edge.addColorStop(0.7, 'rgba(255,255,255,0.10)'); edge.addColorStop(1, 'rgba(255,255,255,0.32)');
-  ctx.beginPath(); ctx.roundRect(x + 1.5, y + 1.5, w - 3, h - 3, r - 1.5); ctx.lineWidth = 3; ctx.strokeStyle = edge; ctx.stroke();
+  ctx.beginPath(); ctx.roundRect(x + 1.5, y + 1.5, w - 3, h - 3, Math.max(0, r - 1.5)); ctx.lineWidth = 3; ctx.strokeStyle = edge; ctx.stroke();
 }
 
 const pad2 = (n: number) => String(n).padStart(2, '0');
@@ -110,14 +99,14 @@ function copyOf(sc: SceneCaption): TvCopy {
 const easeInOut = (x: number) => { const t = clamp01(x); return t * t * (3 - 2 * t); };
 const easeIn = (x: number) => Math.pow(clamp01(x), 2);
 
-const CARD = { X: 120, W: DESIGN_W - 240, padX: 108, padT: 96, padB: 96, R: 56, META: 60, HEAD: 124, SUB: 72, HEAD_LH: 150, SUB_LH: 106 };
+const CARD = { X: 120, W: DESIGN_W - 240, padX: 108, padT: 96, padB: 96, R: 0, META: 60, HEAD: 124, SUB: 72, HEAD_LH: 150, SUB_LH: 106 };
 type Layout = { c: TvCopy; hl: string[]; sl: string[]; metaH: number; H: number };
 
 function layoutOf(ctx: CanvasRenderingContext2D, c: TvCopy): Layout {
   const { W, padX, padT, padB, META, HEAD, SUB, HEAD_LH, SUB_LH } = CARD, textW = W - padX * 2;
-  needFont(600, 'IBM Plex Sans KR', c.head); needFont(600, 'IBM Plex Sans', c.head);
-  needFont(400, 'IBM Plex Sans KR', c.sub ?? ''); needFont(400, 'IBM Plex Sans', c.sub ?? '');
-  if (c.tag) { needFont(500, 'IBM Plex Sans KR', c.tag); needFont(500, 'IBM Plex Sans', c.tag); }
+  needFont(600, 'Google Sans Flex', c.head);
+  needFont(400, 'Google Sans Flex', c.sub ?? '');
+  if (c.tag) { needFont(500, 'Google Sans Flex', c.tag); }
   ctx.save();
   ctx.font = font(600, HEAD, KR); setSpacing(ctx, -2);
   const hl = wrap(ctx, c.head, textW, 2);
@@ -149,7 +138,6 @@ function drawContent(ctx: CanvasRenderingContext2D, Y: number, lay: Layout, r: (
     y += lay.metaH;
   }
   lift(ctx, al(1), dy(1), () => {
-    ctx.shadowColor = 'rgba(8,14,28,0.28)'; ctx.shadowBlur = 24 * RENDER_SCALE; ctx.shadowOffsetY = 4 * RENDER_SCALE;
     ctx.fillStyle = '#fff'; ctx.font = font(600, HEAD, KR); setSpacing(ctx, -2);
     let yy = y + HEAD * 0.86;
     for (const l of lay.hl) { ctx.fillText(l, X + padX, yy); yy += HEAD_LH; }
@@ -158,7 +146,6 @@ function drawContent(ctx: CanvasRenderingContext2D, Y: number, lay: Layout, r: (
   y += lay.hl.length * HEAD_LH;
   if (lay.sl.length) {
     lift(ctx, al(2), dy(2), () => {
-      ctx.shadowColor = 'rgba(8,14,28,0.28)'; ctx.shadowBlur = 24 * RENDER_SCALE; ctx.shadowOffsetY = 4 * RENDER_SCALE;
       ctx.font = font(400, SUB, KR); ctx.fillStyle = 'rgba(255,255,255,0.82)';
       let yy = y + 14 + SUB * 0.84;
       for (const l of lay.sl) { ctx.fillText(l, X + padX, yy); yy += SUB_LH; }
@@ -194,7 +181,7 @@ function drawSceneCard(ctx: CanvasRenderingContext2D, bg: CanvasImageSource | nu
   drawContent(ctx, Y, lay, (k) => easeOut((sc.age + o - 0.08 * k) / 0.5), 0);
 
   // step counter: rolls up like an odometer
-  needFont(500, 'IBM Plex Mono', '0123456789/');
+  needFont(500, 'Google Sans Flex', '0123456789/');
   if (lay.c.tag) {
     const ty = Y + CARD.padT + META * 0.8, rx = X + W - padX;
     const roll = first ? 1 : easeOut(sc.age / 0.5);
@@ -210,8 +197,8 @@ function drawSceneCard(ctx: CanvasRenderingContext2D, bg: CanvasImageSource | nu
   // step progress hairline
   const total = sc.age + (sc.remain < 1e8 ? sc.remain : 0), prog = sc.remain < 1e8 && total > 0 ? clamp01(sc.age / total) : 1;
   const ly = Y + H - padB + 4, lx = X + padX;
-  ctx.beginPath(); ctx.roundRect(lx, ly, textW, 6, 3); ctx.fillStyle = 'rgba(255,255,255,0.2)'; ctx.fill();
-  if (prog > 0) { ctx.beginPath(); ctx.roundRect(lx, ly, Math.max(6, textW * prog), 6, 3); ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fill(); }
+  ctx.beginPath(); ctx.rect(lx, ly, textW, 6); ctx.fillStyle = 'rgba(255,255,255,0.2)'; ctx.fill();
+  if (prog > 0) { ctx.beginPath(); ctx.rect(lx, ly, Math.max(6, textW * prog), 6); ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fill(); }
   ctx.restore();
 }
 
@@ -221,16 +208,15 @@ function drawCta(ctx: CanvasRenderingContext2D, sc: SceneCaption) {
   if (!cta) return;
   const a = easeOut((sc.age + 0.2) / 0.6) * easeOut(sc.remain / 0.4);
   if (a <= 0.001) return;
-  needFont(500, 'IBM Plex Sans', cta.text); needFont(400, 'IBM Plex Sans KR', cta.sub ?? ''); needFont(400, 'IBM Plex Sans', cta.sub ?? '');
+  needFont(500, 'Google Sans Flex', cta.text); needFont(400, 'Google Sans Flex', cta.sub ?? '');
   const cx = DESIGN_W / 2, cy = DESIGN_H / 2 + 220;
   ctx.save();
   ctx.globalAlpha = a;
   ctx.translate(0, (1 - a) * 40);
-  ctx.shadowColor = 'rgba(8,14,28,0.62)'; ctx.shadowBlur = 150 * RENDER_SCALE; ctx.shadowOffsetY = 20 * RENDER_SCALE;
   // listening ripple: two hairline rings expanding from the waveform and fading
   for (let k = 0; k < 2; k++) {
     const ph = ((sc.age / 2.6 + k * 0.5) % 1), rr = 120 + ph * 520;
-    ctx.save(); ctx.shadowColor = 'transparent'; ctx.globalAlpha *= (1 - ph) * 0.55;
+    ctx.save(); ctx.globalAlpha *= (1 - ph) * 0.55;
     ctx.beginPath(); ctx.ellipse(cx, cy - 250, rr * 1.9, rr * 0.5, 0, 0, Math.PI * 2); ctx.lineWidth = 4; ctx.strokeStyle = '#fff'; ctx.stroke(); ctx.restore();
   }
   // waveform: thin bars, envelope peaks in the middle, each breathing at its own phase
@@ -239,7 +225,7 @@ function drawCta(ctx: CanvasRenderingContext2D, sc: SceneCaption) {
   for (let i = 0; i < N; i++) {
     const env = Math.exp(-Math.pow((i - (N - 1) / 2) / 8.5, 2)), k = 0.5 + 0.5 * Math.sin(sc.age * 3.6 + i * 0.62) * Math.sin(sc.age * 1.7 + i * 0.21);
     const h = 14 + 150 * env * (0.25 + 0.75 * k);
-    ctx.beginPath(); ctx.roundRect(x0 + i * (BW + BG), wy - h / 2, BW, h, BW / 2); ctx.fill();
+    ctx.beginPath(); ctx.rect(x0 + i * (BW + BG), wy - h / 2, BW, h); ctx.fill();
   }
   ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = '#fff';
   ctx.font = font(500, 300); setSpacing(ctx, -9);

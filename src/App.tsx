@@ -14,20 +14,15 @@ import { startAutosave, readAutosave } from './runtime/autosave';
 import { unlockAudio } from './runtime/audio';
 import { validateSequence } from './engine/project';
 import { emptySequence } from './engine/edit';
-
-const PRESETS: [string, string, string][] = [
-  ['01_boarding', 'Boarding', '차량 도착 · 환영 · 인사 · 착석 확인 · 출발(빙그르르)'],
-  ['02_driving_a', 'Driving A', '공사 감지 · 앞을 살피고 · 돌아와 우회 안내'],
-  ['04_driving_b', 'Driving B', 'Hey LIEU 호출 · 애교 총출동'],
-  ['03_arrival', 'Arrival', '곧 도착 · 둘러보기 · 작별 인사 · 문 쪽 안내'],
-  ['05_web_cover', '웹 모션 - 표지', '호기심 · 상하좌우 시선 · 눈 감기 · 신남 (21s)'],
-  ['06_custom', 'Custom · 자유 실험', '빈 시퀀스: 모터 · 눈 · 링 · 프로젝터를 마음대로 실험 (저장하면 이 칸에 유지)'],
-];
+import { ExportDialog } from './ui/ExportDialog';
+import { openExport } from './ui/exportUi';
+import { GROUPS, SCENARIOS, PRESET_IDS, scenarioOf } from './scenarios';
 
 function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ left: 0, top: 0 });
+  const cur = useStore((s) => s.seq.id);
   useEffect(() => {
     if (!open) return;
     const off = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
@@ -40,11 +35,16 @@ function ExampleMenu({ onPick }: { onPick: (id: string) => void }) {
       <button className="ico scn" title="Load a scenario" onClick={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPos({ left: r.left, top: r.bottom + 6 }); setOpen((o) => !o); }}>Scenarios <span className="caret">▾</span></button>
       {open && (
         <div className="exlist" style={pos}>
-          {PRESETS.map(([id, l, d], i) => (
-            <button key={id} className="exitem" onClick={() => { setOpen(false); onPick(id); }}>
-              <span className="exnum">{String(i + 1).padStart(2, '0')}</span>
-              <span className="extxt"><b>{l}</b><small>{d}</small></span>
-            </button>
+          {GROUPS.map((g) => (
+            <div key={g.key} className="exgroup">
+              <div className="exhead" title={g.note}><b>{g.title}</b><span>{g.en}</span></div>
+              {SCENARIOS.filter((x) => x.group === g.key).map((x) => (
+                <button key={x.id} className={'exitem' + (x.id === cur ? ' cur' : '')} onClick={() => { setOpen(false); onPick(x.id); }}>
+                  <span className="exnum">{x.id.slice(0, 2)}</span>
+                  <span className="extxt"><b>{x.label}</b><small>{x.desc}</small></span>
+                </button>
+              ))}
+            </div>
           ))}
         </div>
       )}
@@ -73,8 +73,6 @@ async function confirmDiscard(what: string): Promise<boolean> {
 function download(name: string, data: BlobPart, type: string) {
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type })); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 }
-
-const PRESET_IDS = PRESETS.map((p) => p[0]);
 
 async function saveJson() {
   const s = useStore.getState();
@@ -116,7 +114,7 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
         <button className="ico" title="Clear all keyframes and start an empty sequence" onClick={() => void newSequence()}>New</button>
         <ExampleMenu onPick={async (id) => {
           if (!(await confirmDiscard('Load scenario'))) return;
-          try { await loadPresetData(id); toast(`Loaded scenario: ${PRESETS.find((p) => p[0] === id)?.[1]}`, 'ok'); } catch (x) { toast(String(x), 'warn'); }
+          try { await loadPresetData(id); toast(`Loaded scenario: ${scenarioOf(id)?.label}`, 'ok'); } catch (x) { toast(String(x), 'warn'); }
         }} />
       </div>
       <div className="grp">
@@ -140,6 +138,7 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
         {saving ? 'Saving…' : savedAt ? `Autosaved ${timeLabel(savedAt)}` : 'Autosave on'}
       </span>
       <span className="badge preview" title="No commands are sent to the real robot (motors, LEDs, eyes, projector)">PREVIEW ONLY</span>
+      <button className="ico" onClick={openExport} title="Export this scenario as a 16:9 MP4: a vertical close-up plus four other camera views">Export MP4</button>
       <button className="ico" onClick={() => void openProjectorWindow()} title="Open the projector picture in its own window on the second display (the editor stays where it is)">Projector out</button>
       <HardwareMenu />
       <button className="ico" onClick={onPresent} title="Hide the editor and show only the playback view">▶ Present</button>
@@ -226,6 +225,7 @@ export function App() {
         <div className="presentbar"><PresentBar onExit={() => setPresent(false)} /></div>
       </div>
       <Dialogs />
+      <ExportDialog />
     </>
   );
 }

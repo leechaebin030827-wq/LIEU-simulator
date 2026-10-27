@@ -5,8 +5,8 @@ import { PROJ_CHANNEL, type ProjMsg } from '../runtime/projectorOut';
 function ProjectorView({ m, hint, onToggleFs }: { m: ProjMsg | null; hint: boolean; onToggleFs: () => void }) {
   const vid = useRef<HTMLVideoElement>(null);
   // mounting of the real projector is unknown: R turns the output 90 degrees, M mirrors it (remembered in this browser)
-  const [fix, setFix] = useState<{ rot: number; mirror: boolean }>(() => { try { return { rot: 270, mirror: false, ...JSON.parse(localStorage.getItem('lieu.projfix2') ?? '{}') }; } catch { return { rot: 270, mirror: false }; } });
-  useEffect(() => { try { localStorage.setItem('lieu.projfix2', JSON.stringify(fix)); } catch { /* storage unavailable */ } }, [fix]);
+  const [fix, setFix] = useState<{ rot: number; mirror: boolean }>(() => { try { return { rot: 0, mirror: false, ...JSON.parse(localStorage.getItem('lieu.projfix3') ?? '{}') }; } catch { return { rot: 0, mirror: false }; } });
+  useEffect(() => { try { localStorage.setItem('lieu.projfix3', JSON.stringify(fix)); } catch { /* storage unavailable */ } }, [fix]);
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (e.key === 'f' || e.key === 'F') onToggleFs();
@@ -29,12 +29,12 @@ function ProjectorView({ m, hint, onToggleFs }: { m: ProjMsg | null; hint: boole
     transform: `rotate(${m.rotationDeg}deg) scale(${m.scale})`,
   } : {};
   return (
-    <div onClick={onToggleFs} style={{ position: 'absolute', inset: 0, background: '#000', display: 'grid', placeItems: 'center', cursor: hint ? 'pointer' : 'none', overflow: 'hidden' }}>
+    <div style={{ position: 'absolute', inset: 0, background: '#000', display: 'grid', placeItems: 'center', cursor: hint ? 'pointer' : 'none', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', transform: `rotate(${fix.rot}deg) scaleX(${fix.mirror ? -1 : 1})` }}>
       {m?.url && m.kind === 'image' && <img src={m.url} style={style} alt="" draggable={false} />}
       {m?.url && m.kind === 'video' && <video ref={vid} src={m.url} style={style} muted playsInline loop={m.loop} />}
       </div>
-      {hint && <div style={{ position: 'absolute', bottom: 18, left: 0, right: 0, textAlign: 'center', color: '#888', font: '14px system-ui' }}>Drag this window to the projector display, then click or press F for fullscreen · R rotate 90° · M mirror</div>}
+      {hint && <div style={{ position: 'absolute', bottom: 18, left: 0, right: 0, textAlign: 'center', color: '#888', font: '14px system-ui' }}>Drag this window to the projector display, then click anywhere (or press any key) for fullscreen · R rotate 90° · M mirror</div>}
     </div>
   );
 }
@@ -50,6 +50,13 @@ export function ProjectorOut() {
     ch.onmessage = (e) => setM(e.data as ProjMsg);
     ch.postMessage('hello');
     return () => { ch.close(); window.clearTimeout(hide); };
+  }, []);
+  // the browser's title/tab bar only goes away in real fullscreen, which Chrome allows only after a user gesture inside this window: the first press / key / touch does it
+  useEffect(() => {
+    document.documentElement.style.background = '#000'; document.body.style.background = '#000';
+    const enter = (e: Event) => { if ((e as KeyboardEvent).key?.toLowerCase() === 'f') return; if (!document.fullscreenElement) void document.documentElement.requestFullscreen?.().catch(() => undefined); };
+    window.addEventListener('pointerdown', enter, { once: true }); window.addEventListener('keydown', enter, { once: true });
+    return () => { window.removeEventListener('pointerdown', enter); window.removeEventListener('keydown', enter); };
   }, []);
   const toggleFs = async () => { setHint(false); try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { /* needs a click */ } };
   return <div style={{ position: 'fixed', inset: 0 }}><ProjectorView m={m} hint={hint} onToggleFs={() => void toggleFs()} /></div>;

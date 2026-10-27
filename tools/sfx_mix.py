@@ -9,7 +9,7 @@ from pathlib import Path
 # asset -> (fade in s, fade out s, length mode, file length s). 'full' = play the whole file, 'keep' = keep the clip length already in the scenario.
 MIX = {
     'sfx_cue': (0.005, 0.18, 'full', 0.80), 'sfx_nod': (0.005, 0.15, 'full', 0.50), 'sfx_glide': (0.5, 1.1, 'keep', 3.80),
-    'sfx_turn': (0.25, 0.5, 'full', 1.85), 'sfx_scan': (0.2, 0.6, 'full', 2.75), 'sfx_spin': (0.7, 1.3, 'keep', 5.80),
+    'sfx_turn': (0.25, 0.5, 'full', 1.85), 'sfx_scan': (0.2, 0.6, 'full', 2.75), 'sfx_spin': (0.7, 1.3, 'keep', 5.80), 'sfx_spin_long': (0.7, 1.3, 'keep', 9.16),
     'intro-chime': (0.005, 0.4, 'full', 1.60), 'sfx_boing': (0.005, 0.2, 'full', 0.60), 'sfx_giggle': (0.005, 0.2, 'full', 0.90),
     'sfx_sparkle': (0.005, 0.4, 'full', 1.70),
 }
