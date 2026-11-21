@@ -57,7 +57,8 @@ kbd { background: transparent; border: 1px solid var(--line2); border-radius: 2p
 
 /* ---- top bar ---- */
 .top { grid-area: top; display: flex; gap: 6px; align-items: center; padding: 0 16px; overflow-x: auto; min-width: 0; background: var(--bg); border-bottom: 1px solid var(--line); }
-.top h1 { font-size: 12px; margin: 0 18px 0 0; font-weight: 600; letter-spacing: .32em; color: var(--text); }
+.top h1 { display: flex; align-items: center; flex: none; margin: 0 12px 0 0; line-height: 0; }
+.top h1 img { display: block; width: 132px; height: auto; }
 .top .grp { display: flex; align-items: center; gap: 4px; padding-right: 10px; margin-right: 4px; border-right: 1px solid var(--line); }
 .top .grp:last-of-type { border-right: none; }
 .top button, .top select, .top input, .top span, .top label { white-space: nowrap; flex: none; }

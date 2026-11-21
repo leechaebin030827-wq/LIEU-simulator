@@ -111,7 +111,7 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
 
   return (
     <div className="top">
-      <h1 title="LIEU Sequence Editor">LIEU</h1>
+      <h1 title="LIEU Sequence Editor"><img src={`${import.meta.env.BASE_URL}assets/lieu-logo.png`} alt="LIEU" /></h1>
       <div className="grp">
         <ScenarioMenu onPick={async (id) => {
           if (!(await confirmDiscard('Load scenario'))) return;
