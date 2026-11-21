@@ -1,0 +1,41 @@
+{
+  "schema": "lieu.powered-nudge-validation/v1",
+  "date": "2026-11-01",
+  "axis": "yaw",
+  "id": 1,
+  "startRaw": 1692,
+  "requestedOutRaw": 1742,
+  "furthestObservedRaw": 1718,
+  "requestedDeltaRaw": 50,
+  "observedDeltaRaw": 26,
+  "result": "safe-timeout-before-target",
+  "releaseReason": "nudge-timeout",
+  "postReleaseRaw": 1700,
+  "torqueAfterTest": {
+    "yaw": 0,
+    "tilt": 0,
+    "body": 0,
+    "rail": 0
+  },
+  "postReleaseDiagnostics": {
+    "operatingMode": 4,
+    "hardwareError": 0,
+    "presentVelocityRaw": 1,
+    "presentCurrentRaw": 0,
+    "currentLimitRaw": 910,
+    "pwmLimitRaw": 885,
+    "inputVoltageRaw": 121,
+    "inputVoltageV": 12.1,
+    "temperatureC": 34,
+    "profileVelocityRaw": 20,
+    "profileAccelerationRaw": 5
+  },
+  "notes": [
+    "The controller released torque automatically when the three-second outward timeout expired.",
+    "Idle diagnostics are healthy; current and velocity must be captured during load before changing any limit.",
+    "Diagnostic retry started at 1701, targeted 1751, and settled at 1722 before the same safe timeout.",
+    "During the settled portion, Present Current was 51-52 raw (approximately 51-52 mA for XC330-T288) and Present Velocity was 1 raw (approximately 0.229 rpm).",
+    "The 910 raw current limit was not reached; do not increase Current Limit.",
+    "ROBOTIS documents the XC330-T288 default Position P Gain as 900. A small, separately approved gain test is the next candidate."
+  ]
+}

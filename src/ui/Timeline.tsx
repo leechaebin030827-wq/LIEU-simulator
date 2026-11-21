@@ -4,6 +4,8 @@ import { getKeys, withKeys, type TrackPath, pathKey, clone, uid } from '../engin
 import { motionWarnings } from '../engine/limits';
 import { sortedKeys } from '../engine/interp';
 import { unlockAudio } from '../runtime/audio';
+import { playbackRateAt } from '../runtime/playbackRate';
+import { playWithFinalMonitor } from '../runtime/finalMonitor';
 import type { Keyframe } from '../engine/types';
 
 type Lane =
@@ -14,7 +16,6 @@ const NUM = (prop: string, label: string): Lane => ({ id: 'pp' + prop, label, gr
 
 export function Timeline() {
   const seq = useStore((s) => s.seq);
-  const t = useStore((s) => s.tSec);
   const selKeys = useStore((s) => s.selKeys), setSelKeys = useStore((s) => s.setSelKeys);
   const selClip = useStore((s) => s.selClip), setSelClip = useStore((s) => s.setSelClip);
   const setTime = useStore((s) => s.setTime), snapFps = useStore((s) => s.snapFps);
@@ -29,6 +30,7 @@ export function Timeline() {
   const lanes: Lane[] = useMemo(() => {
     const L: Lane[] = [
       { id: 'rx', label: 'Rail X', group: 'Motion', kind: 'keys', path: { type: 'motion', ch: 'railX' } },
+      { id: 'by', label: 'Body ±180°', group: 'Motion', kind: 'keys', path: { type: 'motion', ch: 'bodyYaw' } },
       { id: 'yw', label: 'Yaw Y', group: 'Motion', kind: 'keys', path: { type: 'motion', ch: 'yawY' } },
       { id: 'tl', label: 'Tilt Z', group: 'Motion', kind: 'keys', path: { type: 'motion', ch: 'tiltZ' } },
       { id: 'rb', label: 'All 24 RGBW', group: 'Ring', kind: 'keys', path: { type: 'ringBase' } },
@@ -44,8 +46,8 @@ export function Timeline() {
     );
     if (seq.tracks.eyes.leftIntensity?.keys.length) L.push({ id: 'eli', label: 'L intensity', group: 'Eyes', kind: 'keys', path: { type: 'eyeIntensity', which: 'leftIntensity' } });
     if (seq.tracks.eyes.rightIntensity?.keys.length) L.push({ id: 'eri', label: 'R intensity', group: 'Eyes', kind: 'keys', path: { type: 'eyeIntensity', which: 'rightIntensity' } });
-    L.push({ id: 'pc', label: 'Media source', group: 'Projector', kind: 'clips', clip: 'projector' }, NUM('opacity', 'Opacity'), NUM('brightness', 'Brightness'), NUM('scale', 'Scale'), NUM('rotationDeg', 'Rotation'), NUM('offsetXm', 'Offset X'), NUM('offsetZm', 'Offset Z'));
-    for (const k of ['floorHeightYm', 'projectedWidthM', 'opticalAimYawDeg', 'opticalAimPitchDeg', 'opticalOriginXm', 'opticalOriginYm', 'opticalOriginZm', 'focusBlur', 'keystoneTop', 'keystoneBottom'])
+    L.push({ id: 'pc', label: 'Media source', group: 'Projector', kind: 'clips', clip: 'projector' }, NUM('opacity', 'Opacity'), NUM('brightness', 'Brightness'), NUM('scale', 'Scale'), NUM('rotationDeg', 'Rotation'));
+    for (const k of ['floorHeightYm', 'projectedWidthM', 'opticalOriginXm', 'opticalOriginYm', 'opticalOriginZm', 'focusBlur', 'keystoneTop', 'keystoneBottom'])
       if ((seq.tracks.projector.properties as Record<string, { keys: unknown[] } | undefined>)[k]?.keys.length) L.push(NUM(k, k));
     L.push({ id: 'au', label: 'Voice / SFX', group: 'Audio', kind: 'clips', clip: 'audio' }, { id: 'ev', label: 'Sensor events', group: 'Events', kind: 'clips', clip: 'cue' });
     return L;
@@ -54,19 +56,12 @@ export function Timeline() {
   const isEmpty = useMemo(() => {
     const T = seq.tracks;
     const k = (t: { keys: unknown[] }) => t.keys.length;
-    return k(T.motion.railX) + k(T.motion.yawY) + k(T.motion.tiltZ) + k(T.ring24.baseFrames) + k(T.ring24.brightness) + k(T.eyes.left) + k(T.eyes.right)
+    return k(T.motion.railX) + (T.motion.bodyYaw ? k(T.motion.bodyYaw) : 0) + k(T.motion.yawY) + k(T.motion.tiltZ) + k(T.ring24.baseFrames) + k(T.ring24.brightness) + k(T.eyes.left) + k(T.eyes.right)
       + T.ring24.effects.length + T.projector.clips.length + T.audio.length + T.events.length === 0;
   }, [seq]);
   const W = seq.durationSec * pps + 60;
   const snap = (x: number) => (snapFps > 0 ? Math.round(x * snapFps) / snapFps : x);
   const xToT = (clientX: number, el: Element) => Math.max(0, Math.min(seq.durationSec, snap((clientX - el.getBoundingClientRect().left) / pps)));
-
-  // Keep playhead visible while playing
-  useEffect(() => {
-    const sc = scroller.current; if (!sc) return;
-    const x = 170 + t * pps;
-    if (x > sc.scrollLeft + sc.clientWidth - 40 || x < sc.scrollLeft + 170) sc.scrollLeft = Math.max(0, x - sc.clientWidth / 2);
-  }, [Math.floor(t * 2) / 2, pps]); // eslint-disable-line
 
   const onRuler = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
@@ -189,7 +184,7 @@ export function Timeline() {
               </div>
             );
           })}
-          <Playhead pps={pps} />
+          <Playhead pps={pps} scroller={scroller} />
         </div>
       </div>
       <KeyPanel />
@@ -197,8 +192,14 @@ export function Timeline() {
   );
 }
 
-function Playhead({ pps }: { pps: number }) {
+function Playhead({ pps, scroller }: { pps: number; scroller: { current: HTMLDivElement | null } }) {
   const t = useStore((s) => s.tSec);
+  const scrollBeat = Math.floor(t * 2);
+  useEffect(() => {
+    const sc = scroller.current; if (!sc) return;
+    const x = 170 + useStore.getState().tSec * pps;
+    if (x > sc.scrollLeft + sc.clientWidth - 40 || x < sc.scrollLeft + 170) sc.scrollLeft = Math.max(0, x - sc.clientWidth / 2);
+  }, [scrollBeat, pps, scroller]);
   return <div className="playhead" style={{ left: 170 + t * pps }} />;
 }
 
@@ -227,12 +228,12 @@ function TransportBar({ pps, setPps }: { pps: number; setPps: (n: number) => voi
     <div className="transport">
       <button onClick={() => s.setTime(0)} title="Go to start">|◀</button>
       <button onClick={() => s.setTime(s.tSec - step)} title="Back 1 frame (←)">◀</button>
-      <button className={'playbtn' + (s.playing ? ' on' : '')} onClick={() => { unlockAudio(); s.playing ? s.pause() : s.play(); }} style={{ width: 70 }} title="Play / Pause (Space)">{s.playing ? '❚❚ Pause' : '▶ Play'}</button>
+      <button className={'playbtn' + (s.playing ? ' on' : '')} onClick={() => { unlockAudio(); s.playing ? s.pause() : playWithFinalMonitor(); }} style={{ width: 70 }} title="Play / Pause (Space)">{s.playing ? '❚❚ Pause' : '▶ Play'}</button>
       <button onClick={() => s.setTime(s.tSec + step)} title="Forward 1 frame (→)">▶</button>
       <button onClick={s.stop} title="Stop and return to start">■</button>
       <button className={s.seq.loop ? 'on' : ''} onClick={s.toggleLoop} title="Repeat from the start when the end is reached">↻ Loop</button>
       <span style={{ fontVariantNumeric: 'tabular-nums', minWidth: 120 }} title="Current time / total length">{fmt(s.tSec)} / {fmt(s.seq.durationSec)} s</span>
-      <select value={s.speed} onChange={(e) => s.setSpeed(Number(e.target.value))} title="Playback speed"><option value={0.5}>0.5×</option><option value={0.6}>0.6×</option><option value={0.7}>0.7×</option><option value={1}>1×</option><option value={2}>2×</option></select>
+      <span className="dim" title="뷰포트 모니터 영상의 실제 재생 프레임을 기준으로 동기화됩니다">영상 동기화 · {playbackRateAt(s.seq, s.tSec)}×</span>
       <label className="dim" title="Total sequence length (seconds)">Length <input type="number" min={1} step={1} value={s.seq.durationSec} onChange={(e) => s.patchSeq((q) => { q.durationSec = Math.max(1, Number(e.target.value)); }, 'dur')} /></label>
       <label className="dim" title="Snap keys and clips to this interval">Snap <select value={s.snapFps} onChange={(e) => useStore.setState({ snapFps: Number(e.target.value) })}><option value={0}>Off</option><option value={10}>1/10 s</option><option value={30}>1/30 s</option><option value={60}>1/60 s</option></select></label>
       <button className={s.autoKey ? 'on' : ''} onClick={() => s.setAutoKey(!s.autoKey)} title="On: changing a value records a key (◆) at the current time. Off: unsaved temporary preview (LIVE)">◆ Auto-key {s.autoKey ? 'on' : 'off'}</button>

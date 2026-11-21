@@ -1,0 +1,60 @@
+{
+  "schema": "lieu.user-range-references/v1",
+  "date": "2026-11-01",
+  "captureMode": "manual positioning with torque disabled",
+  "safety": {
+    "motionCommandsSent": false,
+    "torqueObserved": 0,
+    "railCommandLocked": true,
+    "note": "User-defined reference positions; not yet authorized controller limits."
+  },
+  "yaw": {
+    "id": 1,
+    "left90Raw": -3362,
+    "frontRaw": 3400,
+    "right90Raw": 8543,
+    "rawIncreasesToward": "right",
+    "status": "captured"
+  },
+  "tilt": {
+    "id": 2,
+    "forwardMaxRaw": 2248,
+    "levelRaw": 2063,
+    "backMaxRaw": 1829,
+    "rawIncreasesToward": "forward",
+    "backMaxEvidence": "observed extremum; position drifted while torque was disabled",
+    "status": "captured-with-back-drift"
+  },
+  "body": {
+    "id": 3,
+    "right180Raw": 9312,
+    "left180Raw": -5073,
+    "frontRaw": 2396,
+    "rawIncreasesToward": "right",
+    "status": "captured"
+  },
+  "rail": {
+    "id": 4,
+    "monitorMaxRaw": 4113,
+    "audienceMaxRaw": -2522,
+    "defaultRaw": 242,
+    "rawIncreasesToward": "monitor",
+    "status": "captured-manually-command-locked"
+  },
+  "coordinatedDefaultPose": {
+    "yawRaw": 1692,
+    "tiltRaw": 2055,
+    "bodyRaw": 2184,
+    "railRaw": 242,
+    "samplesStable": true,
+    "torque": 0,
+    "note": "Authoritative four-axis default pose set by the user after all endpoint captures. Per-axis front/level captures above were taken with other mechanisms in different positions."
+  },
+  "captureNotes": [
+    "All four Torque Enable readings remained 0 throughout the capture.",
+    "Tilt forward, Body endpoints/front, and Rail endpoints/default had identifiable stable plateaus.",
+    "Tilt back reached raw 1829 but did not hold a stable four-second plateau with torque disabled.",
+    "Other axes shifted while mechanisms were repositioned, so only the intentionally labeled axis value from each plateau is used.",
+    "These are user-defined reference positions and are not yet active firmware limits."
+  ]
+}

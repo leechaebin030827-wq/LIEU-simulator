@@ -54,3 +54,28 @@ describe('store editing', () => {
     expect(st().eventLog).toEqual([]);
   });
 });
+
+it('shares evaluation across readers and invalidates on seek, edit and live override', () => {
+  st().loadSequence(seq()); st().setAutoKey(false);
+  const before = st().evalNow();
+  expect(st().evalNow()).toBe(before);
+  st().setTime(2);
+  expect(st().evalNow()).not.toBe(before);
+  st().setMotion('yawY', 12);
+  expect(st().evalNow().motion.yawY).toBe(12);
+  st().setAutoKey(true); st().setMotion('yawY', 18);
+  expect(st().evalNow().motion.yawY).toBe(18);
+  st().undo(); expect(st().evalNow().motion.yawY).not.toBe(18);
+});
+
+it('rejects corrupt optional track and clip times before loading them into the renderer', () => {
+  const bad = seq(); bad.tracks.projector.clips[0].fromSec = NaN;
+  expect(() => validateSequence(bad)).toThrow('invalid clip time');
+  const badCue = seq(); badCue.tracks.events.push({ id: 'broken', type: 'scene', tSec: NaN, payload: {} });
+  expect(() => validateSequence(badCue)).toThrow('invalid cue');
+});
+
+it('ignores non-finite seeks so the timeline cannot acquire NaN coordinates', () => {
+  st().setTime(1); st().setTime(NaN); st().setTime(Infinity);
+  expect(st().tSec).toBe(1);
+});

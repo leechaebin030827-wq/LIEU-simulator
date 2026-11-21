@@ -1,6 +1,19 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "lieu-dev", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 5173 }
+    {
+      "name": "lieu-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "5180", "--strictPort", "--host", "127.0.0.1"],
+      "port": 5180,
+      "autoPort": false
+    },
+    {
+      "name": "lieu-show",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview"],
+      "port": 4173,
+      "autoPort": false
+    }
   ]
 }

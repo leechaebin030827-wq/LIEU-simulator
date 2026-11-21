@@ -1,0 +1,24 @@
+{
+  "schema": "lieu.rail-repeatability-validation/v1",
+  "date": "2026-11-01",
+  "axis": "rail",
+  "id": 4,
+  "visiblePostReleaseMovementReported": false,
+  "startRaw": 264,
+  "positiveTargetRaw": 314,
+  "positiveCompletionRaw": 311,
+  "negativeTargetRaw": 214,
+  "negativeCompletionRaw": 220,
+  "returnTargetRaw": 264,
+  "completionRaw": 261,
+  "returnErrorRaw": 3,
+  "completionToleranceRaw": 8,
+  "maxObservedCurrentMagnitudeRaw": 38,
+  "result": "pass-with-backlash-tolerance",
+  "commandLockedAfterTest": true,
+  "notes": [
+    "The prior post-release encoder shift was not accompanied by visible mechanism movement according to the user.",
+    "Rail needs an 8-raw completion tolerance for this low-load commissioning test.",
+    "Full travel remains uncommissioned."
+  ]
+}

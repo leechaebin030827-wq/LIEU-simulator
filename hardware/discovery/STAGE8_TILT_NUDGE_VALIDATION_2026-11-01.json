@@ -1,0 +1,20 @@
+{
+  "schema": "lieu.powered-nudge-validation/v1",
+  "date": "2026-11-01",
+  "axis": "tilt",
+  "id": 2,
+  "startRaw": 2055,
+  "requestedOutRaw": 2065,
+  "furthestObservedRaw": 2066,
+  "returnTargetRaw": 2055,
+  "completionRaw": 2057,
+  "postReleaseRaw": 2059,
+  "maxObservedCurrentRaw": 5,
+  "result": "pass",
+  "completionReason": "nudge-complete",
+  "torqueAfterTest": { "yaw": 0, "tilt": 0, "body": 0, "rail": 0 },
+  "notes": [
+    "Tilt moved +10 raw and returned within the configured 2-raw completion tolerance.",
+    "No gain or current-limit value was changed."
+  ]
+}

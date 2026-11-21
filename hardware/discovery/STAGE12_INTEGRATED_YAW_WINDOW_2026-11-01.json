@@ -1,0 +1,21 @@
+{
+  "schema": "lieu.integrated-controller-validation/v1",
+  "date": "2026-11-01",
+  "firmware": "LIEU_STAGE4_SAFE_CONTROLLER",
+  "axis": "yaw",
+  "id": 1,
+  "commissioningWindowRaw": [1682, 1722],
+  "maxCommandStepRaw": 5,
+  "startRaw": 1702,
+  "goalSequenceRaw": [1707, 1712, 1717, 1722, 1717, 1712, 1707, 1702],
+  "observedSequenceRaw": [1708, 1712, 1712, 1713, 1714, 1713, 1708, 1703],
+  "completionRaw": 1703,
+  "finalTorque": "0000",
+  "watchdogMs": 750,
+  "result": "pass-narrow-window-stepped-goals",
+  "notes": [
+    "Yaw did not accurately follow a single +50 raw goal in earlier tests.",
+    "Yaw responded safely to 5-raw stepped goals inside a ±20 raw commissioning window.",
+    "This does not commission the full -90 to +90 degree range."
+  ]
+}

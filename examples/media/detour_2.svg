@@ -1,1 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><rect width="1024" height="1024" fill="#000"/><g stroke="#5d6672" stroke-width="10" fill="none" stroke-linecap="round"><path d="M360 1000 V80"/><path d="M664 1000 V80"/></g><g><path d="M512 150 L600 300 H424 Z" fill="none" stroke="#ffb020" stroke-width="14" stroke-linejoin="round"/><rect x="487" y="205" width="50" height="50" rx="6" fill="#ffb020"/><rect x="380" y="330" width="264" height="26" rx="8" fill="#ffb020"/><rect x="380" y="330" width="264" height="26" rx="8" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="26 26"/></g><path d="M512 840 V380" stroke="#e8f3ff" stroke-width="12" stroke-dasharray="6 26" stroke-linecap="round" fill="none"/><g transform="translate(512 900)"><rect x="-58" y="-90" width="116" height="180" rx="34" fill="#e9f6ff"/><rect x="-42" y="-62" width="84" height="46" rx="14" fill="#7fd0ff"/><path d="M0 -112 L26 -78 H-26 Z" fill="#e9f6ff"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- HUD step 2: the alley is closed by roadworks, the right turn is cancelled -->
+  <defs>
+    <linearGradient id="fadeV" gradientUnits="userSpaceOnUse" x1="0" y1="380" x2="0" y2="700"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <linearGradient id="fadeH" gradientUnits="userSpaceOnUse" x1="660" y1="0" x2="1000" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <mask id="road"><rect width="1024" height="1024" fill="url(#fadeV)"/></mask>
+    <mask id="alley"><rect width="1024" height="1024" fill="url(#fadeH)"/></mask>
+    <clipPath id="bar"><rect x="676" y="552" width="22" height="96"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" fill="#000"/>
+
+  <!-- road in perspective, with the alley opening on the right -->
+  <g stroke="#eef4f8" stroke-opacity="0.5" stroke-width="3" fill="none" stroke-linecap="round">
+    <g mask="url(#road)">
+      <path d="M232 1000L480 380"/>
+      <path d="M792 1000L648 640M616 560L544 380"/>
+      <path d="M512 1000V380" stroke-opacity="0.25" stroke-dasharray="44 40"/>
+    </g>
+    <g mask="url(#alley)"><path d="M616 560H1000M648 640H1000"/></g>
+  </g>
+
+  <!-- barrier across the alley entrance -->
+  <g clip-path="url(#bar)"><rect x="676" y="552" width="22" height="96" fill="#eef4f8"/><path d="M670 566l34-20M670 590l34-20M670 614l34-20M670 638l34-20M670 662l34-20" stroke="#000" stroke-width="8"/></g>
+
+  <!-- cancelled turn: dotted, ends in a cross before the barrier -->
+  <g fill="none" stroke="#eef4f8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M512 1000V640Q512 600 552 600H632" stroke-width="4" stroke-dasharray="2 18" stroke-opacity="0.8"/>
+    <path d="M640 588L664 612M664 588L640 612" stroke-width="5"/>
+  </g>
+
+  <!-- ego marker -->
+  <path d="M488 984L512 960L536 984" fill="none" stroke="#eef4f8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- info -->
+  <g transform="translate(366 170)" fill="none" stroke="#eef4f8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 -34L32 22H-32Z"/><path d="M0 -12V4"/>
+  </g>
+  <circle cx="366" cy="184" r="3.5" fill="#eef4f8"/>
+  <g font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Arial, sans-serif">
+    <text x="458" y="166" font-size="48" font-weight="600" fill="#eef4f8">진입 불가</text>
+    <text x="460" y="204" font-size="24" font-weight="500" letter-spacing="2" fill="#eef4f8" fill-opacity="0.7">골목 공사 중</text>
+  </g>
+</svg>

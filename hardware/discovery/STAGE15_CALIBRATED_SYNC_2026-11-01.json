@@ -1,0 +1,24 @@
+{
+  "stage": 15,
+  "date": "2026-11-01",
+  "controller": "LIEU-STAGE7",
+  "mode": "timeline-calibrated-sync",
+  "purpose": "full calibrated motion at authored speed to evaluate smoothness",
+  "hostOutput": "absolute four-axis goals in one Dynamixel Protocol 2.0 Sync Write packet",
+  "appSlewLimiter": false,
+  "perFrameFirmwareReply": false,
+  "limits": {
+    "yaw": [-3362, 8543],
+    "tilt": [1829, 2248],
+    "body": [-5073, 9312],
+    "rail": [-2522, 4113]
+  },
+  "upload": { "port": "COM3", "result": "passed" },
+  "postUploadStatus": {
+    "active": "NONE",
+    "raw": { "yaw": 1851, "tilt": 2057, "body": 2402, "rail": 327 },
+    "torque": "0000"
+  },
+  "watchdogMs": 750,
+  "physicalPlaybackValidation": "pending user observation"
+}

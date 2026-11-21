@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512">
+  <rect width="1024" height="512" fill="#000"/>
+  <defs><path id="spark" d="M0-24C2-6 6-2 24 0C6 2 2 6 0 24C-2 6-6 2-24 0C-6-2-2-6 0-24Z"/></defs>
+  <use href="#spark" transform="translate(512 236) scale(2)" fill="#eef4f8"/>
+  <use href="#spark" transform="translate(332 300) scale(1.1)" fill="#eef4f8" opacity="0.9"/>
+  <use href="#spark" transform="translate(692 300) scale(1.1)" fill="#eef4f8" opacity="0.9"/>
+  <g fill="#eef4f8" opacity="0.5"><circle cx="222" cy="200" r="3"/><circle cx="802" cy="200" r="3"/><circle cx="512" cy="400" r="3"/></g>
+</svg>

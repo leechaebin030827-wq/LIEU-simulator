@@ -1,0 +1,25 @@
+{
+  "stage": 14,
+  "date": "2026-11-01",
+  "controller": "LIEU-STAGE6",
+  "mode": "timeline-moderate-window",
+  "compile": "passed",
+  "upload": { "port": "COM3", "result": "passed" },
+  "limits": {
+    "yaw": { "min": 1502, "max": 1902, "maxStep": 15 },
+    "tilt": { "min": 1975, "max": 2135, "maxStep": 20 },
+    "body": { "min": 1784, "max": 2584, "maxStep": 40 },
+    "rail": { "min": 64, "max": 464, "maxStep": 20 }
+  },
+  "postUploadStatus": {
+    "active": "NONE",
+    "raw": { "yaw": 1851, "tilt": 2057, "body": 2424, "rail": 292 },
+    "torque": "0000"
+  },
+  "watchdogMs": 750,
+  "frameWrite": "Dynamixel Protocol 2.0 Sync Write (all four goals in one packet)",
+  "profileUpdate": "increased velocity/acceleration while retaining moderate position windows",
+  "trackingMonitor": "per-axis tolerance with 1500ms sustained-lag timeout; transient profile lag no longer releases immediately",
+  "syncWriteValidation": "six consecutive four-axis frames accepted; torque 1111 while armed; host OFF returned torque 0000",
+  "pendingPhysicalValidation": "Arm ALL at current position, then play the first 8 seconds and stop."
+}

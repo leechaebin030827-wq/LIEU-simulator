@@ -1,0 +1,19 @@
+{
+  "stage": 16,
+  "date": "2026-11-01",
+  "axis": "tilt",
+  "id": 2,
+  "model": "XM430-W350",
+  "method": "three-leg +/-60 raw slow and fast profile tests with 50ms position, velocity and current telemetry; all four goals transmitted by Sync Write",
+  "candidates": [
+    { "p": 800, "i": 0, "d": 0, "result": "stable, 0-3 raw settled error, no encoder-visible oscillation" },
+    { "p": 650, "i": 0, "d": 0, "result": "same tracking and settling with lower proportional sensitivity; selected" },
+    { "p": 650, "i": 0, "d": 400, "result": "no overshoot improvement, slightly higher peak current; rejected" },
+    { "p": 500, "i": 0, "d": 0, "result": "no additional settling benefit, peak current reached about 30 raw; rejected" }
+  ],
+  "selected": { "positionP": 650, "positionI": 0, "positionD": 0 },
+  "hostFiltering": { "tiltGoalHysteresisRaw": 3, "fourAxisSyncWritePreserved": true },
+  "firmware": "LIEU-STAGE7",
+  "finalStatus": { "rawTilt": 2078, "torque": "0000" },
+  "verification": "app tests 30 passed; production build passed; firmware compile and COM3 upload passed"
+}

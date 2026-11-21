@@ -1,0 +1,32 @@
+{
+  "stage": 17,
+  "date": "2026-11-01",
+  "axis": "tilt",
+  "id": 2,
+  "test": "150 raw forward/down smoothstep over 1200ms, 1500ms hold, 1200ms return; four-axis Sync Write maintained",
+  "gain": { "p": 650, "i": 0, "d": 0 },
+  "beforeMargin": {
+    "goalUpdate": "approximately every 33ms, including 1-5 raw changes",
+    "downPeakTrackingErrorRaw": 23,
+    "returnPeakTrackingErrorRaw": 21,
+    "holdErrorRaw": 1,
+    "observation": "symmetric dynamic lag; no gravity-specific runaway or settled oscillation; repeated profile regeneration produced correction-current spikes"
+  },
+  "selectedMargin": {
+    "goalHysteresisRaw": 8,
+    "maxTiltGoalUpdateHz": 15,
+    "allFourAxesStillSentEveryFrame": true
+  },
+  "afterMargin": {
+    "downPeakTrackingErrorRaw": 22,
+    "returnPeakTrackingErrorRaw": 23,
+    "holdErrorRaw": "1-2",
+    "trajectory": "monotonic while moving; stable at hold",
+    "observation": "tracking lag unchanged as expected, but small-goal correction activity and current spikes were materially reduced"
+  },
+  "finalStatus": {
+    "tiltRaw": 2137,
+    "torque": "0000"
+  },
+  "verification": "app tests 30 passed; production build passed; firmware compile/upload passed"
+}

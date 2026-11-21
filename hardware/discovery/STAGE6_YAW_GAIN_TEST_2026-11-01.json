@@ -1,0 +1,31 @@
+{
+  "schema": "lieu.position-gain-test/v1",
+  "date": "2026-11-01",
+  "axis": "yaw",
+  "id": 1,
+  "temporaryPositionPGain": 1000,
+  "defaultPositionPGain": 900,
+  "startRaw": 1697,
+  "targetRaw": 1747,
+  "settledRaw": 1719,
+  "requestedDeltaRaw": 50,
+  "observedDeltaRaw": 22,
+  "settledErrorRaw": 28,
+  "settledPresentCurrentRaw": [40, 41],
+  "settledPresentVelocityRaw": 1,
+  "result": "safe-timeout-no-improvement",
+  "postTest": {
+    "raw": 1702,
+    "torque": 0,
+    "hardwareError": 0,
+    "positionPGain": 900,
+    "inputVoltageV": 12.1,
+    "temperatureC": 34
+  },
+  "conclusion": "A small P-gain increase did not remove the loaded steady-state position error. Do not continue increasing gain without an explicit torque cap and a separately reviewed test.",
+  "notes": [
+    "Current Limit was not changed.",
+    "IDs 2, 3, and 4 remained torque-off.",
+    "The temporary gain was restored to 900 after the timeout."
+  ]
+}

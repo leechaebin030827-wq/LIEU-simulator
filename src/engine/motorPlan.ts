@@ -1,21 +1,22 @@
 import type { LieuSequence } from './types';
 import { evalNumeric } from './interp';
-import limits from '../../hardware/config/motor_limits.json';
 
-/** Yaw motor (Dynamixel id 1) plan. DRY RUN ONLY: nothing here talks to a motor. Numbers come from hardware/config/motor_limits.json
- *  (centre / scale measured by hand-moving the axis, safe limits chosen on purpose smaller than the physical +/-90 deg). */
-const m = limits.motors['1'];
+/**
+ * Preview-only follower defaults. These are not hardware calibration values and
+ * must never be used for physical output. The previous measured values live in
+ * the hardware-control backup made before the 2026-11-01 reset.
+ */
 export const YAW_MOTOR = {
-  centerRaw: m.calibration.raw_center_front,
-  rawPerDeg: m.calibration.raw_per_robot_deg,
-  limitDeg: m.safe.limit_deg,
-  maxVel: m.safe.max_vel_deg_s,
-  maxAcc: m.safe.max_acc_deg_s2,
+  centerRaw: 0,
+  rawPerDeg: 4096 / 360,
+  limitDeg: 90,
+  maxVel: 60,
+  maxAcc: 180,
 };
 export type YawMotor = typeof YAW_MOTOR;
 export type Limits = { limitDeg: number; maxVel: number; maxAcc: number };
-const t = limits.motors['2'].safe;
-export const TILT_MOTOR: Limits = { limitDeg: t.limit_deg, maxVel: t.max_vel_deg_s, maxAcc: t.max_acc_deg_s2 };
+export const TILT_MOTOR: Limits = { limitDeg: 15, maxVel: 35, maxAcc: 150 };
+export const BODY_MOTOR: Limits = { limitDeg: 180, maxVel: 60, maxAcc: 180 };
 
 export const yawToRaw = (deg: number, c: YawMotor = YAW_MOTOR) => Math.round(c.centerRaw + c.rawPerDeg * deg);
 

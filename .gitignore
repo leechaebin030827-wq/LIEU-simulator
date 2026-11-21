@@ -1,7 +1,10 @@
 node_modules
 dist
 .DS_Store
+*.log
 *.bak
 exports/
 .claude/settings.local.json
 __pycache__/
+hardware/firmware/lieu_uno_r4/arduino_secrets.h
+hardware/firmware/LIEU_WIFI_SAFE_LOCKED/arduino_secrets.h

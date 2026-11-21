@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="1024" viewBox="0 0 512 1024">
+  <g transform="translate(512 0) rotate(90)">
+    <rect width="1024" height="512" fill="#000000"/>
+    <g fill="#e8f3b5" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Arial, sans-serif" font-weight="700" text-anchor="middle">
+      <text x="512" y="195" font-size="68">WELCOME</text>
+      <text x="512" y="298" font-size="76">HIDE LAB</text>
+    </g>
+  </g>
+</svg>

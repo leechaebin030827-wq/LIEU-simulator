@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useStore, assetKind } from '../store';
+import { downwardFloorHit } from '../engine/projection';
 import { frame } from './runtime';
 
 /** All optical numbers are PREVIEW assumptions: lens position/aim/throw ratio are UNKNOWN on the real unit. */
@@ -9,6 +10,9 @@ export const PROJ_DEFAULTS = {
   originRest: [0.000494, -0.0355, 0.000543] as [number, number, number], // bottom face of Miniray_Beam body (node 18)
   floorY: -1.4881, // lowest point of LIEU_Senario.glb (table feet) = ground
   widthM: 1.0,
+  // The projected screen's readable front points 90° to the body's right.
+  // This is an optical/content convention, not a claim about hardware mounting.
+  projectedFrontDeg: 90,
 };
 
 type Media = { tex: THREE.Texture; video?: HTMLVideoElement; aspect: number };
@@ -69,7 +73,7 @@ export function Projection() {
   const mat = useMemo(() => new THREE.MeshBasicMaterial({ transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false, side: THREE.DoubleSide }), []);
   const geo = useMemo(() => new THREE.PlaneGeometry(1, 1), []);
   const lineGeo = useMemo(() => { const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(8 * 3), 3)); return g; }, []);
-  const tmp = useMemo(() => ({ o: new THREE.Vector3(), d: new THREE.Vector3(), hit: new THREE.Vector3(), q: new THREE.Quaternion(), e: new THREE.Euler() }), []);
+  const tmp = useMemo(() => ({ o: new THREE.Vector3(), hit: new THREE.Vector3(), q: new THREE.Quaternion() }), []);
   const ready = useRef(0);
   const lastVideoClip = useRef<string>('');
 
@@ -85,26 +89,27 @@ export function Projection() {
     const M = stages[lens];
     const o0 = PROJ_DEFAULTS.originRest;
     tmp.o.set(o0[0] + (ex.opticalOriginXm ?? 0), o0[1] + (ex.opticalOriginYm ?? 0), o0[2] + (ex.opticalOriginZm ?? 0)).applyMatrix4(M);
-    tmp.e.set(0, 0, (ex.opticalAimPitchDeg ?? 0) * Math.PI / 180);
-    tmp.d.set(0, -1, 0).applyEuler(tmp.e);
-    tmp.e.set(0, (ex.opticalAimYawDeg ?? 0) * Math.PI / 180, 0);
-    tmp.d.applyEuler(tmp.e).transformDirection(M).normalize();
     const floorY = ex.floorHeightYm ?? PROJ_DEFAULTS.floorY;
-    const hasHit = tmp.d.y < -1e-4;
+    // Optical axis is a hardware invariant: always world-down, regardless of body/yaw/tilt or legacy aim keys.
+    const floorHit = downwardFloorHit([tmp.o.x, tmp.o.y, tmp.o.z], floorY);
+    const hasHit = floorHit !== null;
     const media = clip ? loadMedia(store.assets[clip.assetId]?.url ?? `${import.meta.env.BASE_URL}examples/${clip.assetId}`, store.assets[clip.assetId]?.mime ?? (clip.assetId.endsWith('.svg') ? 'image/svg+xml' : 'image/png'), () => { ready.current++; }) : null;
     const show = !!(clip && media && hasHit && st.projector.opacity > 0.001);
     m.visible = show;
     const bm = beam.current;
     if (bm) bm.visible = false;
     if (!hasHit) { if (lines.current) lines.current.visible = false; return; }
-    const tHit = (floorY - tmp.o.y) / tmp.d.y;
-    tmp.hit.copy(tmp.o).addScaledVector(tmp.d, tHit);
+    tmp.hit.set(...floorHit!);
     const W = (ex.projectedWidthM ?? PROJ_DEFAULTS.widthM) * st.projector.scale;
     const aspect = media?.aspect ?? 1;
     const H = W / aspect;
-    m.position.set(tmp.hit.x + st.projector.offsetXm, floorY + 0.0008, tmp.hit.z + st.projector.offsetZm);
-    // image up -> +X (robot front); rotation about vertical
-    m.rotation.set(-Math.PI / 2, 0, 0); m.rotateZ(-Math.PI / 2 + ((st.projector.rotationDeg + (lens === 'yaw' || lens === 'tilt' ? st.motion.yawY : 0)) * Math.PI) / 180);
+    m.position.set(tmp.hit.x, floorY + 0.0008, tmp.hit.z);
+    // The projected image follows the stage that physically owns the projector:
+    // carriage follows body yaw; head stages add yaw. projectedFrontDeg is the
+    // visible readable direction, so do not cancel it with a texture-basis offset.
+    const bodyDeg = lens === 'fixedRail' ? 0 : (st.motion.bodyYaw ?? 0);
+    const headDeg = lens === 'yaw' || lens === 'tilt' ? st.motion.yawY : 0;
+    m.rotation.set(-Math.PI / 2, 0, 0); m.rotateZ(((PROJ_DEFAULTS.projectedFrontDeg + st.projector.rotationDeg + bodyDeg + headDeg) * Math.PI) / 180);
     m.scale.set(W, H, 1);
     if (bm) {
       const on = show && store.view.showBeam;

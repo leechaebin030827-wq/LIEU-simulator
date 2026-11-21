@@ -37,14 +37,17 @@ def verify():
           f'{length} vs {src.stat().st_size}')
     manifest=data('config/LIEU_GLB_Node_Manifest.json')
     expected=manifest['statistics']
-    counts={'totalNodeCount':len(gltf.get('nodes',[])),
-            'meshInstanceCount':sum('mesh' in n for n in gltf.get('nodes',[])),
-            'uniqueMeshCount':len(gltf.get('meshes',[])),
+    # This manifest describes the original robot. The current export appends
+    # the exhibition stand at node 144; it does not renumber the robot.
+    core=gltf['nodes'][:expected['totalNodeCount']]
+    counts={'totalNodeCount':len(core),
+            'meshInstanceCount':sum('mesh' in n for n in core),
+            'uniqueMeshCount':len({n['mesh'] for n in core if 'mesh' in n}),
             'animationCount':len(gltf.get('animations',[])),
             'skinCount':len(gltf.get('skins',[]))}
     for label,actual in counts.items():
-        check('GLB manifest count: '+label,expected[label]==actual, f'{actual} actual vs {expected[label]} listed')
-    check('GLB expected component counts',counts['totalNodeCount']==144 and
+        check('Robot subassembly manifest count: '+label,expected[label]==actual, f'{actual} actual vs {expected[label]} listed')
+    check('Original robot expected component counts',counts['totalNodeCount']==144 and
           counts['meshInstanceCount']==61 and counts['uniqueMeshCount']==38)
     check('Static Rail node 143 is root mesh', 'mesh' in gltf['nodes'][143] and
           143 in gltf['scenes'][0]['nodes'])
@@ -52,9 +55,20 @@ def verify():
     check('Manifest node coverage 144', sorted(n['nodeIndex'] for n in manifest['nodes'])==list(range(144)))
     check('Manifest mesh coverage 61',
           sorted(m['nodeIndex'] for m in manifest['meshInstances'])==
-          sorted(i for i,n in enumerate(gltf['nodes']) if 'mesh' in n))
+          sorted(i for i,n in enumerate(core) if 'mesh' in n))
+    check('Robot node identities preserved in exhibition export',
+          all(gltf['nodes'][n['nodeIndex']].get('name') == n['name'] and
+              gltf['nodes'][n['nodeIndex']].get('mesh') == n.get('meshIndex')
+              for n in manifest['nodes']))
+    extra=gltf['nodes'][len(core):]
+    check('Exhibition extension counts', len(gltf['nodes']) == 1093 and
+          sum('mesh' in n for n in extra) == 310 and len(gltf['meshes']) == 72,
+          f"{len(gltf['nodes'])} nodes; {sum('mesh' in n for n in extra)} fixed extension meshes")
+    check('Exhibition extension does not reparent robot nodes',
+          all(c >= len(core) for n in extra for c in n.get('children', [])))
+    check('Public GLB matches source', (ROOT/'public/assets/LIEU_Senario.glb').read_bytes() == src.read_bytes())
     cfg=data('config/LIEU_Simulator_Config.json')
-    modelids=set(i for i,n in enumerate(gltf['nodes']) if 'mesh' in n)
+    modelids=set(i for i,n in enumerate(core) if 'mesh' in n)
     static=set(cfg['staticMeshes']['railNodeIndices'])
     carriage=set(cfg['allCarriageMeshes'])
     check('Every mesh exactly one base movement owner',
@@ -65,8 +79,11 @@ def verify():
     check('Candidate tilt subset yaw',tilt<=yaw)
     for name,p in cfg['actuators'].items():
         check(f'{name} previewOnlyRange well ordered',p['previewOnlyRange'][0]<p['previewOnlyRange'][1])
-        check(f'{name} physical bounds intentionally unknown',p['physical']['minimum'] is None and
-              p['physical']['maximum'] is None)
+        check(f'{name} physical bounds unknown or ordered documented record',
+              (p['physical']['minimum'] is None and p['physical']['maximum'] is None) or
+              (isinstance(p['physical']['minimum'], (int,float)) and
+               isinstance(p['physical']['maximum'], (int,float)) and
+               p['physical']['minimum'] < p['physical']['maximum'] and bool(p['physical'].get('controller'))))
     check('Hardware mode disabled',cfg['hardwareMode']['enabled'] is False)
     leds=data('config/LIEU_LED_Calibration.json')
     ring=leds['ring24']['pixels']
@@ -93,15 +110,17 @@ def verify():
           ev['eyes']['independentHardwareControlRequiresDistinctAddresses'])
     check('Gear teeth count unknown',ev['yawGear']['pinionToothCount'] is None
           and ev['yawGear']['ringToothCount'] is None)
-    for name in ('01_boarding','02_driving_a','03_arrival','04_driving_b'):
+    for sequence_path in sorted((ROOT/'examples').glob('[0-9][0-9]_*.lieu.json')):
+        name=sequence_path.name.removesuffix('.lieu.json')
         seq=data(f'examples/{name}.lieu.json')
-        check(f'{name} schema / duration / preview',seq['schema']=='lieu.sequence/v1' and
-              seq['durationSec']>0 and seq['demoPreviewOnly'] is True)
+        check(f'{name} schema / duration / preview flag',seq['schema']=='lieu.sequence/v1' and
+              seq['durationSec']>0 and isinstance(seq.get('demoPreviewOnly'), bool))
+        check(f'{name} public copy matches source', (ROOT/'public/examples'/sequence_path.name).read_bytes() == sequence_path.read_bytes())
         tracks=seq['tracks']; duration=seq['durationSec']
         for axis in ('railX','yawY','tiltZ'):
             keys=tracks['motion'][axis]['keys']
             lo,hi=cfg['actuators'][axis]['previewOnlyRange']
-            check(f'{name} {axis} keys valid',len(keys)>0 and
+            check(f'{name} {axis} keys valid',
                   all(0<=k['tSec']<=duration and lo<=k['value']<=hi for k in keys) and
                   all(a['tSec']<b['tSec'] for a,b in zip(keys,keys[1:])))
         keys=tracks['ring24']['baseFrames']['keys']

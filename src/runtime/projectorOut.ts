@@ -1,4 +1,6 @@
 import { useStore, assetKind } from '../store';
+import { hardwareOutputsEnabled } from './outputGate';
+import { getHwStatus } from './hardware';
 
 /** What the real projector shows: only the clip's graphic on black (no editor, no wallpaper). Sent to the /?projector window. */
 export type ProjMsg = {
@@ -9,9 +11,12 @@ export type ProjMsg = {
 export const PROJ_CHANNEL = 'lieu-projector';
 
 let chan: BroadcastChannel | null = null, last = '', lastAt = 0;
+let receiverSeenAt = -Infinity;
 
 export function currentProjMsg(): ProjMsg {
-  const s = useStore.getState(), p = s.evalNow().projector;
+  const s = useStore.getState();
+  if (!hardwareOutputsEnabled() || !s.playing) return { url: null, kind: null, opacity: 0, brightness: 1, rotationDeg: 0, scale: 1, playing: false, mediaT: 0, loop: true };
+  const p = s.evalNow().projector;
   const clip = p.activeClips[p.activeClips.length - 1];
   if (!clip || p.opacity <= 0.001) return { url: null, kind: null, opacity: 0, brightness: 1, rotationDeg: 0, scale: 1, playing: s.playing, mediaT: 0, loop: true };
   const a = s.assets[clip.assetId];
@@ -28,30 +33,81 @@ export function currentProjMsg(): ProjMsg {
 export function startProjectorBroadcast() {
   if (chan || typeof BroadcastChannel === 'undefined') return;
   chan = new BroadcastChannel(PROJ_CHANNEL);
-  chan.onmessage = (e) => { if (e.data === 'hello') last = ''; }; // a new output window asks for the current picture
+  chan.onmessage = (e) => {
+    if (e.data === 'hello') {
+      receiverSeenAt = performance.now();
+      last = '';
+    }
+  }; // a new output window asks for the current picture
   window.setInterval(() => {
-    const m = currentProjMsg(), key = JSON.stringify({ ...m, mediaT: 0 }); // media time changes constantly: video is resent on a slow beat below
+    // Do no projector work until an output window is alive. The output sends a
+    // heartbeat, so closing it also stops this loop from evaluating the full
+    // sequence forever in the editor tab.
     const now = performance.now();
-    if (key !== last || (m.kind === 'video' && m.playing && now - lastAt > 200) || now - lastAt > 1000) { chan!.postMessage(m); last = key; lastAt = now; }
-  }, 33);
+    if (now - receiverSeenAt > 2500) return;
+    const m = currentProjMsg(), key = JSON.stringify({ ...m, mediaT: 0 }); // media time changes constantly: video is resent on a slow beat below
+    // The video element advances on its own. A one-second correction is enough
+    // to prevent drift; seeking it five times a second causes decode thrash in
+    // Chromium, especially while the editor is also rendering WebGL.
+    if (key !== last || (m.kind === 'video' && m.playing && now - lastAt > 1000) || now - lastAt > 2000) {
+      chan!.postMessage(m); last = key; lastAt = now;
+    }
+  }, 100);
 }
 
 /** Opens ONLY the projector window, covering the second display (the editor window stays on its own screen). A first click in it (or F) makes it true
  *  fullscreen: browsers insist on a user gesture inside the window itself, so we try right away and fall back to that one click. */
 export async function openProjectorWindow() {
-  let feat = 'popup,width=1280,height=800', ext: any = null;
-  try { ext = await extScreen(); } catch { /* no permission: opens on this screen, drag it over */ }
-  if (ext) feat = `popup,left=${ext.left},top=${ext.top},width=${ext.width},height=${ext.height}`;
-  const w = window.open(`${location.pathname}?projector`, 'lieu-projector', feat);
+  if (!getHwStatus().connected) return;
+  // Open synchronously while the button click still owns user activation.
+  // Awaiting getScreenDetails first makes popup blockers reject this window.
+  const url = new URL(location.href);
+  url.search = '?projector'; url.hash = '';
+  const w = window.open(url.href, 'lieu-projector', 'popup,width=1280,height=800');
   if (!w) return;
-  w.addEventListener('load', () => { void w.document.documentElement.requestFullscreen?.().catch(() => undefined); });
+  try {
+    // Physical installation order: projector is external display 1, passenger
+    // TV is external display 2. A single external display is still used.
+    const ext = await extScreen(0);
+    if (ext) { w.moveTo(ext.left, ext.top); w.resizeTo(ext.width, ext.height); }
+  } catch { /* permission denied: leave it open so it can be dragged */ }
+  // Do not leave the black output as Chrome's last active window. macOS will
+  // otherwise restore that fullscreen Space when Chrome is clicked in the
+  // Dock, making the healthy editor appear to be frozen.
+  window.focus();
 }
 
 let screens: any = null;
 /** The non-primary display (needs Chrome's window-management permission, asked once); null when there is none. */
-export async function extScreen(): Promise<any | null> {
+export async function extScreen(preferredIndex = 0): Promise<any | null> {
   try {
     screens ??= await (window as any).getScreenDetails?.();
-    return screens?.screens?.find((x: any) => !x.isPrimary) ?? null;
+    const external = screens?.screens?.filter((x: any) => !x.isPrimary) ?? [];
+    return external[preferredIndex] ?? external[0] ?? null;
   } catch { return null; }
+}
+
+/** Move this output window to the requested external display and enter real
+ * browser fullscreen. Must be called from a click/key gesture. If the browser
+ * cannot enumerate displays, fullscreen applies to whichever display the
+ * window is currently on (so dragging it to the TV first remains reliable). */
+export async function fullscreenOutput(preferredIndex = 0): Promise<boolean> {
+  const ext = await extScreen(preferredIndex);
+  if (ext) {
+    window.moveTo(ext.left, ext.top);
+    window.resizeTo(ext.width, ext.height);
+  }
+  if (!document.fullscreenElement) {
+    const opts = ext ? ({ screen: ext } as FullscreenOptions) : undefined;
+    await document.documentElement.requestFullscreen(opts);
+  }
+  // Once the external display is in fullscreen, hand keyboard focus back to
+  // the editor on the primary display. The output keeps rendering normally.
+  const editor = window.opener;
+  if (editor && !editor.closed) {
+    window.setTimeout(() => {
+      try { editor.focus(); } catch { /* cross-window focus may be restricted */ }
+    }, 120);
+  }
+  return !!ext;
 }

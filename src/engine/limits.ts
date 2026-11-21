@@ -7,9 +7,9 @@ export type LimitWarning = { ch: MotionKey; kind: 'range' | 'velocity' | 'accel'
 /** Samples a motion channel; flags PREVIEW-limit violations (NOT hardware limits - those are unknown). */
 export function motionWarnings(seq: LieuSequence, stepSec = 1 / 30): LimitWarning[] {
   const out: LimitWarning[] = [];
-  for (const ch of ['railX', 'yawY', 'tiltZ'] as MotionKey[]) {
+  for (const ch of ['railX', 'bodyYaw', 'yawY', 'tiltZ'] as MotionKey[]) {
     const tr = seq.tracks.motion[ch];
-    if (!tr.keys.length) continue;
+    if (!tr?.keys.length) continue;
     const L = PREVIEW_LIMITS[ch];
     let pv = 0, pp = evalNumeric(tr, 0, 0), flaggedV = false, flaggedA = false, flaggedR = false;
     for (let t = stepSec; t <= seq.durationSec + 1e-9; t += stepSec) {

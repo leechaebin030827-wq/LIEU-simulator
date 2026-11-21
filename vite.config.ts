@@ -1,22 +1,30 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { writeFileSync } from 'node:fs';
-import { spawn, type ChildProcess } from 'node:child_process';
-import { mkdirSync, readFileSync } from 'node:fs';
+import { spawn } from 'node:child_process';
+import { mkdirSync, createReadStream } from 'node:fs';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import type { Plugin } from 'vite';
-import { createConnection } from 'node:net';
-import { EMOTIONS, DEFAULT_EXPORT, buildEmotionTimeline, renderGrayFrame } from './src/engine/emotions';
+import { EMOTIONS, DEFAULT_EXPORT, buildEmotionTimeline, renderGrayFrame } from './src/engine/emotions.ts';
 
 /** Dev-only: renders the eye emotions to a 2:1 black & white mp4 (needs ffmpeg on PATH) and saves a copy in exports/. */
 const exportEmotions = (): Plugin => ({
   name: 'export-emotions',
   configureServer(server) {
     server.middlewares.use('/__export-emotions', (req, res) => {
+      if (req.method !== 'POST') { res.statusCode = 405; res.end('POST required'); return; }
       let body = '';
-      req.on('data', (c) => { body += c; });
+      req.on('data', (c) => { if (body.length > 1_000_000) return; body += c; });
       req.on('end', () => {
         try {
+          if (body.length > 1_000_000) throw new Error('request too large');
           const q = JSON.parse(body || '{}') as { ids?: string[]; fps?: number; minSec?: number; gapSec?: number; width?: number };
+          for (const [key, lo, hi] of [['fps', 1, 60], ['minSec', 0, 60], ['gapSec', 0, 10], ['width', 32, 3840]] as const) {
+            const value = q[key];
+            if (value !== undefined && (!Number.isFinite(value) || value < lo || value > hi)) throw new Error(`invalid ${key}`);
+          }
+          if (q.ids && (!Array.isArray(q.ids) || q.ids.length > EMOTIONS.length)) throw new Error('invalid emotion list');
           const list = (q.ids?.length ? q.ids.map((id) => EMOTIONS.find((e) => e.id === id)).filter((e) => !!e) : EMOTIONS) as typeof EMOTIONS;
           if (!list.length) { res.statusCode = 400; res.end('no emotions'); return; }
           const o = { ...DEFAULT_EXPORT, ...(q.fps ? { fps: q.fps } : {}), ...(q.minSec !== undefined ? { minSec: q.minSec } : {}), ...(q.gapSec !== undefined ? { gapSec: q.gapSec } : {}) };
@@ -28,49 +36,30 @@ const exportEmotions = (): Plugin => ({
             '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '12', '-preset', 'medium', '-movflags', '+faststart', out], { stdio: ['pipe', 'ignore', 'pipe'] });
           let err = '';
           ff.stderr.on('data', (d) => { err += d; });
-          ff.on('error', () => { res.statusCode = 500; res.end('ffmpeg not found'); });
+          let failed = false;
+          const fail = (message: string) => { if (failed || res.writableEnded || res.destroyed) return; failed = true; res.statusCode = 500; res.end(message); };
+          res.on('close', () => { if (!res.writableEnded) ff.kill(); });
+          ff.on('error', () => fail('ffmpeg not found'));
           ff.on('close', (code) => {
-            if (code !== 0) { res.statusCode = 500; res.end(`ffmpeg failed: ${err.slice(-400)}`); return; }
+            if (failed || res.writableEnded || res.destroyed) return;
+            if (code !== 0) { fail(`ffmpeg failed: ${err.slice(-400)}`); return; }
             res.setHeader('Content-Type', 'video/mp4');
             res.setHeader('X-Saved-As', out);
-            res.end(readFileSync(out));
+            void pipeline(createReadStream(out), res).catch(() => res.destroy());
           });
-          ff.stdin.on('error', () => {});
-          for (const f of buildEmotionTimeline(list, o)) ff.stdin.write(Buffer.from(renderGrayFrame(f.l, f.r, W, H)));
-          ff.stdin.end();
+          // Respect ffmpeg backpressure: buffering every raw HD frame here can
+          // allocate gigabytes and freeze both the dev server and browser.
+          const frames = function* () {
+            for (const f of buildEmotionTimeline(list, o)) yield Buffer.from(renderGrayFrame(f.l, f.r, W, H));
+          };
+          void pipeline(Readable.from(frames(), { objectMode: false, highWaterMark: W * H }), ff.stdin)
+            .catch(() => { ff.kill(); fail('ffmpeg input failed'); });
         } catch (e) { res.statusCode = 400; res.end(String(e)); }
       });
     });
   },
 });
 
-
-/** Dev-only: keeps the motor/hardware bridge (hardware/pi) running together with the dev server, so plugging the U2D2 in is all it takes.
- *  A watcher checks the port every 3 s and starts the bridge whenever nothing answers (also right after a dev-server restart, when the
- *  old bridge is still shutting down). The bridge itself finds the port / baud and keeps looking if the cable or motor power comes and goes. */
-const motorBridge = (): Plugin => ({
-  name: 'lieu-motor-bridge',
-  apply: 'serve',
-  configureServer(server) {
-    if (!server.httpServer || server.config.server.middlewareMode) return; // vite-node / vitest also load this config: they must not start or hold a bridge
-    let child: ChildProcess | null = null, stopped = false;
-    const listening = () => new Promise<boolean>((res) => { const c = createConnection({ port: 8787, host: '127.0.0.1' }); c.on('connect', () => { c.destroy(); res(true); }); c.on('error', () => res(false)); });
-    const log = (d: Buffer) => d.toString().split('\n').filter((l) => l.trim() && !l.startsWith('  ') && !l.startsWith('---')).forEach((l) => console.log('[bridge]', l));
-    const ensure = async () => {
-      if (stopped || child || await listening()) return;
-      child = spawn('python3', ['-m', 'lieu_hw', 'serve'], { cwd: 'hardware/pi', stdio: ['ignore', 'pipe', 'pipe'] });
-      child.stdout?.on('data', log); child.stderr?.on('data', log);
-      child.on('error', (e) => { console.log('[bridge] not started:', e.message); child = null; });
-      child.on('exit', () => { child = null; });
-    };
-    const timer = setInterval(() => void ensure(), 3000);
-    timer.unref(); // never keep a process alive just for this watcher
-    void ensure();
-    const stop = () => { stopped = true; clearInterval(timer); child?.kill('SIGINT'); };
-    server.httpServer?.on('close', stop);
-    process.on('exit', stop);
-  },
-});
 
 /** Dev-only: lets the Save button overwrite a built-in preset (examples/ + public/examples/). */
 const savePreset = (): Plugin => ({
@@ -93,7 +82,15 @@ const savePreset = (): Plugin => ({
 });
 export default defineConfig({
   base: process.env.BASE_PATH ?? '/',
-  plugins: [react(), savePreset(), exportEmotions(), motorBridge()],
-  server: { port: 5173, fs: { allow: ['.'] } },
-  test: { environment: 'node', include: ['src/**/*.test.ts'] },
+  plugins: [react(), savePreset(), exportEmotions()],
+  server: {
+    port: 5173,
+    fs: { allow: ['.'] },
+    // Native file events are missed in this synced workspace, which left the dev server
+    // serving stale modules; polling picks every edit up.
+    watch: { usePolling: true, interval: 300 },
+  },
+  // A single threads worker is faster and more reliable for this iCloud-hosted
+  // workspace than Vitest's default multi-process fork pool.
+  test: { environment: 'node', include: ['src/**/*.test.ts'], pool: 'threads', maxWorkers: 1 },
 });

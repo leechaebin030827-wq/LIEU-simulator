@@ -1,0 +1,25 @@
+{
+  "stage": 13,
+  "date": "2026-11-01",
+  "controller": "LIEU-STAGE5",
+  "mode": "timeline-narrow-window",
+  "firmware": "hardware/firmware/LIEU_STAGE5_TIMELINE_CONTROLLER/LIEU_STAGE5_TIMELINE_CONTROLLER.ino",
+  "compile": "passed",
+  "upload": {
+    "port": "COM3",
+    "board": "arduino:renesas_uno:unor4wifi",
+    "result": "passed"
+  },
+  "postUploadStatus": {
+    "active": "NONE",
+    "raw": { "yaw": 1695, "tilt": 2084, "body": 2204, "rail": 241 },
+    "torque": "0000"
+  },
+  "safety": {
+    "watchdogMs": 750,
+    "startupOutputsLocked": true,
+    "frameWindowsRemainNarrow": true,
+    "requiresExplicitArmAll": true
+  },
+  "pendingPhysicalValidation": "Arm ALL at current position, confirm no jerk, then run a short timeline playback."
+}

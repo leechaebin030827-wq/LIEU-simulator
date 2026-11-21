@@ -6,6 +6,7 @@ import type { LieuSequence } from '../engine/types';
 import { bridge } from '../three/exportBridge';
 import { layout, views, type SizeKey } from './exportViews';
 import { scenarioOf } from '../scenarios';
+import { elapsedAtScenarioTime, playbackRateAt, playbackRateBreaks, scenarioTimeAtElapsed } from './playbackRate';
 
 export const videoExportSupported = () => typeof VideoEncoder !== 'undefined' && typeof VideoFrame !== 'undefined' && !!bridge.gl;
 export const FPS = 30;
@@ -19,22 +20,27 @@ export function exportFileName(seq: LieuSequence, size: SizeKey): string {
 
 const urlOf = (id: string) => useStore.getState().assets[id]?.url ?? `${import.meta.env.BASE_URL}examples/${id}`;
 
-/** Mixes every audio clip of the sequence offline (same clip / fade / gain rules as the live player, at 1x speed). */
+/** Mixes every audio clip with the same variable-rate schedule used by live playback. */
 async function mixAudio(seq: LieuSequence, sr: number): Promise<AudioBuffer | null> {
   if (!seq.tracks.audio.length) return null;
-  const ctx = new OfflineAudioContext(2, Math.ceil(seq.durationSec * sr), sr);
+  const ctx = new OfflineAudioContext(2, Math.ceil(elapsedAtScenarioTime(seq, seq.durationSec) * sr), sr);
   const cache = new Map<string, Promise<AudioBuffer | null>>();
   for (const c of seq.tracks.audio) {
     const url = urlOf(c.assetId);
     let p = cache.get(url);
     if (!p) { p = fetch(url).then((r) => r.arrayBuffer()).then((b) => ctx.decodeAudioData(b)).catch(() => null); cache.set(url, p); }
     const buf = await p; if (!buf) continue;
-    const src = ctx.createBufferSource(); src.buffer = buf; src.loop = c.loop;
-    const g = ctx.createGain(); g.gain.value = 0;
-    src.connect(g).connect(ctx.destination);
-    g.gain.setValueAtTime(audioGainAt(c, c.fromSec), c.fromSec);
-    for (let t = c.fromSec; t <= c.toSec; t += 0.025) g.gain.linearRampToValueAtTime(audioGainAt(c, t), t);
-    src.start(c.fromSec, c.mediaOffsetSec, c.toSec - c.fromSec);
+    const cuts = [c.fromSec, ...playbackRateBreaks(seq).filter((t) => t > c.fromSec && t < c.toSec), c.toSec];
+    for (let i = 1; i < cuts.length; i++) {
+      const from = cuts[i - 1], to = cuts[i], rate = playbackRateAt(seq, from + 1e-6);
+      const src = ctx.createBufferSource(); src.buffer = buf; src.loop = c.loop; src.playbackRate.value = rate;
+      const g = ctx.createGain(); g.gain.value = 0;
+      src.connect(g).connect(ctx.destination);
+      const at = elapsedAtScenarioTime(seq, from);
+      g.gain.setValueAtTime(audioGainAt(c, from), at);
+      for (let t = from; t <= to; t += 0.025) g.gain.linearRampToValueAtTime(audioGainAt(c, t), elapsedAtScenarioTime(seq, t));
+      src.start(at, c.mediaOffsetSec + from - c.fromSec, to - from);
+    }
   }
   return ctx.startRendering();
 }
@@ -112,7 +118,7 @@ export function renderFrame(out: HTMLCanvasElement, seq: LieuSequence, t: number
 
 export type ExportOpts = { size: SizeKey; audio: boolean; preview?: HTMLCanvasElement | null; onProgress: (p: number, phase: string) => void; signal: { cancelled: boolean } };
 
-/** Offline, deterministic render at 1x speed: every frame is drawn at its exact time, then H.264 (+ AAC) is muxed to MP4. */
+/** Offline deterministic render using the same variable-rate schedule as live playback. */
 export async function exportMultiViewMp4(opts: ExportOpts): Promise<Blob> {
   const { gl } = bridge;
   if (!gl || !videoExportSupported()) throw new Error('This browser cannot export video (use a recent Chrome / Edge).');
@@ -135,11 +141,12 @@ export async function exportMultiViewMp4(opts: ExportOpts): Promise<Blob> {
     venc.configure(vcfg);
 
     gl.setPixelRatio(1); gl.setSize(W, H, false);               // the editor canvas is covered by the dialog meanwhile; restored below
-    const total = Math.ceil(seq.durationSec * FPS) + 1;
+    const playbackDuration = elapsedAtScenarioTime(seq, seq.durationSec);
+    const total = Math.ceil(playbackDuration * FPS) + 1;
     for (let i = 0; i < total; i++) {
       if (opts.signal.cancelled) throw new Error('cancelled');
       if (error) throw error;
-      const t = Math.min(seq.durationSec, i / FPS);
+      const t = scenarioTimeAtElapsed(seq, Math.min(playbackDuration, i / FPS));
       renderFrame(out, seq, t, opts.size);
       const frame = new VideoFrame(out, { timestamp: Math.round((i * 1e6) / FPS), duration: Math.round(1e6 / FPS) });
       venc.encode(frame, { keyFrame: i % (FPS * 2) === 0 });

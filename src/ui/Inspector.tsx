@@ -1,4 +1,5 @@
 import { ScreenTab } from './ScreenTab';
+import { StatusTab } from './StatusTab';
 import { useRef, useState } from 'react';
 import { useStore, assetKind } from '../store';
 import { KeyBtn, NumRow, Section, rgbCss, useDesired } from './widgets';
@@ -14,7 +15,7 @@ import { EyeStudio } from './EyeStudio';
 import { EyeLibrary } from './EyeLibrary';
 import { AxisLink, YawLink } from './YawLink';
 
-type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'screen' | 'rig';
+type Tab = 'motion' | 'ring' | 'eyes' | 'proj' | 'audio' | 'events' | 'screen' | 'rig' | 'status';
 
 export function Inspector() {
   const [tab, setTab] = useState<Tab>('motion');
@@ -22,9 +23,10 @@ export function Inspector() {
   const nAudio = useStore((s) => s.seq.tracks.audio.length), nEvents = useStore((s) => s.seq.tracks.events.length);
   // work tabs first (what the robot does / shows / says), then the two setup tabs after a divider
   const tabs: [Tab, string, string, number?][] = [
-    ['motion', '모션', 'Motion · Rail · Yaw · Tilt'], ['ring', 'LED 링', 'LED Ring · NeoPixel ×24 (RGBW)'], ['eyes', '눈', 'Eyes · two 8×8 dot eyes'],
+    ['motion', '모션', 'Motion · Rail · Body · Yaw · Tilt'], ['ring', 'LED 링', 'LED Ring · NeoPixel ×24 (RGBW)'], ['eyes', '눈', 'Eyes · two 8×8 dot eyes'],
     ['screen', '스크린', 'Screen · TV screen (9:16) preview'], ['proj', '프로젝터', 'Projector · floor-projected video/image'], ['audio', '사운드', 'Audio · voice and sound-effect clips', nAudio],
     ['events', '이벤트', 'Events · virtual sensor triggers', nEvents], ['rig', '리그 · HW', 'Rig/HW · part assignment, unknown hardware values'],
+    ['status', '활성상태', 'Live status · DYNAMIXEL (LIEU / rail), eye LEDs, monitor video, projector'],
   ];
   return (
     <div className="insp">
@@ -46,6 +48,7 @@ export function Inspector() {
       {tab === 'audio' && <AudioTab />}
       {tab === 'events' && <Events />}
       {tab === 'rig' && <Rig />}
+      {tab === 'status' && <StatusTab />}
     </div>
   );
 }
@@ -91,26 +94,30 @@ function Motion() {
   const d = useDesired();
   const setMotion = useStore((s) => s.setMotion);
   const L = PREVIEW_LIMITS;
-  const pose = (r: number, y: number, t: number) => { setMotion('railX', r / 1000); setMotion('yawY', y); setMotion('tiltZ', t); };
+  const pose = (r: number, b: number, y: number, t: number) => { setMotion('railX', r / 1000); setMotion('bodyYaw', b); setMotion('yawY', y); setMotion('tiltZ', t); };
   return (
     <>
-      <Section title="Motion" right={<span className="dim small">3 preview axes</span>}>
+      <Section title="Motion" right={<span className="dim small">4 axes</span>}>
         <Axis label="Rail X" hint="forward / back" value={d.motion.railX * 1000} min={-300} max={50} step={1} unit="mm" digits={1} onChange={(v) => setMotion('railX', v / 1000)} path={{ type: 'motion', ch: 'railX' }} warnRange={[L.railX.range[0] * 1000, L.railX.range[1] * 1000]} />
+        <Axis label="Body" hint="whole robot around cylinder axis" value={d.motion.bodyYaw ?? 0} min={-180} max={180} step={1} unit="°" digits={1} onChange={(v) => setMotion('bodyYaw', v)} path={{ type: 'motion', ch: 'bodyYaw' }} warnRange={L.bodyYaw.range} />
+        <AxisLink axis="body" />
         <Axis label="Yaw" hint="turn left / right" value={d.motion.yawY} min={-90} max={90} step={0.5} unit="°" digits={1} onChange={(v) => setMotion('yawY', v)} path={{ type: 'motion', ch: 'yawY' }} warnRange={L.yawY.range as [number, number]} />
         <YawLink />
         <Axis label="Tilt" hint="nod up / down" value={d.motion.tiltZ} min={-15} max={15} step={0.25} unit="°" digits={2} onChange={(v) => setMotion('tiltZ', v)} path={{ type: 'motion', ch: 'tiltZ' }} warnRange={L.tiltZ.range as [number, number]} />
         <AxisLink axis="tilt" />
       </Section>
-      <Section title="Quick poses" right={<span className="dim small">sets all three axes</span>}>
+      <Section title="Quick poses" right={<span className="dim small">sets all four axes</span>}>
         <div className="chips">
-          <button onClick={() => pose(0, 0, 0)}>Center</button>
-          <button onClick={() => pose(-250, 0, 0)}>Rail back</button>
-          <button onClick={() => pose(0, -45, 0)}>Yaw −45°</button>
-          <button onClick={() => pose(0, 45, 0)}>Yaw +45°</button>
-          <button onClick={() => pose(0, 0, -10)}>Bow</button>
-          <button onClick={() => pose(0, 0, 10)}>Look up</button>
+          <button onClick={() => pose(0, 0, 0, 0)}>Center</button>
+          <button onClick={() => pose(-250, 0, 0, 0)}>Rail back</button>
+          <button onClick={() => pose(0, -90, 20, 0)}>Body −90°</button>
+          <button onClick={() => pose(0, 90, -20, 0)}>Body +90°</button>
+          <button onClick={() => pose(0, 0, -45, 0)}>Yaw −45°</button>
+          <button onClick={() => pose(0, 0, 45, 0)}>Yaw +45°</button>
+          <button onClick={() => pose(0, 0, 0, -10)}>Bow</button>
+          <button onClick={() => pose(0, 0, 0, 10)}>Look up</button>
         </div>
-        <div className="note">Drag a slider, type a value, or step with − / +. Double-click a slider to reset it. The ◆ button keys the value at the current time. Demo limits only (Rail {L.railX.range[0] * 1000}~{L.railX.range[1] * 1000} mm · Yaw ±{L.yawY.range[1]}° · Tilt ±{L.tiltZ.range[1]}°) — not the real mechanical range.</div>
+        <div className="note">Drag a slider, type a value, or step with − / +. Double-click a slider to reset it. The ◆ button keys the value at the current time. Body is the new ±180° cylinder-axis motor; physical output stays calibration-locked until its centre and gear ratio are measured.</div>
       </Section>
     </>
   );
@@ -371,16 +378,13 @@ function Projector() {
       <Section title="Projection (keyframable)">
         <NumRow label="Opacity" value={d.projector.opacity} min={0} max={1} step={0.01} onChange={(v) => set('opacity', v, 1)} path={P('opacity')} />
         <NumRow label="Brightness" value={d.projector.brightness} min={0} max={2} step={0.01} onChange={(v) => set('brightness', v, 1)} path={P('brightness')} />
-        <NumRow label="Rotation" value={d.projector.rotationDeg} min={-180} max={180} step={1} unit="°" onChange={(v) => set('rotationDeg', v, 0)} path={P('rotationDeg')} />
+        <NumRow label="Floor image rotation" value={d.projector.rotationDeg} min={-180} max={180} step={1} unit="°" onChange={(v) => set('rotationDeg', v, 0)} path={P('rotationDeg')} />
         <NumRow label="Scale" value={d.projector.scale} min={0.1} max={3} step={0.01} onChange={(v) => set('scale', v, 1)} path={P('scale')} />
-        <NumRow label="Offset X" value={d.projector.offsetXm * 100} min={-50} max={50} step={0.5} unit="cm" digits={1} onChange={(v) => set('offsetXm', v / 100, 0)} path={P('offsetXm')} />
-        <NumRow label="Offset Z" value={d.projector.offsetZm * 100} min={-50} max={50} step={0.5} unit="cm" digits={1} onChange={(v) => set('offsetZm', v / 100, 0)} path={P('offsetZm')} />
       </Section>
       <Section title="Optics (preview assumptions)">
         <NumRow label="Floor Y" value={(ex.floorHeightYm ?? -1.4881) * 100} min={-200} max={-5} step={1} unit="cm" digits={0} onChange={(v) => set('floorHeightYm', v / 100, -1.4881)} path={P('floorHeightYm')} />
         <NumRow label="Width" value={(ex.projectedWidthM ?? 1.0) * 100} min={5} max={120} step={1} unit="cm" digits={0} onChange={(v) => set('projectedWidthM', v / 100, 1.0)} path={P('projectedWidthM')} />
-        <NumRow label="Aim yaw" value={ex.opticalAimYawDeg ?? 0} min={-90} max={90} step={1} unit="°" onChange={(v) => set('opticalAimYawDeg', v, 0)} path={P('opticalAimYawDeg')} />
-        <NumRow label="Aim pitch" value={ex.opticalAimPitchDeg ?? 0} min={-45} max={45} step={1} unit="°" onChange={(v) => set('opticalAimPitchDeg', v, 0)} path={P('opticalAimPitchDeg')} />
+        <div className="note"><b>Projected screen front: Body +90°.</b> This describes the readable direction of the floor image, not the projector's hardware mounting. “Floor image rotation” is an additional artwork rotation.</div>
         <div className="row"><button className={view.showFrustum ? 'on' : ''} onClick={() => setView({ showFrustum: !view.showFrustum })}>Frustum debug</button></div>
         <div className="note">Throw ratio, resolution, lens optical center and focal length are <b>UNKNOWN</b>. Floor raycast + plane texture (MVP); the projection width is an arbitrary assumed value.</div>
       </Section>
@@ -435,12 +439,11 @@ function Rig() {
         ))}
         <div className="note">Pivot, axis and moving-stage assignments are an uncalibrated <b>hypothesis</b> (estimated from AABB centers). Edit assignments per mesh in the Scene Tree on the left.</div>
       </Section>
-      <Section title="Hardware calibration (UNKNOWN)">
+      <Section title="Hardware calibration & output">
         <table className="small" style={{ width: '100%', color: 'var(--dim)' }}><tbody>
-          {[['Motor model / count', '미확인'], ['Axis hard limits · speed · acceleration · jerk', '미확인'], ['Gear ratio / homing', '미확인'], ['Actual rail stroke', '미확인'], ['NeoPixel chipset · LED0 · byte order', '미확인'], ['Eye I²C address · row/column mapping', '미확인'], ['Projector throw / resolution / lens center', '미확인']].map(([a, b]) => <tr key={a}><td>{a}</td><td style={{ textAlign: 'right', color: 'var(--key)' }}>{b}</td></tr>)}
+          {[['Physical transport', '제거됨'], ['Motor controller', '미연결'], ['Yaw / Tilt / Body IDs', '재검색 필요'], ['Zero · limits · speed', '재교정 필요'], ['Firmware', '활성 소스 없음'], ['Actual rail actuator', '미연결'], ['NeoPixel LED0 · byte order', '재교정 필요'], ['Eye I²C / row-column mapping', '재교정 필요'], ['Projector optics', '미교정']].map(([a, b]) => <tr key={a}><td>{a}</td><td style={{ textAlign: 'right', color: 'var(--key)' }}>{b}</td></tr>)}
         </tbody></table>
-        <button disabled style={{ marginTop: 8, width: '100%' }} title="Hardware output is not implemented">Connect hardware — disabled (PREVIEW ONLY)</button>
-        <div className="note">This app sends no commands to motors, LEDs or I²C devices. Until calibration is done (docs/03_INPUTS_AND_LIMITS.md questionnaire), HardwareAdapter is a no-op.</div>
+        <div className="note">하드웨어 제어부가 초기화되어 실제 출력 경로가 없습니다. 상단 <b>하드웨어</b> 메뉴는 초기화 상태만 표시하며, 현재 앱은 미리보기 전용입니다.</div>
       </Section>
     </>
   );

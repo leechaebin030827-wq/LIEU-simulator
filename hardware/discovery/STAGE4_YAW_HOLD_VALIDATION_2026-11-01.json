@@ -1,0 +1,28 @@
+{
+  "schema": "lieu.powered-hold-validation/v1",
+  "date": "2026-11-01",
+  "axis": "yaw",
+  "id": 1,
+  "firmware": "LIEU_STAGE3_YAW_HOLD",
+  "requestedAction": "hold measured current position only",
+  "goalRaw": 1692,
+  "durationMs": 3000,
+  "statusSamples": 12,
+  "observedRawMin": 1692,
+  "observedRawMax": 1692,
+  "maxTrackingErrorRaw": 0,
+  "completionReason": "hold-complete",
+  "torqueAfterTest": {
+    "yaw": 0,
+    "tilt": 0,
+    "body": 0,
+    "rail": 0
+  },
+  "motionCommandSent": false,
+  "result": "pass",
+  "notes": [
+    "Goal Position was set to Present Position before torque enable.",
+    "No nudge or endpoint movement was commanded.",
+    "This validates a three-second stationary hold only, not travel safety."
+  ]
+}

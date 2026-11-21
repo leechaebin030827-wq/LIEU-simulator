@@ -1,0 +1,3212 @@
+{
+  "schema": "lieu.sequence/v1",
+  "id": "08_exhibition_final",
+  "title": "08 Final Exhibition",
+  "durationSec": 92.24,
+  "fps": 30,
+  "loop": true,
+  "demoPreviewOnly": false,
+  "notes": "[SERVICE_V40] 야간 애교에 2초 안팎의 둠칫 스웨이·틸트 박자를 넣고 핑크→라벤더→하트핑크→하늘색→웜옐로 조명을 느린 호흡과 웨이브로 전환합니다. 10초 동안 젠틀하게 루프합니다. [TILT15_V41] 좌우 착석 확인에서 고개를 -15°까지 완전히 숙입니다.",
+  "tracks": {
+    "motion": {
+      "railX": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "rail_0",
+            "tSec": 0,
+            "value": -0.12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_1",
+            "tSec": 14.2,
+            "value": -0.12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_2",
+            "tSec": 18.19,
+            "value": -0.08,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_3",
+            "tSec": 40.2,
+            "value": -0.08,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_4",
+            "tSec": 42,
+            "value": -0.14,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_5",
+            "tSec": 43.9,
+            "value": -0.14,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_6",
+            "tSec": 47,
+            "value": -0.08,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_7",
+            "tSec": 69,
+            "value": -0.07,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_8",
+            "tSec": 72,
+            "value": -0.04,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_9",
+            "tSec": 78.5,
+            "value": -0.04,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_10",
+            "tSec": 82.24,
+            "value": -0.07,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_loop_mid",
+            "tSec": 85.74,
+            "value": -0.095,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "rail_loop_end",
+            "tSec": 92.24,
+            "value": -0.12,
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "bodyYaw": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "body_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_1",
+            "tSec": 6.833333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_2",
+            "tSec": 7.833333,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_3",
+            "tSec": 8.5,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_4",
+            "tSec": 9.083333,
+            "value": -11,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_5",
+            "tSec": 9.583333,
+            "value": -10,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_6",
+            "tSec": 10.25,
+            "value": -5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_6a",
+            "tSec": 10.833333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_6b",
+            "tSec": 11.416667,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_6c",
+            "tSec": 12.083333,
+            "value": 9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_6d",
+            "tSec": 12.583333,
+            "value": 11,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_check_right_release",
+            "tSec": 13.083333,
+            "value": 9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_check_return",
+            "tSec": 13.583333,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_check_zero",
+            "tSec": 14,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_7",
+            "tSec": 14.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_8",
+            "tSec": 16.48,
+            "value": 30,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_9",
+            "tSec": 17.05,
+            "value": 30,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_10",
+            "tSec": 21.03,
+            "value": -30,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_11",
+            "tSec": 23.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_11a",
+            "tSec": 24.95,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_safety_zero",
+            "tSec": 29.3,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_safety_hold",
+            "tSec": 38.4,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_12",
+            "tSec": 40.8,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_inspect_120",
+            "tSec": 42.8,
+            "value": 120,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_inspect_100",
+            "tSec": 43.7,
+            "value": 100,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_inspect_hold",
+            "tSec": 43.9,
+            "value": 100,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_inspect_return",
+            "tSec": 45.3,
+            "value": 45,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_13",
+            "tSec": 47,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_14",
+            "tSec": 50.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_15",
+            "tSec": 54,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_16",
+            "tSec": 57,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_17",
+            "tSec": 63,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_18",
+            "tSec": 64.5,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_19",
+            "tSec": 66.2,
+            "value": 8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_20",
+            "tSec": 68.2,
+            "value": 2,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_21",
+            "tSec": 70,
+            "value": -6,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_6",
+            "tSec": 72,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_7",
+            "tSec": 74,
+            "value": 6,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_8",
+            "tSec": 76,
+            "value": 3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_9",
+            "tSec": 77.5,
+            "value": -4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_10",
+            "tSec": 78.5,
+            "value": -1,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_return",
+            "tSec": 79.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_party_end",
+            "tSec": 82.24,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_loop_mid",
+            "tSec": 85.74,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "body_loop_end",
+            "tSec": 92.24,
+            "value": 0,
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "yawY": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "yaw_0",
+            "tSec": 0,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_1",
+            "tSec": 3.633333,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_2",
+            "tSec": 5.933333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_3",
+            "tSec": 6.833333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_4",
+            "tSec": 7.833333,
+            "value": -4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_5",
+            "tSec": 8.5,
+            "value": -11,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_6",
+            "tSec": 9.083333,
+            "value": -15,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7",
+            "tSec": 9.583333,
+            "value": -14,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7a",
+            "tSec": 10.25,
+            "value": -7,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7b",
+            "tSec": 10.833333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7c",
+            "tSec": 11.416667,
+            "value": 7,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_7d",
+            "tSec": 12.083333,
+            "value": 12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_8",
+            "tSec": 12.583333,
+            "value": 15,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_check_right_release",
+            "tSec": 13.083333,
+            "value": 12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_check_return",
+            "tSec": 13.583333,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_check_zero",
+            "tSec": 14,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9",
+            "tSec": 14.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9a",
+            "tSec": 16.48,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9b",
+            "tSec": 17.05,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9c",
+            "tSec": 21.03,
+            "value": -70,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_9d",
+            "tSec": 23.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_safety_zero",
+            "tSec": 29.3,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_safety_hold",
+            "tSec": 38.4,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_10",
+            "tSec": 40.8,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_11",
+            "tSec": 43.9,
+            "value": 90,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_12",
+            "tSec": 45.3,
+            "value": 45,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_13",
+            "tSec": 47,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_14",
+            "tSec": 47.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_15",
+            "tSec": 48.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_16",
+            "tSec": 50.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_17",
+            "tSec": 53.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_18",
+            "tSec": 55.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_19",
+            "tSec": 63,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_20",
+            "tSec": 64.5,
+            "value": -5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_21",
+            "tSec": 66.2,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_22",
+            "tSec": 68.2,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_23",
+            "tSec": 70,
+            "value": 7,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_24",
+            "tSec": 72,
+            "value": 4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_party_7",
+            "tSec": 74,
+            "value": -7,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_party_8",
+            "tSec": 76,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_party_9",
+            "tSec": 77.5,
+            "value": 5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_party_10",
+            "tSec": 78.5,
+            "value": 2,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_party_return",
+            "tSec": 79.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_party_end",
+            "tSec": 82.24,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_loop_mid",
+            "tSec": 85.74,
+            "value": 30,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "yaw_loop_end",
+            "tSec": 92.24,
+            "value": 90,
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "tiltZ": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "tilt_0",
+            "tSec": 0,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_1",
+            "tSec": 5.933333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_2",
+            "tSec": 6.833333,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_3",
+            "tSec": 7.833333,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_4",
+            "tSec": 8.5,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_5",
+            "tSec": 9.083333,
+            "value": -15,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_6",
+            "tSec": 9.583333,
+            "value": -11,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_7",
+            "tSec": 10.25,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_8",
+            "tSec": 10.833333,
+            "value": -6,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_8a",
+            "tSec": 11.416667,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_8b",
+            "tSec": 12.083333,
+            "value": -11,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_9",
+            "tSec": 12.583333,
+            "value": -15,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_check_right_release",
+            "tSec": 13.083333,
+            "value": -10,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_check_return",
+            "tSec": 13.583333,
+            "value": -6,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_check_zero",
+            "tSec": 14,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10",
+            "tSec": 14.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10a",
+            "tSec": 15.34,
+            "value": -5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10b",
+            "tSec": 16.48,
+            "value": -12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10c",
+            "tSec": 17.05,
+            "value": -12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10d",
+            "tSec": 19.04,
+            "value": 8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10e",
+            "tSec": 21.03,
+            "value": -12,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10f",
+            "tSec": 22.17,
+            "value": -5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_10g",
+            "tSec": 23.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_breath_in",
+            "tSec": 24.66,
+            "value": 2,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_breath_out",
+            "tSec": 25.82,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_safety_1",
+            "tSec": 26.4,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_safety_2",
+            "tSec": 27.37,
+            "value": -15,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_safety_3",
+            "tSec": 28.33,
+            "value": -15,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_safety_4",
+            "tSec": 29.3,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_safety_5",
+            "tSec": 38.4,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_11",
+            "tSec": 40.8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_12",
+            "tSec": 42.2,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_13",
+            "tSec": 43,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_14",
+            "tSec": 44.8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_15",
+            "tSec": 46,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_detour_zero",
+            "tSec": 47,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_16",
+            "tSec": 50.5,
+            "value": -4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_17",
+            "tSec": 53.5,
+            "value": -4,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_18",
+            "tSec": 55.5,
+            "value": -6,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_detour_return_zero",
+            "tSec": 57,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_19",
+            "tSec": 63,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_20",
+            "tSec": 64.5,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_21",
+            "tSec": 66.2,
+            "value": -9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_22",
+            "tSec": 68.2,
+            "value": -5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_23",
+            "tSec": 70,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_6",
+            "tSec": 72,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_7",
+            "tSec": 74,
+            "value": -8,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_8",
+            "tSec": 76,
+            "value": -3,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_9",
+            "tSec": 77.5,
+            "value": -7,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_10",
+            "tSec": 78.5,
+            "value": -2,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_return",
+            "tSec": 79.5,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_party_end",
+            "tSec": 82.24,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_loop_mid",
+            "tSec": 85.74,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "tilt_loop_end",
+            "tSec": 92.24,
+            "value": 0,
+            "interpolationToNext": "hold"
+          }
+        ]
+      }
+    },
+    "ring24": {
+      "baseFrames": {
+        "kind": "rgbw24",
+        "keys": []
+      },
+      "brightness": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "br_0",
+            "tSec": 0,
+            "value": 0.58,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_1",
+            "tSec": 3.633333,
+            "value": 0.58,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_2",
+            "tSec": 6.833333,
+            "value": 0.68,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_3",
+            "tSec": 12.333333,
+            "value": 0.68,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_4",
+            "tSec": 13.75,
+            "value": 0.85,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_5",
+            "tSec": 14.96,
+            "value": 0.72,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_6",
+            "tSec": 24.95,
+            "value": 0.68,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_7",
+            "tSec": 38.4,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_8",
+            "tSec": 47,
+            "value": 0.78,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_9",
+            "tSec": 57,
+            "value": 0.68,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_10",
+            "tSec": 63,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_11",
+            "tSec": 79.5,
+            "value": 0.68,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_12",
+            "tSec": 82.24,
+            "value": 0.68,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_loop_mid",
+            "tSec": 85.74,
+            "value": 0.5,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "br_loop_end",
+            "tSec": 92.24,
+            "value": 0.58,
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "effects": [
+        {
+          "id": "fx_welcome",
+          "type": "breathe",
+          "fromSec": 0,
+          "toSec": 13.75,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              55,
+              155,
+              220,
+              30
+            ],
+            "speedHz": 0.22
+          }
+        },
+        {
+          "id": "fx_ready",
+          "type": "pulse",
+          "fromSec": 13.75,
+          "toSec": 14.96,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              0,
+              0,
+              0,
+              120
+            ],
+            "periodSec": 1.3
+          }
+        },
+        {
+          "id": "fx_depart",
+          "type": "breathe",
+          "fromSec": 14.96,
+          "toSec": 23.5,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              45,
+              150,
+              230,
+              30
+            ],
+            "speedHz": 0.24
+          }
+        },
+        {
+          "id": "fx_single_breath",
+          "type": "breathe",
+          "fromSec": 23.5,
+          "toSec": 26.4,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              45,
+              150,
+              230,
+              30
+            ],
+            "speedHz": 0.333333
+          }
+        },
+        {
+          "id": "fx_greeting_hold",
+          "type": "solid",
+          "fromSec": 26.4,
+          "toSec": 29.3,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              45,
+              145,
+              220,
+              28
+            ]
+          }
+        },
+        {
+          "id": "fx_cruise_base",
+          "type": "solid",
+          "fromSec": 29.3,
+          "toSec": 38.4,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              30,
+              105,
+              170,
+              22
+            ]
+          }
+        },
+        {
+          "id": "fx_construction",
+          "type": "solid",
+          "fromSec": 38.4,
+          "toSec": 47,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              190,
+              35,
+              34
+            ]
+          }
+        },
+        {
+          "id": "fx_detour",
+          "type": "breathe",
+          "fromSec": 47,
+          "toSec": 57,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              190,
+              35,
+              34
+            ],
+            "speedHz": 0.22
+          }
+        },
+        {
+          "id": "fx_resume",
+          "type": "solid",
+          "fromSec": 57,
+          "toSec": 63,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              30,
+              105,
+              170,
+              22
+            ]
+          }
+        },
+        {
+          "id": "fx_aegyo_pink_arrive",
+          "type": "breathe",
+          "fromSec": 63,
+          "toSec": 66.2,
+          "seed": 31,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              80,
+              155,
+              24
+            ],
+            "speedHz": 0.1,
+            "phase": 1.5708
+          }
+        },
+        {
+          "id": "fx_aegyo_lavender_wink",
+          "type": "wave",
+          "fromSec": 66.2,
+          "toSec": 68.2,
+          "seed": 36,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              180,
+              105,
+              255,
+              20
+            ],
+            "speedHz": 0.14,
+            "width": 14,
+            "direction": 1
+          }
+        },
+        {
+          "id": "fx_aegyo_heart",
+          "type": "breathe",
+          "fromSec": 68.2,
+          "toSec": 72.2,
+          "seed": 32,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              65,
+              130,
+              22
+            ],
+            "speedHz": 0.125,
+            "phase": 1.5708
+          }
+        },
+        {
+          "id": "fx_aegyo_stars",
+          "type": "wave",
+          "fromSec": 72.2,
+          "toSec": 76.2,
+          "seed": 33,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              90,
+              170,
+              255,
+              28
+            ],
+            "speedHz": 0.18,
+            "width": 12,
+            "direction": 1
+          }
+        },
+        {
+          "id": "fx_aegyo_settle",
+          "type": "breathe",
+          "fromSec": 76.2,
+          "toSec": 79.5,
+          "seed": 35,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              255,
+              175,
+              70,
+              28
+            ],
+            "speedHz": 0.15,
+            "phase": 1.5708
+          }
+        },
+        {
+          "id": "fx_night_return",
+          "type": "solid",
+          "fromSec": 79.5,
+          "toSec": 82.24,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              30,
+              105,
+              170,
+              22
+            ]
+          }
+        },
+        {
+          "id": "fx_loop_reset",
+          "type": "solid",
+          "fromSec": 82.24,
+          "toSec": 92.24,
+          "seed": 1,
+          "priority": 0,
+          "blend": "max",
+          "params": {
+            "color": [
+              55,
+              155,
+              220,
+              30
+            ]
+          }
+        }
+      ]
+    },
+    "eyes": {
+      "left": {
+        "kind": "hold",
+        "keys": [
+          {
+            "id": "eye_l_0",
+            "tSec": 0,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_1",
+            "tSec": 5.933333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_2",
+            "tSec": 7.833333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_3",
+            "tSec": 8.833333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_check_left_half",
+            "tSec": 9.208333,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_check_left_closed",
+            "tSec": 9.275,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_check_left_open",
+            "tSec": 9.391667,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_4",
+            "tSec": 9.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_5",
+            "tSec": 10.333333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_6",
+            "tSec": 12.333333,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_check_right_half",
+            "tSec": 12.458333,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_check_right_closed",
+            "tSec": 12.525,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_check_right_open",
+            "tSec": 12.641667,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_7",
+            "tSec": 12.75,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_8",
+            "tSec": 13.416667,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_9",
+            "tSec": 13.75,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_10",
+            "tSec": 23.5,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_11",
+            "tSec": 23.79,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_safety_0",
+            "tSec": 25.82,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_safety_half_in",
+            "tSec": 27.23,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_safety_1",
+            "tSec": 27.37,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              0,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_safety_half_out",
+            "tSec": 27.62,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_safety_2",
+            "tSec": 27.82,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_safety_3",
+            "tSec": 29.3,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_idle_blink_1a",
+            "tSec": 33,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_idle_blink_1closed",
+            "tSec": 33.06,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_idle_blink_1b",
+            "tSec": 33.18,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_idle_blink_2a",
+            "tSec": 36.2,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_idle_blink_2closed",
+            "tSec": 36.26,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_idle_blink_2b",
+            "tSec": 36.38,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_12",
+            "tSec": 42.2,
+            "value": [
+              0,
+              32,
+              112,
+              112,
+              112,
+              112,
+              32,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_13",
+            "tSec": 45.8,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_14",
+            "tSec": 48.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_15",
+            "tSec": 63,
+            "value": [
+              0,
+              0,
+              16,
+              56,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_16",
+            "tSec": 63.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_wink_close",
+            "tSec": 66,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_wink_open",
+            "tSec": 66.8,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_heart",
+            "tSec": 68.2,
+            "value": [
+              0,
+              36,
+              66,
+              66,
+              36,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_star_a",
+            "tSec": 72.2,
+            "value": [
+              16,
+              146,
+              56,
+              16,
+              56,
+              146,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_star_b",
+            "tSec": 74.4,
+            "value": [
+              0,
+              16,
+              56,
+              146,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_final_smile",
+            "tSec": 76.2,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_final_blink",
+            "tSec": 78,
+            "value": [
+              0,
+              0,
+              0,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_final_open",
+            "tSec": 78.35,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_19",
+            "tSec": 79.5,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_l_party_end",
+            "tSec": 82.24,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "right": {
+        "kind": "hold",
+        "keys": [
+          {
+            "id": "eye_r_0",
+            "tSec": 0,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_1",
+            "tSec": 5.933333,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_2",
+            "tSec": 7.833333,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_3",
+            "tSec": 8.833333,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_check_left_half",
+            "tSec": 9.208333,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_check_left_closed",
+            "tSec": 9.275,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_check_left_open",
+            "tSec": 9.391667,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_4",
+            "tSec": 9.5,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_5",
+            "tSec": 10.333333,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_6",
+            "tSec": 12.333333,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_check_right_half",
+            "tSec": 12.458333,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_check_right_closed",
+            "tSec": 12.525,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_check_right_open",
+            "tSec": 12.641667,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_7",
+            "tSec": 12.75,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_8",
+            "tSec": 13.416667,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_9",
+            "tSec": 13.75,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_10",
+            "tSec": 23.5,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_11",
+            "tSec": 23.79,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_safety_0",
+            "tSec": 25.82,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_safety_1",
+            "tSec": 26.4,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_safety_2",
+            "tSec": 26.98,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_safety_3",
+            "tSec": 29.3,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_idle_blink_1a",
+            "tSec": 33,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_idle_blink_1closed",
+            "tSec": 33.06,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_idle_blink_1b",
+            "tSec": 33.18,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_idle_blink_2a",
+            "tSec": 36.2,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_idle_blink_2closed",
+            "tSec": 36.26,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_idle_blink_2b",
+            "tSec": 36.38,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_12",
+            "tSec": 42.2,
+            "value": [
+              0,
+              16,
+              56,
+              56,
+              56,
+              56,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_13",
+            "tSec": 45.8,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_14",
+            "tSec": 48.5,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_15",
+            "tSec": 63,
+            "value": [
+              0,
+              0,
+              8,
+              28,
+              28,
+              8,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_16",
+            "tSec": 63.5,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_wink_partner",
+            "tSec": 66,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_wink_partner_open",
+            "tSec": 66.8,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_heart",
+            "tSec": 68.2,
+            "value": [
+              0,
+              36,
+              66,
+              66,
+              36,
+              24,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_star_a",
+            "tSec": 72.2,
+            "value": [
+              16,
+              146,
+              56,
+              16,
+              56,
+              146,
+              16,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_star_b",
+            "tSec": 74.4,
+            "value": [
+              0,
+              16,
+              56,
+              146,
+              56,
+              16,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_final_smile",
+            "tSec": 76.2,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_final_blink",
+            "tSec": 78,
+            "value": [
+              0,
+              0,
+              0,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_final_open",
+            "tSec": 78.35,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              0,
+              0,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_19",
+            "tSec": 79.5,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_r_party_end",
+            "tSec": 82.24,
+            "value": [
+              0,
+              8,
+              28,
+              28,
+              28,
+              28,
+              8,
+              0
+            ],
+            "interpolationToNext": "hold"
+          }
+        ]
+      },
+      "intensity": {
+        "kind": "numeric",
+        "keys": [
+          {
+            "id": "eye_i_0",
+            "tSec": 0,
+            "value": 0.78,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_1",
+            "tSec": 6.833333,
+            "value": 0.86,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_2",
+            "tSec": 12.333333,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_3",
+            "tSec": 13.75,
+            "value": 0.9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_3a",
+            "tSec": 16.29,
+            "value": 0.9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_3b",
+            "tSec": 16.67,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_3c",
+            "tSec": 21.03,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_3d",
+            "tSec": 21.41,
+            "value": 0.9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_3e",
+            "tSec": 23.5,
+            "value": 0.9,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_4",
+            "tSec": 24.95,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_safety_0",
+            "tSec": 25.82,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_safety_1",
+            "tSec": 26.4,
+            "value": 0.92,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_safety_2",
+            "tSec": 29.3,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_pre_stop",
+            "tSec": 38.4,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_stop_off",
+            "tSec": 39.6,
+            "value": 0.82,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_turned_away",
+            "tSec": 40.2,
+            "value": 0,
+            "interpolationToNext": "hold"
+          },
+          {
+            "id": "eye_i_return_hold",
+            "tSec": 45.8,
+            "value": 0,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_5",
+            "tSec": 46.6,
+            "value": 0.92,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_6",
+            "tSec": 57,
+            "value": 0.84,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_aegyo_start",
+            "tSec": 63,
+            "value": 0.84,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_heart",
+            "tSec": 68.2,
+            "value": 0.92,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_stars",
+            "tSec": 72.2,
+            "value": 0.96,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_smile_settle",
+            "tSec": 76.2,
+            "value": 0.88,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_return",
+            "tSec": 79.5,
+            "value": 0.84,
+            "interpolationToNext": "smoothstep"
+          },
+          {
+            "id": "eye_i_8",
+            "tSec": 82.24,
+            "value": 0.82,
+            "interpolationToNext": "hold"
+          }
+        ]
+      }
+    },
+    "projector": {
+      "clips": [
+        {
+          "id": "proj_welcome",
+          "fromSec": 0.7,
+          "toSec": 3.633333,
+          "assetId": "media/welcome.svg",
+          "visible": true
+        },
+        {
+          "id": "proj_detour_1",
+          "fromSec": 47,
+          "toSec": 50.3,
+          "assetId": "media/detour_1.svg",
+          "visible": true
+        },
+        {
+          "id": "proj_detour_2",
+          "fromSec": 50.3,
+          "toSec": 53.6,
+          "assetId": "media/detour_2.svg",
+          "visible": true
+        },
+        {
+          "id": "proj_detour_3",
+          "fromSec": 53.6,
+          "toSec": 57,
+          "assetId": "media/detour_3.svg",
+          "visible": true
+        },
+        {
+          "id": "proj_aegyo_stars_1",
+          "fromSec": 63,
+          "toSec": 68.2,
+          "assetId": "media/aegyo_stars_1.svg",
+          "visible": true
+        },
+        {
+          "id": "proj_aegyo_stars_2",
+          "fromSec": 68.2,
+          "toSec": 72.2,
+          "assetId": "media/aegyo_stars_2.svg",
+          "visible": true
+        },
+        {
+          "id": "proj_aegyo_stars_3",
+          "fromSec": 72.2,
+          "toSec": 79.5,
+          "assetId": "media/aegyo_stars_3.svg",
+          "visible": true
+        }
+      ],
+      "properties": {
+        "opacity": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "proj_op_0",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_1",
+              "tSec": 0.7,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_2",
+              "tSec": 1.4,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_3",
+              "tSec": 3.1,
+              "value": 0.78,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_4",
+              "tSec": 3.633333,
+              "value": 0,
+              "interpolationToNext": "hold"
+            },
+            {
+              "id": "proj_op_7",
+              "tSec": 47,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_8",
+              "tSec": 47.4,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_9",
+              "tSec": 56.5,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_10",
+              "tSec": 57,
+              "value": 0,
+              "interpolationToNext": "hold"
+            },
+            {
+              "id": "proj_op_11",
+              "tSec": 62.8,
+              "value": 0,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_12",
+              "tSec": 63.2,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_13",
+              "tSec": 79.1,
+              "value": 0.85,
+              "interpolationToNext": "smoothstep"
+            },
+            {
+              "id": "proj_op_14",
+              "tSec": 79.5,
+              "value": 0,
+              "interpolationToNext": "hold"
+            }
+          ]
+        },
+        "brightness": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "proj_brightness",
+              "tSec": 0,
+              "value": 0.9,
+              "interpolationToNext": "hold"
+            }
+          ]
+        },
+        "rotationDeg": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "proj_rotation",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "hold"
+            }
+          ]
+        },
+        "scale": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "proj_scale",
+              "tSec": 0,
+              "value": 1.15,
+              "interpolationToNext": "hold"
+            }
+          ]
+        },
+        "offsetXm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "proj_offset_x",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "hold"
+            }
+          ]
+        },
+        "offsetZm": {
+          "kind": "numeric",
+          "keys": [
+            {
+              "id": "proj_offset_z",
+              "tSec": 0,
+              "value": 0,
+              "interpolationToNext": "hold"
+            }
+          ]
+        }
+      }
+    },
+    "audio": [
+      {
+        "id": "exhibition_audio",
+        "fromSec": 0,
+        "toSec": 82.24,
+        "assetId": "media/LIEU-Exhibition-Scenario-audio.m4a",
+        "mediaOffsetSec": 0,
+        "gain": 1,
+        "fadeInSec": 0,
+        "fadeOutSec": 0.3,
+        "loop": false
+      },
+      {
+        "id": "aegyo_giggle",
+        "fromSec": 63.4,
+        "toSec": 65.4,
+        "assetId": "media/sfx_giggle.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.38,
+        "fadeInSec": 0.2,
+        "fadeOutSec": 0.45,
+        "loop": false
+      },
+      {
+        "id": "aegyo_spin",
+        "fromSec": 65.4,
+        "toSec": 72.8,
+        "assetId": "media/sfx_spin_long.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.22,
+        "fadeInSec": 0.5,
+        "fadeOutSec": 0.8,
+        "loop": false
+      },
+      {
+        "id": "aegyo_sparkle",
+        "fromSec": 72.2,
+        "toSec": 78.8,
+        "assetId": "media/sfx_sparkle.wav",
+        "mediaOffsetSec": 0,
+        "gain": 0.28,
+        "fadeInSec": 0.5,
+        "fadeOutSec": 0.8,
+        "loop": false
+      }
+    ],
+    "events": [
+      {
+        "id": "screen_master_video",
+        "tSec": 0,
+        "type": "screen_video",
+        "payload": {
+          "clips": [
+            {
+              "src": "assets/LIEU-Exhibition-Scenario-web.mp4",
+              "from": 0,
+              "dur": 82.24,
+              "accel": 0,
+              "decel": 0
+            },
+            {
+              "src": "assets/LIEU-Exhibition-Scenario-web.mp4",
+              "from": 88.74,
+              "dur": 82.24,
+              "hold": "first"
+            }
+          ]
+        }
+      },
+      {
+        "id": "mark_welcome",
+        "tSec": 0,
+        "type": "welcome",
+        "payload": {
+          "label": "탑승객 환영 / 인사"
+        }
+      },
+      {
+        "id": "mark_seatbelt_check",
+        "tSec": 6.833333,
+        "type": "seatbelt_check",
+        "payload": {
+          "label": "좌우 승객 착석 확인 / 눈맞춤과 미소"
+        }
+      },
+      {
+        "id": "mark_drive_start",
+        "tSec": 14,
+        "type": "drive_start",
+        "payload": {
+          "label": "주행 시작 버튼 / 출발 반응"
+        }
+      },
+      {
+        "id": "screen_start_button",
+        "tSec": 12.166667,
+        "type": "screen_button",
+        "payload": {
+          "show": 12.166667,
+          "pressDown": 13.75,
+          "hold": 13.95,
+          "release": 14.15,
+          "hide": 14.5,
+          "gone": 15
+        }
+      },
+      {
+        "id": "mark_construction_stop",
+        "tSec": 38.4,
+        "type": "construction_stop",
+        "payload": {
+          "label": "공사 현장 앞 정지 / 상황 인지"
+        }
+      },
+      {
+        "id": "mark_inspection",
+        "tSec": 40.2,
+        "type": "construction_inspection",
+        "payload": {
+          "label": "앞으로 이동해 공사 구간 확인"
+        }
+      },
+      {
+        "id": "mark_detour_route",
+        "tSec": 47,
+        "type": "detour_route",
+        "payload": {
+          "label": "우회경로 확인 및 안내"
+        }
+      },
+      {
+        "id": "mark_resume_drive",
+        "tSec": 57,
+        "type": "resume_drive",
+        "payload": {
+          "label": "우회 주행 재개"
+        }
+      },
+      {
+        "id": "mark_night_aegyo",
+        "tSec": 63,
+        "type": "night_aegyo",
+        "payload": {
+          "label": "밤 전환 / 애교 대폭발"
+        }
+      },
+      {
+        "id": "screen_loop_transition",
+        "tSec": 82.24,
+        "type": "screen_loop_transition",
+        "payload": {
+          "from": 82.24,
+          "blackFrom": 85.74,
+          "blackUntil": 88.74,
+          "to": 92.24
+        }
+      }
+    ]
+  }
+}

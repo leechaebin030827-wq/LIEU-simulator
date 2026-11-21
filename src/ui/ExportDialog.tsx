@@ -4,6 +4,7 @@ import { toast } from './ui-store';
 import { useExp } from './exportUi';
 import { exportFileName, exportMultiViewMp4 } from '../runtime/videoExport';
 import { layout, views, SIZES, type SizeKey } from '../runtime/exportViews';
+import { elapsedAtScenarioTime } from '../runtime/playbackRate';
 
 const MM = (t: number) => `${Math.floor(t / 60)}:${String(Math.round(t % 60)).padStart(2, '0')}`;
 
@@ -64,7 +65,7 @@ export function ExportDialog() {
               <label className="chk"><input type="checkbox" checked={audio} onChange={(e) => setAudio(e.target.checked)} />Include sound</label>
             </div>
             <div className="expfile"><span>File</span><code>{name}</code></div>
-            <p className="dim small">{seq.title} · {MM(seq.durationSec)} · 30 fps · 1× speed. 렌더링은 영상 길이의 절반~1배 정도 걸리고(컴퓨터에 따라 다름), 끝나면 자동으로 다운로드됩니다. 진행 중에는 이 탭을 닫지 마세요.</p>
+            <p className="dim small">{seq.title} · {MM(elapsedAtScenarioTime(seq, seq.durationSec))} · 30 fps · 출발 전 0.8× / 이후 1×. 렌더링은 영상 길이의 절반~1배 정도 걸리고(컴퓨터에 따라 다름), 끝나면 자동으로 다운로드됩니다. 진행 중에는 이 탭을 닫지 마세요.</p>
             <div className="modal-actions"><button onClick={() => useExp.setState({ open: false })}>Cancel</button><button className="on" autoFocus onClick={() => void start()}>Export MP4</button></div>
           </>
         ) : (

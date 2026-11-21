@@ -1,0 +1,50 @@
+{
+  "schema": "lieu.zero-references/v1",
+  "date": "2026-11-01",
+  "source": "user positioned all four mechanisms at their intended physical zero with torque disabled",
+  "connection": {
+    "hostPort": "COM3",
+    "board": "Arduino UNO R4 WiFi",
+    "adapter": "ROBOTIS DYNAMIXEL Shield",
+    "baud": 115200,
+    "protocol": 2.0
+  },
+  "safety": {
+    "torqueObserved": 0,
+    "motionCommandsSent": false,
+    "usableAsMotionLimits": false,
+    "usableAsAutomaticArmCalibration": false
+  },
+  "axes": {
+    "yaw": {
+      "id": 1,
+      "rawZeroCandidate": 3263,
+      "samples": [3263, 3263, 3263],
+      "mappingEvidence": "torque-off round trip verified"
+    },
+    "tilt": {
+      "id": 2,
+      "rawZeroCandidate": 2045,
+      "samples": [2045, 2044, 2045],
+      "mappingEvidence": "torque-off round trip verified"
+    },
+    "body": {
+      "id": 3,
+      "rawZeroCandidate": 2328,
+      "samples": [2328, 2328, 2328],
+      "mappingEvidence": "torque-off round trip verified"
+    },
+    "rail": {
+      "id": 4,
+      "rawZeroCandidate": 2135,
+      "samples": [2135, 2135, 2135],
+      "mappingEvidence": "user-confirmed only; rail motion not verified",
+      "commandLocked": true
+    }
+  },
+  "notes": [
+    "These values are user-defined zero references only.",
+    "No direction, scale, travel limit, collision envelope, speed, acceleration, or current limit has been commissioned.",
+    "Do not enable torque from this file."
+  ]
+}

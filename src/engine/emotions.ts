@@ -1,5 +1,5 @@
-import type { EyeRows8 } from './types';
-import { mirrorRows } from './eyePresets';
+import type { EyeRows8 } from './types.ts';
+import { mirrorRows } from './eyePresets.ts';
 
 /** One pose of both eyes held for `ms`. Rows top->bottom, bit7 = leftmost column of that eye (same as EYE_PRESETS). */
 export type EmotionFrame = { l: EyeRows8; r: EyeRows8; ms: number };

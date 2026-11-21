@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512">
+  <rect width="1024" height="512" fill="#000"/>
+  <defs>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <path id="spark" d="M0-24C3-7 7-3 24 0C7 3 3 7 0 24C-3 7-7 3-24 0C-7-3-3-7 0-24Z"/>
+  </defs>
+  <g filter="url(#glow)">
+    <use href="#spark" transform="translate(512 248) scale(1.35)" fill="#fff8d7"/>
+    <use href="#spark" transform="translate(350 165) scale(.72)" fill="#9fe7ff" opacity=".92"/>
+    <use href="#spark" transform="translate(690 332) scale(.62)" fill="#fff" opacity=".9"/>
+    <use href="#spark" transform="translate(766 154) scale(.42)" fill="#ffe79b" opacity=".82"/>
+    <use href="#spark" transform="translate(265 335) scale(.36)" fill="#fff" opacity=".72"/>
+  </g>
+  <g fill="#fff" opacity=".74">
+    <circle cx="430" cy="106" r="5"/><circle cx="592" cy="118" r="4"/><circle cx="615" cy="260" r="5"/>
+    <circle cx="448" cy="348" r="4"/><circle cx="805" cy="275" r="4"/><circle cx="215" cy="222" r="3"/>
+  </g>
+</svg>

@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
-    "validate": "python3 tools/validate_handoff.py"
+    "validate": "python3 tools/validate_handoff.py",
+    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "check": "npm test && npm run validate && npm run build"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",

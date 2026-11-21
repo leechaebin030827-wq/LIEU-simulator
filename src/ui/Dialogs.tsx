@@ -39,7 +39,7 @@ function Help() {
     <div className="overlay" onMouseDown={closeHelp}>
       <div className="modal wide" onMouseDown={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <h2>How to use the LIEU Sequence Editor</h2>
-        <p className="dim">A tool for building and previewing the robot's <b>motion, LEDs, eyes, projector and sound</b> on a single timeline. Nothing is sent to the real robot (PREVIEW ONLY).</p>
+        <p className="dim">A hardware-first console for authoring and running the robot's <b>motion, LEDs, eyes, projector and sound</b> on a single timeline. Physical output is locked after every reload and must be explicitly enabled from the Hardware menu.</p>
         <div className="helpgrid">
           <div>
             <h3>Quick start</h3>

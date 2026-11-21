@@ -65,14 +65,14 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number, maxLine
  * Frosted-glass panel (units: 4K pixels): the picture behind it blurred + saturated, a faint neutral tint that deepens toward the
  * bottom for legibility, a hairline edge with a specular top-left falloff, no drop shadow. No gloss blobs, no colour.
  */
-function glass(ctx: CanvasRenderingContext2D, bg: CanvasImageSource | null, x: number, y: number, w: number, h: number, r: number) {
+function glass(ctx: CanvasRenderingContext2D, _bg: CanvasImageSource | null, x: number, y: number, w: number, h: number, r: number) {
   const rr = () => { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); };
   // body
   ctx.save(); rr(); ctx.clip();
-  if (bg) {
-    try { ctx.filter = `blur(${12 * RENDER_SCALE}px) saturate(1.5) brightness(1.04)`; } catch { /* no ctx.filter: tint only */ }
-    ctx.drawImage(bg, -200, -200, DESIGN_W + 400, DESIGN_H + 400); ctx.filter = 'none';
-  }
+  // The source picture is already directly behind this panel. Re-drawing the
+  // entire full-HD frame through Canvas2D blur allocated a large temporary GPU
+  // surface every frame and was the biggest TV/projector freeze trigger. The
+  // layered tint + highlights below retain the glass read without that copy.
   const tone = ctx.createLinearGradient(0, y, 0, y + h);
   tone.addColorStop(0, 'rgba(255,255,255,0.10)'); tone.addColorStop(0.55, 'rgba(14,20,34,0.03)'); tone.addColorStop(1, 'rgba(14,20,34,0.16)');
   ctx.fillStyle = tone; ctx.fillRect(x, y, w, h);
@@ -238,6 +238,8 @@ function drawCta(ctx: CanvasRenderingContext2D, sc: SceneCaption) {
 /** Redraw the finished screen picture from the current source. */
 export function composeScreen(src: CanvasImageSource | null, info: ScreenInfo) {
   const { ctx } = screenOut;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
   ctx.setTransform(RENDER_SCALE, 0, 0, RENDER_SCALE, 0, 0); // everything below is in 4K pixels
   ctx.clearRect(0, 0, DESIGN_W, DESIGN_H);
   if (src) ctx.drawImage(src, 0, 0, DESIGN_W, DESIGN_H);

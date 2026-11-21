@@ -30,7 +30,7 @@ export function moveKey<T>(keys: readonly Keyframe<T>[], id: string, tSec: numbe
 
 /** Path addressing a keyframe track inside a sequence. */
 export type TrackPath =
-  | { type: 'motion'; ch: 'railX' | 'yawY' | 'tiltZ' }
+  | { type: 'motion'; ch: 'railX' | 'bodyYaw' | 'yawY' | 'tiltZ' }
   | { type: 'ringBrightness' }
   | { type: 'ringBase' }
   | { type: 'eye'; side: 'left' | 'right' }
@@ -44,7 +44,7 @@ type AnyKeys = Keyframe<unknown>[];
 export function getKeys(seq: LieuSequence, p: TrackPath): AnyKeys {
   const T = seq.tracks;
   switch (p.type) {
-    case 'motion': return T.motion[p.ch].keys as AnyKeys;
+    case 'motion': return (T.motion[p.ch]?.keys ?? []) as AnyKeys;
     case 'ringBrightness': return T.ring24.brightness.keys as AnyKeys;
     case 'ringBase': return T.ring24.baseFrames.keys as AnyKeys;
     case 'eye': return T.eyes[p.side].keys as AnyKeys;
@@ -112,7 +112,7 @@ export function emptySequence(title = 'New sequence'): LieuSequence {
   return {
     schema: 'lieu.sequence/v1', id: uid('seq'), title, durationSec: 10, fps: 30, loop: false, demoPreviewOnly: true,
     tracks: {
-      motion: { railX: num(), yawY: num(), tiltZ: num() },
+      motion: { railX: num(), bodyYaw: num(), yawY: num(), tiltZ: num() },
       ring24: { baseFrames: { kind: 'rgbw24', keys: [] }, brightness: num(), effects: [] },
       eyes: { left: { kind: 'eyeBitmap', keys: [] }, right: { kind: 'eyeBitmap', keys: [] }, intensity: num() },
       projector: { clips: [], properties: { opacity: num(), brightness: num(), rotationDeg: num(), scale: num(), offsetXm: num(), offsetZm: num() } },

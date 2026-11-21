@@ -1,6 +1,6 @@
 import type { AudioClip, Cue, DesiredState, EyeRows8, LieuSequence, ProjectorClip, Rgbw, RingFrame } from './types';
 import { BLACK, LED_COUNT } from './types';
-import { clamp, evalHold, evalNumeric, evalRingFrame } from './interp';
+import { clamp, evalHold, evalNumeric, evalRingFrame, smoothstep01 } from './interp';
 import { blendInto, effectPixel, resolveParams } from './effects';
 import { TILT_LIMIT_DEG } from './rigDefaults';
 
@@ -34,14 +34,40 @@ export function evaluateSequenceAt(seq: LieuSequence, tSec: number): DesiredStat
       });
     }
   }
+  // Cross-fade directly adjoining effects. Without this, even two gentle
+  // effects can produce a one-frame color/brightness cut at their boundary.
+  const FADE = 0.18;
+  const transition = ring24.effects
+    .flatMap((a, ai) => ring24.effects.map((b, bi) => ({ a, b, ai, bi })))
+    .filter(({ a, b, ai, bi }) => bi > ai && Math.abs(a.toSec - b.fromSec) < 1e-6
+      && a.priority === b.priority && a.blend === b.blend
+      && Math.abs(t - a.toSec) <= FADE)
+    .sort((x, y) => Math.abs(t - x.a.toSec) - Math.abs(t - y.a.toSec))[0];
+  const transitionIds = transition ? new Set([transition.ai, transition.bi]) : new Set<number>();
   const effects = ring24.effects
     .map((e, idx) => ({ e, idx }))
-    .filter(({ e }) => t >= e.fromSec && t < e.toSec)
+    .filter(({ e, idx }) => !transitionIds.has(idx) && t >= e.fromSec && t < e.toSec)
     .sort((a, b) => a.e.priority - b.e.priority || a.idx - b.idx);
   for (const { e } of effects) {
     const params = resolveParams(e, t);
     const rel = t - e.fromSec;
     for (let i = 0; i < LED_COUNT; i++) blendInto(px[i], effectPixel(e, params, rel, i), e.blend);
+  }
+  if (transition) {
+    const { a, b } = transition;
+    const boundary = a.toSec;
+    const mix = smoothstep01(clamp((t - (boundary - FADE)) / (2 * FADE), 0, 1));
+    const ta = clamp(t, a.fromSec, a.toSec - 1e-6);
+    const tb = clamp(t, b.fromSec, b.toSec - 1e-6);
+    const pa = resolveParams(a, ta), pb = resolveParams(b, tb);
+    for (let i = 0; i < LED_COUNT; i++) {
+      const ca = effectPixel(a, pa, ta - a.fromSec, i);
+      const cb = effectPixel(b, pb, tb - b.fromSec, i);
+      blendInto(px[i], {
+        rgbw: [0, 1, 2, 3].map((ch) => ca.rgbw[ch] + (cb.rgbw[ch] - ca.rgbw[ch]) * mix) as unknown as Rgbw,
+        cover: ca.cover + (cb.cover - ca.cover) * mix,
+      }, b.blend);
+    }
   }
   const pixels: RingFrame = px.map((p) => [0, 1, 2, 3].map((c) => clamp(Math.round(p[c]), 0, 255)) as unknown as Rgbw);
 
@@ -56,7 +82,7 @@ export function evaluateSequenceAt(seq: LieuSequence, tSec: number): DesiredStat
   const pp = projector.properties;
   const activeClips: ProjectorClip[] = projector.clips.filter((c) => c.visible && t >= c.fromSec && t < c.toSec);
   const extra: Record<string, number> = {};
-  for (const k of ['opticalOriginXm', 'opticalOriginYm', 'opticalOriginZm', 'opticalAimYawDeg', 'opticalAimPitchDeg',
+  for (const k of ['opticalOriginXm', 'opticalOriginYm', 'opticalOriginZm',
     'floorHeightYm', 'projectedWidthM', 'focusBlur', 'keystoneTop', 'keystoneBottom'] as const) {
     const tr = pp[k];
     if (tr && tr.keys.length) extra[k] = evalNumeric(tr, t, 0);
@@ -68,6 +94,7 @@ export function evaluateSequenceAt(seq: LieuSequence, tSec: number): DesiredStat
     tSec: t,
     motion: {
       railX: evalNumeric(motion.railX, t, 0),
+      bodyYaw: motion.bodyYaw?.keys.length ? evalNumeric(motion.bodyYaw, t, 0) : 0,
       yawY: evalNumeric(motion.yawY, t, 0),
       tiltZ: clamp(evalNumeric(motion.tiltZ, t, 0), -TILT_LIMIT_DEG, TILT_LIMIT_DEG),
       ...(motion.liftY?.keys.length ? { liftY: evalNumeric(motion.liftY, t, 0) } : {}),

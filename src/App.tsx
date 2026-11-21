@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { SceneTree } from './ui/SceneTree';
 import { Viewport } from './ui/Viewport';
 import { Inspector } from './ui/Inspector';
@@ -6,9 +6,13 @@ import { Timeline } from './ui/Timeline';
 import { Dialogs } from './ui/Dialogs';
 import { confirmDialog, openHelp, toast, toggleParts, useUi } from './ui/ui-store';
 import { useStore } from './store';
-import { HardwareMenu } from './ui/Hardware';
-import { autoConnectHw } from './runtime/hardware';
+import { HardwareMenu, HardwareModeBadge } from './ui/Hardware';
+import { disconnectHw, getHwStatus, subscribeHw } from './runtime/hardware';
+import { holdAllMotors } from './runtime/motor';
+import { hardwareOutputsEnabled, setHardwareOutputsEnabled } from './runtime/outputGate';
 import { startProjectorBroadcast, openProjectorWindow } from './runtime/projectorOut';
+import { openMonitorWindow, startMonitorBroadcast } from './runtime/monitorOut';
+import { screenOut } from './three/screenOut';
 import { startTransport } from './runtime/transport';
 import { startAutosave, readAutosave } from './runtime/autosave';
 import { unlockAudio } from './runtime/audio';
@@ -18,6 +22,8 @@ import { Menu, MenuItem, MenuSep, MenuKeep } from './ui/Menu';
 import { ExportDialog } from './ui/ExportDialog';
 import { openExport } from './ui/exportUi';
 import { GROUPS, SCENARIOS, PRESET_IDS, scenarioOf } from './scenarios';
+import { FinalMonitor } from './ui/FinalMonitor';
+import { playWithFinalMonitor } from './runtime/finalMonitor';
 
 /** Scenario switcher: the button shows what is open now; the list is grouped by purpose, the sequence name can be edited at the bottom. */
 function ScenarioMenu({ onPick }: { onPick: (id: string) => void }) {
@@ -53,6 +59,7 @@ const slug = (s: string) => (s.trim().replace(/[^\w가-힣.-]+/g, '_') || 'seque
 
 async function loadPresetData(id: string) {
   const r = await fetch(`${import.meta.env.BASE_URL}examples/${id}.lieu.json`, { cache: 'no-store' });
+  if (!r.ok) throw new Error(`시나리오 로드 실패 (${r.status}): ${id}`);
   const seq = validateSequence(await r.json());
   const s = useStore.getState();
   for (const c of seq.tracks.projector.clips) s.registerBuiltin(c.assetId);
@@ -92,6 +99,7 @@ async function newSequence() {
 
 function TopBar({ onPresent }: { onPresent: () => void }) {
   const canUndo = useStore((s) => s.past.length > 0), canRedo = useStore((s) => s.future.length > 0);
+  const hardwareConnected = useSyncExternalStore(subscribeHw, () => getHwStatus().connected, () => false);
   const { savedAt, saving, parts } = useUi();
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -129,10 +137,11 @@ function TopBar({ onPresent }: { onPresent: () => void }) {
       <span className={'savestate' + (saving ? ' busy' : '')} title="작업 내용은 이 브라우저에 자동 저장됩니다 (업로드한 미디어 제외)">
         {saving ? '저장 중…' : savedAt ? `자동 저장 ${timeLabel(savedAt)}` : '자동 저장 켜짐'}
       </span>
-      <span className="badge preview" title="실물 로봇(모터·LED·눈·프로젝터)에는 아무 명령도 보내지 않는 미리보기입니다">PREVIEW ONLY</span>
+      <HardwareModeBadge />
       <div className="grp out">
         <HardwareMenu />
-        <button className="ico" onClick={() => void openProjectorWindow()} title="프로젝터 화면을 두 번째 모니터용 별도 창으로 엽니다 (편집기는 그대로)">프로젝터 창</button>
+        {hardwareConnected && <button className="ico" onClick={() => void openMonitorWindow()} title="로봇 모니터에 보이는 영상 + UI를 연결된 TV에 전체화면으로 엽니다">TV 모니터</button>}
+        {hardwareConnected && <button className="ico" onClick={() => void openProjectorWindow()} title="프로젝터 화면을 두 번째 모니터용 별도 창으로 엽니다 (편집기는 그대로)">프로젝터 창</button>}
         <button className="ico cta" onClick={openExport} title="현재 시나리오를 16:9 MP4로 내보내기 — 세로 클로즈업 + 4개 시점">영상 내보내기</button>
       </div>
       <div className="grp">
@@ -153,22 +162,58 @@ export function App() {
   useEffect(() => {
     startTransport();
     startProjectorBroadcast();
-    void autoConnectHw();
-    if ((window as unknown as { __lieuInit?: boolean }).__lieuInit) return;
-    (window as unknown as { __lieuInit?: boolean }).__lieuInit = true;
+    // Same-origin TV popup reads this canvas directly, so its picture is the
+    // exact frame used on the 3D robot monitor without a second timing path.
+    (window as Window & { __lieuScreenCanvas?: HTMLCanvasElement }).__lieuScreenCanvas = screenOut.canvas;
+    startMonitorBroadcast(screenOut.canvas);
+    const initHost = window as unknown as { __lieuInitVersion?: string };
+    if (initHost.__lieuInitVersion === 'SERVICE_V40') return;
+    initHost.__lieuInitVersion = 'SERVICE_V40';
     (async () => {
       const saved = readAutosave();
       let restored = false;
       if (saved) {
         try {
           await useStore.getState().importFile('autosave.lieu.json', new TextEncoder().encode(saved.json).buffer as ArrayBuffer);
-          toast(`Restored previous work (${timeLabel(saved.savedAt)}). To start over, press 'New'.`, 'ok', 6000);
+          const restoredSeq = useStore.getState().seq;
+          const hasLegacyIconEyes = restoredSeq.id === '08_exhibition_final'
+            && [...restoredSeq.tracks.eyes.left.keys, ...restoredSeq.tracks.eyes.right.keys]
+              .some((key) => key.value.some((row) => row.toString(2).replaceAll('0', '').length > 3));
+          const hasWrongFinalProjection = restoredSeq.id === '08_exhibition_final'
+            && (!restoredSeq.tracks.projector.clips.length
+              || restoredSeq.tracks.projector.clips.some((clip) => clip.assetId === 'media/seatbelt.svg'));
+          const hasOldFinalDynamics = restoredSeq.id === '08_exhibition_final'
+            && !restoredSeq.notes?.includes('[MOTION_V53]');
+          if (restoredSeq.id === '08_exhibition_final'
+            && (!restoredSeq.tracks.motion.bodyYaw?.keys.length || hasLegacyIconEyes || hasWrongFinalProjection || hasOldFinalDynamics)) {
+            await loadPresetData('08_exhibition_final');
+            toast('Final Exhibition 모션을 최신 버전(숙이는 동작 -15°·빙그르르·레일 개선)으로 갱신했습니다.', 'ok', 6000);
+          } else {
+            toast(`Restored previous work (${timeLabel(saved.savedAt)}). To start over, press 'New'.`, 'ok', 6000);
+          }
           restored = true;
         } catch { /* fall through to preset */ }
       }
-      if (!restored) await loadPresetData('01_boarding');
+      if (!restored) {
+        try { await loadPresetData('08_exhibition_final'); }
+        catch (error) { toast(`기본 시나리오를 불러오지 못했습니다: ${String(error)}`, 'warn', 10000); }
+      }
       startAutosave();
     })();
+  }, []);
+
+  // Release the motors when the page is actually going away. Merely hidden pages
+  // keep playing (the transport ticks from a worker), and a page that stalls is
+  // caught by the firmware watchdog, which holds the pose and releases after 5 s.
+  useEffect(() => {
+    const safe = () => {
+      if (!hardwareOutputsEnabled()) return;
+      setHardwareOutputsEnabled(false);
+      void holdAllMotors();
+      void disconnectHw('창 닫힘 — 출력 잠김');
+    };
+    window.addEventListener('pagehide', safe);
+    return () => window.removeEventListener('pagehide', safe);
   }, []);
 
   useEffect(() => {
@@ -181,7 +226,7 @@ export function App() {
       else if (mod && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? s.redo() : s.undo(); }
       else if (mod && e.key.toLowerCase() === 'y') { e.preventDefault(); s.redo(); }
       else if (!typing && (e.key === '?' || (e.key === '/' && e.shiftKey))) { e.preventDefault(); openHelp(); }
-      else if (!typing && e.code === 'Space') { e.preventDefault(); unlockAudio(); s.playing ? s.pause() : s.play(); }
+      else if (!typing && e.code === 'Space') { e.preventDefault(); unlockAudio(); s.playing ? s.pause() : playWithFinalMonitor(); }
       else if (!typing && e.key === 'ArrowLeft') s.setTime(s.tSec - 1 / 30);
       else if (!typing && e.key === 'ArrowRight') s.setTime(s.tSec + 1 / 30);
       else if (e.key === 'Escape') { setPresent(false); useUi.setState({ parts: false }); }
@@ -223,6 +268,7 @@ export function App() {
       </div>
       <Dialogs />
       <ExportDialog />
+      <FinalMonitor />
     </>
   );
 }
@@ -232,10 +278,10 @@ function PresentBar({ onExit }: { onExit: () => void }) {
   const s = useStore.getState();
   return (
     <>
-      <button className={'playbtn' + (playing ? ' on' : '')} onClick={() => { unlockAudio(); playing ? s.pause() : s.play(); }}>{playing ? '❚❚ Pause' : '▶ Play'}</button>
+      <button className={'playbtn' + (playing ? ' on' : '')} onClick={() => { unlockAudio(); playing ? s.pause() : playWithFinalMonitor(); }}>{playing ? '❚❚ Pause' : '▶ Play'}</button>
       <button onClick={() => useStore.getState().stop()}>■ Stop</button>
       <span>{t.toFixed(2)} / {dur}s</span><span style={{ flex: 1 }} />
-      <span className="badge preview">PREVIEW ONLY</span><button onClick={onExit}>Back to editing (Esc)</button>
+      <HardwareModeBadge /><button onClick={onExit}>Back to editing (Esc)</button>
     </>
   );
 }

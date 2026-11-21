@@ -4030,7 +4030,7 @@
       {
         "id": "sparkle",
         "fromSec": 19.8,
-        "toSec": 21.5,
+        "toSec": 21.0,
         "assetId": "media/sfx_sparkle.wav",
         "mediaOffsetSec": 0,
         "gain": 0.5,

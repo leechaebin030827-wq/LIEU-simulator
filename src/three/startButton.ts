@@ -13,18 +13,16 @@ export const buttonActive = (b: ButtonTimes, t: number) => t >= b.show && t <= b
 
 /** The whole sheet is drawn at this fraction of its design size, centred on the screen (a compact, slightly taller layout). */
 const SHEET_K = 2 / 3;
-const DEST = { name: '서울역', eta: '14', etaUnit: '분' };
+const DEST = { name: 'KINTEX', detail: '일산 킨텍스', eta: '14', etaUnit: '분' };
 
 /** square corners everywhere: the radius argument is kept so call sites stay unchanged */
 function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, _r: number) { ctx.beginPath(); ctx.rect(x, y, w, h); }
 
 /** Frosted-glass rounded rectangle over the picture: blurred copy of the still, faint white tint, hairline rim with a specular falloff. */
-function glassBox(ctx: CanvasRenderingContext2D, img: CanvasImageSource, W: number, H: number, x: number, y: number, w: number, h: number, r: number, u: number, lit: number) {
+function glassBox(ctx: CanvasRenderingContext2D, _img: CanvasImageSource, _W: number, _H: number, x: number, y: number, w: number, h: number, r: number, u: number, lit: number) {
   ctx.save(); rr(ctx, x, y, w, h, r); ctx.clip();
-  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);   // the blurred picture is in canvas space, whatever scale the sheet is drawn at
-  try { ctx.filter = `blur(${9 * u * SHEET_K}px) saturate(1.5) brightness(1.06)`; } catch { /* tint only */ }
-  ctx.drawImage(img, -40, -40, W + 80, H + 80); ctx.filter = 'none';
-  ctx.restore();
+  // Avoid a second filtered full-frame copy here. On multi-display Chrome that
+  // temporary surface can be tens of MB and is rebuilt for every video frame.
   const tone = ctx.createLinearGradient(0, y, 0, y + h);
   tone.addColorStop(0, `rgba(255,255,255,${0.14 + 0.16 * lit})`); tone.addColorStop(1, `rgba(255,255,255,${0.06 + 0.14 * lit})`);
   ctx.fillStyle = tone; ctx.fillRect(x, y, w, h);
@@ -96,14 +94,17 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   ctx.fillStyle = `rgba(8,14,28,${0.3 * alpha})`; ctx.fillRect(0, 0, W, H);   // calm the scene a little so the white type reads
 
   const X = 64 * u, CW = W - 128 * u;
-  const dy = H * 0.43;                                       // top of the sheet (kept fixed while it scales)
+  const mh = H * 0.31 * 1.25;                                // a longer map
+  // Sheet from the caption tops (~20u above dy) to the button bottom, centred on the screen at SHEET_K.
+  const sheetH = 20 * u + 112 * u + mh + 24 * u + 118 * u;
+  const dy = H / 2 - (SHEET_K * sheetH) / 2 + SHEET_K * 20 * u; // first caption baseline (kept fixed while it scales)
   ctx.save(); ctx.globalAlpha = alpha; ctx.translate(0, lift);
   ctx.translate(W / 2, dy); ctx.scale(SHEET_K, SHEET_K); ctx.translate(-W / 2, -dy);
   ctx.textBaseline = 'alphabetic';
 
   // destination: type only
   ctx.textAlign = 'left';
-  ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.font = `600 ${25 * u}px ${FONT}`; ctx.fillText('목적지', X, dy);
+  ctx.fillStyle = 'rgba(255,255,255,0.92)'; ctx.font = `600 ${25 * u}px ${FONT}`; ctx.fillText(`목적지 · ${DEST.detail}`, X, dy);
   ctx.fillStyle = '#fff'; ctx.font = `600 ${68 * u}px ${FONT}`; if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = `${-1.5 * u}px`;
   ctx.fillText(DEST.name, X, dy + 72 * u);
   ctx.textAlign = 'right';
@@ -114,7 +115,7 @@ export function drawStartButton(ctx: CanvasRenderingContext2D, W: number, H: num
   if ('letterSpacing' in ctx) (ctx as unknown as { letterSpacing: string }).letterSpacing = '0px';
 
   // route map: white line art
-  const my = dy + 112 * u, mh = H * 0.31 * 1.25;   // a longer map
+  const my = dy + 112 * u;
   drawMap(ctx, X - 20 * u, my, CW + 40 * u, mh, u, t, ((t - b.show) / 2.2) % 1);
 
   // the one boxed element: a wide frosted-glass rounded-rectangle Start button

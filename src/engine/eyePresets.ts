@@ -1,4 +1,4 @@
-import type { EyeRows8 } from './types';
+import type { EyeRows8 } from './types.ts';
 
 /** bit7 = virtual screen column 0 (left). Rows top->bottom. Presets are only starting points. */
 const r = (...rows: string[]): EyeRows8 => rows.map((s) => parseInt(s.replace(/\./g, '0').replace(/#/g, '1'), 2));

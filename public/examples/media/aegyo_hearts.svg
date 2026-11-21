@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512"><rect width="1024" height="512" fill="#000000"/><text x="160" y="160" font-size="90" fill="#ff7aa8" opacity="0.9" text-anchor="middle">♥</text><text x="330" y="110" font-size="60" fill="#ffc0d9" opacity="0.8" text-anchor="middle">♥</text><text x="520" y="170" font-size="120" fill="#ff5c93" opacity="1" text-anchor="middle">♥</text><text x="700" y="100" font-size="70" fill="#ffd0e6" opacity="0.8" text-anchor="middle">♥</text><text x="870" y="170" font-size="100" fill="#ff7aa8" opacity="0.9" text-anchor="middle">♥</text><text x="250" y="330" font-size="110" fill="#ffd0e6" opacity="0.9" text-anchor="middle">♥</text><text x="430" y="380" font-size="70" fill="#ff5c93" opacity="0.85" text-anchor="middle">♥</text><text x="620" y="340" font-size="95" fill="#ff7aa8" opacity="0.95" text-anchor="middle">♥</text><text x="800" y="390" font-size="65" fill="#ffc0d9" opacity="0.8" text-anchor="middle">♥</text><text x="960" y="300" font-size="60" fill="#ff5c93" opacity="0.8" text-anchor="middle">♥</text><text x="90" y="420" font-size="60" fill="#ff7aa8" opacity="0.8" text-anchor="middle">♥</text><g font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Arial, sans-serif" font-weight="700" text-anchor="middle"><text x="512" y="285" font-size="64" fill="#ffffff">좋아요 좋아요~</text></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="512" viewBox="0 0 1024 512">
+  <rect width="1024" height="512" fill="#000"/>
+  <defs><path id="heart" d="M0 36C-44 6-62-16-62-38C-62-58-46-72-28-72C-15-72-5-65 0-54C5-65 15-72 28-72C46-72 62-58 62-38C62-16 44 6 0 36Z"/></defs>
+  <!-- heart with two pulse outlines, like a heartbeat ping -->
+  <g fill="none" stroke="#eef4f8" stroke-width="3" stroke-linejoin="round">
+    <use href="#heart" transform="translate(512 214) scale(1.75)" stroke-opacity="0.2" stroke-width="2"/>
+    <use href="#heart" transform="translate(512 214) scale(1.4)" stroke-opacity="0.5" stroke-width="2.5"/>
+  </g>
+  <use href="#heart" transform="translate(512 214)" fill="#eef4f8"/>
+  <text x="514" y="410" fill="#eef4f8" font-size="34" font-weight="500" letter-spacing="6" text-anchor="middle" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Arial, sans-serif">좋아요 좋아요~</text>
+</svg>

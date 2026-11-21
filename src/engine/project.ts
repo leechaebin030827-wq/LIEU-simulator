@@ -31,8 +31,10 @@ const isNum = (v: unknown): v is number => typeof v === 'number' && Number.isFin
 
 function checkKeys(name: string, keys: unknown, each: (v: unknown) => boolean) {
   if (!Array.isArray(keys)) throw new ValidationError(`${name}: keys not an array`);
+  let previous = -Infinity;
   for (const k of keys) {
-    if (!k || typeof k.id !== 'string' || !isNum(k.tSec) || !each(k.value)) throw new ValidationError(`${name}: bad keyframe ${JSON.stringify(k)?.slice(0, 80)}`);
+    if (!k || typeof k.id !== 'string' || !isNum(k.tSec) || k.tSec < 0 || k.tSec < previous || !each(k.value)) throw new ValidationError(`${name}: bad keyframe ${JSON.stringify(k)?.slice(0, 80)}`);
+    previous = k.tSec;
   }
 }
 
@@ -40,10 +42,11 @@ function checkKeys(name: string, keys: unknown, each: (v: unknown) => boolean) {
 export function validateSequence(s: any): LieuSequence {
   if (!s || s.schema !== 'lieu.sequence/v1') throw new ValidationError('schema must be lieu.sequence/v1');
   if (typeof s.id !== 'string' || typeof s.title !== 'string') throw new ValidationError('id/title missing');
-  if (!isNum(s.durationSec) || s.durationSec <= 0 || !isNum(s.fps)) throw new ValidationError('duration/fps invalid');
+  if (!isNum(s.durationSec) || s.durationSec <= 0 || !isNum(s.fps) || s.fps <= 0) throw new ValidationError('duration/fps invalid');
   const T = s.tracks;
   if (!T) throw new ValidationError('tracks missing');
   for (const c of ['railX', 'yawY', 'tiltZ']) checkKeys(`motion.${c}`, T.motion?.[c]?.keys, isNum);
+  if (T.motion?.bodyYaw) checkKeys('motion.bodyYaw', T.motion.bodyYaw.keys, isNum);
   checkKeys('ring24.baseFrames', T.ring24?.baseFrames?.keys, (v) => Array.isArray(v) && v.length === LED_COUNT && v.every((p) => Array.isArray(p) && p.length === 4 && p.every((x) => isNum(x) && x >= 0 && x <= 255)));
   checkKeys('ring24.brightness', T.ring24?.brightness?.keys, isNum);
   if (!Array.isArray(T.ring24?.effects)) throw new ValidationError('ring24.effects');
@@ -51,6 +54,25 @@ export function validateSequence(s: any): LieuSequence {
   checkKeys('eyes.intensity', T.eyes?.intensity?.keys, isNum);
   if (!Array.isArray(T.projector?.clips) || !T.projector?.properties) throw new ValidationError('projector');
   if (!Array.isArray(T.audio) || !Array.isArray(T.events)) throw new ValidationError('audio/events');
+  for (const side of ['leftIntensity', 'rightIntensity']) if (T.eyes[side]) checkKeys(`eyes.${side}`, T.eyes[side].keys, isNum);
+  if (T.motion.liftY) checkKeys('motion.liftY', T.motion.liftY.keys, isNum);
+  for (const [name, track] of Object.entries(T.projector.properties)) {
+    if (track) checkKeys(`projector.${name}`, (track as { keys?: unknown }).keys, isNum);
+  }
+  for (const [name, clips] of [['effects', T.ring24.effects], ['projector', T.projector.clips], ['audio', T.audio]] as const) {
+    for (const clip of clips) {
+      if (!clip || typeof clip.id !== 'string' || !isNum(clip.fromSec) || !isNum(clip.toSec) || clip.fromSec < 0 || clip.toSec <= clip.fromSec) throw new ValidationError(`${name}: invalid clip time`);
+      if (name !== 'effects' && typeof clip.assetId !== 'string') throw new ValidationError(`${name}: missing media`);
+      for (const prop of ['mediaOffsetSec', 'gain', 'fadeInSec', 'fadeOutSec']) {
+        if (clip[prop] !== undefined && !isNum(clip[prop])) throw new ValidationError(`${name}: invalid ${prop}`);
+      }
+      if (clip.nativeRate !== undefined && typeof clip.nativeRate !== 'boolean') throw new ValidationError(`${name}: invalid nativeRate`);
+    }
+  }
+  for (const event of T.events) {
+    if (!event || typeof event.id !== 'string' || typeof event.type !== 'string' || !isNum(event.tSec) || event.tSec < 0) throw new ValidationError('events: invalid cue');
+  }
+
   return s as LieuSequence;
 }
 

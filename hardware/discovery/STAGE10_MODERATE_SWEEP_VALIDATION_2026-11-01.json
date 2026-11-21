@@ -1,0 +1,36 @@
+{
+  "schema": "lieu.moderate-sweep-validation/v1",
+  "date": "2026-11-01",
+  "tilt": {
+    "id": 2,
+    "startRaw": 2059,
+    "positiveTargetRaw": 2089,
+    "negativeTargetRaw": 2029,
+    "completionRaw": 2058,
+    "result": "pass"
+  },
+  "body": {
+    "id": 3,
+    "startRaw": 2184,
+    "positiveTargetRaw": 2284,
+    "negativeTargetRaw": 2084,
+    "completionRaw": 2184,
+    "maxObservedCurrentRaw": 17,
+    "result": "pass"
+  },
+  "rail": {
+    "id": 4,
+    "startRaw": 242,
+    "positiveTargetRaw": 292,
+    "positiveReachedRaw": 289,
+    "returnTargetRaw": 242,
+    "returnSettledRaw": 247,
+    "postReleaseRaw": 264,
+    "maxObservedCurrentMagnitudeRaw": 39,
+    "result": "safe-timeout-on-return",
+    "commandLocked": true,
+    "note": "The mechanism moved after torque release, indicating load, compliance, or backlash. Do not expand travel until this is resolved."
+  },
+  "finalTorque": "0000",
+  "overallResult": "tilt-and-body-pass-rail-locked"
+}

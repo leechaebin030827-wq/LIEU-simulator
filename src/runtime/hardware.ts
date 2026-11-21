@@ -1,158 +1,377 @@
-import { useStore } from '../store';
-import type { DesiredState } from '../engine/types';
+import type { DesiredState, MotionState } from '../engine/types';
+import { motionToSafeRaw, type SafeRawFrame } from './hardwareMap';
+import { lightLines } from './lightMap';
+import { reportIncident } from './incidents';
+import { setHardwareOutputsEnabled } from './outputGate';
 
-/** Live output to the UNO R4 test rig over Web Serial (Chrome/Edge). Same mapping + protocol as hardware/pi/lieu_hw
- *  (python mapping.py / protocol.py), so calibration values carry over to hardware.json. Motors are not driven. */
-export type EyeLayout = 'adafruit' | 'msb_left' | 'lsb_left';
-export type HwSettings = {
-  layout: EyeLayout; flipX: boolean; flipY: boolean; swap: boolean;
-  addrL: number; addrR: number;
-  ringOffset: number; ringReverse: boolean;
-  maxScale: number; budgetMa: number;
+export type SafeAxis = 'yaw' | 'tilt' | 'body' | 'rail';
+
+/** Firmware PLAYOUT_DELAY_MS: motion frames are evaluated this far ahead so the robot stays on the video. */
+export const HARDWARE_PLAYOUT_SEC = 0.1;
+
+type SerialReader = ReadableStreamDefaultReader<Uint8Array>;
+type SerialWriter = WritableStreamDefaultWriter<Uint8Array>;
+type SerialPortLike = {
+  readable: ReadableStream<Uint8Array> | null;
+  writable: WritableStream<Uint8Array> | null;
+  open(options: { baudRate: number; bufferSize?: number }): Promise<void>;
+  close(): Promise<void>;
 };
-export const DEFAULT_HW: HwSettings = { layout: 'adafruit', flipX: false, flipY: false, swap: false, addrL: 0x70, addrR: 0x71, ringOffset: 0, ringReverse: false, maxScale: 0.25, budgetMa: 400 };
 
-const SYNC = [0xaa, 0x55], T_FRAME = 1, T_CONFIG = 2, T_INFO = 3, T_BLANK = 4, N = 24;
+export type HardwareStatus = {
+  connected: boolean;
+  busy: boolean;
+  message: string;
+  activeAxis: SafeAxis | null;
+  playbackArmed: boolean;
+  raw: Record<SafeAxis, number | null>;
+  goal: number | null;
+  torque: string;
+  /** Latest TEL line from the controller (every 0.5 s), for the 활성상태 tab. */
+  telemetry: Telemetry | null;
+};
 
-export function packet(type: number, payload: ArrayLike<number> = []): Uint8Array {
-  const body = [type, payload.length, ...Array.from(payload)];
-  return Uint8Array.from([...SYNC, ...body, body.reduce((a, b) => a + b, 0) & 255]);
+/** Per motor in ID order 1..4 (yaw, tilt, body, rail). present is null when the motor did not answer. */
+export type Telemetry = {
+  at: number;
+  mode: 'ALL' | 'SINGLE' | 'OFF';
+  responded: number;
+  present: (number | null)[];
+  goal: number[];
+  alert: boolean[];
+  torque: boolean[];
+  eyes: [boolean, boolean];
+  lightsActive: boolean;
+  i2cErrors: number;
+  badLines: number;
+};
+
+export function parseTelemetry(line: string, at: number): Telemetry | null {
+  const m = line.match(/^TEL mode=(ALL|SINGLE|OFF) rx=(\d) p=([-\dx,]+) g=([-\d,]+) alert=([01,]+) torque=([01]{4}) eyes=([01]),([01]) lights=([01]) i2c=(\d+) bad=(\d+)$/);
+  if (!m) return null;
+  return {
+    at, mode: m[1] as Telemetry['mode'], responded: Number(m[2]),
+    present: m[3].split(',').map((v) => (v === 'x' ? null : Number(v))),
+    goal: m[4].split(',').map(Number),
+    alert: m[5].split(',').map((v) => v === '1'),
+    torque: m[6].split('').map((v) => v === '1'),
+    eyes: [m[7] === '1', m[8] === '1'],
+    lightsActive: m[9] === '1', i2cErrors: Number(m[10]), badLines: Number(m[11]),
+  };
 }
 
-export function mapRow(row: number, layout: EyeLayout, flipX: boolean): number {
-  const cols = Array.from({ length: 8 }, (_, c) => (row >> (7 - c)) & 1);
-  if (flipX) cols.reverse();
-  let out = 0;
-  cols.forEach((on, c) => { if (on) out |= 1 << (layout === 'msb_left' ? 7 - c : layout === 'lsb_left' ? c : (c + 7) % 8); });
-  return out;
-}
-
-/** Scale so the estimated draw (20 mA per channel at 255) stays within budget and max_scale. */
-export function limitRing(ring: number[], maxScale: number, budgetMa: number): number[] {
-  const total = ring.reduce((a, b) => a + b, 0);
-  const scale = total ? Math.min(maxScale, budgetMa / ((total * 20) / 255)) : maxScale;
-  return ring.map((b) => Math.floor(b * scale));
-}
-
-export type DeviceFrame = { l: number[]; r: number[]; bl: number; br: number; ring: number[] };
-
-export function toDevice(s: DesiredState, c: HwSettings): DeviceFrame {
-  const off = (i: number) => i < 0.03;
-  const dim = (i: number) => Math.round(Math.min(1, Math.max(0, i)) * 15);
-  let l = off(s.eyes.leftIntensity) ? new Array(8).fill(0) : [...s.eyes.left];
-  let r = off(s.eyes.rightIntensity) ? new Array(8).fill(0) : [...s.eyes.right];
-  let bl = dim(s.eyes.leftIntensity), br = dim(s.eyes.rightIntensity);
-  if (c.swap) { [l, r] = [r, l]; [bl, br] = [br, bl]; }
-  const eye = (rows: number[]) => { const m = rows.map((x) => mapRow(x, c.layout, c.flipX)); return c.flipY ? m.reverse() : m; };
-  const g = s.ring24.brightness, phys = new Array(N * 4).fill(0), step = c.ringReverse ? -1 : 1;
-  s.ring24.pixels.forEach((p, v) => {
-    const q = (((step * v + c.ringOffset) % N) + N) % N;
-    for (let k = 0; k < 4; k++) phys[q * 4 + k] = Math.round(p[k] * g);
-  });
-  return { l: eye(l), r: eye(r), bl, br, ring: limitRing(phys, c.maxScale, c.budgetMa) };
-}
-
-export const framePacket = (d: DeviceFrame) => packet(T_FRAME, [...d.l, ...d.r, d.bl, d.br, ...d.ring]);
-/** Host already limits; the firmware keeps the same budget (+10 %) only as a backstop. */
-export const configPacket = (c: HwSettings) => packet(T_CONFIG, [c.addrL, c.addrR, 255, (Math.round(c.budgetMa * 1.1) >> 8) & 255, Math.round(c.budgetMa * 1.1) & 255]);
-
-// ---- connection (browser only) ---------------------------------------------------------------------------------------------
-type Status = { connected: boolean; busy: boolean; message: string; frames: number };
-let port: any = null, writer: any = null, timer = 0, pending = false, lastKey = '', lastSent = 0;
-let settings: HwSettings = loadSettings();
-let status: Status = { connected: false, busy: false, message: 'Not connected', frames: 0 };
 const listeners = new Set<() => void>();
-const emit = () => listeners.forEach((f) => f());
+let status: HardwareStatus = {
+  connected: false,
+  busy: false,
+  message: '안전 컨트롤러 · 연결 안 됨',
+  activeAxis: null,
+  playbackArmed: false,
+  raw: { yaw: null, tilt: null, body: null, rail: null },
+  goal: null,
+  torque: '0000',
+  telemetry: null,
+};
+let port: SerialPortLike | null = null;
+let reader: SerialReader | null = null;
+let writer: SerialWriter | null = null;
+let generation = 0;
+let heartbeat: ReturnType<typeof setInterval> | null = null;
+let playbackGoals: SafeRawFrame | null = null;
+let frameInFlight = false;
+let lightsInFlight = false;
+let lightsOn = false;
+let lastEyes = '', lastRing = '', lastLightsSentAt = 0, lastRingSentAt = 0;
+const LIGHT_KEEPALIVE_MS = 1000; // firmware blanks the lights after 5 s without a line
+// A RING line is ~200 bytes; at 30 Hz it alone used most of the 115200-baud link, and the
+// UNO R4 WiFi's USB bridge has frozen twice under that load. 10 Hz still looks smooth on the LEDs.
+const RING_MIN_INTERVAL_MS = 100;
+// A write slower than this is reported in the hardware menu (link congestion or a stalled page).
+const SLOW_WRITE_MS = 500;
+// Timeline torque released only because the host went quiet: re-arm and carry on.
+let lastAutoRearmAt = 0;
+const AUTO_REARM_GAP_MS = 2000;
+let shouldAutoRearm: () => boolean = () => false;
 
-function loadSettings(): HwSettings {
-  try { return { ...DEFAULT_HW, ...JSON.parse(localStorage.getItem('lieu.hw') ?? '{}') }; } catch { return { ...DEFAULT_HW }; }
+/** Live link diagnostics, shown by the dev overlay (window.__lieuStats.hardware). */
+export const hardwareStats = { lastFrameAt: 0, framesSent: 0, framesSkipped: 0, ringsSent: 0, lastWriteMs: 0, maxWriteMs: 0, slowWrites: 0, autoRearms: 0, readErrors: 0, lastRelease: '' };
+if (typeof window !== 'undefined') {
+  const w = window as Window & { __lieuStats?: Record<string, unknown> };
+  w.__lieuStats = { ...(w.__lieuStats ?? {}), hardware: hardwareStats, hardwareStatus: () => status };
 }
-export const hwSupported = () => typeof navigator !== 'undefined' && 'serial' in navigator;
-export const getHwSettings = () => settings;
+const LOCKING_REFUSALS = new Set(['axis-not-ready', 'timeline-not-active', 'outputs-active', 'axis-not-active']);
+// No status report for this long means the board (often its USB bridge) stopped answering.
+const BOARD_SILENT_MS = 2000;
+let boardSilent = false, connectedAt = 0;
+/** Set by the transport: whether a host-silence release should be re-armed (i.e. still playing). */
+export const setAutoRearmCheck = (check: () => boolean) => { shouldAutoRearm = check; };
+
+const emit = (patch: Partial<HardwareStatus>) => {
+  status = { ...status, ...patch };
+  listeners.forEach((listener) => listener());
+};
+
 export const getHwStatus = () => status;
-export function setHwSettings(p: Partial<HwSettings>) {
-  settings = { ...settings, ...p };
-  try { localStorage.setItem('lieu.hw', JSON.stringify(settings)); } catch { /* storage unavailable */ }
-  lastKey = ''; // force a resend with the new mapping
-  if (writer && ('addrL' in p || 'addrR' in p || 'budgetMa' in p)) void send(configPacket(settings));
-  emit();
-}
-export function subscribeHw(f: () => void) { listeners.add(f); return () => { listeners.delete(f); }; }
-const setStatus = (p: Partial<Status>) => { status = { ...status, ...p }; emit(); };
+export const subscribeHw = (listener: () => void) => { listeners.add(listener); return () => listeners.delete(listener); };
+export const hwSupported = () => typeof navigator !== 'undefined' && 'serial' in navigator;
 
-async function send(bytes: Uint8Array) {
-  if (!writer || pending) return;
-  pending = true;
-  try { await writer.write(bytes); } catch (e) { void disconnectHw(`Write failed: ${(e as Error).message}`); } finally { pending = false; }
-}
+const axisFromDevice = (value: string): SafeAxis | null => {
+  const axis = value.toLowerCase();
+  return axis === 'yaw' || axis === 'tilt' || axis === 'body' || axis === 'rail' ? axis : null;
+};
 
-function tick() {
-  if (!writer) return;
-  const d = toDevice(useStore.getState().evalNow(), settings);
-  const key = [d.l, d.r, d.bl, d.br, d.ring].join('|');
-  const now = performance.now();
-  if (key !== lastKey || now - lastSent > 250) { // keepalive: firmware blanks after ~2 s of silence
-    lastKey = key; lastSent = now;
-    void send(framePacket(d));
-    status.frames++;
+function consumeLine(line: string) {
+  const telemetry = parseTelemetry(line, performance.now());
+  if (telemetry) {
+    const before = status.telemetry?.badLines;
+    if (before != null && telemetry.badLines > before) reportIncident('link-bad-line', `보드가 깨진 명령 ${telemetry.badLines - before}줄 버림`);
+    if (boardSilent) { boardSilent = false; reportIncident('board-silent', '보고 다시 들어옴'); }
+    emit({ telemetry });
+    return;
+  }
+  const state = line.match(/^STATUS active=(NONE|YAW|TILT|BODY|RAIL|ALL) id1=(-?\d+) id2=(-?\d+) id3=(-?\d+) id4=(-?\d+) torque=([01]{4})(?: goal=(-?\d+)| goal1=(-?\d+) goal2=(-?\d+) goal3=(-?\d+) goal4=(-?\d+))?$/);
+  if (state) {
+    const all = state[1] === 'ALL';
+    const raw = { yaw: Number(state[2]), tilt: Number(state[3]), body: Number(state[4]), rail: Number(state[5]) };
+    if (all) playbackGoals = {
+      yaw: state[8] == null ? raw.yaw : Number(state[8]),
+      tilt: state[9] == null ? raw.tilt : Number(state[9]),
+      body: state[10] == null ? raw.body : Number(state[10]),
+      rail: state[11] == null ? raw.rail : Number(state[11]),
+    };
+    emit({
+      activeAxis: state[1] === 'NONE' || all ? null : axisFromDevice(state[1]),
+      playbackArmed: all,
+      raw,
+      torque: state[6],
+      goal: state[7] == null ? null : Number(state[7]),
+      message: all ? '4축 Sync Write 타임라인 준비됨' : '안전 컨트롤러 연결됨',
+    });
+    if (!all) setHardwareOutputsEnabled(false);
+    return;
+  }
+  const armedAll = line.match(/^ARMED axis=ALL raw1=(-?\d+) raw2=(-?\d+) raw3=(-?\d+) raw4=(-?\d+)$/);
+  if (armedAll) {
+    playbackGoals = { yaw: Number(armedAll[1]), tilt: Number(armedAll[2]), body: Number(armedAll[3]), rail: Number(armedAll[4]) };
+    emit({ activeAxis: null, playbackArmed: true, goal: null, torque: '1111', message: '4축 Sync Write 타임라인 준비됨' });
+    setHardwareOutputsEnabled(true);
+    return;
+  }
+  const armed = line.match(/^ARMED axis=(YAW|TILT|BODY|RAIL) raw=(-?\d+)$/);
+  if (armed) { setHardwareOutputsEnabled(false); emit({ activeAxis: axisFromDevice(armed[1]), playbackArmed: false, goal: Number(armed[2]), message: `${armed[1]} Arm` }); return; }
+  const goal = line.match(/^GOAL axis=(YAW|TILT|BODY|RAIL) raw=(-?\d+)$/);
+  if (goal) { emit({ goal: Number(goal[2]), message: `${goal[1]} 목표 ${goal[2]}` }); return; }
+  const frame = line.match(/^FRAME goal1=(-?\d+) goal2=(-?\d+) goal3=(-?\d+) goal4=(-?\d+)$/);
+  if (frame) {
+    playbackGoals = { yaw: Number(frame[1]), tilt: Number(frame[2]), body: Number(frame[3]), rail: Number(frame[4]) };
+    return;
+  }
+  if (line.startsWith('RELEASE ')) {
+    const wasArmed = status.playbackArmed;
+    hardwareStats.lastRelease = line.slice('RELEASE reason='.length);
+    playbackGoals = null;
+    setHardwareOutputsEnabled(false);
+    emit({ activeAxis: null, playbackArmed: false, goal: null, torque: '0000', message: line });
+    if (wasArmed) reportIncident('link-release', hardwareStats.lastRelease);
+    // The firmware let go because nothing arrived for a few seconds (a stalled page or a
+    // congested link), not because of a fault: re-arm at the current pose and keep playing.
+    const now = performance.now();
+    if (line === 'RELEASE reason=watchdog' && wasArmed && shouldAutoRearm() && now - lastAutoRearmAt > AUTO_REARM_GAP_MS) {
+      lastAutoRearmAt = now;
+      hardwareStats.autoRearms++;
+      reportIncident('link-rearm', '통신 지연으로 풀린 토크를 다시 켬');
+      emit({ message: '통신 지연으로 토크 해제 — 자동 재준비 중…' });
+      void sendLine('ARM ALL');
+    }
+    return;
+  }
+  if (line.startsWith('REFUSE ')) {
+    // Only "not armed / cannot arm" refusals lock the outputs. A damaged line the controller
+    // could not parse (unknown-command, bad-frame, ...) used to lock them too: the app then
+    // stopped sending motion while the eyes/ring kept the link alive, and the robot froze
+    // with torque on mid-show.
+    const reason = line.match(/reason=([\w-]+)/)?.[1] ?? '';
+    if (LOCKING_REFUSALS.has(reason)) setHardwareOutputsEnabled(false);
+    else reportIncident('link-bad-line', `보드가 거부: ${reason}`);
+    emit({ message: line });
   }
 }
 
-async function openPort(p: any) {
-  port = p;
-  await port.open({ baudRate: 115200 });
-  writer = port.writable.getWriter();
-  // opening toggles DTR; the R4 may restart, so give it a moment before the first packets
-  setStatus({ message: 'Starting…' });
-  await new Promise((r) => setTimeout(r, 1800));
-  await send(configPacket(settings));
-  lastKey = '';
-  timer = window.setInterval(tick, 1000 / 30);
-  setStatus({ connected: true, busy: false, message: 'Connected', frames: 0 });
+async function readLoop(session: number) {
+  const decoder = new TextDecoder();
+  let pending = '';
+  while (session === generation && reader) {
+    try {
+      const { value, done } = await reader.read();
+      if (done) break;
+      pending += decoder.decode(value, { stream: true });
+      const lines = pending.split(/\r?\n/);
+      pending = lines.pop() ?? '';
+      lines.map((line) => line.trim()).filter(Boolean).forEach(consumeLine);
+    } catch (error) {
+      if (session !== generation) return;
+      // A framing/overrun error ends this reader, but the port hands out a fresh readable
+      // stream: pick it up instead of going deaf to the controller for the rest of the show.
+      hardwareStats.readErrors++;
+      emit({ message: `수신 오류 후 재연결: ${String(error)}` });
+      try { reader?.releaseLock(); } catch { /* already released */ }
+      reader = port?.readable ? port.readable.getReader() : null;
+      pending = '';
+    }
+  }
+}
+
+/** Appends " ~HH" (low byte of the character sum) so the firmware drops lines damaged on the UART. */
+export const withChecksum = (line: string) => {
+  let sum = 0;
+  for (let i = 0; i < line.length; i++) sum = (sum + line.charCodeAt(i)) & 0xff;
+  return `${line} ~${sum.toString(16).padStart(2, '0').toUpperCase()}`;
+};
+
+async function sendLine(line: string) {
+  if (!writer || !status.connected) return false;
+  const began = performance.now();
+  try {
+    await writer.write(new TextEncoder().encode(`${line}\n`));
+    const took = performance.now() - began;
+    hardwareStats.lastWriteMs = took;
+    hardwareStats.maxWriteMs = Math.max(hardwareStats.maxWriteMs, took);
+    if (took > SLOW_WRITE_MS) {
+      hardwareStats.slowWrites++;
+      reportIncident('link-slow', `${line.split(' ')[0]} 송신 ${Math.round(took)}ms`);
+      emit({ message: `송신 지연 ${Math.round(took)}ms (USB 연결 혼잡)` });
+    }
+    return true;
+  } catch (error) { emit({ message: `송신 실패: ${String(error)}` }); return false; }
 }
 
 export async function connectHw() {
-  if (!hwSupported()) { setStatus({ message: 'Web Serial needs Chrome or Edge' }); return; }
-  setStatus({ busy: true, message: 'Choose the Arduino port…' });
+  if (!hwSupported() || status.busy || status.connected) return;
+  emit({ busy: true, message: 'UNO R4 연결 중…' });
   try {
-    await openPort(await (navigator as any).serial.requestPort({ filters: [{ usbVendorId: 0x2341 }] }));
-  } catch (e) {
-    await disconnectHw(e instanceof Error && e.name === 'NotFoundError' ? 'Not connected' : `Connect failed: ${(e as Error).message}`);
+    const serial = (navigator as Navigator & { serial: { requestPort(options?: unknown): Promise<SerialPortLike> } }).serial;
+    port = await serial.requestPort({ filters: [{ usbVendorId: 0x2341 }] });
+    // The 255-byte default buffer nearly fills with one RING line, so writes queued behind it.
+    await port.open({ baudRate: 115200, bufferSize: 8192 });
+    if (!port.readable || !port.writable) throw new Error('Serial streams unavailable');
+    reader = port.readable.getReader();
+    writer = port.writable.getWriter();
+    const session = ++generation;
+    connectedAt = performance.now(); boardSilent = false;
+    emit({ connected: true, busy: false, message: '연결됨 · 출력 잠금', activeAxis: null, playbackArmed: false, torque: '0000' });
+    void readLoop(session);
+    heartbeat = setInterval(() => {
+      if (status.activeAxis || status.playbackArmed) void sendLine(withChecksum('HEARTBEAT'));
+      // The board reports every 0.5 s; silence means its USB bridge or firmware stopped.
+      const lastReport = status.telemetry?.at ?? connectedAt;
+      if (!boardSilent && performance.now() - lastReport > BOARD_SILENT_MS) {
+        boardSilent = true;
+        reportIncident('board-silent', `${((performance.now() - lastReport) / 1000).toFixed(1)}s 동안 보고 없음 (USB 다시 꽂기 필요할 수 있음)`);
+        emit({ message: '보드 응답 없음 — USB 케이블을 다시 꽂아 주세요' });
+      }
+    }, 250);
+    await sendLine('INFO');
+    await sendLine('STATUS');
+  } catch (error) {
+    emit({ connected: false, busy: false, message: `연결 실패: ${String(error)}` });
   }
 }
 
-/** After the first manual "Connect" the browser remembers the Arduino: from then on it is opened by itself on page load and whenever it is plugged back in. */
-let autoStarted = false;
-export async function autoConnectHw() {
-  if (!hwSupported() || writer || status.busy) return;
+export async function offHardware() {
+  setHardwareOutputsEnabled(false);
+  await sendLine('OFF');
+  setTimeout(() => { if (status.connected) void sendLine('STATUS'); }, 100);
+}
+
+export async function disconnectHw(reason = '연결 해제') {
+  ++generation;
+  if (heartbeat) { clearInterval(heartbeat); heartbeat = null; }
+  try { await sendLine('OFF'); } catch { /* best effort */ }
+  try { await reader?.cancel(); } catch { /* best effort */ }
+  try { reader?.releaseLock(); } catch { /* best effort */ }
+  try { writer?.releaseLock(); } catch { /* best effort */ }
+  reader = null; writer = null;
+  try { await port?.close(); } catch { /* best effort */ }
+  port = null;
+  playbackGoals = null;
+  lightsOn = false; lastEyes = ''; lastRing = ''; lastLightsSentAt = 0; lastRingSentAt = 0;
+  setHardwareOutputsEnabled(false);
+  emit({ connected: false, busy: false, activeAxis: null, playbackArmed: false, goal: null, torque: '0000', message: reason, telemetry: null });
+}
+
+export async function armHardwareAxis(axis: SafeAxis) {
+  if (!status.connected) return false;
+  setHardwareOutputsEnabled(false);
+  return sendLine(`ARM ${axis.toUpperCase()}`);
+}
+
+export async function armHardwarePlayback() {
+  if (!status.connected || status.activeAxis || status.playbackArmed) return false;
+  setHardwareOutputsEnabled(false);
+  emit({ message: '4축 Sync Write · 현재 위치에서 준비 중…' });
+  return sendLine('ARM ALL');
+}
+
+export async function sendHardwareFrame(motion: MotionState) {
+  if (status.connected && status.playbackArmed && frameInFlight) hardwareStats.framesSkipped++;
+  if (!status.connected || !status.playbackArmed || !playbackGoals || frameInFlight) return false;
+  frameInFlight = true;
   try {
-    const known = (await (navigator as any).serial.getPorts()).find((p: any) => p.getInfo?.().usbVendorId === 0x2341);
-    if (!known) return;
-    setStatus({ busy: true, message: 'Connecting…' });
-    await openPort(known);
-  } catch (e) { await disconnectHw(`Auto-connect failed: ${(e as Error).message}`); }
-  finally { if (!autoStarted) { autoStarted = true; const s = (navigator as any).serial; s.addEventListener('connect', () => void autoConnectHw()); s.addEventListener('disconnect', () => void disconnectHw('Unplugged')); } }
+    const next = motionToSafeRaw(motion);
+    // Every frame carries the exact goal of all four axes and the host time it
+    // belongs to. The firmware buffers frames and plays them HARDWARE_PLAYOUT_SEC
+    // later on a smooth curve, so USB/timer jitter never makes the motors pause.
+    const now = performance.now();
+    const sent = await sendLine(withChecksum(`FRAMET ${Math.round(now) >>> 0} ${next.yaw} ${next.tilt} ${next.body} ${next.rail}`));
+    if (sent) { playbackGoals = next; hardwareStats.framesSent++; hardwareStats.lastFrameAt = performance.now(); }
+    return sent;
+  } finally {
+    frameInFlight = false;
+  }
 }
 
-export async function disconnectHw(message = 'Not connected') {
-  window.clearInterval(timer);
-  try { if (writer) { await writer.write(packet(T_BLANK)); writer.releaseLock(); } } catch { /* already gone */ }
-  try { await port?.close(); } catch { /* already closed */ }
-  writer = null; port = null; pending = false;
-  setStatus({ connected: false, busy: false, message });
+/**
+ * Streams the eyes and ring of the current frame. Needs only a connection, not
+ * an armed timeline: lights never move anything. Unchanged lines are skipped
+ * except for a periodic keep-alive.
+ */
+export async function sendHardwareLights(state: DesiredState) {
+  if (!status.connected || lightsInFlight) return false;
+  lightsInFlight = true;
+  try {
+    const { eyes, ring } = lightLines(state);
+    const now = performance.now();
+    const keepAlive = now - lastLightsSentAt > LIGHT_KEEPALIVE_MS;
+    if (eyes !== lastEyes || keepAlive) { if (!(await sendLine(withChecksum(eyes)))) return false; lastEyes = eyes; }
+    if ((ring !== lastRing && now - lastRingSentAt >= RING_MIN_INTERVAL_MS) || keepAlive) {
+      if (!(await sendLine(withChecksum(ring)))) return false;
+      lastRing = ring; lastRingSentAt = now; hardwareStats.ringsSent++;
+    }
+    if (keepAlive) lastLightsSentAt = now;
+    lightsOn = true;
+    return true;
+  } finally {
+    lightsInFlight = false;
+  }
 }
 
-/** Single lit eye pixel (virtual row/col) to calibrate the eye mapping. */
-export async function probeEye(side: 'L' | 'R', row: number, col: number) {
-  const rows = new Array(8).fill(0); rows[row] = 1 << (7 - col);
-  const z = new Array(8).fill(0);
-  const m = (a: number[]) => { const o = a.map((x) => mapRow(x, settings.layout, settings.flipX)); return settings.flipY ? o.reverse() : o; };
-  const [l, r] = side === 'L' ? [rows, z] : [z, rows];
-  const [pl, pr] = settings.swap ? [r, l] : [l, r];
-  const hold = window.setInterval(() => void send(packet(T_FRAME, [...m(pl), ...m(pr), 15, 15, ...new Array(96).fill(0)])), 100);
-  window.clearInterval(timer); // pause live output while probing
-  await new Promise((res) => setTimeout(res, 1500));
-  window.clearInterval(hold);
-  timer = window.setInterval(tick, 1000 / 30);
+/** Ring off, neutral eyes. */
+export async function lightsOffHardware() {
+  if (!lightsOn) return;
+  lightsOn = false;
+  lastEyes = ''; lastRing = ''; lastLightsSentAt = 0; lastRingSentAt = 0;
+  await sendLine('LIGHTS_OFF');
 }
-export const requestInfo = () => send(packet(T_INFO));
+
+export async function stepHardwareAxis(axis: SafeAxis, deltaRaw: number) {
+  if (status.activeAxis !== axis) return false;
+  const base = status.goal ?? status.raw[axis];
+  if (base == null) return false;
+  const sent = await sendLine(`MOVE ${axis.toUpperCase()} ${Math.round(base + deltaRaw)}`);
+  if (sent) setTimeout(() => { if (status.connected) void sendLine('STATUS'); }, 120);
+  return sent;
+}
+
+// No release on visibilitychange: the transport keeps ticking from a worker while
+// the page is hidden (TV/projector window on top, another tab), and if the page
+// truly stalls the firmware holds the pose and releases torque after 5 s (and the app re-arms).

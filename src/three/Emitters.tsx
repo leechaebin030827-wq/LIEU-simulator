@@ -17,7 +17,7 @@ const GLOW_FRAG = /* glsl */ `
 varying vec3 vColor; uniform float uCore;
 void main(){ vec2 d=gl_PointCoord-0.5; float r=length(d)*2.0; if(r>1.0) discard;
   float core=smoothstep(uCore,0.0,r); float halo=pow(1.0-r,2.2);
-  gl_FragColor=vec4(vColor*(0.35*halo+0.9*core),1.0); }`;
+  gl_FragColor=vec4(vColor*(0.24*halo+0.68*core),1.0); }`;
 
 function glowMaterial(scale: number, core: number) {
   return new THREE.ShaderMaterial({
@@ -38,6 +38,8 @@ function StageGroup({ node, children }: { node: number; children: React.ReactNod
 }
 
 const ringPts = led.ring24.pixels as { virtualIndex: number; worldPositionMeters: number[] }[];
+/** Preview-only response curve: preserves authored values while preventing additive white clipping. */
+export const ringPreviewGain = (brightness: number) => 0.68 * Math.pow(THREE.MathUtils.clamp(brightness, 0, 1), 1.45);
 /** Eye dots are drawn without depth test (they sit just behind the shell holes) but fade out when viewed from behind/side. */
 const EYE_VERT = /* glsl */ `
 attribute vec3 color; attribute float size; varying vec3 vColor; varying float vFace;
@@ -76,7 +78,7 @@ function RingGlow() {
     const st = frame.state; if (!st) return;
     const v = useStore.getState();
     const col = geo.getAttribute('color') as THREE.BufferAttribute;
-    const b = st.ring24.brightness;
+    const b = ringPreviewGain(st.ring24.brightness);
     let ar = 0, ag = 0, ab = 0;
     for (let i = 0; i < 24; i++) {
       const [r, g, bl, w] = st.ring24.pixels[i];
@@ -86,8 +88,8 @@ function RingGlow() {
     }
     col.needsUpdate = true;
     mat.visible = v.view.showLedGlow;
-    if (light.current) { light.current.color.setRGB(ar / 24, ag / 24, ab / 24); light.current.intensity = Math.min(1.2, (ar + ag + ab) / 24) * 0.6; }
-    if (diffuse.current) diffuse.current.color.setRGB(ar / 24 * 0.9, ag / 24 * 0.9, ab / 24 * 0.9);
+    if (light.current) { light.current.color.setRGB(ar / 24, ag / 24, ab / 24); light.current.intensity = Math.min(1, (ar + ag + ab) / 24) * 0.32; }
+    if (diffuse.current) diffuse.current.color.setRGB(ar / 24 * 0.65, ag / 24 * 0.65, ab / 24 * 0.65);
     // selection ring
     const size = geo.getAttribute('size') as THREE.BufferAttribute;
     for (let i = 0; i < 24; i++) size.setX(i, v.selectedLeds.includes(i) ? 0.024 : 0.016);
@@ -100,7 +102,7 @@ function RingGlow() {
       {/* diffuser tint over the LED shade footprint (disc), not raw LED spheres */}
       <mesh position={[0, -0.0268, 0]} rotation={[Math.PI / 2, 0, 0]} renderOrder={4}>
         <ringGeometry args={[0.0215, 0.0345, 48]} />
-        <meshBasicMaterial ref={diffuse} transparent opacity={0.55} blending={THREE.AdditiveBlending} depthWrite={false} side={THREE.DoubleSide} />
+        <meshBasicMaterial ref={diffuse} transparent opacity={0.38} blending={THREE.AdditiveBlending} depthWrite={false} side={THREE.DoubleSide} />
       </mesh>
       <PickTargets />
     </StageGroup>
@@ -205,18 +207,27 @@ function EyeGlow({ side }: { side: 'left' | 'right' }) {
   }, [data, seats]);
   const mat = useMemo(() => eyeMaterial(900), []);
   const tint = useMemo(() => new THREE.Color(), []);
-  useFrame(() => {
+  const levels = useRef(new Float32Array(64));
+  const lastT = useRef<number | null>(null);
+  useFrame((_, delta) => {
     const st = frame.state; if (!st) return;
     const v = useStore.getState().view;
     tint.set(v.eyeColor);
     const rows = st.eyes[side];
     const k = side === 'left' ? st.eyes.leftIntensity : st.eyes.rightIntensity;
     const col = geo.getAttribute('color') as THREE.BufferAttribute;
+    const jumped = lastT.current !== null && Math.abs(st.tSec - lastT.current) > 0.25;
+    // Roughly 70 ms response: quick enough for a blink, soft enough that a
+    // bitmap swap reads as an organic eyelid transition instead of a cut.
+    const alpha = jumped ? 1 : 1 - Math.exp(-Math.min(delta, 0.05) / 0.07);
     data.pixels.forEach((p, i) => {
       const on = getBit(rows, p.row, p.col);
-      const f = on && !hidden ? 4.5 * k : 0; // unlit dots show only the shell-colored hole interior
+      const target = on && !hidden ? 4.5 * k : 0;
+      levels.current[i] += (target - levels.current[i]) * alpha;
+      const f = levels.current[i]; // unlit dots show only the shell-colored hole interior
       col.setXYZ(i, tint.r * f, tint.g * f, tint.b * f);
     });
+    lastT.current = st.tSec;
     col.needsUpdate = true;
   });
   return <StageGroup node={node}><points geometry={geo} material={mat} frustumCulled={false} renderOrder={5} /></StageGroup>;

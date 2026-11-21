@@ -9,12 +9,14 @@ export const GROUPS: { key: ScenarioGroup; title: string; en: string; note: stri
 ];
 
 export const SCENARIOS: ScenarioInfo[] = [
+  { id: '08_exhibition_final', label: 'Final Exhibition', desc: '82초 통합 영상 · 출발 · 공사 정지 · 밤 애교 인터랙션', group: 'exhibit', file: 'FinalExhibition' },
   { id: '01_boarding', label: 'Boarding', desc: '차량 도착 · 환영 · 인사 · 착석 확인 · 출발(빙그르르)', group: 'exhibit', file: 'Boarding' },
   { id: '02_driving_a', label: 'Driving A', desc: '공사 감지 · 앞을 살피고 · 돌아와 우회 안내', group: 'exhibit', file: 'DrivingA' },
   { id: '04_driving_b', label: 'Driving B', desc: 'Hey LIEU 호출 · 링 쇼 · 애교 총출동', group: 'exhibit', file: 'DrivingB' },
   { id: '03_arrival', label: 'Arrival', desc: '곧 도착 · 둘러보기 · 작별 인사 · 문 쪽 안내', group: 'exhibit', file: 'Arrival' },
   { id: '07_bonus_aegyo', label: '애교 대폭발', desc: '모든 축 · 눈 · 링 · 프로젝터 총동원 · 윙크 폭탄 · 빙그르르 x2', group: 'bonus', file: 'BonusAegyo' },
   { id: '05_web_cover', label: '웹 모션 · 표지', desc: '웹 표지용: 호기심 · 상하좌우 시선 · 눈 감기 · 신남', group: 'lab', file: 'WebCover' },
+  { id: '09_smooth_motion', label: 'Smooth Motion', desc: '끄덕끄덕 · 도리도리 · 갸웃 · 인사 · 둘러보기 · 다가가기 (실제 모터 속도/가속 한계 안)', group: 'lab', file: 'SmoothMotion' },
   { id: '06_custom', label: 'Custom · 자유 실험', desc: '빈 시퀀스에서 마음대로 실험 (저장하면 이 칸에 유지)', group: 'lab', file: 'Custom' },
 ];
 

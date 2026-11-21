@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
-import { useStore, applyLive } from '../store';
-import { evaluateSequenceAt } from '../engine/evaluate';
+import { useStore } from '../store';
 import { getKeys, type TrackPath } from '../engine/edit';
 
 export function useDesired() {
   const seq = useStore((s) => s.seq), t = useStore((s) => s.tSec), live = useStore((s) => s.live);
-  return useMemo(() => applyLive(evaluateSequenceAt(seq, t), live), [seq, t, live]);
+  return useMemo(() => useStore.getState().evalNow(), [seq, t, live]);
 }
 
 export function useKeyedAt(path: TrackPath | null): boolean {

@@ -1,1 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><rect width="1024" height="1024" fill="#000"/><g stroke="#5d6672" stroke-width="10" fill="none" stroke-linecap="round"><path d="M360 1000 V80"/><path d="M664 1000 V80"/></g><g stroke="#5d6672" stroke-width="10" fill="none" stroke-linecap="round"><path d="M664 520 C664 470 700 440 760 440 H1000"/><path d="M664 700 C664 640 700 600 760 600 H1000"/></g><g><path d="M512 150 L600 300 H424 Z" fill="none" stroke="#ffb020" stroke-width="14" stroke-linejoin="round"/><rect x="487" y="205" width="50" height="50" rx="6" fill="#ffb020"/><rect x="380" y="330" width="264" height="26" rx="8" fill="#ffb020"/><rect x="380" y="330" width="264" height="26" rx="8" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="26 26"/></g><path d="M512 840 V380" stroke="#e8f3ff" stroke-width="12" stroke-dasharray="6 26" stroke-linecap="round" fill="none"/><path d="M512 700 C512 560 540 520 640 510 C760 500 860 500 920 500" stroke="#7fd0ff" stroke-width="22" stroke-linecap="round" fill="none"/><path d="M905 450 L990 500 L905 550 Z" fill="#7fd0ff"/><text x="740" y="440" fill="#bfe8ff" font-size="52" font-weight="700" text-anchor="middle" font-family="Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Arial, sans-serif">우회</text><g transform="translate(512 900)"><rect x="-58" y="-90" width="116" height="180" rx="34" fill="#e9f6ff"/><rect x="-42" y="-62" width="84" height="46" rx="14" fill="#7fd0ff"/><path d="M0 -112 L26 -78 H-26 Z" fill="#e9f6ff"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- HUD step 3: rerouted, keep going straight past the closed alley -->
+  <defs>
+    <linearGradient id="fadeV" gradientUnits="userSpaceOnUse" x1="0" y1="380" x2="0" y2="700"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <linearGradient id="fadeH" gradientUnits="userSpaceOnUse" x1="660" y1="0" x2="1000" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="carpet" gradientUnits="userSpaceOnUse" x1="0" y1="400" x2="0" y2="1000"><stop offset="0" stop-color="#eef4f8" stop-opacity="0"/><stop offset="1" stop-color="#eef4f8" stop-opacity="0.22"/></linearGradient>
+    <mask id="road"><rect width="1024" height="1024" fill="url(#fadeV)"/></mask>
+    <mask id="alley"><rect width="1024" height="1024" fill="url(#fadeH)"/></mask>
+    <clipPath id="bar"><rect x="676" y="552" width="22" height="96"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" fill="#000"/>
+
+  <!-- road in perspective, with the alley opening on the right -->
+  <g stroke="#eef4f8" stroke-opacity="0.5" stroke-width="3" fill="none" stroke-linecap="round">
+    <g mask="url(#road)">
+      <path d="M232 1000L480 380"/>
+      <path d="M792 1000L648 640M616 560L544 380"/>
+    </g>
+    <g mask="url(#alley)" stroke-opacity="0.3"><path d="M616 560H1000M648 640H1000"/></g>
+  </g>
+
+  <!-- closed alley, dimmed -->
+  <g clip-path="url(#bar)" opacity="0.45"><rect x="676" y="552" width="22" height="96" fill="#eef4f8"/><path d="M670 566l34-20M670 590l34-20M670 614l34-20M670 638l34-20M670 662l34-20" stroke="#000" stroke-width="8"/></g>
+
+  <!-- new route: straight ahead -->
+  <path d="M452 1000L504 400H520L572 1000Z" fill="url(#carpet)"/>
+  <path d="M512 1000V400" stroke="#eef4f8" stroke-width="4" mask="url(#road)"/>
+  <g fill="none" stroke="#eef4f8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M484 900L512 872L540 900"/>
+    <path d="M490 776L512 754L534 776" stroke-opacity="0.8"/>
+    <path d="M495 670L512 653L529 670" stroke-opacity="0.6"/>
+    <path d="M499 582L512 569L525 582" stroke-opacity="0.4"/>
+    <path d="M502 508L512 498L522 508" stroke-opacity="0.25"/>
+  </g>
+
+  <!-- ego marker -->
+  <path d="M488 984L512 960L536 984" fill="none" stroke="#eef4f8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- info -->
+  <g transform="translate(366 166)" fill="none" stroke="#eef4f8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 34V-26"/><path d="M-16 -12L0 -30L16 -12"/>
+  </g>
+  <g font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, Malgun Gothic, Arial, sans-serif" fill="#eef4f8">
+    <text x="458" y="166" font-size="48" font-weight="600">직진</text>
+    <text x="460" y="204" font-size="24" font-weight="500" letter-spacing="2" fill-opacity="0.7">경로 재탐색 완료</text>
+  </g>
+</svg>

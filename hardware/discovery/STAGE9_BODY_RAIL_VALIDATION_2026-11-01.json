@@ -1,0 +1,49 @@
+{
+  "schema": "lieu.multi-axis-powered-validation/v1",
+  "date": "2026-11-01",
+  "firmware": "LIEU_STAGE3_BODY_RAIL_TEST",
+  "body": {
+    "id": 3,
+    "hold": {
+      "goalRaw": 2184,
+      "durationMs": 3000,
+      "observedRawMin": 2184,
+      "observedRawMax": 2184,
+      "result": "pass"
+    },
+    "nudge": {
+      "startRaw": 2184,
+      "requestedOutRaw": 2204,
+      "reachedRaw": 2202,
+      "completionRaw": 2184,
+      "maxObservedCurrentRaw": 11,
+      "result": "pass"
+    }
+  },
+  "rail": {
+    "id": 4,
+    "hold": {
+      "goalRaw": 241,
+      "durationMs": 3000,
+      "observedRawMin": 241,
+      "observedRawMax": 242,
+      "result": "pass"
+    },
+    "nudge": {
+      "startRaw": 241,
+      "requestedOutRaw": 251,
+      "reachedRaw": 248,
+      "completionRaw": 243,
+      "maxObservedCurrentRaw": 27,
+      "result": "pass"
+    }
+  },
+  "finalStatus": {
+    "yawRaw": 1702,
+    "tiltRaw": 2059,
+    "bodyRaw": 2184,
+    "railRaw": 242,
+    "torque": "0000"
+  },
+  "result": "pass"
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "lieu.hardware-discovery/v1",
+  "date": "2026-11-01",
+  "connection": {
+    "hostPort": "COM3",
+    "board": "Arduino UNO R4 WiFi",
+    "adapter": "ROBOTIS DYNAMIXEL Shield",
+    "bus": "Serial1 D0/D1, direction D2",
+    "baud": 115200,
+    "protocol": 2.0
+  },
+  "safety": {
+    "firmware": "LIEU_STAGE1_SHIELD_DISCOVERY",
+    "torqueOffBeforeEveryScan": true,
+    "motionCommandsAvailable": false,
+    "allObservedTorqueValues": 0
+  },
+  "devices": [
+    { "id": 1, "modelNumber": 1220, "firmwareVersion": 53, "rawSamples": [3071, 3071, 3071], "axis": "yaw" },
+    { "id": 2, "modelNumber": 1020, "firmwareVersion": 50, "rawSamples": [2001, 2001, 2001], "axis": "tilt" },
+    { "id": 3, "modelNumber": 1220, "firmwareVersion": 53, "rawSamples": [2186, 2186, 2186], "axis": "body" },
+    { "id": 4, "modelNumber": 1020, "firmwareVersion": 50, "rawSamples": [2134, 2134, 2135], "axis": "rail", "axisEvidence": "user-confirmed; motion not verified" }
+  ],
+  "notes": [
+    "Four devices were discovered consistently across three scans.",
+    "ID 1 was confirmed as yaw by a torque-off round trip: 3071 -> 4006 -> 3263 raw; other IDs changed much less.",
+    "Yaw zero/front has not been recorded; the final 3263 value is only a mapping observation.",
+    "ID 2 was confirmed as tilt by a torque-off round trip: 2050 -> 2173 -> 2059 raw; other IDs changed much less.",
+    "Tilt zero/level has not been recorded; the final 2059 value is only a mapping observation.",
+    "ID 3 was confirmed as body by a torque-off round trip: 2189 -> 3573 -> 2324 raw; other IDs did not follow.",
+    "Body zero/front has not been recorded; the final 2324 value is only a mapping observation.",
+    "ID 4 is recorded as rail from the user's wiring confirmation; rail motion has not been tested or verified.",
+    "Rail must remain command-locked until its mechanics, direction, travel limits, and emergency stop behavior are verified.",
+    "No previous calibration or axis mapping was restored."
+  ]
+}

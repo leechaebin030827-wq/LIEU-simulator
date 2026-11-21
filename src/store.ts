@@ -47,7 +47,7 @@ type Actions = {
   undo: () => void; redo: () => void;
   loadSequence: (s: LieuSequence) => void;
   setNumericAt: (p: TrackPath, value: number, seedValue: number) => void;
-  setMotion: (ch: 'railX' | 'yawY' | 'tiltZ', v: number) => void;
+  setMotion: (ch: 'railX' | 'bodyYaw' | 'yawY' | 'tiltZ', v: number) => void;
   setPixels: (edits: Record<number, Rgbw>) => void;
   setEye: (side: 'left' | 'right', rows: readonly number[]) => void;
   setProjProp: (prop: string, v: number, def: number) => void;
@@ -82,31 +82,43 @@ export const assetKind = (mime: string): 'image' | 'video' | 'audio' | 'other' =
   mime.startsWith('image/') ? 'image' : mime.startsWith('video/') ? 'video' : mime.startsWith('audio/') ? 'audio' : 'other';
 const mimeFromName = (n: string) => (/\.svg$/i.test(n) ? 'image/svg+xml' : /\.png$/i.test(n) ? 'image/png' : /\.(jpe?g)$/i.test(n) ? 'image/jpeg' : /\.wav$/i.test(n) ? 'audio/wav' : /\.mp3$/i.test(n) ? 'audio/mpeg' : /\.mp4$/i.test(n) ? 'video/mp4' : /\.webm$/i.test(n) ? 'video/webm' : 'application/octet-stream');
 
+let evaluated: { seq: LieuSequence; t: number; live: LiveOverride; value: DesiredState } | undefined;
+
 let lastCoalesce = { key: '', at: 0 };
 
 export const useStore = create<State & Actions>((set, get) => ({
   seq: emptySequence('Untitled'),
   rig: defaultRig(),
   assets: {}, blobs: {},
-  tSec: 0, playing: false, loop: false, speed: 0.7,
+  tSec: 0, playing: false, loop: false, speed: 1,
   autoKey: false, snapFps: 30, live: {},
   selectedLeds: [], selKeys: [], selClip: null, selNode: null, clipboard: null, eventLog: [],
   past: [], future: [], dirtyAudio: 0,
   view: { showPivots: true, showFrustum: false, showBeam: true, opaqueMaterials: true, cutaway: false, showLedGlow: true, outerHalo: false, eyeColor: '#f2f6ff', bloom: true, showAxes: false, hideMachine: false },
 
-  evalNow: () => applyLive(evaluateSequenceAt(get().seq, get().tSec), get().live),
+  evalNow: () => {
+    const { seq, tSec: t, live } = get();
+    if (!evaluated || evaluated.seq !== seq || evaluated.t !== t || evaluated.live !== live) {
+      evaluated = { seq, t, live, value: applyLive(evaluateSequenceAt(seq, t), live) };
+    }
+    return evaluated.value;
+  },
 
   setTime: (t, fromTransport) => {
+    if (!Number.isFinite(t)) return;
     const { seq } = get();
     const nt = Math.max(0, Math.min(seq.durationSec, t));
+    if (fromTransport && nt === get().tSec) return;
     set({ tSec: nt, ...(fromTransport ? {} : { live: {} }) });
     if (!fromTransport) set((s) => ({ dirtyAudio: s.dirtyAudio + 1 }));
   },
-  play: () => { const { tSec, seq } = get(); if (tSec >= seq.durationSec - 1e-6) set({ tSec: 0 }); set((s) => ({ playing: true, live: {}, dirtyAudio: s.dirtyAudio + 1 })); },
+  play: () => { const { tSec, seq } = get(); if (tSec >= seq.durationSec - 1e-6) set({ tSec: 0 }); set((s) => ({ playing: true, speed: 1, live: {}, dirtyAudio: s.dirtyAudio + 1 })); },
   pause: () => set((s) => ({ playing: false, dirtyAudio: s.dirtyAudio + 1 })),
   stop: () => set((s) => ({ playing: false, tSec: 0, live: {}, dirtyAudio: s.dirtyAudio + 1 })),
   toggleLoop: () => get().patchSeq((s) => { s.loop = !s.loop; }),
-  setSpeed: (speed) => set({ speed }),
+  // Exhibition playback is deliberately locked to the monitor video's native
+  // speed. Keeping the action for project compatibility avoids stale callers.
+  setSpeed: () => set({ speed: 1 }),
 
   commit: (next, coalesceKey) => {
     const { seq, past } = get();
@@ -121,7 +133,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   },
   undo: () => { const { past, seq, future } = get(); if (!past.length) return; set((s) => ({ seq: past[past.length - 1], past: past.slice(0, -1), future: [seq, ...future], live: {}, dirtyAudio: s.dirtyAudio + 1 })); },
   redo: () => { const { past, seq, future } = get(); if (!future.length) return; set((s) => ({ seq: future[0], future: future.slice(1), past: [...past, seq], live: {}, dirtyAudio: s.dirtyAudio + 1 })); },
-  loadSequence: (s) => set((st) => ({ seq: s, past: [], future: [], tSec: 0, playing: false, live: {}, selKeys: [], selClip: null, dirtyAudio: st.dirtyAudio + 1 })),
+  loadSequence: (s) => set((st) => ({ seq: s, past: [], future: [], tSec: 0, playing: false, speed: 1, live: {}, selKeys: [], selClip: null, dirtyAudio: st.dirtyAudio + 1 })),
 
   patchSeq: (fn, k) => { const n = clone(get().seq); fn(n); get().commit(n, k); },
 
@@ -251,7 +263,7 @@ function makeProject(s: State): ProjectFile {
 }
 
 function defaultFor(p: TrackPath, st: DesiredState): number {
-  if (p.type === 'motion') return st.motion[p.ch];
+  if (p.type === 'motion') return st.motion[p.ch] ?? 0;
   if (p.type === 'ringBrightness') return st.ring24.brightness;
   if (p.type === 'eyeIntensity') return st.eyes[p.which === 'intensity' ? 'intensity' : p.which];
   if (p.type === 'projProp') { const v = (st.projector as unknown as Record<string, number>)[p.prop]; return typeof v === 'number' ? v : 0; }

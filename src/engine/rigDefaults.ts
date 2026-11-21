@@ -15,8 +15,10 @@ export function defaultRig(): RigState {
   for (const n of k.yawCandidateMeshNodeIndices) owner[n] = 'tilt';
   // Motor / idler assemblies and other loose parts inside the donut tilt with it; only the column (and the rail) stay put.
   for (const n of cfg.allCarriageMeshes) if (n !== COLUMN_NODE) owner[n] = 'tilt';
-  // The centre module hanging below (LED shade, NeoPixel ring, projector body and holder) stays upright and only yaws.
+  // The centre lighting module stays upright and yaws with the head.
   for (const n of CENTER_MODULE_NODES) owner[n] = 'yaw';
+  // The projector is fixed to the body/carriage, not the yaw head.
+  owner[18] = 'carriage';
   for (const n of cfg.staticMeshes.railNodeIndices) owner[n] = 'fixedRail';
   return {
     owner,
@@ -27,8 +29,16 @@ export function defaultRig(): RigState {
 
 export const PREVIEW_LIMITS = {
   railX: { range: cfg.actuators.railX.previewOnlyRange as [number, number], maxVel: cfg.actuators.railX.previewOnlyMaxVelocity, maxAcc: cfg.actuators.railX.previewOnlyMaxAcceleration, unit: 'm' },
-  yawY: { range: cfg.actuators.yawY.previewOnlyRange as [number, number], maxVel: cfg.actuators.yawY.previewOnlyMaxVelocity, maxAcc: cfg.actuators.yawY.previewOnlyMaxAcceleration, unit: '°' },
-  tiltZ: { range: cfg.actuators.tiltZ.previewOnlyRange as [number, number], maxVel: cfg.actuators.tiltZ.previewOnlyMaxVelocity, maxAcc: cfg.actuators.tiltZ.previewOnlyMaxAcceleration, unit: '°' },
+  // 08 Final Exhibition peak envelopes. The small numeric margin prevents the
+  // 30 fps finite-difference checker from flagging an exact smoothstep peak.
+  // The joy spin turns the body up to +/-180 deg at up to ~100 deg/s and turns
+  // around (~235 deg/s^2) only while the face is out of sight.
+  bodyYaw: { range: [-180, 180] as [number, number], maxVel: 100, maxAcc: 250, unit: '°' },
+  // The measured yaw travel is asymmetric around physical front. Keep the
+  // commissioned left margin at -70°, while allowing the verified +90° right pose.
+  yawY: { range: [-70, 90] as [number, number], maxVel: 60.5, maxAcc: 270, unit: '°' },
+  // The joy-spin wobble rocks -15/+15 deg in ~0.85 s (peaks ~57 deg/s, ~285 deg/s^2).
+  tiltZ: { range: [-15, 15] as [number, number], maxVel: 60, maxAcc: 300, unit: '°' },
 } as const;
 export type MotionKey = keyof typeof PREVIEW_LIMITS;
 

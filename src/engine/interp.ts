@@ -35,8 +35,41 @@ export function evalNumeric(track: NumericTrack | undefined, t: number, fallback
   if (!seg) return fallback;
   const [a, b, u] = seg;
   if (a === b) return a.value;
-  const k = ease(u, a.interpolationToNext ?? 'linear');
-  return a.value + (b.value - a.value) * k;
+  const mode = a.interpolationToNext ?? 'linear';
+  if (mode !== 'smoothstep') {
+    const k = ease(u, mode);
+    return a.value + (b.value - a.value) * k;
+  }
+
+  // A per-segment smoothstep comes to a complete stop at every key. That makes
+  // a long gesture look like a chain of small robotic nods. Use a bounded cubic
+  // Hermite curve instead: it carries velocity through keys that continue in the
+  // same direction, but still stops cleanly at holds and direction reversals.
+  const keys = track.keys;
+  const i = keys.indexOf(a);
+  const h = Math.max(1e-9, b.tSec - a.tSec);
+  const secant = (p: number, q: number) => {
+    const dt = keys[q].tSec - keys[p].tSec;
+    return dt > 0 ? (keys[q].value - keys[p].value) / dt : 0;
+  };
+  const slopeAt = (j: number): number => {
+    if (j <= 0 || j >= keys.length - 1) return 0;
+    const prevMode = keys[j - 1].interpolationToNext ?? 'linear';
+    const nextMode = keys[j].interpolationToNext ?? 'linear';
+    if (prevMode !== 'smoothstep' || nextMode !== 'smoothstep') return 0;
+    const dl = secant(j - 1, j), dr = secant(j, j + 1);
+    if (dl === 0 || dr === 0 || Math.sign(dl) !== Math.sign(dr)) return 0;
+    const hl = keys[j].tSec - keys[j - 1].tSec;
+    const hr = keys[j + 1].tSec - keys[j].tSec;
+    const m = (dl * hr + dr * hl) / Math.max(1e-9, hl + hr);
+    return Math.sign(m) * Math.min(Math.abs(m), 3 * Math.min(Math.abs(dl), Math.abs(dr)));
+  };
+  const m0 = slopeAt(i), m1 = slopeAt(i + 1);
+  const u2 = u * u, u3 = u2 * u;
+  return (2 * u3 - 3 * u2 + 1) * a.value
+    + (u3 - 2 * u2 + u) * h * m0
+    + (-2 * u3 + 3 * u2) * b.value
+    + (u3 - u2) * h * m1;
 }
 
 export function evalRingFrame(keys: readonly Keyframe<RingFrame>[], t: number): RingFrame | null {
@@ -55,7 +88,5 @@ export function evalRingFrame(keys: readonly Keyframe<RingFrame>[], t: number): 
 /** Eyes are always step-held. */
 export function evalHold<T>(keys: readonly Keyframe<T>[], t: number): T | null {
   if (keys.length === 0) return null;
-  let found: Keyframe<T> | null = null;
-  for (const k of keys) { if (k.tSec <= t) found = k; else break; }
-  return (found ?? keys[0]).value;
+  return segment(keys, t)![0].value;
 }

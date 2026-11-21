@@ -57,6 +57,8 @@ export type AudioClip = {
   loop: boolean;
   gainTrack?: NumericTrack;
   panTrack?: NumericTrack;
+  /** Sound effects that must keep their pitch: always played at 1x, even when the scenario plays slower. */
+  nativeRate?: boolean;
 };
 export type Cue = {
   id: string;
@@ -95,7 +97,7 @@ export type LieuSequence = {
   /** Optional eye-studio look: when present the viewer draws the eyes as that studio sequence (halftone etc.) instead of the raw 8x8 dots. PREVIEW ONLY. */
   eyeLook?: { studio: unknown; startSec?: number };
   tracks: {
-    motion: { railX: NumericTrack; yawY: NumericTrack; tiltZ: NumericTrack; /** Visual-only exception (not a real axis): whole body up/down in metres. */ liftY?: NumericTrack };
+    motion: { railX: NumericTrack; /** Whole robot rotation around the vertical cylinder axis. */ bodyYaw?: NumericTrack; yawY: NumericTrack; tiltZ: NumericTrack; /** Visual-only exception (not a real axis): whole body up/down in metres. */ liftY?: NumericTrack };
     ring24: {
       baseFrames: RingTrack;
       brightness: NumericTrack;
@@ -118,7 +120,7 @@ export type LieuSequence = {
 };
 export type DesiredState = {
   tSec: number;
-  motion: { railX: number; yawY: number; tiltZ: number; liftY?: number };
+  motion: { railX: number; bodyYaw?: number; yawY: number; tiltZ: number; liftY?: number };
   ring24: { pixels: RingFrame; brightness: number };
   eyes: {
     left: EyeRows8;

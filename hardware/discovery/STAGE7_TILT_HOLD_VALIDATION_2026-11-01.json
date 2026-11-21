@@ -1,0 +1,17 @@
+{
+  "schema": "lieu.powered-hold-validation/v1",
+  "date": "2026-11-01",
+  "axis": "tilt",
+  "id": 2,
+  "firmware": "LIEU_STAGE3_TILT_HOLD",
+  "goalRaw": 2055,
+  "durationMs": 3000,
+  "statusSamples": 12,
+  "observedRawMin": 2055,
+  "observedRawMax": 2055,
+  "maxTrackingErrorRaw": 0,
+  "completionReason": "hold-complete",
+  "torqueAfterTest": { "yaw": 0, "tilt": 0, "body": 0, "rail": 0 },
+  "motionCommandSent": false,
+  "result": "pass"
+}
