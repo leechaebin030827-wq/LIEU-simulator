@@ -1,11 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import { useStore } from '../store';
 import { SCREEN_H, SCREEN_W, screenOut } from '../three/screenOut';
 import { DevOverlay } from './DevOverlay';
+import { getHwStatus, subscribeHw } from '../runtime/hardware';
+import { hardwareOutputsEnabled, subscribeHardwareOutputs } from '../runtime/outputGate';
 
-/** Full-screen mirror shown on this display while scenario 08 is playing. */
+/** Full-screen mirror only during physical playback; preview stays in the 3D editor. */
 export function FinalMonitor() {
-  const active = useStore((s) => s.playing && s.seq.id === '08_exhibition_final');
+  const playingFinal = useStore((s) => s.playing && s.seq.id === '08_exhibition_final');
+  const hardwareConnected = useSyncExternalStore(subscribeHw, () => getHwStatus().connected, () => false);
+  const outputsEnabled = useSyncExternalStore(subscribeHardwareOutputs, hardwareOutputsEnabled, () => false);
+  const active = playingFinal && hardwareConnected && outputsEnabled;
   const canvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
