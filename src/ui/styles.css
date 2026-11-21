@@ -3,7 +3,7 @@
   --bg: #050506; --panel: #0c0c0e; --panel2: #121215; --panel3: #1a1a1f; --card: #141418; --card2: #1c1c21; --inset: #070708; --line: #212127; --line2: #303038;
   --text: #ececee; --dim: #8b8b93; --dim2: #5c5c64;
   --acc: #ececee; --acc2: #ececee; --accSoft: #ffffff14;
-  --key: #DBFF00; --amber: #DBFF00; --warn: #e5484d; --ok: #3fb37f;
+  --key: #E0E6FF; --amber: #E0E6FF; --warn: #e5484d; --ok: #3fb37f;
   --r: 4px; --r-sm: 3px; --shadow: 0 12px 40px #000a;
   --sans: "IBM Plex Sans", "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
@@ -117,7 +117,7 @@ kbd { background: transparent; border: 1px solid var(--line2); border-radius: 2p
 .row input[type=range] { flex: 1; min-width: 0; }
 .keybtn { width: 22px; height: 22px; padding: 0; line-height: 1; color: var(--dim2); background: var(--inset); border-color: var(--line2); border-radius: 50%; font-size: 10px; }
 .keybtn:hover:not(:disabled) { color: var(--text); border-color: #8b8b93; background: transparent; }
-.keybtn.keyed { color: #151900; background: var(--amber); border-color: var(--amber); }
+.keybtn.keyed { color: #121522; background: var(--amber); border-color: var(--amber); }
 .chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .chips button { padding: 3px 10px; font-size: 11.5px; border-radius: 4px; background: var(--card2); }
 .note { font-size: 11px; color: var(--dim); margin-top: 8px; line-height: 1.55; }
@@ -313,9 +313,9 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .top button.ico.scn .caret { opacity: .55; }
 
 /* Play / Pause shares the timeline accent. */
-.transport button.playbtn, .presentbar button.playbtn { background: var(--amber); border-color: var(--amber); color: #151900; font-weight: 600; }
+.transport button.playbtn, .presentbar button.playbtn { background: var(--amber); border-color: var(--amber); color: #121522; font-weight: 600; }
 .transport button.playbtn:hover:not(:disabled), .presentbar button.playbtn:hover:not(:disabled) { background: var(--amber); border-color: var(--amber); filter: brightness(1.08); }
-.transport button.playbtn.on, .presentbar button.playbtn.on { background: var(--amber); border-color: var(--amber); color: #151900; filter: brightness(.86); }
+.transport button.playbtn.on, .presentbar button.playbtn.on { background: var(--amber); border-color: var(--amber); color: #121522; filter: brightness(.86); }
 
 .hwpanel { width: min(440px, calc(100vw - 24px)); gap: 10px; padding: 14px; }
 .hwrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
@@ -330,7 +330,7 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .mdot.on { background: #3ddc84; box-shadow: 0 0 8px #3ddc84aa; }
 .mdot.ready { background: #ffd43b; }
 .mdot.err { background: #ff5d5d; }
-.hwbig { width: 100%; padding: 14px 12px; font-size: 15px; font-weight: 600; border: 0; border-radius: 5px; background: var(--amber); color: #151900; cursor: pointer; }
+.hwbig { width: 100%; padding: 14px 12px; font-size: 15px; font-weight: 600; border: 0; border-radius: 5px; background: var(--amber); color: #121522; cursor: pointer; }
 .hwbig:hover { filter: brightness(1.08); }
 .hwbig.stop { background: #ff6b6b; color: #240808; }
 .mlinks { display: flex; flex-wrap: wrap; gap: 4px 14px; }
@@ -370,7 +370,7 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .wifi-connect { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: end; }
 .wifi-connect label { display: flex; flex-direction: column; gap: 5px; font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: .06em; }
 .wifi-connect input { width: 100%; min-width: 0; height: 36px; box-sizing: border-box; color: var(--text); font-size: 13px; text-transform: none; letter-spacing: 0; }
-.hwprimary, .enable-output.wide { min-height: 36px; border: 0; border-radius: 4px; padding: 0 14px; background: var(--amber); color: #151900; font-weight: 700; }
+.hwprimary, .enable-output.wide { min-height: 36px; border: 0; border-radius: 4px; padding: 0 14px; background: var(--amber); color: #121522; font-weight: 700; }
 .hwprimary:disabled, .enable-output:disabled { opacity: .38; cursor: not-allowed; }
 .hwsecondary, .hwconnected { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-width: 0; }
 .hwsecondary span { color: var(--dim); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -418,7 +418,7 @@ label.inl input[type=color] { width: 22px; height: 18px; padding: 0; border: 1px
 .hwchoice.hardware > span { color: #ffd08a; background: #34240e; }
 .hwchoice.hardware.selected { border-color: #c98b31; background: #2a1c0c; box-shadow: inset 0 0 0 1px #c98b3144; }
 .hwchoice:disabled { opacity: .4; cursor: not-allowed; }
-.hwplay { width: 100%; min-height: 48px; border: 1px solid var(--amber); border-radius: 5px; color: #151900; background: var(--amber); font-size: 14px; font-weight: 800; }
+.hwplay { width: 100%; min-height: 48px; border: 1px solid var(--amber); border-radius: 5px; color: #121522; background: var(--amber); font-size: 14px; font-weight: 800; }
 .hwplay.playing { color: #fff; border-color: #e45d6d; background: #b72f42; }
 .hwplay:disabled { opacity: .35; cursor: not-allowed; filter: grayscale(.8); }
 .hwplayhelp { color: var(--dim); font-size: 10px; line-height: 1.4; }
