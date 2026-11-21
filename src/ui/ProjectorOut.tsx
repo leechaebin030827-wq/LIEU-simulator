@@ -115,8 +115,8 @@ export function ProjectorOut() {
   return <div style={{ position: 'fixed', inset: 0 }}>
     <ProjectorView m={m} hint={hint} onToggleFs={() => void toggleFs()} />
     {!isFullscreen && <div style={{ position: 'absolute', top: 18, right: 18, zIndex: 2, display: 'grid', justifyItems: 'end', gap: 8 }}>
-      <button onClick={(e) => { e.stopPropagation(); void toggleFs(); }} style={{ padding: '14px 20px', border: '1px solid rgba(255,255,255,.4)', borderRadius: 12, background: 'rgba(0,0,0,.72)', color: '#fff', font: '600 16px system-ui', cursor: 'pointer' }}>프로젝터로 보내기 · 전체화면</button>
-      {fsError && <div style={{ maxWidth: 360, padding: '9px 12px', borderRadius: 8, background: 'rgba(0,0,0,.78)', color: '#fff', font: '13px system-ui' }}>{fsError}</div>}
+      <button onClick={(e) => { e.stopPropagation(); void toggleFs(); }} style={{ padding: '14px 20px', border: '1px solid rgba(255,255,255,.4)', borderRadius: 5, background: 'rgba(0,0,0,.72)', color: '#fff', font: '600 16px system-ui', cursor: 'pointer' }}>프로젝터로 보내기 · 전체화면</button>
+      {fsError && <div style={{ maxWidth: 360, padding: '9px 12px', borderRadius: 4, background: 'rgba(0,0,0,.78)', color: '#fff', font: '13px system-ui' }}>{fsError}</div>}
     </div>}
   </div>;
 }

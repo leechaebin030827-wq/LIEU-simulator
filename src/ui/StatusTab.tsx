@@ -14,7 +14,7 @@ function Dot({ level }: { level: Level }) {
   return <span style={{ display: 'inline-block', width: 9, height: 9, borderRadius: 5, background: COLOR[level], marginRight: 6, flex: 'none' }} />;
 }
 function Badge({ level, text }: { level: Level; text?: string }) {
-  return <span style={{ display: 'inline-flex', alignItems: 'center', padding: '1px 7px', borderRadius: 9, border: `1px solid ${COLOR[level]}`, color: COLOR[level], fontSize: 11, whiteSpace: 'nowrap' }}><Dot level={level} />{text ?? LABEL[level]}</span>;
+  return <span style={{ display: 'inline-flex', alignItems: 'center', padding: '1px 7px', borderRadius: 4, border: `1px solid ${COLOR[level]}`, color: COLOR[level], fontSize: 11, whiteSpace: 'nowrap' }}><Dot level={level} />{text ?? LABEL[level]}</span>;
 }
 function Line({ label, value, level }: { label: string; value: React.ReactNode; level?: Level }) {
   return (
@@ -106,7 +106,7 @@ export function StatusTab() {
     <div>
       <Section title="한눈에 보기" right={<span className="dim small">0.5초마다 갱신</span>}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {summary.map(([name, level]) => <span key={name} style={{ display: 'inline-flex', alignItems: 'center', padding: '4px 9px', borderRadius: 7, border: `1px solid ${COLOR[level]}`, fontSize: 12 }}><Dot level={level} />{name}</span>)}
+          {summary.map(([name, level]) => <span key={name} style={{ display: 'inline-flex', alignItems: 'center', padding: '4px 9px', borderRadius: 3, border: `1px solid ${COLOR[level]}`, fontSize: 12 }}><Dot level={level} />{name}</span>)}
         </div>
         <Line label="보드 연결 (UNO R4 · COM)" value={!hw.connected ? '연결 안 됨' : fresh ? `연결됨 · ${tel!.mode === 'ALL' ? '타임라인 준비됨' : tel!.mode === 'SINGLE' ? '한 축 조작 중' : '토크 꺼짐(대기)'}` : '연결됨 · 보드 응답 없음'} level={linkLevel} />
         <Line label="마지막 메시지" value={hw.message} />

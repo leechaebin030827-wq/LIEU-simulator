@@ -20,7 +20,7 @@ export function DevOverlay({ source }: { source: () => Window | null }) {
   try { s = (source() as StatsWindow | null)?.__lieuStats?.summary?.(); } catch { s = undefined; }
   if (!s) return null;
   return (
-    <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 50, width: 330, padding: '8px 10px', borderRadius: 8, background: 'rgba(0,0,0,.66)', color: '#e6e6e6', font: '11px/1.45 ui-monospace, Menlo, Consolas, monospace', pointerEvents: 'none' }}>
+    <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 50, width: 330, padding: '8px 10px', borderRadius: 4, background: 'rgba(0,0,0,.66)', color: '#e6e6e6', font: '11px/1.45 ui-monospace, Menlo, Consolas, monospace', pointerEvents: 'none' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
         <span>{s.playing ? '▶' : '❚❚'} {s.tSec.toFixed(2)}s</span>
         <span>영상 f {s.videoFrame ?? '-'} · {s.videoFps}fps · 디코드 {s.decodeFps}fps</span>

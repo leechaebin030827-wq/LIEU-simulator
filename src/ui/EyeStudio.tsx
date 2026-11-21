@@ -124,7 +124,7 @@ export function EyeStudio() {
         {seq.blocks.map((b, i) => {
           const a = ASSET_BY_ID[b.assetId];
           return (
-            <div key={b.id} className="row" style={{ margin: 0, background: sel === b.id ? 'var(--panel3)' : undefined, padding: '2px 4px', borderRadius: 4 }} onClick={() => setSel(b.id)}>
+            <div key={b.id} className="row" style={{ margin: 0, background: sel === b.id ? 'var(--panel3)' : undefined, padding: '2px 4px', borderRadius: 2 }} onClick={() => setSel(b.id)}>
               <span style={{ flex: 1, fontSize: 12 }}>{a.label}</span>
               <input type="number" min={a.min} max={a.max} step={0.1} value={b.seconds} style={{ width: 56 }} onChange={(e) => setSecs(b.id, Math.min(a.max, Math.max(a.min, +e.target.value || a.seconds)))} />
               <span className="dim small">s</span>
@@ -141,7 +141,7 @@ export function EyeStudio() {
         <input type="color" value={seq.eyeColor} onChange={(e) => patch({ eyeColor: e.target.value })} />
       </div>
       <div className="row"><label>Glow</label><input type="range" min={0} max={200} step={5} value={seq.glow} onChange={(e) => patch({ glow: +e.target.value })} /><span className="dim small">{seq.glow}%</span></div>
-      <canvas ref={cv} width={PREVIEW_W * 2} height={PREVIEW_H * 2} style={{ width: '100%', aspectRatio: '2 / 1', borderRadius: 6, background: seq.bg }} />
+      <canvas ref={cv} width={PREVIEW_W * 2} height={PREVIEW_H * 2} style={{ width: '100%', aspectRatio: '2 / 1', borderRadius: 3, background: seq.bg }} />
       <div className="row"><label>Blend</label><input type="range" min={0} max={1200} step={10} value={seq.blend} onChange={(e) => patch({ blend: +e.target.value })} /><span className="dim small">{seq.blend} ms</span></div>
       <div className="row">
         <button onClick={playing ? stop : play}>{playing ? '■ Stop' : '▶ Preview on robot'}</button>

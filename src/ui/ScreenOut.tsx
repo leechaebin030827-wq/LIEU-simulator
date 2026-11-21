@@ -118,8 +118,8 @@ export function ScreenOut() {
       <DevOverlay source={() => window.opener as Window | null} />
       {hint && <div style={{ position: 'absolute', left: 0, right: 0, bottom: 18, color: '#aaa', textAlign: 'center', font: '14px system-ui' }}>TV 화면을 한 번 클릭하면 완전한 전체화면이 됩니다</div>}
       {!isFullscreen && <div style={{ position: 'absolute', top: import.meta.env.DEV ? 'auto' : 18, bottom: import.meta.env.DEV ? 48 : 'auto', right: 18, display: 'grid', justifyItems: 'end', gap: 8 }}>
-        <button onClick={(e) => { e.stopPropagation(); enterTv(); }} style={{ padding: '14px 20px', border: '1px solid rgba(255,255,255,.4)', borderRadius: 12, background: 'rgba(0,0,0,.72)', color: '#fff', font: '600 16px system-ui', cursor: 'pointer' }}>TV로 보내기 · 전체화면</button>
-        {fsError && <div style={{ maxWidth: 360, padding: '9px 12px', borderRadius: 8, background: 'rgba(0,0,0,.78)', color: '#fff', font: '13px system-ui' }}>{fsError}</div>}
+        <button onClick={(e) => { e.stopPropagation(); enterTv(); }} style={{ padding: '14px 20px', border: '1px solid rgba(255,255,255,.4)', borderRadius: 5, background: 'rgba(0,0,0,.72)', color: '#fff', font: '600 16px system-ui', cursor: 'pointer' }}>TV로 보내기 · 전체화면</button>
+        {fsError && <div style={{ maxWidth: 360, padding: '9px 12px', borderRadius: 4, background: 'rgba(0,0,0,.78)', color: '#fff', font: '13px system-ui' }}>{fsError}</div>}
       </div>}
     </div>
   );
